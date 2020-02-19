@@ -65,7 +65,10 @@ class BookDetail extends React.Component {
           this.setState({ error: err, loading: false });
         });
     } else {
-      this.setState({ error: "Please try again later", loading: false });
+      this.setState({
+        error: "Please register in order to purchase the book",
+        loading: false
+      });
     }
   };
 
