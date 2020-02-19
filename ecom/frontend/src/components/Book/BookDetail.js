@@ -99,7 +99,6 @@ class BookDetail extends React.Component {
             <Dimmer active inverted>
               <Loader inverted>Loading</Loader>
             </Dimmer>
-            <Image src="/images/wireframe/short-paragraph.png" />
           </Segment>
         )}
         <Grid divided>

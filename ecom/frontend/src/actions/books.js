@@ -4,20 +4,16 @@ import { bookListURL } from "../constants";
 
 export const fetchBooks = () => {
   return dispatch => {
-    dispatch({ type: "LOADING" });
+    dispatch({ type: actionTypes.LOADING });
     axios
       .get(bookListURL)
       .then(res => {
-        dispatch({ type: "FETCH_SUCCESS", data: res.data });
-        console.log("success");
-        console.log(res.data);
+        dispatch({ type: actionTypes.FETCH_SUCCESS, data: res.data });
       })
       .catch(err => {
-        dispatch({ type: "FETCH_FAIL", error: err });
-        console.log("fail");
+        dispatch({ type: actionTypes.FETCH_FAIL, error: err });
       });
   };
-  // this.setState({ loading: true });
 };
 
 // onSelectRadio = event => {

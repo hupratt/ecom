@@ -15,6 +15,8 @@ import { bookListURL, s3_base_url } from "../../constants";
 import PaginationShorthand from "../Layout/Pagination";
 import RadioButton from "../Layout/RadioButton";
 import { fetchBooks } from "../../actions/books";
+import { fetchCart } from "../../actions/cart";
+import { localhost } from "../../constants";
 
 class BookList extends React.Component {
   componentDidMount() {
@@ -37,7 +39,9 @@ class BookList extends React.Component {
     const indexOfLastBook = currentPage * bookPerPage;
     const indexOfFirstBook = indexOfLastBook - bookPerPage;
     const paginatedData = dataToShow.slice(indexOfFirstBook, indexOfLastBook);
-
+    console.log(localhost);
+    console.log(process.env.REACT_LOCALHOST);
+    console.log(process.env);
     return (
       <Container>
         {error && (
@@ -52,8 +56,6 @@ class BookList extends React.Component {
             <Dimmer active inverted>
               <Loader inverted>Loading</Loader>
             </Dimmer>
-
-            <Image src="/images/wireframe/short-paragraph.png" />
           </Segment>
         )}
         <Form className="radio">

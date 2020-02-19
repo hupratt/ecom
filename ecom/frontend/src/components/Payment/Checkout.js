@@ -279,15 +279,12 @@ class CheckoutForm extends Component {
             <Dimmer active inverted>
               <Loader inverted>Loading</Loader>
             </Dimmer>
-            <Image src="/images/wireframe/short-paragraph.png" />
           </Segment>
         )}
 
         <OrderPreview data={data} />
         <Divider />
-        {/* <CouponForm
-          handleAddCoupon={(e, code) => this.handleAddCoupon(e, code)}
-        /> */}
+
         <Divider />
         <Header>Select a billing address</Header>
         {billingAddresses.length > 0 ? (
