@@ -135,7 +135,7 @@ class BookList extends React.Component {
 const mapDispatchToProps = dispatch => {
   return {
     refreshCart: () => dispatch(fetchCart()),
-    fetchBooks: () => dispatch({ type: "FETCH_ITEMS" })
+    fetchBooks: () => dispatch(fetchBooks())
   };
 };
 

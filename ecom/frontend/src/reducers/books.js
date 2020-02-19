@@ -19,7 +19,7 @@ const loading = (state, action) => {
 
 const fetchItemsSuccess = (state, action) => {
   return updateObject(state, {
-    shoppingCart: action.data,
+    data: action.data,
     error: null,
     loading: false
   });
@@ -36,7 +36,7 @@ const reducer = (state = initState, action) => {
   switch (action.type) {
     case actionTypes.LOADING:
       return loading(state, action);
-    case actionTypes.FETCH_ITEMS:
+    case actionTypes.FETCH_SUCCESS:
       return fetchItemsSuccess(state, action);
     case actionTypes.FETCH_FAIL:
       return fetchItemsFail(state, action);
