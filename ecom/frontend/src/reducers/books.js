@@ -31,7 +31,16 @@ const fetchItemsFail = (state, action) => {
     loading: false
   });
 };
-
+const pageChanged = (state, action) => {
+  return updateObject(state, {
+    currentPage: action.pageNumber
+  });
+};
+const radioButtonClick = (state, action) => {
+  return updateObject(state, {
+    language: action.language
+  });
+};
 const reducer = (state = initState, action) => {
   switch (action.type) {
     case actionTypes.LOADING:
@@ -40,6 +49,10 @@ const reducer = (state = initState, action) => {
       return fetchItemsSuccess(state, action);
     case actionTypes.FETCH_FAIL:
       return fetchItemsFail(state, action);
+    case actionTypes.PAGE_CHANGED:
+      return pageChanged(state, action);
+    case actionTypes.RADIO_BUTTON_CLICK:
+      return radioButtonClick(state, action);
     default:
       return state;
   }

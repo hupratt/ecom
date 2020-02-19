@@ -9,3 +9,5 @@ export const CART_FAIL = "CART_FAIL";
 export const FETCH_SUCCESS = "FETCH_SUCCESS";
 export const FETCH_FAIL = "FETCH_FAIL";
 export const LOADING = "LOADING";
+export const PAGE_CHANGED = "PAGE_CHANGED";
+export const RADIO_BUTTON_CLICK = "RADIO_BUTTON_CLICK";

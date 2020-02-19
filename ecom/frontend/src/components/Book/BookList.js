@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import {
   Container,
   Dimmer,
-  Image,
   Loader,
   Message,
   Segment,
@@ -11,12 +10,10 @@ import {
   Item,
   Form
 } from "semantic-ui-react";
-import { bookListURL, s3_base_url } from "../../constants";
+import { s3_base_url } from "../../constants";
 import PaginationShorthand from "../Layout/Pagination";
 import RadioButton from "../Layout/RadioButton";
-import { fetchBooks } from "../../actions/books";
-import { fetchCart } from "../../actions/cart";
-import { localhost } from "../../constants";
+import { fetchBooks, onPageChange, onSelectRadio } from "../../actions/books";
 
 class BookList extends React.Component {
   componentDidMount() {
@@ -29,7 +26,9 @@ class BookList extends React.Component {
       loading,
       currentPage,
       bookPerPage,
-      language
+      language,
+      onSelectRadio,
+      onPageChange
     } = this.props;
     const dataToShow =
       language !== "No filter"
@@ -39,9 +38,6 @@ class BookList extends React.Component {
     const indexOfLastBook = currentPage * bookPerPage;
     const indexOfFirstBook = indexOfLastBook - bookPerPage;
     const paginatedData = dataToShow.slice(indexOfFirstBook, indexOfLastBook);
-    console.log(localhost);
-    console.log(process.env.REACT_LOCALHOST);
-    console.log(process.env);
     return (
       <Container>
         {error && (
@@ -62,25 +58,25 @@ class BookList extends React.Component {
           <div className="h4">Language</div>
           <ul>
             <RadioButton
-              handleChange={this.onSelectRadio}
+              handleChange={onSelectRadio}
               language={language}
               value="PT"
               id="1"
             />
             <RadioButton
-              handleChange={this.onSelectRadio}
+              handleChange={onSelectRadio}
               language={language}
               value="FR"
               id="2"
             />
             <RadioButton
-              handleChange={this.onSelectRadio}
+              handleChange={onSelectRadio}
               language={language}
               value="EN"
               id="3"
             />
             <RadioButton
-              handleChange={this.onSelectRadio}
+              handleChange={onSelectRadio}
               language={language}
               value="No filter"
               id="4"
@@ -122,7 +118,7 @@ class BookList extends React.Component {
         <PaginationShorthand
           bookPerPage={bookPerPage}
           books={dataToShow.length}
-          paginate={this.onPageChange}
+          paginate={onPageChange}
           currentPage={currentPage}
         >
           <p>
@@ -136,7 +132,8 @@ class BookList extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    refreshCart: () => dispatch(fetchCart()),
+    onSelectRadio: () => dispatch(onSelectRadio(event)),
+    onPageChange: () => dispatch(onPageChange(pageNumber)),
     fetchBooks: () => dispatch(fetchBooks())
   };
 };

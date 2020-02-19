@@ -16,25 +16,19 @@ export const fetchBooks = () => {
   };
 };
 
-// onSelectRadio = event => {
-//   this.setState({
-//     language: event.currentTarget.value
-//   });
-// };
-// onPageChange = pageNumber => {
-//   this.setState({ currentPage: pageNumber });
-// };
+export const onSelectRadio = event => {
+  console.log("onSelectRadio");
+  return dispatch => {
+    dispatch({
+      type: actionTypes.RADIO_BUTTON_CLICK,
+      data: event.currentTarget.value
+    });
+  };
+};
 
-// export const fetchCart = () => {
-//   return dispatch => {
-//     dispatch(cartStart());
-//     axios
-//       .get(orderSummaryURL)
-//       .then(res => {
-//         dispatch(cartSuccess(res.data));
-//       })
-//       .catch(err => {
-//         dispatch(cartFail(err));
-//       });
-//   };
-// };
+export const onPageChange = pageNumber => {
+  return dispatch => {
+    console.log("onSelectRadio");
+    dispatch({ type: actionTypes.PAGE_CHANGED, currentPage: pageNumber });
+  };
+};

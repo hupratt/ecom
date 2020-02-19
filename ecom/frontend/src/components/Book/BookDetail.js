@@ -1,7 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import axios from "axios";
 import {
   Button,
   Card,
@@ -23,67 +22,17 @@ import {
 import { bookDetailURL, addToCartURL } from "../../constants";
 import { fetchCart } from "../../actions/cart";
 import { s3_base_url } from "../../constants";
-class BookDetail extends React.Component {
-  state = {
-    loading: false,
-    error: null,
-    formVisible: false,
-    data: [],
-    formData: {}
-  };
+import { fetchBook } from "../../actions/book";
 
+class BookDetail extends React.Component {
   componentDidMount() {
-    this.handleFetchItem();
+    let id = this.props.match.params.bookID;
+    this.props.fetchBook(id);
   }
 
-  handleFetchItem = () => {
-    const {
-      match: { params }
-    } = this.props;
-    this.setState({ loading: true });
-    axios
-      .get(bookDetailURL(params.bookID))
-      .then(res => {
-        this.setState({ data: res.data, loading: false });
-      })
-      .catch(err => {
-        this.setState({ error: err, loading: false });
-      });
-  };
-
-  handleAddToCart = (id, isAuthenticated) => {
-    this.setState({ loading: true });
-    if (localStorage.getItem("token") !== null && isAuthenticated) {
-      this.props.refreshCart();
-      axios
-        .post(addToCartURL, { id })
-        .then(res => {
-          this.props.refreshCart();
-          this.setState({ loading: false });
-        })
-        .catch(err => {
-          this.setState({ error: err, loading: false });
-        });
-    } else {
-      this.setState({
-        error: "Please register in order to purchase the book",
-        loading: false
-      });
-    }
-  };
-
-  handleChange = (e, { name, value }) => {
-    const { formData } = this.state;
-    const updatedFormData = {
-      ...formData,
-      [name]: value
-    };
-    this.setState({ formData: updatedFormData });
-  };
-
   render() {
-    const { data, error, loading } = this.state;
-    const { isAuthenticated } = this.props;
+    const { data, error, loading, isAuthenticated } = this.props;
+
     const item = data;
     return (
       <Container>
@@ -158,13 +107,17 @@ class BookDetail extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    refreshCart: () => dispatch(fetchCart())
+    refreshCart: () => dispatch(fetchCart()),
+    fetchBook: id => dispatch(fetchBook(id))
   };
 };
 
 const mapStateToProps = state => {
   return {
-    isAuthenticated: state.auth.token !== null
+    isAuthenticated: state.auth.token !== null,
+    loading: state.book.loading,
+    error: state.book.error,
+    data: state.book.data
   };
 };
 
