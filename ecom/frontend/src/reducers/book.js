@@ -7,12 +7,6 @@ const initState = {
   data: []
 };
 
-const loading = (state, action) => {
-  return updateObject(state, {
-    loading: true
-  });
-};
-
 const fetchItemsSuccess = (state, action) => {
   return updateObject(state, {
     data: action.data,
@@ -27,24 +21,12 @@ const fetchBook = (state, action) => {
   });
 };
 
-const fetchItemsFail = (state, action) => {
-  return updateObject(state, {
-    error: action.error,
-    loading: false
-  });
-};
-
 const reducer = (state = initState, action) => {
   switch (action.type) {
-    case actionTypes.LOADING:
-      return loading(state, action);
     case actionTypes.FETCH_SUCCESS:
       return fetchItemsSuccess(state, action);
-    case actionTypes.FETCH_FAIL:
-      return fetchItemsFail(state, action);
     case actionTypes.FETCH_BOOK:
       return fetchBook(state, action);
-
     default:
       return state;
   }
