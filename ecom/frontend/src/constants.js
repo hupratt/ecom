@@ -1,4 +1,4 @@
-export const localhost = process.env.REACT_LOCALHOST || "http://127.0.0.1:3212";
+export const localhost = process.env.REACT_LOCALHOST;
 
 const apiURL = "/api";
 
