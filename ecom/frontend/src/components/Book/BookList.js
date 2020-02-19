@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
-import axios from "axios";
 import {
   Container,
   Dimmer,
@@ -15,39 +14,12 @@ import {
 import { bookListURL, s3_base_url } from "../../constants";
 import PaginationShorthand from "../Layout/Pagination";
 import RadioButton from "../Layout/RadioButton";
+import { fetchBooks } from "../../actions/books";
 
 class BookList extends React.Component {
-  state = {
-    loading: false,
-    error: null,
-    data: [],
-    currentPage: 1,
-    setPage: 1,
-    bookPerPage: 12,
-    language: "No filter"
-  };
-
   componentDidMount() {
-    this.setState({ loading: true });
-    axios
-      .get(bookListURL)
-      .then(res => {
-        this.setState({ data: res.data, loading: false });
-      })
-      .catch(err => {
-        this.setState({ error: err, loading: false });
-      });
+    this.props.fetchBooks();
   }
-
-  onSelectRadio = event => {
-    this.setState({
-      language: event.currentTarget.value
-    });
-  };
-  // change page
-  onPageChange = pageNumber => {
-    this.setState({ currentPage: pageNumber });
-  };
   render() {
     const {
       data,
@@ -56,7 +28,7 @@ class BookList extends React.Component {
       currentPage,
       bookPerPage,
       language
-    } = this.state;
+    } = this.props;
     const dataToShow =
       language !== "No filter"
         ? data.filter(item => language.includes(item.langue_nom))
@@ -160,4 +132,24 @@ class BookList extends React.Component {
   }
 }
 
-export default BookList;
+const mapDispatchToProps = dispatch => {
+  return {
+    refreshCart: () => dispatch(fetchCart()),
+    fetchBooks: () => dispatch({ type: "FETCH_ITEMS" })
+  };
+};
+
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.auth.token !== null,
+    loading: state.books.loading,
+    error: state.books.error,
+    data: state.books.data,
+    currentPage: state.books.currentPage,
+    setPage: state.books.setPage,
+    bookPerPage: state.books.bookPerPage,
+    language: state.books.language
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(BookList);

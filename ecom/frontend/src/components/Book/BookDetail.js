@@ -36,13 +36,6 @@ class BookDetail extends React.Component {
     this.handleFetchItem();
   }
 
-  handleToggleForm = () => {
-    const { formVisible } = this.state;
-    this.setState({
-      formVisible: !formVisible
-    });
-  };
-
   handleFetchItem = () => {
     const {
       match: { params }
@@ -56,13 +49,6 @@ class BookDetail extends React.Component {
       .catch(err => {
         this.setState({ error: err, loading: false });
       });
-  };
-
-  handleFormatData = formData => {
-    // convert {colour: 1, size: 2} to [1,2] - they're all variations
-    return Object.keys(formData).map(key => {
-      return formData[key];
-    });
   };
 
   handleAddToCart = (id, isAuthenticated) => {
