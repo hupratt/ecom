@@ -1,4 +1,4 @@
-export const localhost = process.env.REACT_LOCALHOST;
+export const localhost = "https://shop.lapetiteportugaise.eu";
 
 const apiURL = "/api";
 
