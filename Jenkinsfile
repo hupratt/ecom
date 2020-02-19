@@ -48,6 +48,7 @@ for (x in labels) {
 
 					#$PYTHON_P manage.py migrate                  
 					echo 'manage.py migrate done'
+					npm run build
 
 					# sudo /usr/local/bin/compile_messages
 

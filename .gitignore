@@ -17,4 +17,3 @@ media
 *.db
 share
 .mypy_cache/
-/.env
