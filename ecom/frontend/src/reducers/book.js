@@ -20,6 +20,12 @@ const fetchItemsSuccess = (state, action) => {
     loading: false
   });
 };
+const fetchBook = (state, action) => {
+  return updateObject(state, {
+    data: state.data.find(post => post.id == action.bookID),
+    loading: false
+  });
+};
 
 const fetchItemsFail = (state, action) => {
   return updateObject(state, {
@@ -36,6 +42,8 @@ const reducer = (state = initState, action) => {
       return fetchItemsSuccess(state, action);
     case actionTypes.FETCH_FAIL:
       return fetchItemsFail(state, action);
+    case actionTypes.FETCH_BOOK:
+      return fetchBook(state, action);
 
     default:
       return state;
