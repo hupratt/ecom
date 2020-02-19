@@ -6,20 +6,13 @@ import {
   Card,
   Container,
   Dimmer,
-  Form,
   Grid,
-  Header,
   Icon,
-  Image,
   Item,
-  Label,
   Loader,
   Message,
-  Segment,
-  Select,
-  Divider
+  Segment
 } from "semantic-ui-react";
-import { bookDetailURL, addToCartURL } from "../../constants";
 import { fetchCart } from "../../actions/cart";
 import { s3_base_url } from "../../constants";
 import { fetchBook } from "../../actions/book";
@@ -31,9 +24,8 @@ class BookDetail extends React.Component {
   }
 
   render() {
-    const { data, error, loading, isAuthenticated } = this.props;
+    const { book, error, loading, isAuthenticated } = this.props;
 
-    const item = data;
     return (
       <Container>
         {error && (
@@ -56,29 +48,29 @@ class BookDetail extends React.Component {
               <div className="row">
                 <Item.Image
                   className="col picture"
-                  src={s3_base_url + item.isbn + ".jpg"}
+                  src={s3_base_url + book.isbn + ".jpg"}
                 />
                 <Card
                   fluid
                   className="col"
-                  header={item.titre}
+                  header={book.titre}
                   meta={
                     <React.Fragment>
-                      <ul>Author: {item.auteur_nom}</ul>
-                      <ul>Genre: {item.genre_nom}</ul>
-                      <ul>{item.isbn}</ul>
-                      <ul>{item.prix} €</ul>
-                      <ul>{item.note} /5</ul>
-                      <ul>Publication: {item.date_publication}</ul>
-                      <ul>Stock: {item.quantite}</ul>
-                      <ul>Language: {item.langue_nom}</ul>
+                      <ul>Author: {book.auteur_nom}</ul>
+                      <ul>Genre: {book.genre_nom}</ul>
+                      <ul>{book.isbn}</ul>
+                      <ul>{book.prix} €</ul>
+                      <ul>{book.note} /5</ul>
+                      <ul>Publication: {book.date_publication}</ul>
+                      <ul>Stock: {book.quantite}</ul>
+                      <ul>Language: {book.langue_nom}</ul>
                     </React.Fragment>
                   }
-                  description={item.description}
+                  description={book.description}
                   extra={
                     <React.Fragment>
-                      {item.genre_nom}
-                      {item.prix}
+                      {book.genre_nom}
+                      {book.prix}
 
                       <Button
                         fluid
@@ -87,7 +79,7 @@ class BookDetail extends React.Component {
                         icon
                         labelPosition="right"
                         onClick={() =>
-                          this.handleAddToCart(item.id, isAuthenticated)
+                          this.handleAddToCart(book.id, isAuthenticated)
                         }
                       >
                         Add to cart
@@ -117,7 +109,7 @@ const mapStateToProps = state => {
     isAuthenticated: state.auth.token !== null,
     loading: state.book.loading,
     error: state.book.error,
-    data: state.book.data
+    book: state.book.data
   };
 };
 
