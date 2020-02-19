@@ -9,7 +9,7 @@ for (x in labels) {
 		timestamps {
 			node () {
 				
-				def PROJECT="/home/ubuntu/Dev/myshop"
+				def PROJECT="/home/ubuntu/Dev/ecom"
 				def PYTHON_P="$PROJECT/bin/python3.6"
 				def GET_SECRET="/var/lib/jenkins/run_vars_ecom.py"
 				
