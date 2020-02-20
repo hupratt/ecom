@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
@@ -18,7 +18,7 @@ import { fetchBooks, onPageChange, onSelectRadio } from "../../actions/books";
 
 class BookList extends React.Component {
   componentDidMount() {
-    this.props.fetchBooks();
+    this.props.fetchBooks(this.props.dataIsCached);
   }
   render() {
     const {
@@ -133,7 +133,9 @@ class BookList extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchBooks: () => bindActionCreators(fetchBooks(), dispatch)
+    onSelectRadio: event => dispatch(onSelectRadio(event)),
+    onPageChange: pageNumber => dispatch(onPageChange(pageNumber)),
+    fetchBooks: dataIsCached => dispatch(fetchBooks(dataIsCached))
   };
 };
 
@@ -146,7 +148,8 @@ const mapStateToProps = state => {
     currentPage: state.books.currentPage,
     setPage: state.books.setPage,
     bookPerPage: state.books.bookPerPage,
-    language: state.books.language
+    language: state.books.language,
+    dataIsCached: state.books.data.length != 0
   };
 };
 

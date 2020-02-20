@@ -8,7 +8,8 @@ const initState = {
   currentPage: 1,
   setPage: 1,
   bookPerPage: 12,
-  language: "No filter"
+  language: "No filter",
+  dataIsCached: false
 };
 
 const loading = (state, action) => {
@@ -25,6 +26,13 @@ const fetchItemsSuccess = (state, action) => {
   });
 };
 
+const fetchCache = (state, action) => {
+  return updateObject(state, {
+    error: null,
+    loading: false,
+    dataIsCached: true
+  });
+};
 const fetchItemsFail = (state, action) => {
   return updateObject(state, {
     error: action.error,
@@ -53,6 +61,8 @@ const reducer = (state = initState, action) => {
       return pageChanged(state, action);
     case actionTypes.RADIO_BUTTON_CLICK:
       return radioButtonClick(state, action);
+    case actionTypes.FETCH_CACHE:
+      return fetchCache(state, action);
     default:
       return state;
   }

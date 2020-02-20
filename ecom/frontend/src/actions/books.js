@@ -2,7 +2,12 @@ import axios from "axios";
 import * as actionTypes from "./actionTypes";
 import { bookListURL } from "../constants";
 
-export const fetchBooks = () => {
+export const fetchBooks = dataIsCached => {
+  if (dataIsCached) {
+    return dispatch => {
+      dispatch({ type: actionTypes.FETCH_CACHE });
+    };
+  }
   return dispatch => {
     dispatch({ type: actionTypes.LOADING });
     axios
@@ -28,7 +33,7 @@ export const onSelectRadio = event => {
 
 export const onPageChange = pageNumber => {
   return dispatch => {
-    console.log("onSelectRadio");
+    console.log("onPageChange");
     dispatch({ type: actionTypes.PAGE_CHANGED, currentPage: pageNumber });
   };
 };
