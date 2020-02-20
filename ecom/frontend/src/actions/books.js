@@ -3,6 +3,7 @@ import * as actionTypes from "./actionTypes";
 import { bookListURL } from "../constants";
 
 export const fetchBooks = () => {
+  // thunk provides the dispatch
   return dispatch => {
     dispatch({ type: actionTypes.LOADING });
     axios
