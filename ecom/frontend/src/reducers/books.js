@@ -29,10 +29,10 @@ const fetchItemsSuccess = (state, action) => {
 const fetchCache = (state, action) => {
   return updateObject(state, {
     error: null,
-    loading: false
+    loading: false,
+    dataIsCached: true
   });
 };
-
 const fetchItemsFail = (state, action) => {
   return updateObject(state, {
     error: action.error,
