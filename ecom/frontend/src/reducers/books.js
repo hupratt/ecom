@@ -8,7 +8,8 @@ const initState = {
   currentPage: 1,
   setPage: 1,
   bookPerPage: 12,
-  language: "No filter"
+  language: "No filter",
+  dataIsCached: false
 };
 
 const loading = (state, action) => {
