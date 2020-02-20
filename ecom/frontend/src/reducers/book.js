@@ -4,6 +4,7 @@ import * as actionTypes from "../actions/actionTypes";
 const initState = {
   loading: false,
   error: null,
+  book: [],
   data: []
 };
 
@@ -16,7 +17,7 @@ const fetchItemsSuccess = (state, action) => {
 };
 const fetchBook = (state, action) => {
   return updateObject(state, {
-    data: state.data.find(post => post.id == action.bookID),
+    book: state.data.find(post => post.id == action.bookID),
     loading: false
   });
 };

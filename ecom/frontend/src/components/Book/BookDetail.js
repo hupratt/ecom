@@ -109,7 +109,8 @@ const mapStateToProps = state => {
     isAuthenticated: state.auth.token !== null,
     loading: state.book.loading,
     error: state.book.error,
-    book: state.book.data
+    data: state.book.data,
+    book: state.book.book
   };
 };
 
