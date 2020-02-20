@@ -3,6 +3,7 @@ import cartReducer from "./cart";
 import booksReducer from "./books";
 import bookReducer from "./book";
 import { createStore, compose, applyMiddleware, combineReducers } from "redux";
+// thunk allows to run async tasks in our action creators
 import thunk from "redux-thunk";
 const composeEnhances = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
