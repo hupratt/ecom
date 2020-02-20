@@ -12,3 +12,4 @@ export const LOADING = "LOADING";
 export const PAGE_CHANGED = "PAGE_CHANGED";
 export const RADIO_BUTTON_CLICK = "RADIO_BUTTON_CLICK";
 export const FETCH_BOOK = "FETCH_BOOK";
+export const FETCH_CACHE = "FETCH_CACHE";
