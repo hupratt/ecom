@@ -2,7 +2,8 @@ import axios from "axios";
 import * as actionTypes from "./actionTypes";
 import { bookListURL } from "../constants";
 
-export const fetchBooks = () => {
+export const fetchBooks = (dataIsCached) => {
+  if (dataIsCached) return dispatch({ type: actionTypes.FETCH_CACHE });
   // thunk provides the dispatch
   return dispatch => {
     dispatch({ type: actionTypes.LOADING });
