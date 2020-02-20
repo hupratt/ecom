@@ -1,5 +1,6 @@
-import React, { Fragment } from "react";
+import { React } from "react";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux"
 import {
   Container,
   Dimmer,
@@ -132,9 +133,11 @@ class BookList extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSelectRadio: () => dispatch(onSelectRadio(event)),
-    onPageChange: () => dispatch(onPageChange(pageNumber)),
-    fetchBooks: () => dispatch(fetchBooks())
+    ...bindActionCreators({
+      onSelectRadio: (event) => {onSelectRadio(event)},
+      onPageChange: (pageNumber) => {onPageChange(pageNumber)},
+      fetchBooks: (dataIsCached) => {fetchBooks(dataIsCached)}
+  }, dispatch)
   };
 };
 
@@ -147,7 +150,8 @@ const mapStateToProps = state => {
     currentPage: state.books.currentPage,
     setPage: state.books.setPage,
     bookPerPage: state.books.bookPerPage,
-    language: state.books.language
+    language: state.books.language,
+    dataIsCached: state.data.length != 0
   };
 };
 
