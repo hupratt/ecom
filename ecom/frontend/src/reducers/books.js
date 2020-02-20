@@ -26,6 +26,13 @@ const fetchItemsSuccess = (state, action) => {
   });
 };
 
+const fetchCache = (state, action) => {
+  return updateObject(state, {
+    error: null,
+    loading: false
+  });
+};
+
 const fetchItemsFail = (state, action) => {
   return updateObject(state, {
     error: action.error,
@@ -54,6 +61,8 @@ const reducer = (state = initState, action) => {
       return pageChanged(state, action);
     case actionTypes.RADIO_BUTTON_CLICK:
       return radioButtonClick(state, action);
+    case actionTypes.FETCH_CACHE:
+      return fetchCache(state, action);
     default:
       return state;
   }
