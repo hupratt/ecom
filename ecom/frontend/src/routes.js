@@ -1,6 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import Hoc from "./hoc/hoc";
+import { Hoc } from "./hoc/hoc";
 
 import Login from "./components/User/Login";
 import Signup from "./components/User/Signup";

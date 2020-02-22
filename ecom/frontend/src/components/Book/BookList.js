@@ -1,10 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Container, Dimmer, Loader, Message, Segment } from "semantic-ui-react";
-import PaginationShorthand from "../Layout/Pagination";
 import { fetchBooks, onPageChange, onSelectRadio } from "../../actions/books";
-import LanguageFilter from "./LanguageFilter";
-import BookGrid from "./BookGrid";
+import BookPage from "./BookPage";
+import { withLoading } from "../../hoc/hoc";
 
 class BookList extends React.Component {
   componentDidMount() {
@@ -38,27 +37,19 @@ class BookList extends React.Component {
             content={JSON.stringify(error)}
           />
         )}
-        {loading && (
-          <Segment>
-            <Dimmer active inverted>
-              <Loader inverted>Loading</Loader>
-            </Dimmer>
-          </Segment>
-        )}
-        <LanguageFilter onSelectRadio={onSelectRadio} language={language} />
-        <BookGrid paginatedData={paginatedData} />
+
+        <BookPageWithLoading
+          bookPerPage={bookPerPage}
+          dataToShow={dataToShow}
+          onPageChange={onPageChange}
+          currentPage={currentPage}
+          onSelectRadio={onSelectRadio}
+          paginatedData={paginatedData}
+          language={language}
+          loading={loading}
+        />
 
         {this.props.children}
-        <PaginationShorthand
-          bookPerPage={bookPerPage}
-          books={dataToShow.length}
-          paginate={onPageChange}
-          currentPage={currentPage}
-        >
-          <p>
-            Displaying {bookPerPage} of {dataToShow.length} books
-          </p>
-        </PaginationShorthand>
       </Container>
     );
   }
@@ -71,6 +62,8 @@ const mapDispatchToProps = dispatch => {
     fetchBooks: dataIsCached => dispatch(fetchBooks(dataIsCached))
   };
 };
+
+const BookPageWithLoading = withLoading(BookPage);
 
 const mapStateToProps = state => {
   return {
