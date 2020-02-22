@@ -1,14 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import {
-  Container,
-  Dimmer,
-  Loader,
-  Message,
-  Segment,
-  Grid,
-  Item
-} from "semantic-ui-react";
+import { Container, Dimmer, Loader, Message, Segment } from "semantic-ui-react";
 import PaginationShorthand from "../Layout/Pagination";
 import { fetchBooks, onPageChange, onSelectRadio } from "../../actions/books";
 import LanguageFilter from "./LanguageFilter";
