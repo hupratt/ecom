@@ -18,10 +18,12 @@ get description, language, author from isbn
 
 def get_image(image_dir, isbn):
     isbn_path = os.path.join(image_dir, isbn)
-    _file = [i for i in os.listdir(isbn_path)]
-    if len(_file) > 0 and os.path.isfile(os.path.join(isbn_path, _file[0])):
-        return File(open(os.path.join(isbn_path, _file[0]), "rb"), name=_file[0])
-    # print("isbn not found ", isbn)
+    isdir = os.path.isdir(isbn_path)
+    if isdir is True:
+        _file = [i for i in os.listdir(isbn_path)]
+        if len(_file) > 0 and os.path.isfile(os.path.join(isbn_path, _file[0])):
+            return File(open(os.path.join(isbn_path, _file[0]), "rb"), name=_file[0])
+        # print("isbn not found ", isbn)
     return False
 
 
@@ -157,8 +159,8 @@ def import_books_into_postgres(conn):
         )
 
 
-PLACHOLDERS = "/home/hugo/Development/ecom/ecom/frontend/static/thumbnails"
-DATABASE = "/home/hugo/Development/ecom/LPP-Master_2019_2020-01-21.db"
+PLACHOLDERS = "/home/ubuntu/Dev/ecom/ecom/frontend/static/thumbnails"
+DATABASE = "/home/ubuntu/Dropbox/sauvegardes/LPP-Master_2019_2020-01-21.db"
 # create a database connection
 conn = create_connection(DATABASE)
 conn.text_factory = lambda x: str(x, "latin1")
