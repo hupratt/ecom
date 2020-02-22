@@ -17,7 +17,7 @@ const BookPage = ({
 }) => {
   return (
     <React.Fragment>
-      <div class="container container-forms">
+      <div className="container container-forms">
         <LanguageFilter onSelectRadio={onSelectRadio} language={language} />
         <AuthorFilter />
         <PaginationShorthand

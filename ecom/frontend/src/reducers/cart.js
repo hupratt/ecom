@@ -1,4 +1,4 @@
-import { CART_START, CART_SUCCESS, CART_FAIL } from "../actions/actionTypes";
+import * as actionTypes from "../actions/actionTypes";
 import { updateObject } from "./utility";
 
 const initialState = {
@@ -31,12 +31,13 @@ const cartFail = (state, action) => {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case CART_START:
+    case actionTypes.CART_START:
       return cartStart(state, action);
-    case CART_SUCCESS:
+    case actionTypes.CART_SUCCESS:
       return cartSuccess(state, action);
-    case CART_FAIL:
+    case actionTypes.CART_FAIL:
       return cartFail(state, action);
+
     default:
       return state;
   }

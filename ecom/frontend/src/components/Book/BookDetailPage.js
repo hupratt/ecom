@@ -1,4 +1,5 @@
 import React from "react";
+import { fetchCart, handleAddToCart } from "../../actions/cart";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import {
@@ -13,7 +14,6 @@ import {
   Message,
   Segment
 } from "semantic-ui-react";
-import { fetchCart } from "../../actions/cart";
 import { s3_base_url } from "../../constants";
 import { fetchBook } from "../../actions/book";
 
@@ -26,7 +26,13 @@ class BookDetail extends React.Component {
   }
 
   render() {
-    const { book, error, loading, isAuthenticated } = this.props;
+    const {
+      book,
+      error,
+      loading,
+      isAuthenticated,
+      handleAddToCart
+    } = this.props;
 
     return (
       <Container>
@@ -81,7 +87,7 @@ class BookDetail extends React.Component {
                         icon
                         labelPosition="right"
                         onClick={() =>
-                          this.handleAddToCart(book.id, isAuthenticated)
+                          handleAddToCart(book.id, isAuthenticated)
                         }
                       >
                         Add to cart
@@ -102,7 +108,9 @@ class BookDetail extends React.Component {
 const mapDispatchToProps = dispatch => {
   return {
     refreshCart: () => dispatch(fetchCart()),
-    fetchBook: (id, dataIsCached) => dispatch(fetchBook(id, dataIsCached))
+    fetchBook: (id, dataIsCached) => dispatch(fetchBook(id, dataIsCached)),
+    handleAddToCart: (id, isAuthenticated) =>
+      dispatch(handleAddToCart(id, isAuthenticated))
   };
 };
 

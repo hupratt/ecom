@@ -1,23 +1,23 @@
-import { CART_START, CART_SUCCESS, CART_FAIL } from "./actionTypes";
-import { orderSummaryURL } from "../constants";
+import * as actionTypes from "../actions/actionTypes";
+import { orderSummaryURL, addToCartURL } from "../constants";
 import axios from "axios";
 
 export const cartStart = () => {
   return {
-    type: CART_START
+    type: actionTypes.CART_START
   };
 };
 
 export const cartSuccess = data => {
   return {
-    type: CART_SUCCESS,
+    type: actionTypes.CART_SUCCESS,
     data
   };
 };
 
 export const cartFail = error => {
   return {
-    type: CART_FAIL,
+    type: actionTypes.CART_FAIL,
     error: error
   };
 };
@@ -29,6 +29,27 @@ export const fetchCart = () => {
       .get(orderSummaryURL)
       .then(res => {
         dispatch(cartSuccess(res.data));
+      })
+      .catch(err => {
+        dispatch(cartFail(err));
+      });
+  };
+};
+
+export const handleAddToCart = (id, isAuthenticated) => {
+  return dispatch => {
+    axios
+      .post(addToCartURL, { id })
+      .then(res => {
+        dispatch(cartStart());
+        axios
+          .get(orderSummaryURL)
+          .then(res => {
+            dispatch(cartSuccess(res.data));
+          })
+          .catch(err => {
+            dispatch(cartFail(err));
+          });
       })
       .catch(err => {
         dispatch(cartFail(err));
