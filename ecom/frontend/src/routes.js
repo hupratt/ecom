@@ -4,11 +4,11 @@ import { Hoc } from "./hoc/hoc";
 
 import Login from "./components/User/Login";
 import Signup from "./components/User/Signup";
-import BookList from "./components/Book/BookList";
+import BookList from "./components/Book/BookListPage";
 import OrderSummary from "./components/Payment/OrderSummary";
 import Checkout from "./components/Payment/Checkout";
 import Profile from "./components/User/Profile";
-import BookDetail from "./components/Book/BookDetail";
+import BookDetail from "./components/Book/BookDetailPage";
 
 const BaseRouter = () => (
   <Hoc>

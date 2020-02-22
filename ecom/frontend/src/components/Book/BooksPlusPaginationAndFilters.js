@@ -2,7 +2,7 @@ import React from "react";
 import PaginationShorthand from "../Layout/Pagination";
 import { onSelectRadio } from "../../actions/books";
 import LanguageFilter from "./LanguageFilter";
-import BookGrid from "./BookGrid";
+import BookGrid from "./Books";
 
 const BookPage = ({
   bookPerPage,
