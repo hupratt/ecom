@@ -23,14 +23,18 @@ body {
 .pagination {
   margin-top: 50px;
   display: inline-flex;
+  align-self: auto;
+  margin-top: auto;
 }
+
+.pagination + p {
+  padding: 2px;
+}
+
 .pagination .active {
   color: #fb5270;
 }
-.pagination p {
-  display: inline;
-  padding-left: 20px;
-}
+
 .grid {
   .item {
     width: 228px;
@@ -54,6 +58,7 @@ body {
   position: absolute;
 }
 
+.author-checkbox,
 .radio {
   ul {
     list-style-type: none;
@@ -64,9 +69,22 @@ body {
     padding: 0px;
   }
 }
+
+.ui.form.author-checkbox,
 .ui.form.radio {
-  position: absolute;
+  float: left;
   max-width: 100%;
-  left: 10vw;
-  margin-top: 9px;
+}
+
+.author-checkbox .checkbox,
+.container-forms {
+  flex-direction: column;
+  display: flex;
+  width: 15vw;
+}
+
+.ui.container {
+  width: 80vw;
+  flex-direction: row;
+  display: flex;
 }

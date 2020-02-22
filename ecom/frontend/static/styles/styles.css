@@ -23,15 +23,17 @@ body {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
+  -ms-flex-item-align: auto;
+      align-self: auto;
+  margin-top: auto;
+}
+
+.pagination + p {
+  padding: 2px;
 }
 
 .pagination .active {
   color: #fb5270;
-}
-
-.pagination p {
-  display: inline;
-  padding-left: 20px;
 }
 
 .grid .item {
@@ -59,20 +61,44 @@ body {
   position: absolute;
 }
 
+.author-checkbox ul,
 .radio ul {
   list-style-type: none;
   margin-top: 15px;
   padding: 0;
 }
 
+.author-checkbox .h4,
 .radio .h4 {
   padding: 0px;
 }
 
+.ui.form.author-checkbox,
 .ui.form.radio {
-  position: absolute;
+  float: left;
   max-width: 100%;
-  left: 10vw;
-  margin-top: 9px;
+}
+
+.author-checkbox .checkbox,
+.container-forms {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 15vw;
+}
+
+.ui.container {
+  width: 80vw;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 /*# sourceMappingURL=styles.css.map */

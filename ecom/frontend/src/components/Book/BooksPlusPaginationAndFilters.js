@@ -2,6 +2,7 @@ import React from "react";
 import PaginationShorthand from "../Layout/Pagination";
 import { onSelectRadio } from "../../actions/books";
 import LanguageFilter from "./LanguageFilter";
+import AuthorFilter from "./AuthorFilter";
 import BookGrid from "./Books";
 
 const BookPage = ({
@@ -16,22 +17,23 @@ const BookPage = ({
 }) => {
   return (
     <React.Fragment>
-      <LanguageFilter onSelectRadio={onSelectRadio} language={language} />
+      <div class="container container-forms">
+        <LanguageFilter onSelectRadio={onSelectRadio} language={language} />
+        <AuthorFilter />
+        <PaginationShorthand
+          bookPerPage={bookPerPage}
+          books={dataToShow.length}
+          paginate={onPageChange}
+          currentPage={currentPage}
+        ></PaginationShorthand>
+        <p>
+          Displaying {bookPerPage} of {dataToShow.length} books
+        </p>
+      </div>
       <BookGrid
         paginatedData={paginatedData}
         handleClickOnBook={handleClickOnBook}
       />
-
-      <PaginationShorthand
-        bookPerPage={bookPerPage}
-        books={dataToShow.length}
-        paginate={onPageChange}
-        currentPage={currentPage}
-      >
-        <p>
-          Displaying {bookPerPage} of {dataToShow.length} books
-        </p>
-      </PaginationShorthand>
     </React.Fragment>
   );
 };
