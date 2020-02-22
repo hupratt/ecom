@@ -5,7 +5,8 @@ const initState = {
   loading: false,
   error: null,
   book: [],
-  data: []
+  data: [],
+  dataIsCached: false
 };
 
 const fetchItemsSuccess = (state, action) => {
@@ -15,19 +16,49 @@ const fetchItemsSuccess = (state, action) => {
     loading: false
   });
 };
-const fetchBook = (state, action) => {
+
+const fetchBookLocally = (state, action) => {
   return updateObject(state, {
     book: state.data.find(post => post.id == action.bookID),
+    loading: false,
+    dataIsCached: true
+  });
+};
+const fetchBook = (state, action) => {
+  return updateObject(state, {
+    book: action.data,
+    error: null,
+    loading: false,
+    dataIsCached: true
+  });
+};
+
+const loading = (state, action) => {
+  return updateObject(state, {
+    loading: true
+  });
+};
+
+const fetchItemsFail = (state, action) => {
+  return updateObject(state, {
+    error: action.error,
     loading: false
   });
 };
 
 const reducer = (state = initState, action) => {
   switch (action.type) {
+    case actionTypes.LOADING:
+      return loading(state, action);
+    case actionTypes.FETCH_FAIL:
+      return fetchItemsFail(state, action);
     case actionTypes.FETCH_SUCCESS:
       return fetchItemsSuccess(state, action);
+    case actionTypes.FETCH_BOOK_LOCAL:
+      return fetchBookLocally(state, action);
     case actionTypes.FETCH_BOOK:
       return fetchBook(state, action);
+
     default:
       return state;
   }

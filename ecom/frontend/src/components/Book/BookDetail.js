@@ -19,8 +19,10 @@ import { fetchBook } from "../../actions/book";
 
 class BookDetail extends React.Component {
   componentDidMount() {
-    let id = this.props.match.params.bookID;
-    this.props.fetchBook(id);
+    this.props.fetchBook(
+      this.props.match.params.bookID,
+      this.props.dataIsCached
+    );
   }
 
   render() {
@@ -100,17 +102,19 @@ class BookDetail extends React.Component {
 const mapDispatchToProps = dispatch => {
   return {
     refreshCart: () => dispatch(fetchCart()),
-    fetchBook: id => dispatch(fetchBook(id))
+    fetchBook: (id, dataIsCached) => dispatch(fetchBook(id, dataIsCached))
   };
 };
 
 const mapStateToProps = state => {
+  console.log(state.book);
   return {
     isAuthenticated: state.auth.token !== null,
     loading: state.book.loading,
     error: state.book.error,
     data: state.book.data,
-    book: state.book.book
+    book: state.book.book,
+    dataIsCached: state.book.dataIsCached
   };
 };
 

@@ -4,14 +4,14 @@ import { bookListURL } from "../constants";
 
 export const fetchBooks = dataIsCached => {
   if (dataIsCached) {
-    console.log("fetching cache");
+    console.log("fetching cache for all books");
     return dispatch => {
       dispatch({ type: actionTypes.FETCH_CACHE });
     };
   }
   return dispatch => {
     dispatch({ type: actionTypes.LOADING });
-    console.log("running axios");
+    console.log("running axios to fetch all books");
     axios
       .get(bookListURL)
       .then(res => {
