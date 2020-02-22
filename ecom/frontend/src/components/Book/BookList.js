@@ -3,12 +3,15 @@ import { connect } from "react-redux";
 import { Container, Dimmer, Loader, Message, Segment } from "semantic-ui-react";
 import { fetchBooks, onPageChange, onSelectRadio } from "../../actions/books";
 import BookPage from "./BookPage";
-import { withLoading } from "../../hoc/hoc";
+import { withLoading, withError } from "../../hoc/hoc";
 
 class BookList extends React.Component {
   componentDidMount() {
     this.props.fetchBooks(this.props.dataIsCached);
   }
+  handleClickOnBook = id => {
+    this.props.history.push(`/books/${id}`);
+  };
   render() {
     const {
       data,
@@ -28,17 +31,10 @@ class BookList extends React.Component {
     const indexOfLastBook = currentPage * bookPerPage;
     const indexOfFirstBook = indexOfLastBook - bookPerPage;
     const paginatedData = dataToShow.slice(indexOfFirstBook, indexOfLastBook);
+
     return (
       <Container>
-        {error && (
-          <Message
-            error
-            header="There was some errors with your submission"
-            content={JSON.stringify(error)}
-          />
-        )}
-
-        <BookPageWithLoading
+        <BookPageWithLoadingAndErrorHandling
           bookPerPage={bookPerPage}
           dataToShow={dataToShow}
           onPageChange={onPageChange}
@@ -47,6 +43,8 @@ class BookList extends React.Component {
           paginatedData={paginatedData}
           language={language}
           loading={loading}
+          error={error}
+          handleClickOnBook={this.handleClickOnBook}
         />
 
         {this.props.children}
@@ -64,10 +62,10 @@ const mapDispatchToProps = dispatch => {
 };
 
 const BookPageWithLoading = withLoading(BookPage);
+const BookPageWithLoadingAndErrorHandling = withError(BookPageWithLoading);
 
 const mapStateToProps = state => {
   return {
-    isAuthenticated: state.auth.token !== null,
     loading: state.books.loading,
     error: state.books.error,
     data: state.books.data,
@@ -75,6 +73,7 @@ const mapStateToProps = state => {
     setPage: state.books.setPage,
     bookPerPage: state.books.bookPerPage,
     language: state.books.language,
+    isAuthenticated: state.auth.token !== null,
     dataIsCached: state.books.data.length != 0
   };
 };

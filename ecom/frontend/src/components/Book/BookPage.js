@@ -11,12 +11,16 @@ const BookPage = ({
   currentPage,
   onSelectRadio,
   paginatedData,
-  language
+  language,
+  handleClickOnBook
 }) => {
   return (
     <React.Fragment>
       <LanguageFilter onSelectRadio={onSelectRadio} language={language} />
-      <BookGrid paginatedData={paginatedData} />
+      <BookGrid
+        paginatedData={paginatedData}
+        handleClickOnBook={handleClickOnBook}
+      />
 
       <PaginationShorthand
         bookPerPage={bookPerPage}

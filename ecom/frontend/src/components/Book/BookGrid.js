@@ -2,7 +2,7 @@ import React from "react";
 import { Grid, Item } from "semantic-ui-react";
 import { s3_base_url } from "../../constants";
 
-const BookGrid = ({ paginatedData }) => {
+const BookGrid = ({ paginatedData, handleClickOnBook }) => {
   return (
     <Grid divided>
       <div className="row">
@@ -11,17 +11,14 @@ const BookGrid = ({ paginatedData }) => {
             <Item className="four wide column" key={item.id}>
               <Item.Image
                 as="a"
-                onClick={() => this.props.history.push(`/books/${item.id}`)}
+                onClick={() => handleClickOnBook(item.id)}
                 src={s3_base_url + item.isbn + ".jpg"}
               />
               <Item.Content>
                 <Item.Meta>
                   <span className="cinema">{item.genre_nom}</span>
                 </Item.Meta>
-                <Item.Header
-                  as="a"
-                  onClick={() => this.props.history.push(`/books/${item.id}`)}
-                >
+                <Item.Header as="a" onClick={() => handleClickOnBook}>
                   {item.titre}
                 </Item.Header>
 
