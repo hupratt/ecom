@@ -28,7 +28,7 @@ body {
 }
 
 .pagination + p {
-  padding: 2px;
+  padding: 3px;
 }
 
 .pagination .active {
@@ -83,7 +83,7 @@ body {
   width: 15vw;
 }
 
-.ui.container {
+.ui.container.booklist {
   width: 80vw;
   flex-direction: row;
   display: flex;

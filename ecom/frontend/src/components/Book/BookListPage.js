@@ -33,7 +33,7 @@ class BookList extends React.Component {
     const paginatedData = dataToShow.slice(indexOfFirstBook, indexOfLastBook);
 
     return (
-      <Container>
+      <Container className="booklist">
         <BookPageWithLoadingAndErrorHandling
           bookPerPage={bookPerPage}
           dataToShow={dataToShow}
