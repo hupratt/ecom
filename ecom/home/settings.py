@@ -64,16 +64,28 @@ TEMPLATES = [
 # for the debug toolbar middleware
 INTERNAL_IPS = ["127.0.0.1", "localhost"]
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "ecom",
-        "USER": os.environ.get("dbuser"),
-        "PASSWORD": os.environ.get("dbpassword"),
-        "HOST": os.environ.get("hostip"),
-        "PORT": os.environ.get("pnumber"),
+if os.environ.get("DJANGO_DEVELOPMENT") is not None:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql_psycopg2",
+            "NAME": "ecom",
+            "USER": os.environ.get("dbuser"),
+            "PASSWORD": os.environ.get("dbpassword"),
+            "HOST": os.environ.get("hostipdev"),
+            "PORT": os.environ.get("pnumber"),
+        }
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql_psycopg2",
+            "NAME": "ecom",
+            "USER": os.environ.get("dbuser"),
+            "PASSWORD": os.environ.get("dbpassword"),
+            "HOST": os.environ.get("hostip"),
+            "PORT": os.environ.get("pnumber"),
+        }
+    }
 
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
