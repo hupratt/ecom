@@ -41,7 +41,7 @@ const fetchItemsFail = (state, action) => {
 };
 const pageChanged = (state, action) => {
   return updateObject(state, {
-    currentPage: action.pageNumber
+    currentPage: action.currentPage
   });
 };
 const radioButtonClick = (state, action) => {

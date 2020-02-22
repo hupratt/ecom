@@ -35,7 +35,7 @@ export const onSelectRadio = event => {
 
 export const onPageChange = pageNumber => {
   return dispatch => {
-    console.log("onPageChange");
+    console.log(`${pageNumber} is called`);
     dispatch({ type: actionTypes.PAGE_CHANGED, currentPage: pageNumber });
   };
 };
