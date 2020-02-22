@@ -24,11 +24,11 @@ export const fetchBooks = dataIsCached => {
 };
 
 export const onSelectRadio = event => {
-  console.log("onSelectRadio");
   return dispatch => {
+    console.log(`language ${event.currentTarget.value}`);
     dispatch({
       type: actionTypes.RADIO_BUTTON_CLICK,
-      data: event.currentTarget.value
+      language: event.currentTarget.value
     });
   };
 };
