@@ -1,0 +1,39 @@
+import React from "react";
+import { Form } from "semantic-ui-react";
+import RadioButton from "../Layout/RadioButton";
+
+const LanguageFilter = ({ onSelectRadio, language }) => {
+  return (
+    <Form className="radio">
+      <div className="h4">Language</div>
+      <ul>
+        <RadioButton
+          handleChange={onSelectRadio}
+          language={language}
+          value="PT"
+          id="1"
+        />
+        <RadioButton
+          handleChange={onSelectRadio}
+          language={language}
+          value="FR"
+          id="2"
+        />
+        <RadioButton
+          handleChange={onSelectRadio}
+          language={language}
+          value="EN"
+          id="3"
+        />
+        <RadioButton
+          handleChange={onSelectRadio}
+          language={language}
+          value="No filter"
+          id="4"
+        />
+      </ul>
+    </Form>
+  );
+};
+
+export default LanguageFilter;

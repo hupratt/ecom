@@ -21,13 +21,13 @@ class CustomLayout extends React.Component {
       <div>
         <Menu inverted>
           <Container>
+            <Menu.Menu position="left">
+              <Link to="/">
+                <Menu.Item header>Home</Menu.Item>
+              </Link>
+            </Menu.Menu>
             {authenticated ? (
               <React.Fragment>
-                <Menu.Menu position="left">
-                  <Link to="/">
-                    <Menu.Item header>Home</Menu.Item>
-                  </Link>
-                </Menu.Menu>
                 <Menu.Menu position="right">
                   <Link to="/profile">
                     <Menu.Item>Profile</Menu.Item>

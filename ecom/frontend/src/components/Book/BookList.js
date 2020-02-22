@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import {
   Container,
   Dimmer,
@@ -8,13 +7,12 @@ import {
   Message,
   Segment,
   Grid,
-  Item,
-  Form
+  Item
 } from "semantic-ui-react";
-import { s3_base_url } from "../../constants";
 import PaginationShorthand from "../Layout/Pagination";
-import RadioButton from "../Layout/RadioButton";
 import { fetchBooks, onPageChange, onSelectRadio } from "../../actions/books";
+import LanguageFilter from "./LanguageFilter";
+import BookGrid from "./BookGrid";
 
 class BookList extends React.Component {
   componentDidMount() {
@@ -55,65 +53,8 @@ class BookList extends React.Component {
             </Dimmer>
           </Segment>
         )}
-        <Form className="radio">
-          <div className="h4">Language</div>
-          <ul>
-            <RadioButton
-              handleChange={onSelectRadio}
-              language={language}
-              value="PT"
-              id="1"
-            />
-            <RadioButton
-              handleChange={onSelectRadio}
-              language={language}
-              value="FR"
-              id="2"
-            />
-            <RadioButton
-              handleChange={onSelectRadio}
-              language={language}
-              value="EN"
-              id="3"
-            />
-            <RadioButton
-              handleChange={onSelectRadio}
-              language={language}
-              value="No filter"
-              id="4"
-            />
-          </ul>
-        </Form>
-        <Grid divided>
-          <div className="row">
-            {paginatedData.map(item => {
-              return (
-                <Item className="four wide column" key={item.id}>
-                  <Item.Image
-                    as="a"
-                    onClick={() => this.props.history.push(`/books/${item.id}`)}
-                    src={s3_base_url + item.isbn + ".jpg"}
-                  />
-                  <Item.Content>
-                    <Item.Meta>
-                      <span className="cinema">{item.genre_nom}</span>
-                    </Item.Meta>
-                    <Item.Header
-                      as="a"
-                      onClick={() =>
-                        this.props.history.push(`/books/${item.id}`)
-                      }
-                    >
-                      {item.titre}
-                    </Item.Header>
-
-                    <Item.Extra>{item.prix} €</Item.Extra>
-                  </Item.Content>
-                </Item>
-              );
-            })}
-          </div>
-        </Grid>
+        <LanguageFilter onSelectRadio={onSelectRadio} language={language} />
+        <BookGrid paginatedData={paginatedData} />
 
         {this.props.children}
         <PaginationShorthand
