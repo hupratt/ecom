@@ -6,9 +6,9 @@ const AuthorFilter = () => {
     <Form className="author-checkbox">
       <div className="filter-title">Author</div>
       <ul>
-        <Checkbox label="Make my profile visible" checked />
-        <Checkbox label="Make my profile visible" />
-        <Checkbox label="Make my profile visible" />
+        <Checkbox label="Author 1" checked />
+        <Checkbox label="Author 2" />
+        <Checkbox label="Author 3" />
       </ul>
     </Form>
   );

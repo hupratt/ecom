@@ -93,7 +93,16 @@ body {
 .container-forms {
   flex-direction: column;
   display: flex;
-  width: 15vw;
+  width: 20vw;
+}
+
+.container-forms {
+  // .form:nth-child(odd) {
+  //   margin-top: 26px;
+  // }
+  .form:not(:first-child) {
+    margin-top: 26px;
+  }
 }
 
 .ui.container.booklist {
@@ -106,4 +115,18 @@ body {
   font-size: 22px;
   font-weight: 700;
   margin-bottom: 26px;
+}
+
+.book-category {
+  margin-right: 20px;
+  a {
+    display: inline-block;
+    font-size: 16px;
+    color: #636363;
+    padding: 5px 15px;
+    border: 1px solid #ebebeb;
+    margin-right: 5px;
+    margin-bottom: 9px;
+    border-radius: 2px;
+  }
 }

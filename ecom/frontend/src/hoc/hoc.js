@@ -28,20 +28,26 @@ export const withError = WrappedComponent => {
       const { error, errorCart } = this.props;
       if (error) {
         return (
-          <Message
-            error
-            header="There was some errors with your submission"
-            content={JSON.stringify(error)}
-          />
+          <React.Fragment>
+            <Message
+              error
+              header="There was some errors with your submission"
+              content={JSON.stringify(error)}
+            />
+            <WrappedComponent {...this.props} />
+          </React.Fragment>
         );
       }
       if (errorCart) {
         return (
-          <Message
-            error
-            header="There was some errors with your submission"
-            content={JSON.stringify(errorCart)}
-          />
+          <React.Fragment>
+            <Message
+              error
+              header="There was some errors with your submission"
+              content={JSON.stringify(errorCart)}
+            />
+            <WrappedComponent {...this.props} />
+          </React.Fragment>
         );
       }
 
