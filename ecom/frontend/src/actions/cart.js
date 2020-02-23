@@ -16,6 +16,7 @@ export const cartSuccess = data => {
 };
 
 export const cartFail = error => {
+  console.log("action failed");
   return {
     type: actionTypes.CART_FAIL,
     error: error
@@ -38,21 +39,25 @@ export const fetchCart = () => {
 
 export const handleAddToCart = (id, isAuthenticated) => {
   return dispatch => {
-    axios
-      .post(addToCartURL, { id })
-      .then(res => {
-        dispatch(cartStart());
-        axios
-          .get(orderSummaryURL)
-          .then(res => {
-            dispatch(cartSuccess(res.data));
-          })
-          .catch(err => {
-            dispatch(cartFail(err));
-          });
-      })
-      .catch(err => {
-        dispatch(cartFail(err));
-      });
+    if (isAuthenticated) {
+      axios
+        .post(addToCartURL, { id })
+        .then(res => {
+          dispatch(cartStart());
+          axios
+            .get(orderSummaryURL)
+            .then(res => {
+              dispatch(cartSuccess(res.data));
+            })
+            .catch(err => {
+              dispatch(cartFail(err));
+            });
+        })
+        .catch(err => {
+          dispatch(cartFail(err));
+        });
+    } else {
+      dispatch(cartFail("Login in order to proceed"));
+    }
   };
 };

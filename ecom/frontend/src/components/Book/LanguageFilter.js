@@ -5,7 +5,7 @@ import RadioButton from "../Layout/RadioButton";
 const LanguageFilter = ({ language, onSelectRadio }) => {
   return (
     <Form className="radio">
-      <div className="h4">Language</div>
+      <div className="filter-title">Language</div>
       <ul>
         <RadioButton
           handleChange={onSelectRadio}

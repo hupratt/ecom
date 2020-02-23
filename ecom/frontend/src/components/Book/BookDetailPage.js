@@ -31,11 +31,19 @@ class BookDetail extends React.Component {
       error,
       loading,
       isAuthenticated,
-      handleAddToCart
+      handleAddToCart,
+      errorCart
     } = this.props;
-
+    console.log("error" + error);
     return (
       <Container>
+        {errorCart && (
+          <Message
+            error
+            header="There was some errors with your submission"
+            content={JSON.stringify(errorCart)}
+          />
+        )}
         {error && (
           <Message
             error
@@ -120,6 +128,7 @@ const mapStateToProps = state => {
     isAuthenticated: state.auth.token !== null,
     loading: state.book.loading,
     error: state.book.error,
+    errorCart: state.cart.error,
     data: state.book.data,
     book: state.book.book,
     dataIsCached: state.book.dataIsCached
