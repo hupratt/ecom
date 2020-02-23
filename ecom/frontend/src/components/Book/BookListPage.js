@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Container, Dimmer, Loader, Message, Segment } from "semantic-ui-react";
+import { Container } from "semantic-ui-react";
 import { fetchBooks, onPageChange, onSelectRadio } from "../../actions/books";
 import BookPage from "./BooksPlusPaginationAndFilters";
 import { withLoading, withError } from "../../hoc/hoc";

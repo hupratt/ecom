@@ -25,7 +25,7 @@ export const withLoading = WrappedComponent => {
 export const withError = WrappedComponent => {
   class HOC extends React.Component {
     render() {
-      const { error } = this.props;
+      const { error, errorCart } = this.props;
       if (error) {
         return (
           <Message
@@ -35,6 +35,16 @@ export const withError = WrappedComponent => {
           />
         );
       }
+      if (errorCart) {
+        return (
+          <Message
+            error
+            header="There was some errors with your submission"
+            content={JSON.stringify(errorCart)}
+          />
+        );
+      }
+
       return <WrappedComponent {...this.props} />;
     }
   }

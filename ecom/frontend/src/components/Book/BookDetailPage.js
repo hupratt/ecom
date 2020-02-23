@@ -2,22 +2,12 @@ import React from "react";
 import { fetchCart, handleAddToCart } from "../../actions/cart";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import {
-  Button,
-  Card,
-  Container,
-  Dimmer,
-  Grid,
-  Icon,
-  Item,
-  Loader,
-  Message,
-  Segment
-} from "semantic-ui-react";
-import { s3_base_url } from "../../constants";
 import { fetchBook } from "../../actions/book";
+import BookDetail from "./BookDetail";
+import { Container } from "semantic-ui-react";
+import { withLoading, withError } from "../../hoc/hoc";
 
-class BookDetail extends React.Component {
+class BookDetailPage extends React.Component {
   componentDidMount() {
     this.props.fetchBook(
       this.props.match.params.bookID,
@@ -28,90 +18,27 @@ class BookDetail extends React.Component {
   render() {
     const {
       book,
-      error,
-      loading,
-      isAuthenticated,
       handleAddToCart,
-      errorCart
+      isAuthenticated,
+      errorCart,
+      error
     } = this.props;
-    console.log("error" + error);
     return (
       <Container>
-        {errorCart && (
-          <Message
-            error
-            header="There was some errors with your submission"
-            content={JSON.stringify(errorCart)}
-          />
-        )}
-        {error && (
-          <Message
-            error
-            header="There was some errors with your submission"
-            content={JSON.stringify(error)}
-          />
-        )}
-        {loading && (
-          <Segment>
-            <Dimmer active inverted>
-              <Loader inverted>Loading</Loader>
-            </Dimmer>
-          </Segment>
-        )}
-        <Grid divided>
-          <Grid.Row>
-            <Grid.Column>
-              <div className="row">
-                <Item.Image
-                  className="col picture"
-                  src={s3_base_url + book.isbn + ".jpg"}
-                />
-                <Card
-                  fluid
-                  className="col"
-                  header={book.titre}
-                  meta={
-                    <React.Fragment>
-                      <ul>Author: {book.auteur_nom}</ul>
-                      <ul>Genre: {book.genre_nom}</ul>
-                      <ul>{book.isbn}</ul>
-                      <ul>{book.prix} €</ul>
-                      <ul>{book.note} /5</ul>
-                      <ul>Publication: {book.date_publication}</ul>
-                      <ul>Stock: {book.quantite}</ul>
-                      <ul>Language: {book.langue_nom}</ul>
-                    </React.Fragment>
-                  }
-                  description={book.description}
-                  extra={
-                    <React.Fragment>
-                      {book.genre_nom}
-                      {book.prix}
-
-                      <Button
-                        fluid
-                        color="yellow"
-                        floated="right"
-                        icon
-                        labelPosition="right"
-                        onClick={() =>
-                          handleAddToCart(book.id, isAuthenticated)
-                        }
-                      >
-                        Add to cart
-                        <Icon name="cart plus" />
-                      </Button>
-                    </React.Fragment>
-                  }
-                />
-              </div>
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
+        <BookDetailWithLoadingAndErrorHandling
+          handleAddToCart={handleAddToCart}
+          book={book}
+          isAuthenticated={isAuthenticated}
+          errorCart={errorCart}
+          error={error}
+        />
       </Container>
     );
   }
 }
+
+const BookDetailWithLoading = withLoading(BookDetail);
+const BookDetailWithLoadingAndErrorHandling = withError(BookDetailWithLoading);
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -123,7 +50,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 const mapStateToProps = state => {
-  console.log(state.book);
   return {
     isAuthenticated: state.auth.token !== null,
     loading: state.book.loading,
@@ -136,5 +62,5 @@ const mapStateToProps = state => {
 };
 
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(BookDetail)
+  connect(mapStateToProps, mapDispatchToProps)(BookDetailPage)
 );
