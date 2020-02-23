@@ -21,6 +21,7 @@ const BookPage = ({
         <LanguageFilter onSelectRadio={onSelectRadio} language={language} />
         <AuthorFilter />
         <CategoryFilter />
+        <input className="js-range-slider" id="price_range" name="pricerange" />
         <PaginationShorthand
           bookPerPage={bookPerPage}
           books={dataToShow.length}
