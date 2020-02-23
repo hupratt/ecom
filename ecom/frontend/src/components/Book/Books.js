@@ -14,15 +14,19 @@ const BookGrid = ({ paginatedData, handleClickOnBook }) => {
                 onClick={() => handleClickOnBook(item.id)}
                 src={s3_base_url + item.isbn + ".jpg"}
               />
-              <Item.Content>
+              <Item.Content className="book-list-meta">
                 <Item.Meta>
-                  <span className="cinema">{item.genre_nom}</span>
+                  <span>{item.genre_nom}</span>
                 </Item.Meta>
-                <Item.Header as="a" onClick={() => handleClickOnBook}>
+                <Item.Header
+                  className="title"
+                  as="a"
+                  onClick={() => handleClickOnBook}
+                >
                   {item.titre}
                 </Item.Header>
 
-                <Item.Extra>{item.prix} €</Item.Extra>
+                <Item.Extra className="price">{item.prix} €</Item.Extra>
               </Item.Content>
             </Item>
           );
