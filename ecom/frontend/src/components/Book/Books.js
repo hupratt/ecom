@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid, Item } from "semantic-ui-react";
 import { s3_base_url } from "../../constants";
+import styled from 'styled-components';
 
 // Define our button, but with the use of props.theme this time
 const TiltBook = styled.img`
