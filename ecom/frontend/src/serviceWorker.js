@@ -27,6 +27,16 @@ const assets = [
   "/fallback"
 ]
 
+const limitCacheSize = (cacheName, size) => {
+  caches.open(cacheName).then(cache => {
+    cache.keys().then(keys => {
+      if (keys.length > size) {
+        cache.delete(keys[0]).then(limitCacheSize(cacheName, size))
+      }
+    })
+  })
+}
+
 window.addEventListener("fetch", e => {
   console.log("fetching" + e)
   // pause the event and respond with our custom event
@@ -35,6 +45,7 @@ window.addEventListener("fetch", e => {
     return cacheRes || fetch(e.request).then(fetchRes => {
       return caches.open(dynamicCacheName).then(cache => {
         cache.put(e.request.url, fetchRes.clone())
+        limitCacheSize(dynamicCacheName, 15)
         return fetchRes
       })
     }).catch(() => {
