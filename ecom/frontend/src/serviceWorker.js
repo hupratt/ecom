@@ -23,8 +23,8 @@ const assets = [
   "https://bootswatch.com/4/cosmo/bootstrap.min.css",
   "https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700&display=swap",
   "https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&subset=latin",
-  "https://code.jquery.com/jquery-3.3.1.slim.min.js"
-
+  "https://code.jquery.com/jquery-3.3.1.slim.min.js",
+  "/fallback"
 ]
 
 window.addEventListener("fetch", e => {
@@ -37,6 +37,12 @@ window.addEventListener("fetch", e => {
         cache.put(e.request.url, fetchRes.clone())
         return fetchRes
       })
+    }).catch(() => {
+      // checks the position of the .html 
+      // in the request url if it doesnt find returns -1
+      if (e.request.url.indexOf(".html") > -1) {
+        return caches.match("/fallback")
+      }
     })
   })
 });
@@ -51,6 +57,7 @@ window.addEventListener("install", e => {
   )
 });
 
+// fires when we activate a new service worker
 window.addEventListener("activate", e => {
   console.log("delete cache on activate" + e)
   // waitUntil epects one promise back
@@ -59,7 +66,7 @@ window.addEventListener("activate", e => {
       console.log(keys)
       // when all resolve return one promise
       Promise.all(keys
-        .filter(key => key !== staticCacheName)
+        .filter(key => key !== staticCacheName && key !== dynamicCacheName)
         .map(key => caches.delete())
       )
     })
