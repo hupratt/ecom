@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, Item } from "semantic-ui-react";
 import { s3_base_url } from "../../constants";
-import styled from 'styled-components';
+import styled, { ThemeProvider } from "styled-components";
 
 // Define our button, but with the use of props.theme this time
 const TiltBook = styled.img`
@@ -28,7 +28,7 @@ const BookGrid = ({ paginatedData, handleClickOnBook }) => {
                     url: `${s3_base_url}${item.isbn}.jpg`
                   };
                   return (
-                    <li>
+                    <li key={item.id}>
                       <ThemeProvider theme={theme}>
                         <div className="bk-book book-1 bk-bookdefault">
                           <div className="bk-front">

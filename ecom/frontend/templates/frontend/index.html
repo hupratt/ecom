@@ -9,7 +9,7 @@
       href="https://bootswatch.com/4/cosmo/bootstrap.min.css"
     />
     <title>La petite portugaise: books</title>
-    
+    {% load static %}
     <!-- ios support start -->
     <link rel="manifest" href="{% static 'mobile/manifest.json' %}">
     <!-- colorize status bar -->
@@ -30,7 +30,7 @@
   </head>
   <body>
     <div id="root"></div>
-    {% load static %}
+    
     <script src="{% static 'frontend/main.js' %}"></script>
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
