@@ -10,21 +10,20 @@
     />
     <title>La petite portugaise: books</title>
     {% load static %}
+    <link rel="manifest" href="{% static 'pwa/manifest.json' %}">
     <!-- ios support start -->
-    <link rel="manifest" href="{% static 'mobile/manifest.json' %}">
-    <!-- colorize status bar -->
-    <meta name="apple-mobile-web-app-status-bar" content="#7dcbd8">
-    <!-- colorize status bar -->
-    <link rel="apple-touch-icon" href="{% static 'icons/icon-72x72.png' %}">
-    <link rel="apple-touch-icon" href="{% static 'icons/icon-96x96.png' %}">
-    <link rel="apple-touch-icon" href="{% static 'icons/icon-128x128.png' %}">
-    <link rel="apple-touch-icon" href="{% static 'icons/icon-144x144.png' %}">
-    <link rel="apple-touch-icon" href="{% static 'icons/icon-152x152.png' %}">
-    <link rel="apple-touch-icon" href="{% static 'icons/icon-192x192.png' %}">
-    <link rel="apple-touch-icon" href="{% static 'icons/icon-384x384.png' %}">
-    <link rel="apple-touch-icon" href="{% static 'icons/icon-512x512.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'pwa/icon-72x72.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'pwa/icon-96x96.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'pwa/icon-128x128.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'pwa/icon-144x144.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'pwa/icon-152x152.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'pwa/icon-192x192.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'pwa/icon-384x384.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'pwa/icon-512x512.png' %}">
     <!-- overrides manifest.json theme-color -->
     <meta name="theme-color" content="#7dcbd8">
+    <!-- colorize status bar -->
+    <meta name="apple-mobile-web-app-status-bar" content="#7dcbd8">
     <!-- ios support end -->
     
   </head>
