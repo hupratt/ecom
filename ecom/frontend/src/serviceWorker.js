@@ -10,15 +10,64 @@
 
 const isLocalhost = Boolean(
   window.location.hostname === "localhost" ||
-    // [::1] is the IPv6 localhost address.
-    window.location.hostname === "[::1]" ||
-    // 127.0.0.1/8 is considered localhost for IPv4.
-    window.location.hostname.match(
-      /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
-    )
+  // 127.0.0.1/8 is considered localhost for IPv4.
+  window.location.hostname.match(
+    /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
+  )
 );
 
-export default function register() {
+const staticCacheName = 'site-static'
+const dynamicCacheName = 'site-dynamic'
+const assets = [
+  "/",
+  "https://bootswatch.com/4/cosmo/bootstrap.min.css",
+  "https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700&display=swap",
+  "https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&subset=latin",
+  "https://code.jquery.com/jquery-3.3.1.slim.min.js"
+
+]
+
+window.addEventListener("fetch", e => {
+  console.log("fetching" + e)
+  // pause the event and respond with our custom event
+  // check if url is in the pre cache
+  e.respondWith(e.request).then(cacheRes => {
+    return cacheRes || fetch(e.request).then(fetchRes => {
+      return caches.open(dynamicCacheName).then(cache => {
+        cache.put(e.request.url, fetchRes.clone())
+        return fetchRes
+      })
+    })
+  })
+});
+
+
+window.addEventListener("install", e => {
+  console.log("caching" + e)
+  e.waitUntil(
+    caches.open(staticCacheName).then(cache => {
+      cache.addAll(assets)
+    })
+  )
+});
+
+window.addEventListener("activate", e => {
+  console.log("delete cache on activate" + e)
+  // waitUntil epects one promise back
+  e.waitUntil(
+    caches.keys().then(keys => {
+      console.log(keys)
+      // when all resolve return one promise
+      Promise.all(keys
+        .filter(key => key !== staticCacheName)
+        .map(key => caches.delete())
+      )
+    })
+  )
+});
+
+export default function register() {  
+  // checks the env variable and whether the browser supports service workers 
   if (process.env.NODE_ENV === "production" && "serviceWorker" in navigator) {
     // The URL constructor is available in all browsers that support SW.
     const publicUrl = new URL(process.env.PUBLIC_URL, window.location);
