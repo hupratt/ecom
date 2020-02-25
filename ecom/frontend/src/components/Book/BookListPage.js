@@ -6,148 +6,122 @@ import BookPage from "./BooksPlusPaginationAndFilters";
 import { withLoading, withError } from "../../hoc/hoc";
 import $ from "jquery";
 
-function rafAsync() {
+const rafAsync = () => {
   return new Promise(resolve => {
     requestAnimationFrame(resolve);
   });
 }
 
-function checkElement(selector) {
+const checkElement = (selector) => {
   if (document.querySelector(selector) === null) {
     return rafAsync().then(() => checkElement(selector));
   } else {
     return Promise.resolve(document.querySelectorAll(selector));
   }
 }
+
+const node2object = node => {
+  let $books_array = [...node],
+    $books = {};
+  for (var i = 0; i < $books_array.length; ++i) {
+    $books[i] = $books_array[i];
+  }
+  return $books;
+};
+
 class BookList extends React.Component {
   componentDidMount() {
     this.props.fetchBooks(this.props.dataIsCached);
     checkElement("#bk-list li") //use whichever selector you want
       .then($books => {
-        $books.forEach($book => {
-          let $other = { ...$books, $book };
-          let $parent = $book.parentElement;
-          let children = $book.children;
-          console.log(children);
-          // var $page = $book.children("div.bk-page");
-          // var $bookview = $parent.find("button.bk-bookview");
-          // var $content = $page.children("div.bk-content");
-          // var current = 0;
-          // $parent.find("button.bk-bookback").on("click", function() {
-          //   $bookview.removeClass("bk-active");
-          //   if ($book.data("flip")) {
-          //     $book
-          //       .data({ opened: false, flip: false })
-          //       .removeClass("bk-viewback")
-          //       .addClass("bk-bookdefault");
-          //   } else {
-          //     $book
-          //       .data({ opened: false, flip: true })
-          //       .removeClass("bk-viewinside bk-bookdefault")
-          //       .addClass("bk-viewback");
-          //   }
-          // });
-        });
+        $books.forEach(book => {
+      var $book = node2object(document.querySelectorAll("#bk-list li")),
+        $other = $books.not($book),
+        $parent = $book.parent(),
+        $page = $book.children("div.bk-page"),
+        $bookview = $parent.find("button.bk-bookview"),
+        $content = $page.children("div.bk-content"),
+        current = 0;
+
+      $parent.find("button.bk-bookback").on("click", function() {
+        $bookview.removeClass("bk-active");
+
+        if ($book.data("flip")) {
+          $book
+            .data({ opened: false, flip: false })
+            .removeClass("bk-viewback")
+            .addClass("bk-bookdefault");
+        } else {
+          $book
+            .data({ opened: false, flip: true })
+            .removeClass("bk-viewinside bk-bookdefault")
+            .addClass("bk-viewback");
+        }
       });
-    // var Books = (() => {
-    //   var $books = $("#bk-list > li > div.bk-book"),
-    //     booksCount = $books.length;
 
-    //   init = () => {
-    //     $books.each(function() {
-    //       var $book = $(this),
-    //         $other = $books.not($book),
-    //         $parent = $book.parent(),
-    //         $page = $book.children("div.bk-page"),
-    //         $bookview = $parent.find("button.bk-bookview"),
-    //         $content = $page.children("div.bk-content"),
-    //         current = 0;
+      $bookview.on("click", function() {
+        var $this = $(this);
 
-    //       $parent.find("button.bk-bookback").on("click", function() {
-    //         $bookview.removeClass("bk-active");
+        $other
+          .data("opened", false)
+          .removeClass("bk-viewinside")
+          .parent()
+          .css("z-index", 0)
+          .find("button.bk-bookview")
+          .removeClass("bk-active");
+        if (!$other.hasClass("bk-viewback")) {
+          $other.addClass("bk-bookdefault");
+        }
 
-    //         if ($book.data("flip")) {
-    //           $book
-    //             .data({ opened: false, flip: false })
-    //             .removeClass("bk-viewback")
-    //             .addClass("bk-bookdefault");
-    //         } else {
-    //           $book
-    //             .data({ opened: false, flip: true })
-    //             .removeClass("bk-viewinside bk-bookdefault")
-    //             .addClass("bk-viewback");
-    //         }
-    //       });
+        if ($book.data("opened")) {
+          $this.removeClass("bk-active");
+          $book
+            .data({ opened: false, flip: false })
+            .removeClass("bk-viewinside")
+            .addClass("bk-bookdefault");
+        } else {
+          $this.addClass("bk-active");
+          $book
+            .data({ opened: true, flip: false })
+            .removeClass("bk-viewback bk-bookdefault")
+            .addClass("bk-viewinside");
+          $parent.css("z-index", booksCount);
+          current = 0;
+          $content
+            .removeClass("bk-content-current")
+            .eq(current)
+            .addClass("bk-content-current");
+        }
+      });
 
-    //       $bookview.on("click", function() {
-    //         var $this = $(this);
+      if ($content.length > 1) {
+        var $navPrev = $('<span class="bk-page-prev">&lt;</span>'),
+          $navNext = $('<span class="bk-page-next">&gt;</span>');
 
-    //         $other
-    //           .data("opened", false)
-    //           .removeClass("bk-viewinside")
-    //           .parent()
-    //           .css("z-index", 0)
-    //           .find("button.bk-bookview")
-    //           .removeClass("bk-active");
-    //         if (!$other.hasClass("bk-viewback")) {
-    //           $other.addClass("bk-bookdefault");
-    //         }
+        $page.append($("<nav></nav>").append($navPrev, $navNext));
 
-    //         if ($book.data("opened")) {
-    //           $this.removeClass("bk-active");
-    //           $book
-    //             .data({ opened: false, flip: false })
-    //             .removeClass("bk-viewinside")
-    //             .addClass("bk-bookdefault");
-    //         } else {
-    //           $this.addClass("bk-active");
-    //           $book
-    //             .data({ opened: true, flip: false })
-    //             .removeClass("bk-viewback bk-bookdefault")
-    //             .addClass("bk-viewinside");
-    //           $parent.css("z-index", booksCount);
-    //           current = 0;
-    //           $content
-    //             .removeClass("bk-content-current")
-    //             .eq(current)
-    //             .addClass("bk-content-current");
-    //         }
-    //       });
+        $navPrev.on("click", function() {
+          if (current > 0) {
+            --current;
+            $content
+              .removeClass("bk-content-current")
+              .eq(current)
+              .addClass("bk-content-current");
+          }
+          return false;
+        });
 
-    //       if ($content.length > 1) {
-    //         var $navPrev = $('<span class="bk-page-prev">&lt;</span>'),
-    //           $navNext = $('<span class="bk-page-next">&gt;</span>');
-
-    //         $page.append($("<nav></nav>").append($navPrev, $navNext));
-
-    //         $navPrev.on("click", function() {
-    //           if (current > 0) {
-    //             --current;
-    //             $content
-    //               .removeClass("bk-content-current")
-    //               .eq(current)
-    //               .addClass("bk-content-current");
-    //           }
-    //           return false;
-    //         });
-
-    //         $navNext.on("click", function() {
-    //           if (current < $content.length - 1) {
-    //             ++current;
-    //             $content
-    //               .removeClass("bk-content-current")
-    //               .eq(current)
-    //               .addClass("bk-content-current");
-    //           }
-    //           return false;
-    //         });
-    //       }
-    //     });
-    //   };
-
-    //   return { init: init };
-    // })();
-    // Books.init();
+        $navNext.on("click", function() {
+          if (current < $content.length - 1) {
+            ++current;
+            $content
+              .removeClass("bk-content-current")
+              .eq(current)
+              .addClass("bk-content-current");
+          }
+          return false;
+        });
+      }
   }
   handleClickOnBook = id => {
     this.props.history.push(`/books/${id}`);
