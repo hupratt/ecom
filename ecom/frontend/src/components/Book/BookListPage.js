@@ -33,9 +33,10 @@ class BookList extends React.Component {
   componentDidMount() {
     this.props.fetchBooks(this.props.dataIsCached);
     checkElement("#bk-list li") //use whichever selector you want
-      .then($books => {
-        $books.forEach(book => {
-          let $book = node2object(book),
+      .then(books => {
+        books.forEach(book => {
+          let $book = $(book),
+            $books = $(books),
             $other = $books.not($book),
             $parent = $book.parent(),
             $page = $book.children("div.bk-page"),
@@ -60,8 +61,6 @@ class BookList extends React.Component {
           });
 
           $bookview.on("click", function() {
-            var $this = $(this);
-
             $other
               .data("opened", false)
               .removeClass("bk-viewinside")
