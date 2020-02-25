@@ -143,47 +143,18 @@ body {
   border-radius: 2px;
 }
 
-.book-list-meta {
-  text-align: center;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  width: 200px;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-
-.book-list-meta .meta {
-  font-size: 10px;
-  color: #b2b2b2;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-top: 10px;
-}
-
-.book-list-meta .title {
-  font-weight: 400;
-  font-size: 18px;
-  height: 30px;
-  margin-bottom: 10px;
-  margin-top: 10px;
-}
-
-.book-list-meta .price {
-  color: var(--logo-color);
-  font-size: 20px;
-  font-weight: 700;
-  margin-top: 10px;
-  margin-bottom: 15px;
-}
-
 /* Book tilt effect */
 .bk-list {
   list-style: none;
   position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .bk-list li {
@@ -212,15 +183,6 @@ body {
   font-size: 26px;
 }
 
-.bk-info h3 span:first-child {
-  font-size: 14px;
-  font-weight: 400;
-  text-transform: uppercase;
-  padding-bottom: 5px;
-  display: block;
-  color: #777;
-}
-
 .bk-info p {
   line-height: 24px;
   color: #444;
@@ -240,6 +202,15 @@ body {
   margin-right: 4px;
   -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
           box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+}
+
+.bk-info h3 span:first-child {
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: uppercase;
+  padding-bottom: 5px;
+  display: block;
+  color: #777;
 }
 
 .bk-info button.bk-active,
@@ -341,7 +312,7 @@ body {
 }
 
 .bk-list li .bk-cover-back {
-  background-color: #000;
+  background-color: white;
   -webkit-transform: rotate3d(0, 1, 0, -179deg);
   transform: rotate3d(0, 1, 0, -179deg);
 }
@@ -497,12 +468,11 @@ body {
 .bk-back,
 .bk-left,
 .bk-front:after {
-  background-color: #9fe4ff;
+  background-color: #000000;
 }
 
 .bk-cover {
   background-repeat: no-repeat;
-  background-position: 10px 40px;
 }
 
 .bk-cover h2 {
@@ -551,6 +521,11 @@ body {
   padding: 40px;
   text-align: center;
   font-weight: 700;
+}
+
+.whitebackground {
+  background: white;
+  background-color: white !important;
 }
 
 /* End Individual style & artwork */
