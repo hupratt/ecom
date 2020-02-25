@@ -10,15 +10,15 @@ const rafAsync = () => {
   return new Promise(resolve => {
     requestAnimationFrame(resolve);
   });
-}
+};
 
-const checkElement = (selector) => {
+const checkElement = selector => {
   if (document.querySelector(selector) === null) {
     return rafAsync().then(() => checkElement(selector));
   } else {
     return Promise.resolve(document.querySelectorAll(selector));
   }
-}
+};
 
 const node2object = node => {
   let $books_array = [...node],
@@ -35,93 +35,95 @@ class BookList extends React.Component {
     checkElement("#bk-list li") //use whichever selector you want
       .then($books => {
         $books.forEach(book => {
-      var $book = node2object(document.querySelectorAll("#bk-list li")),
-        $other = $books.not($book),
-        $parent = $book.parent(),
-        $page = $book.children("div.bk-page"),
-        $bookview = $parent.find("button.bk-bookview"),
-        $content = $page.children("div.bk-content"),
-        current = 0;
+          let $book = node2object(book),
+            $other = $books.not($book),
+            $parent = $book.parent(),
+            $page = $book.children("div.bk-page"),
+            $bookview = $parent.find("button.bk-bookview"),
+            $content = $page.children("div.bk-content"),
+            current = 0;
 
-      $parent.find("button.bk-bookback").on("click", function() {
-        $bookview.removeClass("bk-active");
+          $parent.find("button.bk-bookback").on("click", function() {
+            $bookview.removeClass("bk-active");
 
-        if ($book.data("flip")) {
-          $book
-            .data({ opened: false, flip: false })
-            .removeClass("bk-viewback")
-            .addClass("bk-bookdefault");
-        } else {
-          $book
-            .data({ opened: false, flip: true })
-            .removeClass("bk-viewinside bk-bookdefault")
-            .addClass("bk-viewback");
-        }
-      });
+            if ($book.data("flip")) {
+              $book
+                .data({ opened: false, flip: false })
+                .removeClass("bk-viewback")
+                .addClass("bk-bookdefault");
+            } else {
+              $book
+                .data({ opened: false, flip: true })
+                .removeClass("bk-viewinside bk-bookdefault")
+                .addClass("bk-viewback");
+            }
+          });
 
-      $bookview.on("click", function() {
-        var $this = $(this);
+          $bookview.on("click", function() {
+            var $this = $(this);
 
-        $other
-          .data("opened", false)
-          .removeClass("bk-viewinside")
-          .parent()
-          .css("z-index", 0)
-          .find("button.bk-bookview")
-          .removeClass("bk-active");
-        if (!$other.hasClass("bk-viewback")) {
-          $other.addClass("bk-bookdefault");
-        }
+            $other
+              .data("opened", false)
+              .removeClass("bk-viewinside")
+              .parent()
+              .css("z-index", 0)
+              .find("button.bk-bookview")
+              .removeClass("bk-active");
+            if (!$other.hasClass("bk-viewback")) {
+              $other.addClass("bk-bookdefault");
+            }
 
-        if ($book.data("opened")) {
-          $this.removeClass("bk-active");
-          $book
-            .data({ opened: false, flip: false })
-            .removeClass("bk-viewinside")
-            .addClass("bk-bookdefault");
-        } else {
-          $this.addClass("bk-active");
-          $book
-            .data({ opened: true, flip: false })
-            .removeClass("bk-viewback bk-bookdefault")
-            .addClass("bk-viewinside");
-          $parent.css("z-index", booksCount);
-          current = 0;
-          $content
-            .removeClass("bk-content-current")
-            .eq(current)
-            .addClass("bk-content-current");
-        }
-      });
+            if ($book.data("opened")) {
+              $this.removeClass("bk-active");
+              $book
+                .data({ opened: false, flip: false })
+                .removeClass("bk-viewinside")
+                .addClass("bk-bookdefault");
+            } else {
+              $this.addClass("bk-active");
+              $book
+                .data({ opened: true, flip: false })
+                .removeClass("bk-viewback bk-bookdefault")
+                .addClass("bk-viewinside");
+              $parent.css("z-index", booksCount);
+              current = 0;
+              $content
+                .removeClass("bk-content-current")
+                .eq(current)
+                .addClass("bk-content-current");
+            }
+          });
 
-      if ($content.length > 1) {
-        var $navPrev = $('<span class="bk-page-prev">&lt;</span>'),
-          $navNext = $('<span class="bk-page-next">&gt;</span>');
+          if ($content.length > 1) {
+            var $navPrev = $('<span class="bk-page-prev">&lt;</span>'),
+              $navNext = $('<span class="bk-page-next">&gt;</span>');
 
-        $page.append($("<nav></nav>").append($navPrev, $navNext));
+            $page.append($("<nav></nav>").append($navPrev, $navNext));
 
-        $navPrev.on("click", function() {
-          if (current > 0) {
-            --current;
-            $content
-              .removeClass("bk-content-current")
-              .eq(current)
-              .addClass("bk-content-current");
+            $navPrev.on("click", function() {
+              if (current > 0) {
+                --current;
+                $content
+                  .removeClass("bk-content-current")
+                  .eq(current)
+                  .addClass("bk-content-current");
+              }
+              return false;
+            });
+
+            $navNext.on("click", function() {
+              if (current < $content.length - 1) {
+                ++current;
+                $content
+                  .removeClass("bk-content-current")
+                  .eq(current)
+                  .addClass("bk-content-current");
+              }
+              return false;
+            });
           }
-          return false;
         });
-
-        $navNext.on("click", function() {
-          if (current < $content.length - 1) {
-            ++current;
-            $content
-              .removeClass("bk-content-current")
-              .eq(current)
-              .addClass("bk-content-current");
-          }
-          return false;
-        });
-      }
+      });
   }
   handleClickOnBook = id => {
     this.props.history.push(`/books/${id}`);
