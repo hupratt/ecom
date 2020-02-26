@@ -37,7 +37,7 @@ const BookGrid = ({ paginatedData, handleClickOnBook }) => {
                       <div className="bk-cover-back"></div>
                       <TiltBook
                         className="bk-cover"
-                        // onClick={() => handleClickOnBook(item.id)}
+                        onClick={() => handleClickOnBook(item.id)}
                       ></TiltBook>
                     </div>
                     <div className="bk-page">
@@ -50,28 +50,6 @@ const BookGrid = ({ paginatedData, handleClickOnBook }) => {
                           striped bass, medusafish dragon goby starry flounder
                           cuchia round whitefish northern anchovy spadefish
                           merluccid hake cat shark Black pickerel. Pacific cod.
-                        </p>
-                      </div>
-                      <div className="bk-content">
-                        <p>
-                          Whale catfish leatherjacket deep sea anglerfish
-                          grenadier sawfish pompano dolphinfish carp large-eye
-                          bream, squeaker amago. Sandroller; rough scad, tiger
-                          shovelnose catfish snubnose parasitic eel? Black bass
-                          soldierfish duckbill--Rattail Atlantic saury Blind
-                          shark California halibut; false trevally warty angler!
-                        </p>
-                      </div>
-                      <div className="bk-content">
-                        <p>
-                          Trahira giant wels cutlassfish snapper koi blackchin
-                          mummichog mustard eel rock bass whiff murray cod.
-                          Bigmouth buffalo ling cod giant wels, sauger pink
-                          salmon. Clingfish luderick treefish flatfish
-                          Cherubfish oldwife Indian mul gizzard shad hagfish
-                          zebra danio. Butterfly ray lizardfish ponyfish
-                          muskellunge Long-finned sand diver mullet swordfish
-                          limia ghost carp filefish.
                         </p>
                       </div>
                     </div>

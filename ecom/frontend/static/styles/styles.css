@@ -162,7 +162,6 @@ body {
   width: 300px;
   float: left;
   z-index: 1;
-  margin: 0px 50px 40px 0;
   -webkit-perspective: 1800px;
   perspective: 1800px;
 }
@@ -312,7 +311,7 @@ body {
 }
 
 .bk-list li .bk-cover-back {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0);
   -webkit-transform: rotate3d(0, 1, 0, -179deg);
   transform: rotate3d(0, 1, 0, -179deg);
 }

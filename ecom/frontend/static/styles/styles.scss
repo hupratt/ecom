@@ -289,7 +289,7 @@ body {
 }
 
 .bk-list li .bk-cover-back {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0);
   -webkit-transform: rotate3d(0, 1, 0, -179deg);
   transform: rotate3d(0, 1, 0, -179deg);
 }

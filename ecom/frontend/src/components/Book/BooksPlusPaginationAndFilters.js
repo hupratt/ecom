@@ -3,7 +3,7 @@ import PaginationShorthand from "../Layout/Pagination";
 import LanguageFilter from "./LanguageFilter";
 import AuthorFilter from "./AuthorFilter";
 import CategoryFilter from "./CategoryFilter";
-import BookGrid from "./Books";
+import BookGrid from "./BookGrid";
 
 const BookPage = ({
   bookPerPage,
