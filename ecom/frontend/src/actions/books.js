@@ -39,3 +39,13 @@ export const onPageChange = pageNumber => {
     dispatch({ type: actionTypes.PAGE_CHANGED, currentPage: pageNumber });
   };
 };
+
+export const loadmoar = bookPerPage => {
+  return dispatch => {
+    let newbookPerPage = bookPerPage + 12;
+    dispatch({
+      type: actionTypes.LOAD_MORE,
+      bookPerPage: newbookPerPage
+    });
+  };
+};

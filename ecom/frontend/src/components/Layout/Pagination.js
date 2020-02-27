@@ -5,7 +5,8 @@ const PaginationShorthand = ({
   books,
   paginate,
   currentPage,
-  children
+  children,
+  loadmoar
 }) => {
   const pageNumbers = [];
   for (let i = currentPage - 1; i <= currentPage + 5; i++) {
@@ -26,7 +27,7 @@ const PaginationShorthand = ({
           </a>
         </li>
       ))}
-      <button id="loadmoar" onClick={() => paginate(currentPage + 1)}>
+      <button id="loadmoar" onClick={() => loadmoar(bookPerPage)}>
         Load ...
       </button>
       {children}

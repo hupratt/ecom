@@ -1,7 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Container } from "semantic-ui-react";
-import { fetchBooks, onPageChange, onSelectRadio } from "../../actions/books";
+import {
+  fetchBooks,
+  onPageChange,
+  onSelectRadio,
+  loadmoar
+} from "../../actions/books";
 import BooksPlusPaginationAndFilters from "./BooksPlusPaginationAndFilters";
 import { withLoading, withError } from "../../hoc/hoc";
 import { fetchCart } from "../../actions/cart";
@@ -28,6 +33,10 @@ class BookList extends React.Component {
     this.props.fetchBooks(this.props.dataIsCached);
     document.addEventListener("scroll", this.trackScrolling);
   }
+
+  componentWillUnmount = () => {
+    document.removeEventListener("scroll", this.trackScrolling);
+  };
   handleClickOnBook = id => {
     this.props.history.push(`/books/${id}`);
   };
@@ -36,14 +45,11 @@ class BookList extends React.Component {
     if (el) return el.getBoundingClientRect().bottom <= window.innerHeight;
   };
 
-  componentWillUnmount = () => {
-    document.removeEventListener("scroll", this.trackScrolling);
-  };
-
   trackScrolling = () => {
     const wrappedElement = document.getElementById("loadmoar");
     if (this.isBottom(wrappedElement)) {
       console.log("loadmoar");
+      this.props.loadMoar(this.props.bookPerPage + 12);
       document.removeEventListener("scroll", this.trackScrolling);
     }
   };
@@ -56,7 +62,8 @@ class BookList extends React.Component {
       bookPerPage,
       language,
       onSelectRadio,
-      onPageChange
+      onPageChange,
+      loadMoar
     } = this.props;
     const dataToShow =
       language !== "No filter"
@@ -73,6 +80,7 @@ class BookList extends React.Component {
           bookPerPage={bookPerPage}
           dataToShow={dataToShow}
           onPageChange={onPageChange}
+          loadmoar={loadMoar}
           currentPage={currentPage}
           onSelectRadio={onSelectRadio}
           paginatedData={paginatedData}
@@ -92,6 +100,7 @@ const mapDispatchToProps = dispatch => {
   return {
     onSelectRadio: event => dispatch(onSelectRadio(event)),
     onPageChange: pageNumber => dispatch(onPageChange(pageNumber)),
+    loadMoar: bookPerPage => dispatch(loadmoar(bookPerPage)),
     fetchBooks: dataIsCached => dispatch(fetchBooks(dataIsCached)),
     refreshCart: () => dispatch(fetchCart())
   };

@@ -13,7 +13,8 @@ const BooksPlusPaginationAndFilters = ({
   onSelectRadio,
   paginatedData,
   language,
-  handleClickOnBook
+  handleClickOnBook,
+  loadmoar
 }) => {
   return (
     <React.Fragment>
@@ -26,6 +27,7 @@ const BooksPlusPaginationAndFilters = ({
           bookPerPage={bookPerPage}
           books={dataToShow.length}
           paginate={onPageChange}
+          loadmoar={loadmoar}
           currentPage={currentPage}
         ></PaginationShorthand>
         <p>

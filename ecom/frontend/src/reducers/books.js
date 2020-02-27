@@ -44,6 +44,11 @@ const pageChanged = (state, action) => {
     currentPage: action.currentPage
   });
 };
+const loadMoar = (state, action) => {
+  return updateObject(state, {
+    bookPerPage: action.bookPerPage
+  });
+};
 const radioButtonClick = (state, action) => {
   return updateObject(state, {
     language: action.language
@@ -59,6 +64,8 @@ const reducer = (state = initState, action) => {
       return fetchItemsFail(state, action);
     case actionTypes.PAGE_CHANGED:
       return pageChanged(state, action);
+    case actionTypes.LOAD_MORE:
+      return loadMoar(state, action);
     case actionTypes.RADIO_BUTTON_CLICK:
       return radioButtonClick(state, action);
     case actionTypes.FETCH_CACHE:

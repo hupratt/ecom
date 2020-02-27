@@ -14,3 +14,4 @@ export const RADIO_BUTTON_CLICK = "RADIO_BUTTON_CLICK";
 export const FETCH_BOOK = "FETCH_BOOK";
 export const FETCH_BOOK_LOCAL = "FETCH_BOOK_LOCAL";
 export const FETCH_CACHE = "FETCH_CACHE";
+export const LOAD_MORE = "LOAD_MORE";
