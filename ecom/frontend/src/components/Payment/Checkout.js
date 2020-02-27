@@ -100,19 +100,17 @@ class CouponForm extends Component {
   render() {
     const { code } = this.state;
     return (
-      <React.Fragment>
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Field>
-            <label>Coupon code</label>
-            <input
-              placeholder="Enter a coupon.."
-              value={code}
-              onChange={this.handleChange}
-            />
-          </Form.Field>
-          <Button type="submit">Submit</Button>
-        </Form>
-      </React.Fragment>
+      <Form onSubmit={this.handleSubmit}>
+        <Form.Field>
+          <label>Coupon code</label>
+          <input
+            placeholder="Enter a coupon.."
+            value={code}
+            onChange={this.handleChange}
+          />
+        </Form.Field>
+        <Button type="submit">Submit</Button>
+      </Form>
     );
   }
 }

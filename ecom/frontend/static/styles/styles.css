@@ -89,6 +89,14 @@ body {
   padding: 0px;
 }
 
+.ui.inverted.menu span {
+  color: black;
+}
+
+.ui.inverted.menu .arrow {
+  color: black;
+}
+
 .ui.form.author-checkbox,
 .ui.form.radio {
   float: left;
