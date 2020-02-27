@@ -9,7 +9,8 @@ const initState = {
   setPage: 1,
   bookPerPage: 12,
   language: "No filter",
-  dataIsCached: false
+  dataIsCached: false,
+  offset: 0
 };
 
 const loading = (state, action) => {
@@ -20,7 +21,7 @@ const loading = (state, action) => {
 
 const fetchItemsSuccess = (state, action) => {
   return updateObject(state, {
-    data: action.data,
+    data: action.data.results,
     error: null,
     loading: false
   });
@@ -46,6 +47,10 @@ const pageChanged = (state, action) => {
 };
 const loadMoar = (state, action) => {
   return updateObject(state, {
+    offset: action.offset,
+    data: action.data.results,
+    error: null,
+    loading: false,
     bookPerPage: action.bookPerPage
   });
 };

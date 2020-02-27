@@ -30,7 +30,7 @@ class BookList extends React.Component {
     if (this.props.shoppingCart) {
       this.props.refreshCart();
     }
-    this.props.fetchBooks(this.props.dataIsCached);
+    this.props.fetchBooks(this.props.dataIsCached, this.props.offset);
     document.addEventListener("scroll", this.trackScrolling);
   }
 
@@ -45,15 +45,14 @@ class BookList extends React.Component {
     if (el)
       return (
         el.getBoundingClientRect().bottom <=
-        window.innerHeight + el.getBoundingClientRect().bottom / 3
+        window.innerHeight + el.getBoundingClientRect().bottom / 15
       );
   };
 
   trackScrolling = () => {
     const wrappedElement = document.getElementById("loadmoar");
     if (this.isBottom(wrappedElement)) {
-      console.log("loadmoar");
-      this.props.loadMoar(this.props.bookPerPage + 12);
+      this.props.loadMoar(this.props.offset + 12, this.props.bookPerPage + 12);
     }
   };
 
@@ -73,10 +72,10 @@ class BookList extends React.Component {
       language !== "No filter"
         ? data.filter(item => language.includes(item.langue_nom))
         : data;
-
-    const indexOfLastBook = currentPage * bookPerPage;
-    const indexOfFirstBook = indexOfLastBook - bookPerPage;
-    const paginatedData = dataToShow.slice(indexOfFirstBook, indexOfLastBook);
+    let paginatedData = [];
+    if (dataToShow.length != 0) {
+      paginatedData = dataToShow;
+    }
 
     return (
       <Container className="booklist">
@@ -104,8 +103,9 @@ const mapDispatchToProps = dispatch => {
   return {
     onSelectRadio: event => dispatch(onSelectRadio(event)),
     onPageChange: pageNumber => dispatch(onPageChange(pageNumber)),
-    loadMoar: bookPerPage => dispatch(loadmoar(bookPerPage)),
-    fetchBooks: dataIsCached => dispatch(fetchBooks(dataIsCached)),
+    loadMoar: (offset, bookPerPage) => dispatch(loadmoar(offset, bookPerPage)),
+    fetchBooks: (dataIsCached, bookPerPage) =>
+      dispatch(fetchBooks(dataIsCached, bookPerPage)),
     refreshCart: () => dispatch(fetchCart())
   };
 };
@@ -118,6 +118,7 @@ const mapStateToProps = state => {
     loading: state.books.loading,
     error: state.books.error,
     data: state.books.data,
+    offset: state.books.offset,
     currentPage: state.books.currentPage,
     setPage: state.books.setPage,
     bookPerPage: state.books.bookPerPage,

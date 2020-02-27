@@ -42,24 +42,13 @@ const BookGrid = ({ paginatedData, handleClickOnBook }) => {
                     </div>
                     <div className="bk-page">
                       <div className="bk-content bk-content-current">
-                        <p>
-                          Red snapper Kafue pike fangtooth humums slipmouth,
-                          salmon cutlassfish; swallower European perch mola mola
-                          sunfish, threadfin bream. Billfish hog sucker
-                          trout-perch lenok orbicular velvetfish. Delta smelt
-                          striped bass, medusafish dragon goby starry flounder
-                          cuchia round whitefish northern anchovy spadefish
-                          merluccid hake cat shark Black pickerel. Pacific cod.
-                        </p>
+                        <p>Red snapper KafuReReReReReReRe</p>
                       </div>
                     </div>
                     <div className="bk-back">
                       <p>
-                        In this nightmare vision of cats in revolt,
-                        fifteen-year-old Alex and his friends set out on a
-                        diabolical orgy of robbery, rape, torture and murder.
-                        Alex is jailed for his teenage delinquency and the State
-                        tries to reform him - but at what cost?
+                        In thRe-year-old Alex andReinquency and the State tries
+                        to reform him - but at what cost?
                       </p>
                     </div>
                     <div className="bk-right"></div>

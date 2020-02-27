@@ -2,7 +2,7 @@ import axios from "axios";
 import * as actionTypes from "./actionTypes";
 import { bookListURL } from "../constants";
 
-export const fetchBooks = dataIsCached => {
+export const fetchBooks = (dataIsCached, bookPerPage) => {
   if (dataIsCached) {
     console.log("fetching cache for all books");
     return dispatch => {
@@ -13,8 +13,10 @@ export const fetchBooks = dataIsCached => {
     dispatch({ type: actionTypes.LOADING });
     console.log("running axios to fetch all books");
     axios
-      .get(bookListURL)
+      .get(bookListURL(bookPerPage))
       .then(res => {
+        console.log(res.data.results);
+
         dispatch({ type: actionTypes.FETCH_SUCCESS, data: res.data });
       })
       .catch(err => {
@@ -40,12 +42,24 @@ export const onPageChange = pageNumber => {
   };
 };
 
-export const loadmoar = bookPerPage => {
+export const loadmoar = (offset, bookPerPage) => {
   return dispatch => {
-    let newbookPerPage = bookPerPage + 12;
-    dispatch({
-      type: actionTypes.LOAD_MORE,
-      bookPerPage: newbookPerPage
-    });
+    dispatch({ type: actionTypes.LOADING });
+    console.log("axios to fetch more books offset:" + offset);
+    console.log("bookPerPage:" + bookPerPage);
+    axios
+      .get(bookListURL(offset))
+      .then(res => {
+        console.log(res.data);
+        dispatch({
+          type: actionTypes.LOAD_MORE,
+          data: res.data,
+          offset: offset,
+          bookPerPage: bookPerPage
+        });
+      })
+      .catch(err => {
+        dispatch({ type: actionTypes.FETCH_FAIL, error: err });
+      });
   };
 };

@@ -60,6 +60,7 @@ class BookListView(ListAPIView):
     permission_classes = (AllowAny,)
     serializer_class = BookSerializer
     queryset = Livre.objects.all()
+    paginate_by_param = "limit"
 
 
 class ItemDetailView(RetrieveAPIView):
