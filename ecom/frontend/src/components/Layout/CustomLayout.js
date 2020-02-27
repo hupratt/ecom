@@ -1,4 +1,4 @@
-import { React } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import { Container, Menu } from "semantic-ui-react";
@@ -20,7 +20,12 @@ class CustomLayout extends React.Component {
                 <Menu.Item header>Home</Menu.Item>
               </Link>
             </Menu.Menu>
-            <TopNavigationWithAuthenticationHandling authenticated={authenticated} cart={cart} loading={loading} logout={logout}/>
+            <TopNavigationWithAuthenticationHandling
+              authenticated={authenticated}
+              cart={cart}
+              loading={loading}
+              logout={logout}
+            />
           </Container>
         </Menu>
         {this.props.children}
@@ -30,7 +35,10 @@ class CustomLayout extends React.Component {
   }
 }
 
-const TopNavigationWithAuthenticationHandling = withAuthentication(TopNavigationWithAuth, TopNavigationNoAuth);
+const TopNavigationWithAuthenticationHandling = withAuthentication(
+  TopNavigationWithAuth,
+  TopNavigationNoAuth
+);
 
 const mapStateToProps = state => {
   return {
