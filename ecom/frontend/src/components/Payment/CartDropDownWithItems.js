@@ -14,11 +14,11 @@ const CartDropDownWithItems = ({ cart }) => {
       })}
       {cart.order_items.length < 1 ? (
         <Dropdown.Item>No items in your cart</Dropdown.Item>
-      ) : null}
-      <Dropdown.Divider />
-      <Link to="/order-summary">
-        <Dropdown.Item icon="arrow right" text="Checkout" />
-      </Link>
+      ) : (
+        <Link to="/order-summary">
+          <Dropdown.Item icon="arrow right" text="Checkout" />
+        </Link>
+      )}
     </React.Fragment>
   );
 };

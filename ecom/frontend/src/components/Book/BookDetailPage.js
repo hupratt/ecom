@@ -9,6 +9,9 @@ import { withLoading, withError } from "../../hoc/hoc";
 
 class BookDetailPage extends React.Component {
   componentDidMount() {
+    if (this.props.shoppingCart) {
+      this.props.refreshCart();
+    }
     this.props.fetchBook(
       this.props.match.params.bookID,
       this.props.dataIsCached
@@ -57,7 +60,8 @@ const mapStateToProps = state => {
     errorCart: state.cart.error,
     data: state.book.data,
     book: state.book.book,
-    dataIsCached: state.book.dataIsCached
+    dataIsCached: state.book.dataIsCached,
+    shoppingCart: state.cart.shoppingCart
   };
 };
 

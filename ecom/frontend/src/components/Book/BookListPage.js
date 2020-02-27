@@ -4,6 +4,7 @@ import { Container } from "semantic-ui-react";
 import { fetchBooks, onPageChange, onSelectRadio } from "../../actions/books";
 import BookPage from "./BooksPlusPaginationAndFilters";
 import { withLoading, withError } from "../../hoc/hoc";
+import { fetchCart } from "../../actions/cart";
 
 const rafAsync = () => {
   return new Promise(resolve => {
@@ -21,6 +22,9 @@ const checkElement = selector => {
 
 class BookList extends React.Component {
   componentDidMount() {
+    if (this.props.shoppingCart) {
+      this.props.refreshCart();
+    }
     this.props.fetchBooks(this.props.dataIsCached);
   }
   handleClickOnBook = id => {
@@ -71,7 +75,8 @@ const mapDispatchToProps = dispatch => {
   return {
     onSelectRadio: event => dispatch(onSelectRadio(event)),
     onPageChange: pageNumber => dispatch(onPageChange(pageNumber)),
-    fetchBooks: dataIsCached => dispatch(fetchBooks(dataIsCached))
+    fetchBooks: dataIsCached => dispatch(fetchBooks(dataIsCached)),
+    refreshCart: () => dispatch(fetchCart())
   };
 };
 
@@ -88,7 +93,8 @@ const mapStateToProps = state => {
     bookPerPage: state.books.bookPerPage,
     language: state.books.language,
     isAuthenticated: state.auth.token !== null,
-    dataIsCached: state.books.data.length != 0
+    dataIsCached: state.books.data.length != 0,
+    shoppingCart: state.cart.shoppingCart
   };
 };
 
