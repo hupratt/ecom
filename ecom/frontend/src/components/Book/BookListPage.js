@@ -42,7 +42,11 @@ class BookList extends React.Component {
   };
 
   isBottom = el => {
-    if (el) return el.getBoundingClientRect().bottom <= window.innerHeight;
+    if (el)
+      return (
+        el.getBoundingClientRect().bottom <=
+        window.innerHeight + el.getBoundingClientRect().bottom / 3
+      );
   };
 
   trackScrolling = () => {
@@ -50,9 +54,9 @@ class BookList extends React.Component {
     if (this.isBottom(wrappedElement)) {
       console.log("loadmoar");
       this.props.loadMoar(this.props.bookPerPage + 12);
-      document.removeEventListener("scroll", this.trackScrolling);
     }
   };
+
   render() {
     const {
       data,
