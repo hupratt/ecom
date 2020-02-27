@@ -6,8 +6,7 @@ export const Hoc = props => props.children;
 export const withLoading = WrappedComponent => {
   class HOC extends React.Component {
     render() {
-      const { loading } = this.props;
-      if (loading) {
+      if (this.props.loading) {
         return (
           <Segment>
             <Dimmer active inverted>
@@ -52,6 +51,20 @@ export const withError = WrappedComponent => {
       }
 
       return <WrappedComponent {...this.props} />;
+    }
+  }
+  return HOC;
+};
+
+export const withAuthentication = (WrappedComponent1, WrappedComponent2) => {
+  class HOC extends React.Component {
+    render() {
+      if (this.props.authenticated) {
+        return (
+          <WrappedComponent1 {...this.props}/>
+        );
+      }
+      return <WrappedComponent2 />;
     }
   }
   return HOC;
