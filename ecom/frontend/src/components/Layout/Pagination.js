@@ -26,6 +26,9 @@ const PaginationShorthand = ({
           </a>
         </li>
       ))}
+      <button id="loadmoar" onClick={() => paginate(currentPage + 1)}>
+        Load ...
+      </button>
       {children}
     </ul>
   );

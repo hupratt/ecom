@@ -5,7 +5,7 @@ import AuthorFilter from "./AuthorFilter";
 import CategoryFilter from "./CategoryFilter";
 import BookGrid from "./BookGrid";
 
-const BookPage = ({
+const BooksPlusPaginationAndFilters = ({
   bookPerPage,
   dataToShow,
   onPageChange,
@@ -40,4 +40,4 @@ const BookPage = ({
   );
 };
 
-export default BookPage;
+export default BooksPlusPaginationAndFilters;

@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Container } from "semantic-ui-react";
 import { fetchBooks, onPageChange, onSelectRadio } from "../../actions/books";
-import BookPage from "./BooksPlusPaginationAndFilters";
+import BooksPlusPaginationAndFilters from "./BooksPlusPaginationAndFilters";
 import { withLoading, withError } from "../../hoc/hoc";
 import { fetchCart } from "../../actions/cart";
 
@@ -26,9 +26,26 @@ class BookList extends React.Component {
       this.props.refreshCart();
     }
     this.props.fetchBooks(this.props.dataIsCached);
+    document.addEventListener("scroll", this.trackScrolling);
   }
   handleClickOnBook = id => {
     this.props.history.push(`/books/${id}`);
+  };
+
+  isBottom = el => {
+    if (el) return el.getBoundingClientRect().bottom <= window.innerHeight;
+  };
+
+  componentWillUnmount = () => {
+    document.removeEventListener("scroll", this.trackScrolling);
+  };
+
+  trackScrolling = () => {
+    const wrappedElement = document.getElementById("loadmoar");
+    if (this.isBottom(wrappedElement)) {
+      console.log("loadmoar");
+      document.removeEventListener("scroll", this.trackScrolling);
+    }
   };
   render() {
     const {
@@ -80,7 +97,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const BookPageWithLoading = withLoading(BookPage);
+const BookPageWithLoading = withLoading(BooksPlusPaginationAndFilters);
 const BookPageWithLoadingAndErrorHandling = withError(BookPageWithLoading);
 
 const mapStateToProps = state => {

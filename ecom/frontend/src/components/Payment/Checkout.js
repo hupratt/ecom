@@ -12,7 +12,6 @@ import {
   Divider,
   Form,
   Header,
-  Image,
   Item,
   Label,
   Loader,
