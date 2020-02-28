@@ -45,7 +45,7 @@ class BookList extends React.Component {
     if (el)
       return (
         el.getBoundingClientRect().bottom <=
-        window.innerHeight + el.getBoundingClientRect().bottom / 15
+        window.innerHeight + el.getBoundingClientRect().bottom / 10
       );
   };
 

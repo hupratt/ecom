@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Item } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 import { s3_base_url } from "../../../constants";
 import styled, { ThemeProvider } from "styled-components";
 import FlipButton from "../../Buttons/FlipButton";

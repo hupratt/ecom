@@ -48,9 +48,8 @@ const pageChanged = (state, action) => {
 const loadMoar = (state, action) => {
   return updateObject(state, {
     offset: action.offset,
-    data: [...state.data, action.data],
+    data: [...state.data, ...action.data],
     error: null,
-    loading: false,
     bookPerPage: action.bookPerPage
   });
 };
