@@ -1,8 +1,8 @@
 import React from "react";
-import PaginationShorthand from "../Layout/Pagination";
-import LanguageFilter from "./LanguageFilter";
-import AuthorFilter from "./AuthorFilter";
-import CategoryFilter from "./CategoryFilter";
+import PaginationShorthand from "../../Layout/Pagination";
+import LanguageFilter from "../../Filters/LanguageFilter";
+import AuthorFilter from "../../Filters/AuthorFilter";
+import CategoryFilter from "../../Filters/CategoryFilter";
 import BookGrid from "./BookGrid";
 
 const BooksPlusPaginationAndFilters = ({

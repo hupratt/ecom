@@ -1,11 +1,11 @@
 import React from "react";
-import { fetchCart, handleAddToCart } from "../../actions/cart";
+import { fetchCart, handleAddToCart } from "../../../actions/cart";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { fetchBook } from "../../actions/book";
+import { fetchBook } from "../../../actions/book";
 import BookDetail from "./BookDetail";
 import { Container } from "semantic-ui-react";
-import { withLoading, withError } from "../../hoc/hoc";
+import { withLoading, withError } from "../../../hoc/hoc";
 
 class BookDetailPage extends React.Component {
   componentDidMount() {

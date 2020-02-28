@@ -1,9 +1,9 @@
 import React from "react";
 import { Grid, Item } from "semantic-ui-react";
-import { s3_base_url } from "../../constants";
+import { s3_base_url } from "../../../constants";
 import styled, { ThemeProvider } from "styled-components";
-import FlipButton from "../Layout/FlipButton";
-import ViewInsideButton from "../Layout/ViewInsideButton";
+import FlipButton from "../../Layout/FlipButton";
+import ViewInsideButton from "../../Layout/ViewInsideButton";
 
 // Define our button, but with the use of props.theme this time
 const TiltBook = styled.img`

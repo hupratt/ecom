@@ -6,10 +6,10 @@ import {
   onPageChange,
   onSelectRadio,
   loadmoar
-} from "../../actions/books";
+} from "../../../actions/books";
 import BooksPlusPaginationAndFilters from "./BooksPlusPaginationAndFilters";
-import { withLoading, withError } from "../../hoc/hoc";
-import { fetchCart } from "../../actions/cart";
+import { withLoading, withError } from "../../../hoc/hoc";
+import { fetchCart } from "../../../actions/cart";
 
 const rafAsync = () => {
   return new Promise(resolve => {

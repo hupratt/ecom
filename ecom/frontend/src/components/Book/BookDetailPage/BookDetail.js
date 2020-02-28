@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Card, Grid, Icon, Item } from "semantic-ui-react";
-import { s3_base_url } from "../../constants";
+import { s3_base_url } from "../../../constants";
 
 const BookDetail = ({ handleAddToCart, book, isAuthenticated }) => {
   return (
