@@ -1,0 +1,60 @@
+:root {
+  --font-color: #3d3d3e;
+  --logo-color: #7dcbd8;
+}
+
+body {
+  margin: 0;
+  height: 100%;
+  font-family: "Muli", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  color: var(--font-color);
+}
+
+/*
+* Typography: Start
+*/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1;
+  font-weight: normal;
+}
+
+h1 {
+  font-size: 42px;
+}
+
+h2 {
+  font-size: 36px;
+}
+
+h3 {
+  font-size: 30px;
+}
+
+h4 {
+  font-size: 24px;
+}
+
+h5 {
+  font-size: 18px;
+}
+
+h6 {
+  font-size: 14px;
+}
+
+p {
+  line-height: 1.5;
+  hyphens: auto;
+  font-weight: normal;
+}
+
+/*
+* Typography: End
+*/
