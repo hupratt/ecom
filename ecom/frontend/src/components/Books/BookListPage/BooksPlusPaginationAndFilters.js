@@ -1,5 +1,4 @@
 import React from "react";
-import PaginationShorthand from "../../Buttons/Pagination";
 import LanguageFilter from "../../Filters/LanguageFilter";
 import AuthorFilter from "../../Filters/AuthorFilter";
 import CategoryFilter from "../../Filters/CategoryFilter";
@@ -23,13 +22,7 @@ const BooksPlusPaginationAndFilters = ({
         <AuthorFilter />
         <CategoryFilter />
         <input className="js-range-slider" id="price_range" name="pricerange" />
-        <PaginationShorthand
-          bookPerPage={bookPerPage}
-          books={dataToShow.length}
-          paginate={onPageChange}
-          loadmoar={loadmoar}
-          currentPage={currentPage}
-        ></PaginationShorthand>
+
         <p>
           Displaying {bookPerPage} of {dataToShow.length} books
         </p>

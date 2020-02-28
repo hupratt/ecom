@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid } from "semantic-ui-react";
+import { Grid, Dimmer, Loader, Segment } from "semantic-ui-react";
 import { s3_base_url } from "../../../constants";
 import styled, { ThemeProvider } from "styled-components";
 import FlipButton from "../../Buttons/FlipButton";
@@ -30,7 +30,7 @@ const BookGrid = ({ paginatedData, handleClickOnBook }) => {
               url: `${s3_base_url}${item.isbn}.jpg`
             };
             return (
-              <li key={item.id}>
+              <li key={item.isbn}>
                 <ThemeProvider theme={theme}>
                   <div className="bk-book bk-bookdefault" id={item.isbn}>
                     <div className="bk-front">
@@ -81,6 +81,49 @@ const BookGrid = ({ paginatedData, handleClickOnBook }) => {
               </li>
             );
           })}
+          {[...Array(8)].map((e, i) => (
+            <li key={i}>
+              <div className="bk-book bk-bookdefault">
+                <div className="bk-front" id="loadmoar">
+                  <div className="bk-cover-back"></div>
+                  <Segment>
+                    <Dimmer active inverted>
+                      <Loader inverted>Loading</Loader>
+                    </Dimmer>
+                  </Segment>
+                </div>
+                <div className="bk-page">
+                  <div className="bk-content bk-content-current"></div>
+                </div>
+                <div className="bk-back"></div>
+                <div className="bk-right"></div>
+
+                <div className="bk-left">
+                  <h2>
+                    <span>Lorem, ipsum.</span>
+                    <span>Lorem, ipsum.</span>
+                  </h2>
+                </div>
+                <div className="bk-top"></div>
+                <div className="bk-bottom"></div>
+              </div>
+
+              <div className="bk-info">
+                <FlipButton />
+                <ViewInsideButton />
+                <h3>
+                  <span>Lorem, ipsum.</span>
+                  <span>Lorem, ipsum.</span>
+                </h3>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Officia soluta beatae nesciunt hic debitis repellat nobis
+                  alias sapiente blanditiis, laboriosam natus nemo? Consequatur
+                  maxime fugit tempora molestiae sunt culpa omnis?
+                </p>
+              </div>
+            </li>
+          ))}
         </ul>
       </React.Fragment>
     </Grid>
