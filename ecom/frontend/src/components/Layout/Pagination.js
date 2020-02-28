@@ -9,12 +9,12 @@ const PaginationShorthand = ({
   loadmoar
 }) => {
   return (
-    <ul className="pagination">
+    <div className="my-pagination">
       <button id="loadmoar" onClick={() => loadmoar(bookPerPage)}>
         Load ...
       </button>
       {children}
-    </ul>
+    </div>
   );
 };
 

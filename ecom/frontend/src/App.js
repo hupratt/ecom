@@ -6,7 +6,7 @@ import BaseRouter from "./routes";
 import * as actions from "./actions/auth";
 import "semantic-ui-css/semantic.min.css";
 import CustomLayout from "./components/Layout/CustomLayout";
-import "../static/styles/styles.css";
+import "../static/styles/index.css";
 
 class App extends Component {
   componentDidMount() {

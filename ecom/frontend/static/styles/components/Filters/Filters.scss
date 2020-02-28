@@ -1,0 +1,72 @@
+.author-checkbox .checkbox,
+.container-forms {
+  flex-direction: column;
+  display: flex;
+  width: 20vw;
+}
+
+.ui.form.author-checkbox,
+.ui.form.radio {
+  float: left;
+  max-width: 100%;
+}
+
+.ui.checkbox input:focus ~ label,
+.ui.checkbox label {
+  color: var(--font-color);
+  &:hover {
+    color: var(--font-color);
+  }
+}
+
+.book-category {
+  margin-right: 20px;
+  a {
+    display: inline-block;
+    font-size: 16px;
+    color: #636363;
+    padding: 5px 15px;
+    border: 1px solid #ebebeb;
+    margin-right: 5px;
+    margin-bottom: 9px;
+    border-radius: 2px;
+  }
+}
+
+.container-forms {
+  .form:not(:first-child) {
+    margin-top: 26px;
+  }
+}
+
+.author-checkbox,
+.radio {
+  ul {
+    list-style-type: none;
+    margin-top: 15px;
+    padding: 0;
+  }
+  .h4 {
+    padding: 0px;
+  }
+}
+
+.filter-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 26px;
+}
+
+.my-pagination {
+  display: flex;
+  align-self: auto;
+  margin-top: auto;
+}
+
+// .pagination + button {
+//   padding: 3px;
+// }
+
+// .pagination .active {
+//   color: #fb5270;
+// }
