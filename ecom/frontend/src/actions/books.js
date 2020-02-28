@@ -3,21 +3,16 @@ import * as actionTypes from "./actionTypes";
 import { bookListURL } from "../constants";
 
 export const fetchBooks = (dataIsCached, bookPerPage) => {
-  if (dataIsCached) {
-    console.log("fetching cache for all books");
-    return dispatch => {
-      dispatch({ type: actionTypes.FETCH_CACHE });
-    };
-  }
   return dispatch => {
     dispatch({ type: actionTypes.LOADING });
-    console.log("running axios to fetch all books");
+    console.log("running axios to fetch first 12 books");
     axios
       .get(bookListURL(bookPerPage))
       .then(res => {
-        console.log(res.data.results);
-
-        dispatch({ type: actionTypes.FETCH_SUCCESS, data: res.data });
+        dispatch({
+          type: actionTypes.FETCH_SUCCESS,
+          data: Object.values(res.data.results)
+        });
       })
       .catch(err => {
         dispatch({ type: actionTypes.FETCH_FAIL, error: err });
@@ -27,7 +22,7 @@ export const fetchBooks = (dataIsCached, bookPerPage) => {
 
 export const onSelectRadio = event => {
   return dispatch => {
-    console.log(`language ${event.currentTarget.value}`);
+    console.log(`language ${event.currentTarget.value} selected`);
     dispatch({
       type: actionTypes.RADIO_BUTTON_CLICK,
       language: event.currentTarget.value
@@ -37,7 +32,7 @@ export const onSelectRadio = event => {
 
 export const onPageChange = pageNumber => {
   return dispatch => {
-    console.log(`${pageNumber} is called`);
+    console.log(`${pageNumber} was called`);
     dispatch({ type: actionTypes.PAGE_CHANGED, currentPage: pageNumber });
   };
 };
@@ -50,10 +45,9 @@ export const loadmoar = (offset, bookPerPage) => {
     axios
       .get(bookListURL(offset))
       .then(res => {
-        console.log(res.data);
         dispatch({
           type: actionTypes.LOAD_MORE,
-          data: res.data,
+          data: Object.values(res.data.results),
           offset: offset,
           bookPerPage: bookPerPage
         });
