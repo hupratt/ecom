@@ -21,7 +21,7 @@ const loading = (state, action) => {
 
 const fetchItemsSuccess = (state, action) => {
   return updateObject(state, {
-    data: action.data.results,
+    data: action.data,
     error: null,
     loading: false
   });
@@ -48,12 +48,13 @@ const pageChanged = (state, action) => {
 const loadMoar = (state, action) => {
   return updateObject(state, {
     offset: action.offset,
-    data: action.data.results,
+    data: [...state.data, action.data],
     error: null,
     loading: false,
     bookPerPage: action.bookPerPage
   });
 };
+
 const radioButtonClick = (state, action) => {
   return updateObject(state, {
     language: action.language
