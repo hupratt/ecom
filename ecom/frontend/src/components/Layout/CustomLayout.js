@@ -4,9 +4,9 @@ import { Link, withRouter } from "react-router-dom";
 import { Container, Menu } from "semantic-ui-react";
 import { logout } from "../../actions/auth";
 import { withAuthentication } from "../../hoc/hoc";
-import BottomNavigation from "./BottomNavigation";
-import TopNavigationNoAuth from "./TopNavigationNoAuth";
-import TopNavigationWithAuth from "./TopNavigationWithAuth";
+import BottomNavigation from "./BottomNavigation/BottomNavigation";
+import TopNavigationNoAuth from "./TopNavigation/TopNavigationNoAuth";
+import TopNavigationWithAuth from "./TopNavigation/TopNavigationWithAuth";
 
 class CustomLayout extends React.Component {
   render() {

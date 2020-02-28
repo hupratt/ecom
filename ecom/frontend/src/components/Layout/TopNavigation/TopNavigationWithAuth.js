@@ -1,9 +1,9 @@
 import React from "react";
 import { Dropdown, Menu } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-import CartDropDownNoItems from "../Payment/CartDropDownNoItems";
-import CartDropDownWithItems from "../Payment/CartDropDownWithItems";
-import { withItemsInTheCart } from "../../hoc/hoc";
+import CartDropDownNoItems from "./CartDropDownNoItems";
+import CartDropDownWithItems from "./CartDropDownWithItems";
+import { withItemsInTheCart } from "../../../hoc/hoc";
 
 const TopNavigationWithAuth = ({ cart, loading, logout }) => {
   return (

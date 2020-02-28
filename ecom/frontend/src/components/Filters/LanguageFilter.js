@@ -1,6 +1,6 @@
 import React from "react";
 import { Form } from "semantic-ui-react";
-import RadioButton from "../Layout/RadioButton";
+import RadioButton from "../Buttons/RadioButton";
 
 const LanguageFilter = ({ language, onSelectRadio }) => {
   return (
