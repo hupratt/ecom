@@ -4,8 +4,6 @@ import {
   Dimmer,
   Header,
   Icon,
-  Image,
-  Label,
   Loader,
   Table,
   Button,
