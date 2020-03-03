@@ -151,14 +151,23 @@ if os.environ.get("DJANGO_DEVELOPMENT") is None:
         integrations=[DjangoIntegration()],
     )
     # SECURITY
-
+    
+    # clients should access this website through HTTPS exclusively, 
+    # if for some reason it is not the case website will not load
     SECURE_HSTS_SECONDS = 31536000
+    # Is a default in django3
+    # Adds an http header of nosniff on all responses
     SECURE_CONTENT_TYPE_NOSNIFF = True
+    # Adds an http header of xss on all responses
     SECURE_BROWSER_XSS_FILTER = True
     SECURE_SSL_REDIRECT = True
+    # Tells the browser to only accept session cookies from HTTPS
     SESSION_COOKIE_SECURE = True
+    # the browser will block the resource from loading in a frame no matter which site made the request
     X_FRAME_OPTIONS = "DENY"
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    # Tells the browser to set the cookie only when an HTTPS connection is established
     CSRF_COOKIE_SECURE = True
     SECURE_HSTS_PRELOAD = True
+
 
