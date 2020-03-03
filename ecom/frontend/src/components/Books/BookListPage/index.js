@@ -6,20 +6,6 @@ import BooksPlusPaginationAndFilters from "./BooksPlusPaginationAndFilters";
 import { withLoading, withError } from "../../../hoc/hoc";
 import { fetchCart } from "../../../actions/cart";
 
-const rafAsync = () => {
-  return new Promise(resolve => {
-    requestAnimationFrame(resolve);
-  });
-};
-
-const checkElement = selector => {
-  if (document.querySelector(selector) === null) {
-    return rafAsync().then(() => checkElement(selector));
-  } else {
-    return Promise.resolve(document.querySelectorAll(selector));
-  }
-};
-
 class BookList extends React.Component {
   componentDidMount() {
     if (this.props.shoppingCart) {
