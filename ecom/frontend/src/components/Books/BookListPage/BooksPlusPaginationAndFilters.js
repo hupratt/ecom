@@ -7,13 +7,10 @@ import BookGrid from "./BookGrid";
 const BooksPlusPaginationAndFilters = ({
   bookPerPage,
   dataToShow,
-  onPageChange,
-  currentPage,
   onSelectRadio,
   paginatedData,
   language,
-  handleClickOnBook,
-  loadmoar
+  handleClickOnBook
 }) => {
   return (
     <React.Fragment>
