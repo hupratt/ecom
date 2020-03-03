@@ -10,7 +10,6 @@ import {
   Container,
   Dimmer,
   Divider,
-  Form,
   Header,
   Item,
   Label,
@@ -25,13 +24,11 @@ import {
   orderSummaryURL,
   addCouponURL,
   addressListURL,
-  localhost,
   s3_base_url
 } from "../../constants";
 import axios from "axios";
 
-const OrderPreview = props => {
-  const { data } = props;
+const OrderPreview = ({ data }) => {
   return (
     <React.Fragment>
       {data && (
@@ -42,7 +39,6 @@ const OrderPreview = props => {
                 <Item key={i}>
                   <Item.Image
                     size="tiny"
-                    // src={`${localhost}${orderItem.livre.image}`}
                     src={`${s3_base_url}${orderItem.livre.isbn}.jpg`}
                   />
                   <Item.Content verticalAlign="middle">
