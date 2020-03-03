@@ -1,12 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Container } from "semantic-ui-react";
-import {
-  fetchBooks,
-  onPageChange,
-  onSelectRadio,
-  loadmoar
-} from "../../../actions/books";
+import { fetchBooks, onSelectRadio, loadmoar } from "../../../actions/books";
 import BooksPlusPaginationAndFilters from "./BooksPlusPaginationAndFilters";
 import { withLoading, withError } from "../../../hoc/hoc";
 import { fetchCart } from "../../../actions/cart";
@@ -61,12 +56,9 @@ class BookList extends React.Component {
       data,
       error,
       loading,
-      currentPage,
       bookPerPage,
       language,
-      onSelectRadio,
-      onPageChange,
-      loadMoar
+      onSelectRadio
     } = this.props;
     const dataToShow =
       language !== "No filter"
@@ -82,9 +74,6 @@ class BookList extends React.Component {
         <BookPageWithLoadingAndErrorHandling
           bookPerPage={bookPerPage}
           dataToShow={dataToShow}
-          onPageChange={onPageChange}
-          loadmoar={loadMoar}
-          currentPage={currentPage}
           onSelectRadio={onSelectRadio}
           paginatedData={paginatedData}
           language={language}
@@ -102,7 +91,6 @@ class BookList extends React.Component {
 const mapDispatchToProps = dispatch => {
   return {
     onSelectRadio: event => dispatch(onSelectRadio(event)),
-    onPageChange: pageNumber => dispatch(onPageChange(pageNumber)),
     loadMoar: (offset, bookPerPage) => dispatch(loadmoar(offset, bookPerPage)),
     fetchBooks: (dataIsCached, bookPerPage) =>
       dispatch(fetchBooks(dataIsCached, bookPerPage)),
@@ -119,7 +107,6 @@ const mapStateToProps = state => {
     error: state.books.error,
     data: state.books.data,
     offset: state.books.offset,
-    currentPage: state.books.currentPage,
     setPage: state.books.setPage,
     bookPerPage: state.books.bookPerPage,
     language: state.books.language,
