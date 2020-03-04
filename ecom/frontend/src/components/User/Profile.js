@@ -166,7 +166,16 @@ class AddressForm extends React.Component {
         this.setState({
           saving: false,
           success: true,
-          formData: { default: false }
+          formData: {
+            address_type: "",
+            apartment_address: "",
+            country: "",
+            default: false,
+            id: "",
+            street_address: "",
+            user: 1,
+            zip: ""
+          }
         });
         this.props.callback();
       })
