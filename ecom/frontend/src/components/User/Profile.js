@@ -109,6 +109,10 @@ class AddressForm extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    resetForm();
+  }
+
   handleToggleDefault = () => {
     const { formData } = this.state;
     const updatedFormdata = {
@@ -117,6 +121,23 @@ class AddressForm extends React.Component {
     };
     this.setState({
       formData: updatedFormdata
+    });
+  };
+
+  resetForm = () => {
+    this.setState({
+      saving: false,
+      success: true,
+      formData: {
+        address_type: "",
+        apartment_address: "",
+        country: "",
+        default: false,
+        id: "",
+        street_address: "",
+        user: 1,
+        zip: ""
+      }
     });
   };
 
@@ -166,16 +187,7 @@ class AddressForm extends React.Component {
         this.setState({
           saving: false,
           success: true,
-          formData: {
-            address_type: "",
-            apartment_address: "",
-            country: "",
-            default: false,
-            id: "",
-            street_address: "",
-            user: 1,
-            zip: ""
-          }
+          formData: { default: false }
         });
         this.props.callback();
       })
