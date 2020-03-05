@@ -9,11 +9,11 @@ import { Container } from "semantic-ui-react";
 import { withLoading, withError } from "../../../hoc/hoc";
 
 const propTypes = {
-  book: PropTypes.array.isRequired,
+  book: PropTypes.object.isRequired,
   handleAddToCart: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
-  errorCart: PropTypes.string.isRequired,
-  error: PropTypes.string.isRequired
+  errorCart: PropTypes.object,
+  error: PropTypes.object
 };
 class BookDetailPage extends React.Component {
   componentDidMount() {

@@ -109,10 +109,6 @@ class AddressForm extends React.Component {
     }
   }
 
-  componentWillUnmount() {
-    resetForm();
-  }
-
   handleToggleDefault = () => {
     const { formData } = this.state;
     const updatedFormdata = {
@@ -127,7 +123,7 @@ class AddressForm extends React.Component {
   resetForm = () => {
     this.setState({
       saving: false,
-      success: true,
+      success: false,
       formData: {
         address_type: "",
         apartment_address: "",
@@ -172,6 +168,7 @@ class AddressForm extends React.Component {
     } else {
       this.handleCreateAddress();
     }
+    this.resetForm();
   };
 
   handleCreateAddress = () => {
@@ -263,9 +260,6 @@ class AddressForm extends React.Component {
           onChange={this.handleToggleDefault}
           checked={formData.default}
         />
-        {success && (
-          <Message success header="Success!" content="Your address was saved" />
-        )}
         {error && (
           <Message
             error

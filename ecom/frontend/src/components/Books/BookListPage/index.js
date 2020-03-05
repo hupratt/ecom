@@ -9,8 +9,8 @@ import PropTypes from "prop-types";
 
 const propTypes = {
   data: PropTypes.array.isRequired,
-  error: PropTypes.string.isRequired,
-  loading: PropTypes.func.isRequired,
+  error: PropTypes.object,
+  loading: PropTypes.bool.isRequired,
   bookPerPage: PropTypes.number.isRequired,
   language: PropTypes.string.isRequired,
   onSelectRadio: PropTypes.func.isRequired

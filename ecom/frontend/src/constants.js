@@ -1,5 +1,5 @@
-export const localhost = "https://shop.lapetiteportugaise.eu";
-// export const localhost = "http://127.0.0.1:3212";
+// export const localhost = "https://shop.lapetiteportugaise.eu";
+export const localhost = "http://127.0.0.1:8000";
 
 const apiURL = "/api";
 

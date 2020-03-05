@@ -11,7 +11,7 @@ import PropTypes from "prop-types";
 
 const propTypes = {
   authenticated: PropTypes.bool.isRequired,
-  cart: PropTypes.array.isRequired,
+  cart: PropTypes.object,
   loading: PropTypes.bool.isRequired,
   logout: PropTypes.func.isRequired
 };

@@ -5,7 +5,7 @@ const propTypes = {
   handleChange: PropTypes.func.isRequired,
   language: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired
+  id: PropTypes.string.isRequired
 };
 const RadioButton = ({ handleChange, language, value, id }) => {
   return (

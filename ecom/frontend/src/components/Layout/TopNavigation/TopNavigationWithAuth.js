@@ -7,9 +7,9 @@ import { withItemsInTheCart } from "../../../hoc/hoc";
 import PropTypes from "prop-types";
 
 const propTypes = {
-  cart: PropTypes.array.isRequired,
+  cart: PropTypes.object,
   loading: PropTypes.bool.isRequired,
-  logout: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired
 };
 
 const TopNavigationWithAuth = ({ cart, loading, logout }) => {

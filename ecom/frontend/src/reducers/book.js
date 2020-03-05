@@ -4,7 +4,7 @@ import * as actionTypes from "../actions/actionTypes";
 const initState = {
   loading: false,
   error: null,
-  book: [],
+  book: {},
   data: [],
   dataIsCached: false
 };

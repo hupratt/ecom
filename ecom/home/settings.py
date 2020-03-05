@@ -123,6 +123,7 @@ ACCOUNT_EMAIL_VERIFICATION = "none"
 WSGI_APPLICATION = "home.wsgi.application"
 
 CORS_ORIGIN_WHITELIST = ("http://localhost:8000", "https://shop.lapetiteportugaise.eu")
+CORS_ORIGIN_ALLOW_ALL = True
 
 
 # Stripe
@@ -151,8 +152,8 @@ if os.environ.get("DJANGO_DEVELOPMENT") is None:
         integrations=[DjangoIntegration()],
     )
     # SECURITY
-    
-    # clients should access this website through HTTPS exclusively, 
+
+    # clients should access this website through HTTPS exclusively,
     # if for some reason it is not the case website will not load
     SECURE_HSTS_SECONDS = 31536000
     # Is a default in django3
@@ -169,5 +170,4 @@ if os.environ.get("DJANGO_DEVELOPMENT") is None:
     # Tells the browser to set the cookie only when an HTTPS connection is established
     CSRF_COOKIE_SECURE = True
     SECURE_HSTS_PRELOAD = True
-
 

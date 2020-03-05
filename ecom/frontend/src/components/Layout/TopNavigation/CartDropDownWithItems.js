@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 const propTypes = {
-  cart: PropTypes.array.isRequired
+  cart: PropTypes.object.isRequired
 };
 
 const CartDropDownWithItems = ({ cart }) => {
@@ -28,6 +28,6 @@ const CartDropDownWithItems = ({ cart }) => {
   );
 };
 
-FlipButton.propTypes = propTypes;
+CartDropDownWithItems.propTypes = propTypes;
 
 export default CartDropDownWithItems;

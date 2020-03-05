@@ -5,7 +5,7 @@ import { s3_base_url } from "../../../constants";
 
 const propTypes = {
   handleAddToCart: PropTypes.func.isRequired,
-  book: PropTypes.array.isRequired,
+  book: PropTypes.object.isRequired,
   isAuthenticated: PropTypes.bool.isRequired
 };
 
