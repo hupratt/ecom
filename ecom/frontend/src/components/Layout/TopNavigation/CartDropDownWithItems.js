@@ -1,6 +1,11 @@
 import React from "react";
 import { Dropdown } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+
+const propTypes = {
+  cart: PropTypes.array.isRequired
+};
 
 const CartDropDownWithItems = ({ cart }) => {
   return (
@@ -22,5 +27,7 @@ const CartDropDownWithItems = ({ cart }) => {
     </React.Fragment>
   );
 };
+
+FlipButton.propTypes = propTypes;
 
 export default CartDropDownWithItems;
