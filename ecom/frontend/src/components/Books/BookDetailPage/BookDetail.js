@@ -1,6 +1,13 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Button, Card, Grid, Icon, Item } from "semantic-ui-react";
 import { s3_base_url } from "../../../constants";
+
+const propTypes = {
+  handleAddToCart: PropTypes.func.isRequired,
+  book: PropTypes.array.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired
+};
 
 const BookDetail = ({ handleAddToCart, book, isAuthenticated }) => {
   return (
@@ -54,5 +61,7 @@ const BookDetail = ({ handleAddToCart, book, isAuthenticated }) => {
     </Grid>
   );
 };
+
+BookDetail.propTypes = propTypes;
 
 export default BookDetail;
