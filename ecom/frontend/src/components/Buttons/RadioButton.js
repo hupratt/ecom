@@ -1,5 +1,12 @@
 import React from "react";
+import PropTypes from "prop-types";
 
+const propTypes = {
+  handleChange: PropTypes.func.isRequired,
+  language: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired
+};
 const RadioButton = ({ handleChange, language, value, id }) => {
   return (
     <li>
@@ -16,5 +23,7 @@ const RadioButton = ({ handleChange, language, value, id }) => {
     </li>
   );
 };
+
+RadioButton.propTypes = propTypes;
 
 export default RadioButton;
