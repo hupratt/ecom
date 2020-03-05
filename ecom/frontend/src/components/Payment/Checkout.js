@@ -276,7 +276,7 @@ class CheckoutForm extends Component {
         )}
         <Divider />
 
-        {billingAddresses.length < 1 || shippingAddresses.length < 1 ? (
+        {shippingAddresses.length < 1 ? (
           <p>You need to add addresses before you can complete your purchase</p>
         ) : (
           <React.Fragment>
