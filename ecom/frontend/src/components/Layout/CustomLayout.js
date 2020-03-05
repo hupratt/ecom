@@ -7,6 +7,14 @@ import { withAuthentication } from "../../hoc/hoc";
 import BottomNavigation from "./BottomNavigation/BottomNavigation";
 import TopNavigationNoAuth from "./TopNavigation/TopNavigationNoAuth";
 import TopNavigationWithAuth from "./TopNavigation/TopNavigationWithAuth";
+import PropTypes from "prop-types";
+
+const propTypes = {
+  authenticated: PropTypes.bool.isRequired,
+  cart: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
+  logout: PropTypes.func.isRequired
+};
 
 class CustomLayout extends React.Component {
   render() {
@@ -39,6 +47,8 @@ const TopNavigationWithAuthenticationHandling = withAuthentication(
   TopNavigationWithAuth,
   TopNavigationNoAuth
 );
+
+CustomLayout.propTypes = propTypes;
 
 const mapStateToProps = state => {
   return {
