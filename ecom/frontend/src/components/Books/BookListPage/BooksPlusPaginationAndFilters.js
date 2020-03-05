@@ -31,7 +31,7 @@ const BooksPlusPaginationAndFilters = ({
         <input className="js-range-slider" id="price_range" name="pricerange" />
 
         <p>
-          Displaying {bookPerPage} of {dataToShow.length} books
+          Displaying {dataToShow.length} of {bookPerPage} books
         </p>
       </div>
       <BookGrid
