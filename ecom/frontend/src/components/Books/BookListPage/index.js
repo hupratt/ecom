@@ -5,7 +5,16 @@ import { fetchBooks, onSelectRadio, loadmoar } from "../../../actions/books";
 import BooksPlusPaginationAndFilters from "./BooksPlusPaginationAndFilters";
 import { withLoading, withError } from "../../../hoc/hoc";
 import { fetchCart } from "../../../actions/cart";
+import PropTypes from "prop-types";
 
+const propTypes = {
+  data: PropTypes.array.isRequired,
+  error: PropTypes.string.isRequired,
+  loading: PropTypes.func.isRequired,
+  bookPerPage: PropTypes.number.isRequired,
+  language: PropTypes.string.isRequired,
+  onSelectRadio: PropTypes.func.isRequired
+};
 class BookList extends React.Component {
   componentDidMount() {
     if (this.props.shoppingCart) {
@@ -101,5 +110,7 @@ const mapStateToProps = state => {
     shoppingCart: state.cart.shoppingCart
   };
 };
+
+BookList.propTypes = propTypes;
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookList);
