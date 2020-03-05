@@ -1,5 +1,6 @@
 import React from "react";
 import { fetchCart, handleAddToCart } from "../../../actions/cart";
+import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchBook } from "../../../actions/book";
@@ -7,6 +8,13 @@ import BookDetail from "./BookDetail";
 import { Container } from "semantic-ui-react";
 import { withLoading, withError } from "../../../hoc/hoc";
 
+const propTypes = {
+  book: PropTypes.array.isRequired,
+  handleAddToCart: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
+  errorCart: PropTypes.string.isRequired,
+  error: PropTypes.string.isRequired
+};
 class BookDetailPage extends React.Component {
   componentDidMount() {
     if (this.props.shoppingCart) {
@@ -64,6 +72,8 @@ const mapStateToProps = state => {
     shoppingCart: state.cart.shoppingCart
   };
 };
+
+BookDetailPage.propTypes = propTypes;
 
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(BookDetailPage)
