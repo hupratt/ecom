@@ -243,22 +243,6 @@ class CheckoutForm extends Component {
         <OrderPreview data={data} />
         <Divider />
 
-        <Divider />
-        <Header>Select a billing address</Header>
-        {billingAddresses.length > 0 ? (
-          <Select
-            name="selectedBillingAddress"
-            value={selectedBillingAddress}
-            clearable
-            options={billingAddresses}
-            selection
-            onChange={this.handleSelectChange}
-          />
-        ) : (
-          <p>
-            You need to <Link to="/profile">add a billing address</Link>
-          </p>
-        )}
         <Header>Select a shipping address</Header>
         {shippingAddresses.length > 0 ? (
           <Select
@@ -272,6 +256,21 @@ class CheckoutForm extends Component {
         ) : (
           <p>
             You need to <Link to="/profile">add a shipping address</Link>
+          </p>
+        )}
+        <Header>Select a billing address</Header>
+        {billingAddresses.length > 0 ? (
+          <Select
+            name="selectedBillingAddress"
+            value={selectedBillingAddress}
+            clearable
+            options={billingAddresses}
+            selection
+            onChange={this.handleSelectChange}
+          />
+        ) : (
+          <p>
+            Add a billing address <Link to="/profile">here</Link>
           </p>
         )}
         <Divider />

@@ -17,10 +17,8 @@ const propTypes = {
 };
 class BookList extends React.Component {
   componentDidMount() {
-    if (this.props.shoppingCart) {
-      this.props.refreshCart();
-    }
     this.props.fetchBooks(this.props.dataIsCached, this.props.offset);
+    this.props.refreshCart();
     document.addEventListener("scroll", this.trackScrolling);
   }
 
@@ -47,14 +45,7 @@ class BookList extends React.Component {
   };
 
   render() {
-    const {
-      data,
-      error,
-      loading,
-      bookPerPage,
-      language,
-      onSelectRadio
-    } = this.props;
+    const { data, bookPerPage, language, onSelectRadio } = this.props;
     const dataToShow =
       language !== "No filter"
         ? data.filter(item => language.includes(item.langue_nom))
@@ -72,8 +63,6 @@ class BookList extends React.Component {
           onSelectRadio={onSelectRadio}
           paginatedData={paginatedData}
           language={language}
-          loading={loading}
-          error={error}
           handleClickOnBook={this.handleClickOnBook}
         />
 

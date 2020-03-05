@@ -17,31 +17,21 @@ const propTypes = {
 };
 class BookDetailPage extends React.Component {
   componentDidMount() {
-    if (this.props.shoppingCart) {
-      this.props.refreshCart();
-    }
     this.props.fetchBook(
       this.props.match.params.bookID,
       this.props.dataIsCached
     );
+    this.props.refreshCart();
   }
 
   render() {
-    const {
-      book,
-      handleAddToCart,
-      isAuthenticated,
-      errorCart,
-      error
-    } = this.props;
+    const { book, handleAddToCart, isAuthenticated } = this.props;
     return (
       <Container>
         <BookDetailWithLoadingAndErrorHandling
           handleAddToCart={handleAddToCart}
           book={book}
           isAuthenticated={isAuthenticated}
-          errorCart={errorCart}
-          error={error}
         />
       </Container>
     );
