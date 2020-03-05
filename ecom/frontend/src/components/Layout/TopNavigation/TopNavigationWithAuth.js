@@ -38,9 +38,9 @@ const TopNavigationWithAuth = ({ cart, loading, logout }) => {
   );
 };
 
-export default TopNavigationWithAuth;
-
 TopNavigationWithAuth.propTypes = propTypes;
+
+export default TopNavigationWithAuth;
 
 const CartDropDownWithItemsAndNoItems = withItemsInTheCart(
   CartDropDownWithItems,
