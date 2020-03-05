@@ -16,7 +16,6 @@ export const cartSuccess = data => {
 };
 
 export const cartFail = error => {
-  console.log("action failed");
   return {
     type: actionTypes.CART_FAIL,
     error: error

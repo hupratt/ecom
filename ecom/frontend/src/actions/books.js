@@ -37,22 +37,25 @@ export const onPageChange = pageNumber => {
   };
 };
 
-export const loadmoar = (offset, bookPerPage) => {
+export const loadmoar = (offset, bookPerPage, loading) => {
   return dispatch => {
-    console.log("axios to fetch more books offset:" + offset);
-    console.log("bookPerPage:" + bookPerPage);
-    axios
-      .get(bookListURL(offset))
-      .then(res => {
-        dispatch({
-          type: actionTypes.LOAD_MORE,
-          data: Object.values(res.data.results),
-          offset: offset,
-          bookPerPage: bookPerPage
+    if (loading == false) {
+      dispatch({ type: actionTypes.LOADING });
+      console.log("axios to fetch more books offset:" + offset);
+      console.log("bookPerPage:" + bookPerPage);
+      axios
+        .get(bookListURL(offset))
+        .then(res => {
+          dispatch({
+            type: actionTypes.LOAD_MORE,
+            data: Object.values(res.data.results),
+            offset: offset,
+            bookPerPage: bookPerPage
+          });
+        })
+        .catch(err => {
+          dispatch({ type: actionTypes.FETCH_FAIL, error: err });
         });
-      })
-      .catch(err => {
-        dispatch({ type: actionTypes.FETCH_FAIL, error: err });
-      });
+    }
   };
 };

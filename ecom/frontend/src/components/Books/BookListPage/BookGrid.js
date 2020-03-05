@@ -35,7 +35,7 @@ const BookGrid = ({ paginatedData, handleClickOnBook }) => {
             url: `${s3_base_url}${item.isbn}.jpg`
           };
           return (
-            <li key={item.isbn}>
+            <li key={item.id}>
               <ThemeProvider theme={theme}>
                 <div className="bk-book bk-bookdefault" id={item.isbn}>
                   <div className="bk-front">

@@ -50,7 +50,8 @@ const loadMoar = (state, action) => {
     offset: action.offset,
     data: [...state.data, ...action.data],
     error: null,
-    bookPerPage: action.bookPerPage
+    bookPerPage: action.bookPerPage,
+    loading: false
   });
 };
 

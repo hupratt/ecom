@@ -23,14 +23,6 @@ const cartSuccess = (state, action) => {
 };
 
 const cartFail = (state, action) => {
-  console.log("reducer" + action.error);
-  console.log(state);
-  console.log(
-    updateObject(state, {
-      error: action.error,
-      loading: false
-    })
-  );
   return updateObject(state, {
     error: action.error,
     loading: false
@@ -44,7 +36,6 @@ const reducer = (state = initialState, action) => {
     case actionTypes.CART_SUCCESS:
       return cartSuccess(state, action);
     case actionTypes.CART_FAIL:
-      console.log("cart failed");
       return cartFail(state, action);
 
     default:

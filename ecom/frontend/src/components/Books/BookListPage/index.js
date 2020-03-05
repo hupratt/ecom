@@ -10,7 +10,7 @@ import PropTypes from "prop-types";
 const propTypes = {
   data: PropTypes.array.isRequired,
   error: PropTypes.object,
-  loading: PropTypes.bool.isRequired,
+  loading: PropTypes.bool,
   bookPerPage: PropTypes.number.isRequired,
   language: PropTypes.string.isRequired,
   onSelectRadio: PropTypes.func.isRequired
@@ -40,7 +40,11 @@ class BookList extends React.Component {
   trackScrolling = () => {
     const wrappedElement = document.getElementById("loadmoar");
     if (this.isBottom(wrappedElement)) {
-      this.props.loadMoar(this.props.offset + 12, this.props.bookPerPage + 12);
+      this.props.loadMoar(
+        this.props.offset + 12,
+        this.props.bookPerPage + 12,
+        this.props.loading
+      );
     }
   };
 
@@ -75,7 +79,8 @@ class BookList extends React.Component {
 const mapDispatchToProps = dispatch => {
   return {
     onSelectRadio: event => dispatch(onSelectRadio(event)),
-    loadMoar: (offset, bookPerPage) => dispatch(loadmoar(offset, bookPerPage)),
+    loadMoar: (offset, bookPerPage, loading) =>
+      dispatch(loadmoar(offset, bookPerPage, loading)),
     fetchBooks: (dataIsCached, bookPerPage) =>
       dispatch(fetchBooks(dataIsCached, bookPerPage)),
     refreshCart: () => dispatch(fetchCart())
@@ -87,16 +92,12 @@ const BookPageWithLoadingAndErrorHandling = withError(BookPageWithLoading);
 
 const mapStateToProps = state => {
   return {
-    loading: state.books.loading,
-    error: state.books.error,
     data: state.books.data,
+    loading: state.books.loading,
     offset: state.books.offset,
-    setPage: state.books.setPage,
     bookPerPage: state.books.bookPerPage,
     language: state.books.language,
-    isAuthenticated: state.auth.token !== null,
-    dataIsCached: state.books.data.length != 0,
-    shoppingCart: state.cart.shoppingCart
+    dataIsCached: state.books.data.length != 0
   };
 };
 
