@@ -1,6 +1,12 @@
 import React from "react";
 import { Form } from "semantic-ui-react";
 import RadioButton from "../Buttons/RadioButton";
+import PropTypes from "prop-types";
+
+const propTypes = {
+  language: PropTypes.string.isRequired,
+  onSelectRadio: PropTypes.func.isRequired
+};
 
 const LanguageFilter = ({ language, onSelectRadio }) => {
   return (
@@ -35,5 +41,7 @@ const LanguageFilter = ({ language, onSelectRadio }) => {
     </Form>
   );
 };
+
+LanguageFilter.propTypes = propTypes;
 
 export default LanguageFilter;
