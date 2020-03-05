@@ -3,6 +3,16 @@ import LanguageFilter from "../../Filters/LanguageFilter";
 import AuthorFilter from "../../Filters/AuthorFilter";
 import CategoryFilter from "../../Filters/CategoryFilter";
 import BookGrid from "./BookGrid";
+import PropTypes from "prop-types";
+
+const propTypes = {
+  bookPerPage: PropTypes.number.isRequired,
+  dataToShow: PropTypes.array.isRequired,
+  onSelectRadio: PropTypes.func.isRequired,
+  paginatedData: PropTypes.array.isRequired,
+  language: PropTypes.string.isRequired,
+  handleClickOnBook: PropTypes.func.isRequired
+};
 
 const BooksPlusPaginationAndFilters = ({
   bookPerPage,
@@ -31,5 +41,7 @@ const BooksPlusPaginationAndFilters = ({
     </React.Fragment>
   );
 };
+
+BooksPlusPaginationAndFilters.propTypes = propTypes;
 
 export default BooksPlusPaginationAndFilters;
