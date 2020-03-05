@@ -1,4 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
+
+const propTypes = {
+  isbn: PropTypes.string.isRequired
+};
 
 const handleViewInside = isbn => {
   let book = document.getElementById(isbn);
@@ -23,5 +28,7 @@ const ViewInsideButton = ({ isbn }) => {
     </button>
   );
 };
+
+ViewInsideButton.propTypes = propTypes;
 
 export default ViewInsideButton;
