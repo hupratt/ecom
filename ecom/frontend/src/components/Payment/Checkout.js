@@ -19,14 +19,13 @@ import {
   Select
 } from "semantic-ui-react";
 import { Link, withRouter } from "react-router-dom";
+import { s3_base_url, checkoutURL } from "../../constants";
+import { connect } from "react-redux";
 import {
-  checkoutURL,
-  orderSummaryURL,
-  addCouponURL,
-  addressListURL,
-  s3_base_url
-} from "../../constants";
-import axios from "axios";
+  handleFetchOrder,
+  handleFetchBillingAddresses,
+  handleFetchShippingAddresses,
+} from "../../actions/books";
 
 const OrderPreview = ({ data }) => {
   return (
@@ -76,140 +75,11 @@ const OrderPreview = ({ data }) => {
 };
 
 class CheckoutForm extends Component {
-  state = {
-    data: null,
-    loading: false,
-    error: null,
-    success: false,
-    shippingAddresses: [],
-    billingAddresses: [],
-    selectedBillingAddress: "",
-    selectedShippingAddress: ""
-  };
-
   componentDidMount() {
-    this.handleFetchOrder();
-    this.handleFetchBillingAddresses();
-    this.handleFetchShippingAddresses();
+    this.props.handleFetchOrder(this.props.history);
+    this.props.handleFetchBillingAddresses();
+    this.props.handleFetchShippingAddresses();
   }
-
-  handleGetDefaultAddress = addresses => {
-    const filteredAddresses = addresses.filter(el => el.default === true);
-    if (filteredAddresses.length > 0) {
-      return filteredAddresses[0].id;
-    }
-    return "";
-  };
-
-  handleFetchBillingAddresses = () => {
-    this.setState({ loading: true });
-    axios
-      .get(addressListURL("B"))
-      .then(res => {
-        this.setState({
-          billingAddresses: res.data.map(a => {
-            return {
-              key: a.id,
-              text: `${a.street_address}, ${a.apartment_address}, ${a.country}`,
-              value: a.id
-            };
-          }),
-          selectedBillingAddress: this.handleGetDefaultAddress(res.data),
-          loading: false
-        });
-      })
-      .catch(err => {
-        this.setState({ error: err, loading: false });
-      });
-  };
-
-  handleFetchShippingAddresses = () => {
-    this.setState({ loading: true });
-    axios
-      .get(addressListURL("S"))
-      .then(res => {
-        this.setState({
-          shippingAddresses: res.data.map(a => {
-            return {
-              key: a.id,
-              text: `${a.street_address}, ${a.apartment_address}, ${a.country}`,
-              value: a.id
-            };
-          }),
-          selectedShippingAddress: this.handleGetDefaultAddress(res.data),
-          loading: false
-        });
-      })
-      .catch(err => {
-        this.setState({ error: err, loading: false });
-      });
-  };
-
-  handleFetchOrder = () => {
-    this.setState({ loading: true });
-    axios
-      .get(orderSummaryURL)
-      .then(res => {
-        this.setState({ data: res.data, loading: false });
-      })
-      .catch(err => {
-        if (err.response.status === 404) {
-          this.props.history.push("/products");
-        } else {
-          this.setState({ error: err, loading: false });
-        }
-      });
-  };
-
-  handleAddCoupon = (e, code) => {
-    e.preventDefault();
-    this.setState({ loading: true });
-    axios
-      .post(addCouponURL, { code })
-      .then(res => {
-        this.setState({ loading: false });
-        this.handleFetchOrder();
-      })
-      .catch(err => {
-        this.setState({ error: err, loading: false });
-      });
-  };
-
-  handleSelectChange = (e, { name, value }) => {
-    this.setState({ [name]: value });
-  };
-
-  submit = ev => {
-    ev.preventDefault();
-    this.setState({ loading: true });
-    if (this.props.stripe) {
-      this.props.stripe.createToken().then(result => {
-        if (result.error) {
-          this.setState({ error: result.error.message, loading: false });
-        } else {
-          this.setState({ error: null });
-          const {
-            selectedBillingAddress,
-            selectedShippingAddress
-          } = this.state;
-          axios
-            .post(checkoutURL, {
-              stripeToken: result.token.id,
-              selectedBillingAddress,
-              selectedShippingAddress
-            })
-            .then(res => {
-              this.setState({ loading: false, success: true });
-            })
-            .catch(err => {
-              this.setState({ loading: false, error: err });
-            });
-        }
-      });
-    } else {
-      this.setState({ loading: false, error: "Stripe is not loaded" });
-    }
-  };
 
   render() {
     const {
@@ -221,8 +91,41 @@ class CheckoutForm extends Component {
       shippingAddresses,
       selectedBillingAddress,
       selectedShippingAddress
-    } = this.state;
+    } = this.props;
 
+    handleSelectChange = (e, { name, value }) => {
+      this.setState({ [name]: value });
+    };
+
+    submit = ev => {
+      ev.preventDefault();
+      this.setState({ loading: true });
+      if (this.props.stripe) {
+        this.props.stripe.createToken().then(result => {
+          if (result.error) {
+            this.setState({ error: result.error.message, loading: false });
+          } else {
+            this.setState({ error: null });
+            const { selectedBillingAddress, selectedShippingAddress } = this.props;
+            axios
+              .post(checkoutURL, {
+                stripeToken: result.token.id,
+                selectedBillingAddress: selectedBillingAddress,
+                selectedShippingAddress: selectedShippingAddress
+              })
+              .then(res => {
+                this.setState({ loading: false, success: true });
+              })
+              .catch(err => {
+                this.setState({ loading: false, error: err });
+              });
+          }
+        });
+      } else {
+        this.setState({ loading: false, error: "Stripe is not loaded" });
+      }
+    };
+    
     return (
       <div>
         {error && (
@@ -305,7 +208,35 @@ class CheckoutForm extends Component {
   }
 }
 
-const InjectedForm = withRouter(injectStripe(CheckoutForm));
+const mapDispatchToProps = dispatch => {
+  return {
+    submit: (e) => dispatch(submit(e)),
+    handleSelectChange = (e, { name, value }) => dispatch(handleSelectChange((e, { name, value }))),
+    handleFetchOrder: history => dispatch(handleFetchOrder(history)),
+    handleFetchBillingAddresses: () => dispatch(handleFetchBillingAddresses),
+    handleFetchShippingAddresses: () => dispatch(handleFetchShippingAddresses)
+  };
+};
+
+const mapStateToProps = state => {
+  return {
+    data: state.checkout.data,
+    loading: state.checkout.loading,
+    error: state.checkout.error,
+    success: state.checkout.success,
+    shippingAddresses: state.checkout.shippingAddresses,
+    billingAddresses: state.checkout.billingAddresses,
+    selectedBillingAddress: state.checkout.selectedBillingAddress,
+    selectedShippingAddress: state.checkout.selectedShippingAddress
+  };
+};
+
+const CheckoutFormWithRedux = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CheckoutForm);
+
+const InjectedForm = withRouter(injectStripe(CheckoutFormWithRedux));
 
 const WrappedForm = () => (
   <Container text>
