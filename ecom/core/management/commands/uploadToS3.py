@@ -1,6 +1,5 @@
 
-# In[ ]:
-from google_images_download import google_images_download  # importing the library
+from google_images_download import google_images_download 
 from sqlite3 import Error
 import sqlite3
 import os
@@ -11,7 +10,6 @@ import botocore
 import pathlib
 
 # AWS specific
-
 
 def upload_to_aws(local_file, bucket, s3_file):
     s3 = boto3.client('s3', aws_access_key_id=os.environ.get(
@@ -27,17 +25,19 @@ def upload_to_aws(local_file, bucket, s3_file):
 
 def create_bucket_name(bucket_prefix):
     # The generated bucket name must be between 3 and 63 chars long
+    print(bucket_name, "created")
     return ''.join([bucket_prefix, str(uuid.uuid4())])
 
 
 def create_bucket(bucket_prefix, s3_connection):
     session = boto3.session.Session()
+    # bucket_name = create_bucket_name(bucket_prefix)
     bucket_name = bucket_prefix
     bucket_response = s3_connection.create_bucket(
         Bucket=bucket_name,
         CreateBucketConfiguration={
             'LocationConstraint': 'eu-west-2'})
-    print(bucket_name, "created")
+    print(bucket_name, "used")
     return bucket_name, bucket_response
 
 
@@ -52,16 +52,14 @@ def connect_bucket(name):
         print(e)
         return 'does not exist'
 
-
 # Postgres specific
 
 def create_connection(db_file):
-
     if os.path.isfile(db_file):
         try:
             return sqlite3.connect(db_file, uri=True)
         except Error as e:
-            print(e)
+            print(e)  
     return None
 
 
@@ -75,7 +73,6 @@ def select_all_books(conn):
     return ",".join(liste_isbn)
 
 # CRUD specific
-
 
 def lower_quality_images(directory) -> str:
     to_download = list()
@@ -101,7 +98,6 @@ def ship_to_s3(directory):
     return response
 
 # main functions
-
 
 def google_it(placeholders, conn):
     isbn = select_all_books(conn)
@@ -129,11 +125,9 @@ def store_it(bucket_name, placeholders):
             bucket_prefix=bucket_name, s3_connection=s3_resource.meta.client)
         for isbn, image_path in _json.items():
             if len(image_path) > 0:
-                # upload_to_aws('/home/hugo/Development/saleor/saleor/static/placeholders/saleordemoproduct_cl_boot07_2.png',bucket_name,'saleordemoproduct_cl_boot07_2.png')
                 upload_to_aws(image_path, bucket_name, isbn + '.jpg')
     else:
         for isbn, image_path in _json.items():
-            # upload_to_aws('/home/hugo/Development/saleor/saleor/static/placeholders/saleordemoproduct_cl_boot07_2.png',bucket_name,'saleordemoproduct_cl_boot07_2.png')
             if len(image_path) > 0:
                 upload_to_aws(image_path, bucket_name, isbn + '.jpg')
 
@@ -156,8 +150,8 @@ def rename(placeholders):
 
 
 def main():
-    DATABASE = "/home/hugo/Development/ecom/LPP-Master_2019_2020-01-21.db"
-    PLACHOLDERS = "/home/hugo/Development/ecom/ecom/frontend/static/thumbnails"
+    DATABASE = "/home/ubuntu/Dev/ecom/LPP-Master_2019_2020-01-21.db"
+    PLACHOLDERS = "/home/ubuntu/Dev/ecom/ecom/frontend/static/thumbnails"
     YOUR_BUCKET_NAME = "bookshop-images-f1492f08-f236-4a55-afb7-70ded209cb24"
 
     # create a database connection
