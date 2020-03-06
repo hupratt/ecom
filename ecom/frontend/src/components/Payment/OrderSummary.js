@@ -13,7 +13,6 @@ import {
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import {
-  addToCartURL,
   orderSummaryURL,
   orderItemDeleteURL,
   orderItemUpdateQuantityURL
@@ -50,26 +49,11 @@ class OrderSummary extends React.Component {
       });
   };
 
-  renderVariations = orderItem => {
-    let text = "";
-    orderItem.item_variations.forEach(iv => {
-      text += `${iv.variation.name}: ${iv.value}, `;
-    });
-    return text;
-  };
-
-  handleFormatData = itemVariations => {
-    // convert [{id: 1},{id: 2}] to [1,2] - they're all variations
-    return Object.keys(itemVariations).map(key => {
-      return itemVariations[key].id;
-    });
-  };
-
-  handleAddToCart = id => {
+  handleAddQuantityToCart = id => {
     this.setState({ loading: true });
     // const variations = this.handleFormatData(itemVariations);
     axios
-      .post(addToCartURL, { id })
+      .post(orderItemUpdateQuantityURL, { id: id, type: "add" })
       .then(res => {
         this.handleFetchOrder();
         this.setState({ loading: false });
@@ -80,17 +64,19 @@ class OrderSummary extends React.Component {
   };
 
   handleRemoveQuantityFromCart = id => {
+    this.setState({ loading: true });
     axios
-      .post(orderItemUpdateQuantityURL, { id })
+      .post(orderItemUpdateQuantityURL, { id: id, type: "remove" })
       .then(res => {
         this.handleFetchOrder();
+        this.setState({ loading: false });
       })
       .catch(err => {
-        this.setState({ error: err });
+        this.setState({ error: err, loading: false });
       });
   };
 
-  handleRemoveItem = itemID => {
+  handleCancelOrder = itemID => {
     axios
       .delete(orderItemDeleteURL(itemID))
       .then(res => {
@@ -156,7 +142,9 @@ class OrderSummary extends React.Component {
                       <Icon
                         name="plus"
                         style={{ float: "right", cursor: "pointer" }}
-                        onClick={() => this.handleAddToCart(orderItem.livre.id)}
+                        onClick={() =>
+                          this.handleAddQuantityToCart(orderItem.livre.id)
+                        }
                       />
                     </Table.Cell>
                     <Table.Cell>
@@ -165,7 +153,7 @@ class OrderSummary extends React.Component {
                         name="trash"
                         color="red"
                         style={{ float: "right", cursor: "pointer" }}
-                        onClick={() => this.handleRemoveItem(orderItem.id)}
+                        onClick={() => this.handleCancelOrder(orderItem.id)}
                       />
                     </Table.Cell>
                   </Table.Row>
