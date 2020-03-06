@@ -78,6 +78,7 @@ class BookDetailView(RetrieveAPIView):
 class OrderQuantityUpdateView(APIView):
     def post(self, request, *args, **kwargs):
         id = request.data.get("id", None)
+        action_type = request.data.get("type", None)
         if id is None:
             return Response({"message": "Invalid data"}, status=HTTP_400_BAD_REQUEST)
         item = get_object_or_404(Livre, id=id)
@@ -89,11 +90,15 @@ class OrderQuantityUpdateView(APIView):
                 order_item = OrderItem.objects.filter(
                     livre=item, user=request.user, ordered=False
                 )[0]
-                if order_item.quantity > 1:
-                    order_item.quantity -= 1
+                if action_type == "remove":
+                    if order_item.quantity > 1:
+                        order_item.quantity -= 1
+                        order_item.save()
+                    else:
+                        order.items.remove(order_item)
+                if action_type == "add":
+                    order_item.quantity += 1
                     order_item.save()
-                else:
-                    order.items.remove(order_item)
                 return Response(status=HTTP_200_OK)
             else:
                 return Response(
