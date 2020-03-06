@@ -53,6 +53,13 @@ const error = (state, action) => {
   });
 };
 
+const success = () => {
+  return updateObject(state, {
+    success: true,
+    loading: false
+  });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.FETCH_BILLING_ADD:
@@ -67,6 +74,8 @@ const reducer = (state = initialState, action) => {
       return start(state, action);
     case actionTypes.ERROR:
       return error(state, action);
+    case actionTypes.PAYMENT_SUCCESS:
+      return success(state, action);
 
     default:
       return state;
