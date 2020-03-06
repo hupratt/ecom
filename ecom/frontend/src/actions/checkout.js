@@ -10,11 +10,19 @@ export const shippingSuccess = (shippingAddresses, selectedShippingAddress) => {
     loading: false
   };
 };
+
 export const billingSuccess = (billingAddresses, selectedBillingAddress) => {
   return {
     type: actionTypes.FETCH_BILLING_ADD,
     selectedShippingAddress: billingAddresses,
     selectedBillingAddress: selectedBillingAddress,
+    loading: false
+  };
+};
+
+export const paymentSuccess = () => {
+  return {
+    success: true,
     loading: false
   };
 };
@@ -110,5 +118,45 @@ export const handleFetchOrder = history => {
           dispatch(error(err));
         }
       });
+  };
+};
+
+export const handleSelectChange = (name, value) => {
+  return dispatch => {
+    dispatch({ type: actionTypes.SELECT_CHANGE, name: name, value: value });
+  };
+};
+
+export const submit = (
+  e,
+  stripe,
+  selectedBillingAddress,
+  selectedShippingAddress
+) => {
+  return dispatch => {
+    e.preventDefault();
+    dispatch(start());
+    if (stripe) {
+      stripe.createToken().then(result => {
+        if (result.error) {
+          dispatch(error(result.error.message));
+        } else {
+          axios
+            .post(checkoutURL, {
+              stripeToken: result.token.id,
+              selectedBillingAddress: selectedBillingAddress,
+              selectedShippingAddress: selectedShippingAddress
+            })
+            .then(res => {
+              dispatch(paymentSuccess());
+            })
+            .catch(err => {
+              dispatch(error(err));
+            });
+        }
+      });
+    } else {
+      dispatch(error("Stripe is not loaded"));
+    }
   };
 };
