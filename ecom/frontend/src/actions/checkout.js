@@ -2,7 +2,7 @@ import * as actionTypes from "./actionTypes";
 import axios from "axios";
 import { orderSummaryURL, addressListURL } from "../constants";
 
-export const shippingSuccess = (shippingAddresses, selectedShippingAddress) => {
+const shippingSuccess = (shippingAddresses, selectedShippingAddress) => {
   return {
     type: actionTypes.FETCH_SHIPPING_ADD,
     shippingAddresses: shippingAddresses,
@@ -11,7 +11,7 @@ export const shippingSuccess = (shippingAddresses, selectedShippingAddress) => {
   };
 };
 
-export const billingSuccess = (billingAddresses, selectedBillingAddress) => {
+const billingSuccess = (billingAddresses, selectedBillingAddress) => {
   return {
     type: actionTypes.FETCH_BILLING_ADD,
     selectedShippingAddress: billingAddresses,
@@ -20,34 +20,28 @@ export const billingSuccess = (billingAddresses, selectedBillingAddress) => {
   };
 };
 
-export const paymentSuccess = () => {
+const paymentSuccess = () => {
   return {
+    type: actionTypes.PAYMENT_SUCCESS,
     success: true,
     loading: false
   };
 };
 
-export const checkoutFail = error => {
-  return {
-    type: actionTypes.CART_FAIL,
-    error: error
-  };
-};
-
-export const start = () => {
+const start = () => {
   return {
     type: actionTypes.START
   };
 };
 
-export const error = err => {
+const error = err => {
   return {
     type: actionTypes.ERROR,
     error: err
   };
 };
 
-handleGetDefaultAddress = addresses => {
+const handleGetDefaultAddress = addresses => {
   const filteredAddresses = addresses.filter(el => el.default === true);
   if (filteredAddresses.length > 0) {
     return filteredAddresses[0].id;
