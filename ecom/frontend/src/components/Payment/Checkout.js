@@ -78,9 +78,9 @@ const OrderPreview = ({ data }) => {
 
 class CheckoutForm extends Component {
   componentDidMount() {
-    this.props.handleFetchOrder(this.props.history);
-    this.props.handleFetchBillingAddresses();
-    this.props.handleFetchShippingAddresses();
+    this.props.fetchOrder(this.props.history);
+    this.props.fetchBillingAddresses();
+    this.props.fetchShippingAddresses();
   }
 
   render() {
@@ -95,7 +95,6 @@ class CheckoutForm extends Component {
       selectedShippingAddress,
       stripe
     } = this.props;
-
     return (
       <div>
         {error && (
@@ -190,9 +189,9 @@ const mapDispatchToProps = dispatch => {
       ),
     handleSelectChange: (e, obj) =>
       dispatch(handleSelectChange({ name, value })),
-    handleFetchOrder: history => dispatch(handleFetchOrder(history)),
-    handleFetchBillingAddresses: () => dispatch(handleFetchBillingAddresses),
-    handleFetchShippingAddresses: () => dispatch(handleFetchShippingAddresses)
+    fetchOrder: history => dispatch(handleFetchOrder(history)),
+    fetchBillingAddresses: () => dispatch(handleFetchBillingAddresses()),
+    fetchShippingAddresses: () => dispatch(handleFetchShippingAddresses())
   };
 };
 

@@ -14,7 +14,7 @@ const shippingSuccess = (shippingAddresses, selectedShippingAddress) => {
 const billingSuccess = (billingAddresses, selectedBillingAddress) => {
   return {
     type: actionTypes.FETCH_BILLING_ADD,
-    selectedShippingAddress: billingAddresses,
+    billingAddresses: billingAddresses,
     selectedBillingAddress: selectedBillingAddress,
     loading: false
   };
@@ -62,6 +62,7 @@ export const handleFetchBillingAddresses = () => {
             value: a.id
           };
         });
+        console.log("billingAddresses");
         const selectedBillingAddress = handleGetDefaultAddress(res.data);
         dispatch(billingSuccess(billingAddresses, selectedBillingAddress));
       })
