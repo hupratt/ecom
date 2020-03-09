@@ -17,6 +17,7 @@ export const FETCH_CACHE = "FETCH_CACHE";
 export const LOAD_MORE = "LOAD_MORE";
 
 export const FETCH_BILLING_ADD = "FETCH_BILLING_ADD";
+export const FETCH_SHIPPING_ADD = "FETCH_SHIPPING_ADD";
 export const FETCH_ORDER = "FETCH_ORDER";
 export const SELECT_CHANGE = "SELECT_CHANGE";
 export const START = "START";

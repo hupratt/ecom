@@ -27,7 +27,7 @@ import {
   handleFetchShippingAddresses,
   handleSelectChange,
   submit
-} from "../../actions/books";
+} from "../../actions/checkout";
 
 const OrderPreview = ({ data }) => {
   return (
@@ -93,11 +93,9 @@ class CheckoutForm extends Component {
       shippingAddresses,
       selectedBillingAddress,
       selectedShippingAddress,
-      stripe,
-      selectedBillingAddress,
-      selectedShippingAddress
+      stripe
     } = this.props;
-    
+
     return (
       <div>
         {error && (
@@ -168,7 +166,11 @@ class CheckoutForm extends Component {
               loading={loading}
               disabled={loading}
               primary
-              onClick={submit(stripe,selectedBillingAddress,selectedShippingAddress)}
+              onClick={submit(
+                stripe,
+                selectedBillingAddress,
+                selectedShippingAddress
+              )}
               style={{ marginTop: "10px" }}
             >
               Submit
@@ -182,8 +184,12 @@ class CheckoutForm extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    submit: (e, stripe,selectedBillingAddress,selectedShippingAddress) => dispatch(submit(e, stripe,selectedBillingAddress,selectedShippingAddress)),
-    handleSelectChange = (e, { name, value }) => dispatch(handleSelectChange(name,value)),
+    submit: (e, stripe, selectedBillingAddress, selectedShippingAddress) =>
+      dispatch(
+        submit(e, stripe, selectedBillingAddress, selectedShippingAddress)
+      ),
+    handleSelectChange: (e, obj) =>
+      dispatch(handleSelectChange({ name, value })),
     handleFetchOrder: history => dispatch(handleFetchOrder(history)),
     handleFetchBillingAddresses: () => dispatch(handleFetchBillingAddresses),
     handleFetchShippingAddresses: () => dispatch(handleFetchShippingAddresses)
