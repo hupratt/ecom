@@ -56,6 +56,11 @@ class ItemListView(ListAPIView):
     queryset = Item.objects.all()
 
 
+# Fix me !!
+# Do a view to grab the top 10 authors
+# Livre.objects.values('auteur_nom').annotate(total=Count("id")).order_by('-total')
+
+
 class BookListView(ListAPIView):
     permission_classes = (AllowAny,)
     serializer_class = BookSerializer
@@ -69,9 +74,10 @@ class BookListView(ListAPIView):
         """
         queryset = Livre.objects.all()
         language = self.request.query_params.get("language", None)
-        if (language != "") and (language != "undefined"):
-            print("filtering", language)
+        if language != "":
             queryset = queryset.filter(langue_nom__contains=language)
+        # if author != "":
+        # queryset =
         return queryset
 
 
