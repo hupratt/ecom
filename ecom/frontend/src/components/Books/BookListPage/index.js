@@ -25,7 +25,11 @@ class BookList extends React.Component {
         language: queryString.parse(this.props.location.search).language
       });
     }
-    this.props.fetchBooks(this.props.offset, this.state.language);
+    if (this.state.language == "All") {
+      this.props.fetchBooks(this.props.offset, "");
+    } else {
+      this.props.fetchBooks(this.props.offset, this.state.language);
+    }
     this.props.refreshCart();
     document.addEventListener("scroll", this.trackScrolling);
   }
@@ -65,11 +69,12 @@ class BookList extends React.Component {
 
   trackScrolling = () => {
     const wrappedElement = document.getElementById("loadmoar");
-    if (this.isBottom(wrappedElement)) {
+    const language = queryString.parse(this.props.location.search).language;
+    if (this.isBottom(wrappedElement) && this.props.loading == false) {
       this.props.loadMoar(
         this.props.offset + 12,
         this.props.bookPerPage + 12,
-        this.props.loading
+        language
       );
     }
   };

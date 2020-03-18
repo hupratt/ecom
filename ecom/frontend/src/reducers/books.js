@@ -8,7 +8,7 @@ const initState = {
   currentPage: 1,
   setPage: 1,
   bookPerPage: 12,
-  language: "No filter",
+  language: "All",
   dataIsCached: false,
   offset: 0,
   _length: 0

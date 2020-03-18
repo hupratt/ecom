@@ -2,7 +2,7 @@ import React from "react";
 import { Form } from "semantic-ui-react";
 import RadioButton from "../Buttons/RadioButton";
 import PropTypes from "prop-types";
-
+import { Link } from "react-router-dom";
 const propTypes = {
   language: PropTypes.string.isRequired,
   onSelectRadio: PropTypes.func.isRequired

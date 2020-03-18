@@ -6,33 +6,18 @@ export const fetchBooks = (offset, language) => {
   return dispatch => {
     dispatch({ type: actionTypes.LOADING });
     console.log("running axios to fetch first 12 books");
-    if (language == "All") {
-      axios
-        .get(bookListURL(offset, ""))
-        .then(res => {
-          dispatch({
-            type: actionTypes.FETCH_SUCCESS,
-            data: Object.values(res.data.results),
-            _length: res.data.count
-          });
-        })
-        .catch(err => {
-          dispatch({ type: actionTypes.FETCH_FAIL, error: err });
+    axios
+      .get(bookListURL(offset, language))
+      .then(res => {
+        dispatch({
+          type: actionTypes.FETCH_SUCCESS,
+          data: Object.values(res.data.results),
+          _length: res.data.count
         });
-    } else {
-      axios
-        .get(bookListURL(offset, language))
-        .then(res => {
-          dispatch({
-            type: actionTypes.FETCH_SUCCESS,
-            data: Object.values(res.data.results),
-            _length: res.data.count
-          });
-        })
-        .catch(err => {
-          dispatch({ type: actionTypes.FETCH_FAIL, error: err });
-        });
-    }
+      })
+      .catch(err => {
+        dispatch({ type: actionTypes.FETCH_FAIL, error: err });
+      });
   };
 };
 
@@ -53,25 +38,23 @@ export const onPageChange = pageNumber => {
   };
 };
 
-export const loadmoar = (offset, bookPerPage, loading) => {
+export const loadmoar = (offset, bookPerPage, language) => {
   return dispatch => {
-    if (loading == false) {
-      dispatch({ type: actionTypes.LOADING });
-      console.log("axios to fetch more books offset:" + offset);
-      console.log("bookPerPage:" + bookPerPage);
-      axios
-        .get(bookListURL(offset))
-        .then(res => {
-          dispatch({
-            type: actionTypes.LOAD_MORE,
-            data: Object.values(res.data.results),
-            offset: offset,
-            bookPerPage: bookPerPage
-          });
-        })
-        .catch(err => {
-          dispatch({ type: actionTypes.FETCH_FAIL, error: err });
+    dispatch({ type: actionTypes.LOADING });
+    console.log("axios to fetch more books offset:" + offset);
+    console.log("bookPerPage:" + bookPerPage);
+    axios
+      .get(bookListURL(offset, language))
+      .then(res => {
+        dispatch({
+          type: actionTypes.LOAD_MORE,
+          data: Object.values(res.data.results),
+          offset: offset,
+          bookPerPage: bookPerPage
         });
-    }
+      })
+      .catch(err => {
+        dispatch({ type: actionTypes.FETCH_FAIL, error: err });
+      });
   };
 };
