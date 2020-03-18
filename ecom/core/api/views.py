@@ -62,6 +62,17 @@ class BookListView(ListAPIView):
     queryset = Livre.objects.all()
     paginate_by_param = "limit"
 
+    def get_queryset(self):
+        """
+        Optionally restricts the returned purchases to a given user,
+        by filtering against a `username` query parameter in the URL.
+        """
+        queryset = Livre.objects.all()
+        language = self.request.query_params.get("language", None)
+        if language is not None:
+            queryset = queryset.filter(langue_nom__exact=language)
+        return queryset
+
 
 class ItemDetailView(RetrieveAPIView):
     permission_classes = (AllowAny,)
