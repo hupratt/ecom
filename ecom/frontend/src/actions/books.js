@@ -2,12 +2,12 @@ import axios from "axios";
 import * as actionTypes from "./actionTypes";
 import { bookListURL } from "../constants";
 
-export const fetchBooks = (offset, language) => {
+export const fetchBooks = (offset, language, checkedItems = "") => {
   return dispatch => {
     dispatch({ type: actionTypes.LOADING });
-    console.log("running axios to fetch first 12 books");
+    console.log("running axios to fetch first 12 books", checkedItems);
     axios
-      .get(bookListURL(offset, language))
+      .get(bookListURL(offset, language, checkedItems))
       .then(res => {
         dispatch({
           type: actionTypes.FETCH_SUCCESS,

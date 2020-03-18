@@ -61,10 +61,16 @@ class BookList extends React.Component {
       prevState => ({
         checkedItems: prevState.checkedItems.set(item, isChecked)
       }),
-      () =>
+      () => {
         this.props.history.push(
           `/?author=${Array.from(this.state.checkedItems.entries()).join("&")}`
-        )
+        );
+        this.props.fetchBooks(
+          this.props.offset,
+          this.state.language,
+          Array.from(this.state.checkedItems.entries()).join("&")
+        );
+      }
     );
   };
 
