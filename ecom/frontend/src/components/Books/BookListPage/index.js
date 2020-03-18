@@ -44,18 +44,22 @@ class BookList extends React.Component {
 
   onSelectRadio = event => {
     console.log(`language ${event.currentTarget.value} selected`);
-    this.props.history.push(`/?language=${event.currentTarget.value}`);
-    this.setState({ language: event.currentTarget.value });
+    this.setState({ language: event.currentTarget.value }, () =>
+      this.props.history.push(`/?language=${this.state.language}`)
+    );
   };
 
   onSelectAuthor = (e, data) => {
     const item = e.target.textContent;
     const isChecked = data.checked;
-    this.setState(prevState => ({
-      checkedItems: prevState.checkedItems.set(item, isChecked)
-    }));
-    this.props.history.push(
-      `/?author=${Array.from(this.state.checkedItems.entries()).join("&")}`
+    this.setState(
+      prevState => ({
+        checkedItems: prevState.checkedItems.set(item, isChecked)
+      }),
+      () =>
+        this.props.history.push(
+          `/?author=${Array.from(this.state.checkedItems.entries()).join("&")}`
+        )
     );
   };
 
@@ -102,7 +106,6 @@ class BookList extends React.Component {
           paginatedData={paginatedData}
           language={language}
           handleClickOnBook={this.handleClickOnBook}
-          checkedItems={checkedItems}
         />
 
         {this.props.children}

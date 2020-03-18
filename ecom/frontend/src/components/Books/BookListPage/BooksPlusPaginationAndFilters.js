@@ -18,7 +18,6 @@ const BooksPlusPaginationAndFilters = ({
   length,
   onSelectRadio,
   onSelectAuthor,
-  checkedItems,
   paginatedData,
   language,
   handleClickOnBook
@@ -27,7 +26,7 @@ const BooksPlusPaginationAndFilters = ({
     <React.Fragment>
       <div className="container container-forms">
         <LanguageFilter onSelectRadio={onSelectRadio} language={language} />
-        <AuthorFilter onSelectAuthor={onSelectAuthor} checked={checkedItems} />
+        <AuthorFilter onSelectAuthor={onSelectAuthor} />
         <CategoryFilter />
         <input className="js-range-slider" id="price_range" name="pricerange" />
 
