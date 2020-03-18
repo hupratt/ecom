@@ -34,7 +34,7 @@ const LanguageFilter = ({ language, onSelectRadio }) => {
         <RadioButton
           handleChange={onSelectRadio}
           language={language}
-          value="No filter"
+          value="All"
           id="4"
         />
       </ul>

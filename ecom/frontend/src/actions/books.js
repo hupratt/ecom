@@ -2,21 +2,37 @@ import axios from "axios";
 import * as actionTypes from "./actionTypes";
 import { bookListURL } from "../constants";
 
-export const fetchBooks = (dataIsCached, bookPerPage) => {
+export const fetchBooks = (offset, language) => {
   return dispatch => {
     dispatch({ type: actionTypes.LOADING });
     console.log("running axios to fetch first 12 books");
-    axios
-      .get(bookListURL(bookPerPage))
-      .then(res => {
-        dispatch({
-          type: actionTypes.FETCH_SUCCESS,
-          data: Object.values(res.data.results)
+    if (language == "All") {
+      axios
+        .get(bookListURL(offset, ""))
+        .then(res => {
+          dispatch({
+            type: actionTypes.FETCH_SUCCESS,
+            data: Object.values(res.data.results),
+            _length: res.data.count
+          });
+        })
+        .catch(err => {
+          dispatch({ type: actionTypes.FETCH_FAIL, error: err });
         });
-      })
-      .catch(err => {
-        dispatch({ type: actionTypes.FETCH_FAIL, error: err });
-      });
+    } else {
+      axios
+        .get(bookListURL(offset, language))
+        .then(res => {
+          dispatch({
+            type: actionTypes.FETCH_SUCCESS,
+            data: Object.values(res.data.results),
+            _length: res.data.count
+          });
+        })
+        .catch(err => {
+          dispatch({ type: actionTypes.FETCH_FAIL, error: err });
+        });
+    }
   };
 };
 

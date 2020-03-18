@@ -69,8 +69,9 @@ class BookListView(ListAPIView):
         """
         queryset = Livre.objects.all()
         language = self.request.query_params.get("language", None)
-        if language is not None:
-            queryset = queryset.filter(langue_nom__exact=language)
+        if (language != "") and (language != "undefined"):
+            print("filtering", language)
+            queryset = queryset.filter(langue_nom__contains=language)
         return queryset
 
 

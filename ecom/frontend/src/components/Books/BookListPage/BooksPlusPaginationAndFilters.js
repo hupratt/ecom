@@ -7,7 +7,6 @@ import PropTypes from "prop-types";
 
 const propTypes = {
   bookPerPage: PropTypes.number.isRequired,
-  dataToShow: PropTypes.array.isRequired,
   onSelectRadio: PropTypes.func.isRequired,
   paginatedData: PropTypes.array.isRequired,
   language: PropTypes.string.isRequired,
@@ -16,7 +15,7 @@ const propTypes = {
 
 const BooksPlusPaginationAndFilters = ({
   bookPerPage,
-  dataToShow,
+  length,
   onSelectRadio,
   paginatedData,
   language,
@@ -31,7 +30,7 @@ const BooksPlusPaginationAndFilters = ({
         <input className="js-range-slider" id="price_range" name="pricerange" />
 
         <p>
-          Displaying {dataToShow.length} of {bookPerPage} books
+          Displaying {bookPerPage} of {length} books
         </p>
       </div>
       <BookGrid

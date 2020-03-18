@@ -1,23 +1,29 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Container } from "semantic-ui-react";
-import { fetchBooks, onSelectRadio, loadmoar } from "../../../actions/books";
+import { fetchBooks, loadmoar } from "../../../actions/books";
 import BooksPlusPaginationAndFilters from "./BooksPlusPaginationAndFilters";
 import { withLoading, withError } from "../../../hoc/hoc";
 import { fetchCart } from "../../../actions/cart";
 import PropTypes from "prop-types";
+import queryString from "query-string";
 
 const propTypes = {
   data: PropTypes.array.isRequired,
   error: PropTypes.object,
   loading: PropTypes.bool,
-  bookPerPage: PropTypes.number.isRequired,
-  language: PropTypes.string.isRequired,
-  onSelectRadio: PropTypes.func.isRequired
+  bookPerPage: PropTypes.number.isRequired
 };
 class BookList extends React.Component {
+  state = {
+    language: "All"
+  };
   componentDidMount() {
-    this.props.fetchBooks(this.props.dataIsCached, this.props.offset);
+    const values = queryString.parse(this.props.location.search);
+    if (values.language !== undefined) {
+      this.setState({ language: values.language });
+    }
+    this.props.fetchBooks(this.props.offset, this.state.language);
     this.props.refreshCart();
     document.addEventListener("scroll", this.trackScrolling);
   }
@@ -25,8 +31,15 @@ class BookList extends React.Component {
   componentWillUnmount = () => {
     document.removeEventListener("scroll", this.trackScrolling);
   };
+
   handleClickOnBook = id => {
     this.props.history.push(`/books/${id}`);
+  };
+
+  onSelectRadio = event => {
+    console.log(`language ${event.currentTarget.value} selected`);
+    this.props.history.push(`/?language=${event.currentTarget.value}`);
+    this.setState({ language: event.currentTarget.value });
   };
 
   isBottom = el => {
@@ -49,9 +62,11 @@ class BookList extends React.Component {
   };
 
   render() {
-    const { data, bookPerPage, language, onSelectRadio } = this.props;
+    const { data, bookPerPage, _length } = this.props;
+    const { language } = this.state;
+
     const dataToShow =
-      language !== "No filter"
+      language !== "All"
         ? data.filter(item => language.includes(item.langue_nom))
         : data;
     let paginatedData = [];
@@ -63,8 +78,8 @@ class BookList extends React.Component {
       <Container className="booklist">
         <BookPageWithLoadingAndErrorHandling
           bookPerPage={bookPerPage}
-          dataToShow={dataToShow}
-          onSelectRadio={onSelectRadio}
+          length={_length}
+          onSelectRadio={this.onSelectRadio}
           paginatedData={paginatedData}
           language={language}
           handleClickOnBook={this.handleClickOnBook}
@@ -78,7 +93,6 @@ class BookList extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSelectRadio: event => dispatch(onSelectRadio(event)),
     loadMoar: (offset, bookPerPage, loading) =>
       dispatch(loadmoar(offset, bookPerPage, loading)),
     fetchBooks: (dataIsCached, bookPerPage) =>
@@ -96,8 +110,8 @@ const mapStateToProps = state => {
     loading: state.books.loading,
     offset: state.books.offset,
     bookPerPage: state.books.bookPerPage,
-    language: state.books.language,
-    dataIsCached: state.books.data.length != 0
+    dataIsCached: state.books.data.length != 0,
+    _length: state.books._length
   };
 };
 
