@@ -74,10 +74,12 @@ class BookListView(ListAPIView):
         """
         queryset = Livre.objects.all()
         language = self.request.query_params.get("language", None)
-        if language != "":
+        author = self.request.query_params.get("author", None)
+        if language != "" and language is not None:
             queryset = queryset.filter(langue_nom__contains=language)
-        # if author != "":
-        # queryset =
+        if author != "" and author is not None:
+            print("filtering on author", author)
+            queryset = queryset.filter(auteur_nom__contains=author)
         return queryset
 
 
