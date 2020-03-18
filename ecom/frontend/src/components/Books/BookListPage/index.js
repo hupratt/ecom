@@ -16,12 +16,14 @@ const propTypes = {
 };
 class BookList extends React.Component {
   state = {
-    language: "All"
+    language: "All",
+    checkedItems: new Map()
   };
   componentDidMount() {
-    const values = queryString.parse(this.props.location.search);
-    if (values.language !== undefined) {
-      this.setState({ language: values.language });
+    if (queryString.parse(this.props.location.search).language !== undefined) {
+      this.setState({
+        language: queryString.parse(this.props.location.search).language
+      });
     }
     this.props.fetchBooks(this.props.offset, this.state.language);
     this.props.refreshCart();
@@ -41,6 +43,50 @@ class BookList extends React.Component {
     this.props.history.push(`/?language=${event.currentTarget.value}`);
     this.setState({ language: event.currentTarget.value });
   };
+
+  handleCheckboxChange = event =>
+    this.setState({ checked: event.target.checked });
+
+  serialize = items => {
+    for (let entry in items) {
+      console.log(entry);
+    }
+    // return Object.entries(items)
+    //   .map(([key, val]) => `${key}=${val}`)
+    //   .join("&");
+  };
+  onSelectAuthor = (e, data) => {
+    const item = e.target.textContent;
+    const isChecked = data.checked;
+    this.setState(prevState => ({
+      checkedItems: prevState.checkedItems.set(item, isChecked)
+    }));
+    // console.log(this.state.checkedItems);
+    // for (let entry in this.state.checkedItems) {
+    //   console.log(entry);
+    // } // var query = [];
+    this.state.checkedItems.forEach((isChecked, checkbox) => {
+      console.log(checkbox, isChecked);
+    });
+    // this.props.history.push(`/?author=${query}`);
+  };
+
+  // onSelectAuthor = event => {
+  //   const condition = this.state.author.includes(event.target.textContent);
+  //   if (condition === false) {
+  //     this.setState({
+  //       author: [...this.state.author, event.target.textContent]
+  //     });
+  //     this.props.history.push(`/?author=${this.state.author}`);
+  //   } else {
+  //     this.setState({
+  //       author: this.state.author.splice(
+  //         this.state.author.indexOf(event.target.textContent)
+  //       )
+  //     });
+  //     this.props.history.push(`/?author=${this.state.author}`);
+  //   }
+  // };
 
   isBottom = el => {
     if (el)
@@ -63,7 +109,7 @@ class BookList extends React.Component {
 
   render() {
     const { data, bookPerPage, _length } = this.props;
-    const { language } = this.state;
+    const { language, checkedItems } = this.state;
 
     const dataToShow =
       language !== "All"
@@ -80,9 +126,11 @@ class BookList extends React.Component {
           bookPerPage={bookPerPage}
           length={_length}
           onSelectRadio={this.onSelectRadio}
+          onSelectAuthor={this.onSelectAuthor}
           paginatedData={paginatedData}
           language={language}
           handleClickOnBook={this.handleClickOnBook}
+          checkedItems={checkedItems}
         />
 
         {this.props.children}

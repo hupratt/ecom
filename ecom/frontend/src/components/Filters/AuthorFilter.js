@@ -6,7 +6,11 @@ const AuthorFilter = ({ onSelectAuthor, checked }) => {
     <Form className="author-checkbox">
       <div className="filter-title">Author</div>
       <ul>
-        <Checkbox label="Fernando Pessoa" onChange={onSelectAuthor} />
+        <Checkbox
+          label="Fernando Pessoa"
+          onChange={onSelectAuthor}
+          checked={checked.get("Fernando Pessoa")}
+        />
         <Checkbox label="José Saramago" onChange={onSelectAuthor} />
         <Checkbox label="Eça de Queirós" onChange={onSelectAuthor} />
         <Checkbox label="Gonçalo M. Tavares" onChange={onSelectAuthor} />
