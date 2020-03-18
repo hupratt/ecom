@@ -76,6 +76,7 @@ class BookListView(ListAPIView):
         language = self.request.query_params.get("language", None)
         author = self.request.query_params.get("author", None)
         if language != "" and language is not None:
+            print("filtering on language", language)
             queryset = queryset.filter(langue_nom__contains=language)
         if author != "" and author is not None:
             print("filtering on author", author)
