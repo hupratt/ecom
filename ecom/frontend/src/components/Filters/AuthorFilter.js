@@ -1,14 +1,18 @@
 import React from "react";
 import { Form, Checkbox } from "semantic-ui-react";
 
-const AuthorFilter = () => {
+const AuthorFilter = ({ onSelectAuthor, checked }) => {
   return (
     <Form className="author-checkbox">
       <div className="filter-title">Author</div>
       <ul>
-        <Checkbox label="Author 1" checked />
-        <Checkbox label="Author 2" />
-        <Checkbox label="Author 3" />
+        <Checkbox label="Fernando Pessoa" onChange={onSelectAuthor} />
+        <Checkbox label="José Saramago" onChange={onSelectAuthor} />
+        <Checkbox label="Eça de Queirós" onChange={onSelectAuthor} />
+        <Checkbox label="Gonçalo M. Tavares" onChange={onSelectAuthor} />
+        <Checkbox label="Sophia de Mello Breyner" onChange={onSelectAuthor} />
+        <Checkbox label="Mia Couto" onChange={onSelectAuthor} />
+        <Checkbox label="Miguel Torga" onChange={onSelectAuthor} />
       </ul>
     </Form>
   );
