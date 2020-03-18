@@ -44,49 +44,16 @@ class BookList extends React.Component {
     this.setState({ language: event.currentTarget.value });
   };
 
-  handleCheckboxChange = event =>
-    this.setState({ checked: event.target.checked });
-
-  serialize = items => {
-    for (let entry in items) {
-      console.log(entry);
-    }
-    // return Object.entries(items)
-    //   .map(([key, val]) => `${key}=${val}`)
-    //   .join("&");
-  };
   onSelectAuthor = (e, data) => {
     const item = e.target.textContent;
     const isChecked = data.checked;
     this.setState(prevState => ({
       checkedItems: prevState.checkedItems.set(item, isChecked)
     }));
-    // console.log(this.state.checkedItems);
-    // for (let entry in this.state.checkedItems) {
-    //   console.log(entry);
-    // } // var query = [];
-    this.state.checkedItems.forEach((isChecked, checkbox) => {
-      console.log(checkbox, isChecked);
-    });
-    // this.props.history.push(`/?author=${query}`);
+    this.props.history.push(
+      `/?author=${Array.from(this.state.checkedItems.entries()).join("&")}`
+    );
   };
-
-  // onSelectAuthor = event => {
-  //   const condition = this.state.author.includes(event.target.textContent);
-  //   if (condition === false) {
-  //     this.setState({
-  //       author: [...this.state.author, event.target.textContent]
-  //     });
-  //     this.props.history.push(`/?author=${this.state.author}`);
-  //   } else {
-  //     this.setState({
-  //       author: this.state.author.splice(
-  //         this.state.author.indexOf(event.target.textContent)
-  //       )
-  //     });
-  //     this.props.history.push(`/?author=${this.state.author}`);
-  //   }
-  // };
 
   isBottom = el => {
     if (el)
