@@ -16,22 +16,27 @@ const propTypes = {
 };
 class BookList extends React.Component {
   state = {
-    language: "All",
+    language: "",
     checkedItems: new Map()
   };
   componentDidMount() {
-    if (queryString.parse(this.props.location.search).language !== undefined) {
-      this.setState({
-        language: queryString.parse(this.props.location.search).language
-      });
-    }
-    if (this.state.language == "All") {
-      this.props.fetchBooks(this.props.offset, "");
+    const lang_param = queryString.parse(this.props.location.search).language;
+    if (lang_param !== undefined) {
+      this.setState(
+        {
+          language: lang_param
+        },
+        () => {
+          this.props.fetchBooks(this.props.offset, lang_param);
+          this.props.refreshCart();
+          document.addEventListener("scroll", this.trackScrolling);
+        }
+      );
     } else {
       this.props.fetchBooks(this.props.offset, this.state.language);
+      this.props.refreshCart();
+      document.addEventListener("scroll", this.trackScrolling);
     }
-    this.props.refreshCart();
-    document.addEventListener("scroll", this.trackScrolling);
   }
 
   componentWillUnmount = () => {
@@ -43,10 +48,10 @@ class BookList extends React.Component {
   };
 
   onSelectRadio = event => {
-    console.log(`language ${event.currentTarget.value} selected`);
-    this.setState({ language: event.currentTarget.value }, () =>
-      this.props.history.push(`/?language=${this.state.language}`)
-    );
+    this.setState({ language: event.currentTarget.value }, () => {
+      this.props.history.push(`/?language=${this.state.language}`);
+      this.props.fetchBooks(this.props.offset, this.state.language);
+    });
   };
 
   onSelectAuthor = (e, data) => {
@@ -73,28 +78,18 @@ class BookList extends React.Component {
 
   trackScrolling = () => {
     const wrappedElement = document.getElementById("loadmoar");
-    const language = queryString.parse(this.props.location.search).language;
     if (this.isBottom(wrappedElement) && this.props.loading == false) {
       this.props.loadMoar(
         this.props.offset + 12,
         this.props.bookPerPage + 12,
-        language
+        this.state.language
       );
     }
   };
 
   render() {
     const { data, bookPerPage, _length } = this.props;
-    const { language, checkedItems } = this.state;
-
-    const dataToShow =
-      language !== "All"
-        ? data.filter(item => language.includes(item.langue_nom))
-        : data;
-    let paginatedData = [];
-    if (dataToShow.length != 0) {
-      paginatedData = dataToShow;
-    }
+    const { language } = this.state;
 
     return (
       <Container className="booklist">
@@ -103,7 +98,7 @@ class BookList extends React.Component {
           length={_length}
           onSelectRadio={this.onSelectRadio}
           onSelectAuthor={this.onSelectAuthor}
-          paginatedData={paginatedData}
+          paginatedData={data}
           language={language}
           handleClickOnBook={this.handleClickOnBook}
         />

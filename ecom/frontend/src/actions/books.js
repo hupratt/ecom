@@ -41,7 +41,11 @@ export const onPageChange = pageNumber => {
 export const loadmoar = (offset, bookPerPage, language) => {
   return dispatch => {
     dispatch({ type: actionTypes.LOADING });
-    console.log("axios to fetch more books offset:" + offset);
+    console.log(
+      "axios to fetch more books offset:" + offset,
+      bookPerPage,
+      language
+    );
     console.log("bookPerPage:" + bookPerPage);
     axios
       .get(bookListURL(offset, language))

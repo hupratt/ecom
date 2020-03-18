@@ -16,25 +16,29 @@ const LanguageFilter = ({ language, onSelectRadio }) => {
         <RadioButton
           handleChange={onSelectRadio}
           language={language}
+          label="Portuguese"
           value="PT"
           id="1"
         />
         <RadioButton
           handleChange={onSelectRadio}
           language={language}
+          label="French"
           value="FR"
           id="2"
         />
         <RadioButton
           handleChange={onSelectRadio}
           language={language}
+          label="English"
           value="EN"
           id="3"
         />
         <RadioButton
           handleChange={onSelectRadio}
           language={language}
-          value="All"
+          value=""
+          label="All"
           id="4"
         />
       </ul>

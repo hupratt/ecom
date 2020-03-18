@@ -7,7 +7,7 @@ const propTypes = {
   value: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired
 };
-const RadioButton = ({ handleChange, language, value, id }) => {
+const RadioButton = ({ handleChange, language, value, id, label }) => {
   return (
     <li>
       <label>
@@ -18,7 +18,7 @@ const RadioButton = ({ handleChange, language, value, id }) => {
           checked={language === value}
           onChange={handleChange}
         />
-        {value}
+        {label}
       </label>
     </li>
   );
