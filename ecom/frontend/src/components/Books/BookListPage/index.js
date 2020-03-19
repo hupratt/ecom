@@ -7,6 +7,7 @@ import { withLoading, withError } from "../../../hoc/hoc";
 import { fetchCart } from "../../../actions/cart";
 import PropTypes from "prop-types";
 import queryString from "query-string";
+import { bookListURL } from "../../../constants";
 
 const propTypes = {
   data: PropTypes.array.isRequired,
@@ -27,13 +28,15 @@ class BookList extends React.Component {
           language: lang_param
         },
         () => {
-          this.props.fetchBooks(this.props.offset, lang_param);
+          this.props.fetchBooks(bookListURL(this.props.offset, lang_param));
           this.props.refreshCart();
           document.addEventListener("scroll", this.trackScrolling);
         }
       );
     } else {
-      this.props.fetchBooks(this.props.offset, this.state.language);
+      this.props.fetchBooks(
+        bookListURL(this.props.offset, this.state.language)
+      );
       this.props.refreshCart();
       document.addEventListener("scroll", this.trackScrolling);
     }
@@ -50,7 +53,9 @@ class BookList extends React.Component {
   onSelectRadio = event => {
     this.setState({ language: event.currentTarget.value }, () => {
       this.props.history.push(`/?language=${this.state.language}`);
-      this.props.fetchBooks(this.props.offset, this.state.language);
+      this.props.fetchBooks(
+        bookListURL(this.props.offset, this.state.language)
+      );
     });
   };
 
@@ -65,11 +70,12 @@ class BookList extends React.Component {
         this.props.history.push(
           `/?author=${Array.from(this.state.checkedItems.entries()).join("&")}`
         );
-        this.props.fetchBooks(
+        const url_endpoint = bookListURL(
           this.props.offset,
           this.state.language,
           Array.from(this.state.checkedItems.entries()).join("&")
         );
+        this.props.fetchBooks(url_endpoint);
       }
     );
   };
@@ -119,8 +125,7 @@ const mapDispatchToProps = dispatch => {
   return {
     loadMoar: (offset, bookPerPage, loading) =>
       dispatch(loadmoar(offset, bookPerPage, loading)),
-    fetchBooks: (dataIsCached, bookPerPage) =>
-      dispatch(fetchBooks(dataIsCached, bookPerPage)),
+    fetchBooks: url_endpoint => dispatch(fetchBooks(url_endpoint)),
     refreshCart: () => dispatch(fetchCart())
   };
 };
