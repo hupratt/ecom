@@ -21,18 +21,6 @@ const CategoryFilter = ({ handleSetActiveCategory }) => {
           <a href="javascript:void(0)" onClick={handleSetActiveCategory}>
             Crónicas
           </a>
-          <a href="javascript:void(0)" onClick={handleSetActiveCategory}>
-            Cozinha
-          </a>
-          <a href="javascript:void(0)" onClick={handleSetActiveCategory}>
-            Biografia
-          </a>
-          <a href="javascript:void(0)" onClick={handleSetActiveCategory}>
-            Viagens
-          </a>
-          <a href="javascript:void(0)" onClick={handleSetActiveCategory}>
-            Arte
-          </a>
         </div>
       </div>
     </React.Fragment>

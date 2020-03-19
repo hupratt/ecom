@@ -50,6 +50,10 @@
   margin-top: 10vh;
 }
 
+.container-forms p {
+  margin-top: 15px;
+}
+
 .author-checkbox ul,
 .radio ul {
   list-style-type: none;
@@ -59,7 +63,12 @@
 
 .author-checkbox li,
 .radio li {
-  margin-bottom: 9px;
+  margin-bottom: 0.3em;
+}
+
+.author-checkbox label,
+.radio label {
+  margin-bottom: 0;
 }
 
 .author-checkbox .h4,

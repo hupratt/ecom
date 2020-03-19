@@ -31,16 +31,6 @@ const AuthorFilter = ({ onSelectAuthor, authors }) => {
           onChange={onSelectAuthor}
           checked={authors.get("Sophia de Mello Breyner")}
         />
-        <Checkbox
-          label="Mia Couto"
-          onChange={onSelectAuthor}
-          checked={authors.get("Mia Couto")}
-        />
-        <Checkbox
-          label="Miguel Torga"
-          onChange={onSelectAuthor}
-          checked={authors.get("Miguel Torga")}
-        />
       </ul>
     </Form>
   );
