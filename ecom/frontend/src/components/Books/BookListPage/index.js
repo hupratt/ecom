@@ -73,7 +73,11 @@ class BookList extends React.Component {
 
   onSelectRadio = event => {
     this.setState({ language: event.currentTarget.value }, () => {
-      this.props.history.push(`/?language=${this.state.language}`);
+      this.props.history.push(
+        `/?language=${this.state.language}&authors=${Array.from(
+          this.state.checkedItems.entries()
+        ).join(",")}`
+      );
       this.props.fetchBooks(
         bookListURL(this.props.offset, this.state.language)
       );
@@ -89,7 +93,9 @@ class BookList extends React.Component {
       }),
       () => {
         this.props.history.push(
-          `/?authors=${Array.from(this.state.checkedItems.entries()).join(",")}`
+          `/?language=${this.state.language}&authors=${Array.from(
+            this.state.checkedItems.entries()
+          ).join(",")}`
         );
         const url_endpoint = bookListURL(
           this.props.offset,
