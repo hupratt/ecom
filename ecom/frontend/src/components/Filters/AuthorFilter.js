@@ -2,7 +2,6 @@ import React from "react";
 import { Form, Checkbox } from "semantic-ui-react";
 
 const AuthorFilter = ({ onSelectAuthor, authors }) => {
-  console.log(typeof authors.get("Fernando Pessoa"));
   return (
     <Form className="author-checkbox">
       <div className="filter-title">Author</div>

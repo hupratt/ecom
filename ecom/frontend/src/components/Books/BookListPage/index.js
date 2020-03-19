@@ -22,8 +22,14 @@ class BookList extends React.Component {
     authorsQueryString: ""
   };
   componentDidMount() {
-    const lang_param = queryString.parse(this.props.location.search).language;
-    const authors_param = queryString.parse(this.props.location.search).authors;
+    this.mapLanguageUrlToState(
+      queryString.parse(this.props.location.search).language
+    );
+    this.mapAuthorUrlToState(
+      queryString.parse(this.props.location.search).authors
+    );
+  }
+  mapLanguageUrlToState = lang_param => {
     if (lang_param !== undefined) {
       this.setState(
         {
@@ -42,12 +48,21 @@ class BookList extends React.Component {
       this.props.refreshCart();
       document.addEventListener("scroll", this.trackScrolling);
     }
+  };
+
+  mapAuthorUrlToState = authors_param => {
     if (authors_param !== undefined) {
       let urlAuthorMap = new Map();
-      urlAuthorMap.set(
-        authors_param.split(",")[0],
-        authors_param.split(",")[1] === "true"
-      );
+      let result = [];
+      for (var i = 0; i < authors_param.split(",").length; i += 2) {
+        result.push([
+          authors_param.split(",")[i],
+          authors_param.split(",")[i + 1]
+        ]);
+      }
+      result.forEach(element => {
+        urlAuthorMap.set(element[0], element[1] === "true");
+      });
       this.setState(
         {
           authors: urlAuthorMap
@@ -62,7 +77,7 @@ class BookList extends React.Component {
         }
       );
     }
-  }
+  };
 
   componentWillUnmount = () => {
     document.removeEventListener("scroll", this.trackScrolling);
