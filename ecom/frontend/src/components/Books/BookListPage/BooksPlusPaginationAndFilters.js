@@ -22,16 +22,13 @@ const BooksPlusPaginationAndFilters = ({
   language,
   handleClickOnBook,
   handleSetActiveCategory,
-  authorsQueryString
+  authors
 }) => {
   return (
     <React.Fragment>
       <div className="container container-forms">
         <LanguageFilter onSelectRadio={onSelectRadio} language={language} />
-        <AuthorFilter
-          onSelectAuthor={onSelectAuthor}
-          authorsQueryString={authorsQueryString}
-        />
+        <AuthorFilter onSelectAuthor={onSelectAuthor} authors={authors} />
         <CategoryFilter handleSetActiveCategory={handleSetActiveCategory} />
         <input className="js-range-slider" id="price_range" name="pricerange" />
 

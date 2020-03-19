@@ -18,7 +18,7 @@ const propTypes = {
 class BookList extends React.Component {
   state = {
     language: "",
-    checkedItems: new Map(),
+    authors: new Map(),
     authorsQueryString: ""
   };
   componentDidMount() {
@@ -43,19 +43,20 @@ class BookList extends React.Component {
       document.addEventListener("scroll", this.trackScrolling);
     }
     if (authors_param !== undefined) {
-      let map = new Map();
-      map.set(authors_param.split(",")[0], authors_param.split(",")[1]);
+      let urlAuthorMap = new Map();
+      urlAuthorMap.set(
+        authors_param.split(",")[0],
+        authors_param.split(",")[1] === "true"
+      );
       this.setState(
         {
-          authorsQueryString: queryString.parse(this.props.location.search)
-            .authors,
-          checkedItems: map
+          authors: urlAuthorMap
         },
         () => {
           const url_endpoint = bookListURL(
             this.props.offset,
             this.state.language,
-            Array.from(this.state.checkedItems.entries()).join(",")
+            Array.from(this.state.authors.entries()).join(",")
           );
           this.props.fetchBooks(url_endpoint);
         }
@@ -75,7 +76,7 @@ class BookList extends React.Component {
     this.setState({ language: event.currentTarget.value }, () => {
       this.props.history.push(
         `/?language=${this.state.language}&authors=${Array.from(
-          this.state.checkedItems.entries()
+          this.state.authors.entries()
         ).join(",")}`
       );
       this.props.fetchBooks(
@@ -89,18 +90,18 @@ class BookList extends React.Component {
     const isChecked = data.checked;
     this.setState(
       prevState => ({
-        checkedItems: prevState.checkedItems.set(item, isChecked)
+        authors: prevState.authors.set(item, isChecked)
       }),
       () => {
         this.props.history.push(
           `/?language=${this.state.language}&authors=${Array.from(
-            this.state.checkedItems.entries()
+            this.state.authors.entries()
           ).join(",")}`
         );
         const url_endpoint = bookListURL(
           this.props.offset,
           this.state.language,
-          Array.from(this.state.checkedItems.entries()).join(",")
+          Array.from(this.state.authors.entries()).join(",")
         );
         this.props.fetchBooks(url_endpoint);
       }
@@ -122,7 +123,7 @@ class BookList extends React.Component {
         bookListURL(
           this.props.offset + 12,
           this.state.language,
-          Array.from(this.state.checkedItems.entries()).join(",")
+          Array.from(this.state.authors.entries()).join(",")
         ),
         this.props.bookPerPage + 12,
         this.props.offset + 12
@@ -132,7 +133,7 @@ class BookList extends React.Component {
 
   render() {
     const { data, bookPerPage, _length } = this.props;
-    const { language } = this.state;
+    const { language, authors } = this.state;
     return (
       <Container className="booklist">
         <BookPageWithLoadingAndErrorHandling
@@ -144,7 +145,7 @@ class BookList extends React.Component {
           language={language}
           handleClickOnBook={this.handleClickOnBook}
           handleSetActiveCategory={this.handleSetActiveCategory}
-          authorsQueryString={this.state.authorsQueryString}
+          authors={authors}
         />
 
         {this.props.children}
