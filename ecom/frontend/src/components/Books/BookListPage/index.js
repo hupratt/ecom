@@ -73,7 +73,7 @@ class BookList extends React.Component {
         const url_endpoint = bookListURL(
           this.props.offset,
           this.state.language,
-          Array.from(this.state.checkedItems.entries()).join("&")
+          Array.from(this.state.checkedItems.entries()).join(",")
         );
         this.props.fetchBooks(url_endpoint);
       }
@@ -92,9 +92,13 @@ class BookList extends React.Component {
     const wrappedElement = document.getElementById("loadmoar");
     if (this.isBottom(wrappedElement) && this.props.loading == false) {
       this.props.loadMoar(
-        this.props.offset + 12,
+        bookListURL(
+          this.props.offset + 12,
+          this.state.language,
+          Array.from(this.state.checkedItems.entries()).join(",")
+        ),
         this.props.bookPerPage + 12,
-        this.state.language
+        this.props.offset + 12
       );
     }
   };
@@ -123,8 +127,8 @@ class BookList extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadMoar: (offset, bookPerPage, loading) =>
-      dispatch(loadmoar(offset, bookPerPage, loading)),
+    loadMoar: (url_endpoint, bookPerPage, offset) =>
+      dispatch(loadmoar(url_endpoint, bookPerPage, offset)),
     fetchBooks: url_endpoint => dispatch(fetchBooks(url_endpoint)),
     refreshCart: () => dispatch(fetchCart())
   };

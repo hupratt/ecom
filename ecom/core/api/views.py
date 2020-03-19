@@ -96,18 +96,16 @@ class BookListView(ListAPIView):
 
     def get_queryset(self):
         """
-        Optionally restricts the returned purchases to a given user,
-        by filtering against a `username` query parameter in the URL.
+        Optionally restricts the returned books to a given set of parameters.
+        It filters `authors` and `language` query parameters in the URL.
         """
         queryset = Livre.objects.all()
         language = self.request.query_params.get("language", None)
         authors = self.request.query_params.get("authors", "")
         search_for = serialize_URL_params(self.request.query_params)
         if language != "" and language is not None:
-            print("filtering on language", language)
             queryset = queryset.filter(langue_nom__contains=language)
         if authors != "" and len(search_for) > 0:
-            print("filtering on author", search_for)
             queryset = queryset.filter(auteur_nom__in=search_for)
         return queryset
 

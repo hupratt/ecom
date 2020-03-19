@@ -1,6 +1,5 @@
 import axios from "axios";
 import * as actionTypes from "./actionTypes";
-import { bookListURL } from "../constants";
 
 export const fetchBooks = url_endpoint => {
   return dispatch => {
@@ -38,17 +37,11 @@ export const onPageChange = pageNumber => {
   };
 };
 
-export const loadmoar = (offset, bookPerPage, language) => {
+export const loadmoar = (url_endpoint, bookPerPage, offset) => {
   return dispatch => {
     dispatch({ type: actionTypes.LOADING });
-    console.log(
-      "axios to fetch more books offset:" + offset,
-      bookPerPage,
-      language
-    );
-    console.log("bookPerPage:" + bookPerPage);
     axios
-      .get(bookListURL(offset, language))
+      .get(url_endpoint)
       .then(res => {
         dispatch({
           type: actionTypes.LOAD_MORE,
