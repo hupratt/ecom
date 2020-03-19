@@ -6,7 +6,6 @@ export const fetchBooks = url_endpoint => {
   return dispatch => {
     dispatch({ type: actionTypes.LOADING });
     console.log("running axios to fetch first 12 books");
-    console.log(url_endpoint);
     axios
       .get(url_endpoint)
       .then(res => {

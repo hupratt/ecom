@@ -68,7 +68,7 @@ class BookList extends React.Component {
       }),
       () => {
         this.props.history.push(
-          `/?author=${Array.from(this.state.checkedItems.entries()).join("&")}`
+          `/?authors=${Array.from(this.state.checkedItems.entries()).join(",")}`
         );
         const url_endpoint = bookListURL(
           this.props.offset,

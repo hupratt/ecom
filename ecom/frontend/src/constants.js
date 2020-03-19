@@ -5,7 +5,7 @@ const apiURL = "/api";
 
 export const endpoint = `${localhost}${apiURL}`;
 export const productListURL = `${endpoint}/products/`;
-export const bookListURL = (offset, language, checkedItems) =>
+export const bookListURL = (offset, language, checkedItems = "") =>
   `${endpoint}/books/?limit=12&offset=${offset}&language=${language}&authors=${checkedItems}`;
 export const productDetailURL = id => `${endpoint}/products/${id}/`;
 export const bookDetailURL = id => `${endpoint}/books/${id}/`;

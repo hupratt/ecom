@@ -58,7 +58,34 @@ class ItemListView(ListAPIView):
 
 # Fix me !!
 # Do a view to grab the top 10 authors
+# from core.models import Livre
+# from django.db.models import Count
 # Livre.objects.values('auteur_nom').annotate(total=Count("id")).order_by('-total')
+
+
+def naive_grouper(inputs, n):
+    # transform URL params
+    # Humberto Werneck, true, Jean-Yves Loude, true, Jack, false
+    # into
+    # [('Humberto Werneck', 'true'), ('Jean-Yves Loude', 'true'), ('Jack', 'false')]
+    num_groups = len(inputs) // n
+    return [tuple(inputs[i * n : (i + 1) * n]) for i in range(num_groups)]
+
+
+def serialize_URL_params(query_param):
+    # transform URL param
+    # &authors=Humberto Werneck, true, Jean-Yves Loude, true, Jack, false
+    # into
+    # ['Humberto Werneck', 'Jean-Yves Loude']
+    groups, result = [], []
+    for k, v in query_param.items():
+        if k == "authors" or k == "":
+            groups = naive_grouper(v.split(","), 2)
+    for search in groups:
+        author, boolean = search
+        if boolean == "true":
+            result.append(author)
+    return result
 
 
 class BookListView(ListAPIView):
@@ -74,13 +101,14 @@ class BookListView(ListAPIView):
         """
         queryset = Livre.objects.all()
         language = self.request.query_params.get("language", None)
-        author = self.request.query_params.get("author", None)
+        authors = self.request.query_params.get("authors", "")
+        search_for = serialize_URL_params(self.request.query_params)
         if language != "" and language is not None:
             print("filtering on language", language)
             queryset = queryset.filter(langue_nom__contains=language)
-        if author != "" and author is not None:
-            print("filtering on author", author)
-            queryset = queryset.filter(auteur_nom__contains=author)
+        if authors != "" and len(search_for) > 0:
+            print("filtering on author", search_for)
+            queryset = queryset.filter(auteur_nom__in=search_for)
         return queryset
 
 
