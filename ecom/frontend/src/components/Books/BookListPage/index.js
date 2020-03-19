@@ -18,10 +18,12 @@ const propTypes = {
 class BookList extends React.Component {
   state = {
     language: "",
-    checkedItems: new Map()
+    checkedItems: new Map(),
+    authorsQueryString: ""
   };
   componentDidMount() {
     const lang_param = queryString.parse(this.props.location.search).language;
+    const authors_param = queryString.parse(this.props.location.search).authors;
     if (lang_param !== undefined) {
       this.setState(
         {
@@ -39,6 +41,25 @@ class BookList extends React.Component {
       );
       this.props.refreshCart();
       document.addEventListener("scroll", this.trackScrolling);
+    }
+    if (authors_param !== undefined) {
+      let map = new Map();
+      map.set(authors_param.split(",")[0], authors_param.split(",")[1]);
+      this.setState(
+        {
+          authorsQueryString: queryString.parse(this.props.location.search)
+            .authors,
+          checkedItems: map
+        },
+        () => {
+          const url_endpoint = bookListURL(
+            this.props.offset,
+            this.state.language,
+            Array.from(this.state.checkedItems.entries()).join(",")
+          );
+          this.props.fetchBooks(url_endpoint);
+        }
+      );
     }
   }
 
@@ -106,7 +127,6 @@ class BookList extends React.Component {
   render() {
     const { data, bookPerPage, _length } = this.props;
     const { language } = this.state;
-
     return (
       <Container className="booklist">
         <BookPageWithLoadingAndErrorHandling
@@ -117,6 +137,8 @@ class BookList extends React.Component {
           paginatedData={data}
           language={language}
           handleClickOnBook={this.handleClickOnBook}
+          handleSetActiveCategory={this.handleSetActiveCategory}
+          authorsQueryString={this.state.authorsQueryString}
         />
 
         {this.props.children}

@@ -23,7 +23,7 @@ class CustomLayout extends React.Component {
       <div>
         <Menu inverted>
           <Container>
-            <Menu.Menu position="left">
+            <Menu.Menu position="left" onClick={() => window.location.reload()}>
               <Link to="/">
                 <Menu.Item header>Home</Menu.Item>
               </Link>

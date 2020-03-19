@@ -61,6 +61,7 @@ class ItemListView(ListAPIView):
 # from core.models import Livre
 # from django.db.models import Count
 # Livre.objects.values('auteur_nom').annotate(total=Count("id")).order_by('-total')
+# Livre.objects.values('genre_nom').annotate(total=Count("id")).order_by('-total')
 
 
 def naive_grouper(inputs, n):
