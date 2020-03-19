@@ -1,4 +1,3 @@
-.author-checkbox .checkbox,
 .container-forms {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -8,6 +7,7 @@
   display: -ms-flexbox;
   display: flex;
   width: 20vw;
+  position: fixed;
 }
 
 .ui.form.author-checkbox,
@@ -30,7 +30,8 @@
   margin-right: 20px;
 }
 
-.book-category a {
+.book-category a,
+.book-category button {
   display: inline-block;
   font-size: 16px;
   color: #636363;
@@ -45,11 +46,20 @@
   margin-top: 26px;
 }
 
+.container-forms .form:first-child {
+  margin-top: 10vh;
+}
+
 .author-checkbox ul,
 .radio ul {
   list-style-type: none;
   margin-top: 15px;
   padding: 0;
+}
+
+.author-checkbox li,
+.radio li {
+  margin-bottom: 9px;
 }
 
 .author-checkbox .h4,
@@ -70,5 +80,21 @@
   -ms-flex-item-align: auto;
       align-self: auto;
   margin-top: auto;
+}
+
+.container-forms label {
+  font-size: 16px;
+  color: #636363;
+}
+
+.container-forms input {
+  margin-right: 0.3em;
+}
+
+.ui.checkbox label {
+  padding-left: 1.5em;
+  font-size: 16px;
+  color: #636363;
+  margin-bottom: 9px;
 }
 /*# sourceMappingURL=Filters.css.map */

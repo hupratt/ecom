@@ -9,6 +9,12 @@
   display: flex;
 }
 
+.ui.divided.grid {
+  margin-left: 20vw;
+  top: 10vh;
+  position: relative;
+}
+
 .ui.divided.grid .column {
   -webkit-box-shadow: none !important;
           box-shadow: none !important;

@@ -1,8 +1,8 @@
-.author-checkbox .checkbox,
 .container-forms {
   flex-direction: column;
   display: flex;
   width: 20vw;
+  position: fixed;
 }
 
 .ui.form.author-checkbox,
@@ -38,6 +38,9 @@
   .form:not(:first-child) {
     margin-top: 26px;
   }
+  .form:first-child {
+    margin-top: 10vh;
+  }
 }
 
 .author-checkbox,
@@ -46,6 +49,9 @@
     list-style-type: none;
     margin-top: 15px;
     padding: 0;
+  }
+  li {
+    margin-bottom: 9px;
   }
   .h4 {
     padding: 0px;
@@ -71,3 +77,22 @@
 // .pagination .active {
 //   color: #fb5270;
 // }
+
+.container-forms {
+  label {
+    font-size: 16px;
+    color: #636363;
+  }
+  input {
+    margin-right: 0.3em;
+  }
+}
+
+.ui.checkbox {
+  label {
+    padding-left: 1.5em;
+    font-size: 16px;
+    color: #636363;
+    margin-bottom: 9px;
+  }
+}

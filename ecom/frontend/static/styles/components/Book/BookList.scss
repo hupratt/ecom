@@ -18,8 +18,13 @@
 //   }
 // }
 
-.ui.divided.grid .column {
-  box-shadow: none !important;
+.ui.divided.grid {
+  .column {
+    box-shadow: none !important;
+  }
+  margin-left: 20vw;
+  top: 10vh;
+  position: relative;
 }
 
 /* Book tilt effect */
