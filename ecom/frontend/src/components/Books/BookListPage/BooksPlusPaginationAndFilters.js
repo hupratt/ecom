@@ -31,7 +31,6 @@ const BooksPlusPaginationAndFilters = ({
         <AuthorFilter onSelectAuthor={onSelectAuthor} authors={authors} />
         <CategoryFilter handleSetActiveCategory={handleSetActiveCategory} />
         <input className="js-range-slider" id="price_range" name="pricerange" />
-
         <p>
           Displaying {bookPerPage} of {length} books
         </p>

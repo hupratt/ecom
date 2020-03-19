@@ -101,13 +101,16 @@ class BookListView(ListAPIView):
         It filters `authors` and `language` query parameters in the URL.
         """
         queryset = Livre.objects.all()
-        language = self.request.query_params.get("language", None)
+        language = self.request.query_params.get("language", "")
         authors = self.request.query_params.get("authors", "")
-        search_for = serialize_URL_params(self.request.query_params)
-        if language != "" and language is not None:
+        search_for_authors = serialize_URL_params(self.request.query_params)
+        category = self.request.query_params.get("category", "")
+        if language != "":
             queryset = queryset.filter(langue_nom__contains=language)
-        if authors != "" and len(search_for) > 0:
-            queryset = queryset.filter(auteur_nom__in=search_for)
+        if category != "":
+            queryset = queryset.filter(genre_nom__contains=category)
+        if authors != "" and len(search_for_authors) > 0:
+            queryset = queryset.filter(auteur_nom__in=search_for_authors)
         return queryset
 
 
