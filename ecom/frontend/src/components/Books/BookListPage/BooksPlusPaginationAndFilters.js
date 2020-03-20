@@ -23,7 +23,9 @@ const BooksPlusPaginationAndFilters = ({
   language,
   handleClickOnBook,
   handleSetActiveCategory,
-  authors
+  authors,
+  onSliderChange,
+  sliderValues
 }) => {
   return (
     <React.Fragment>
@@ -31,7 +33,7 @@ const BooksPlusPaginationAndFilters = ({
         <LanguageFilter onSelectRadio={onSelectRadio} language={language} />
         <AuthorFilter onSelectAuthor={onSelectAuthor} authors={authors} />
         <CategoryFilter handleSetActiveCategory={handleSetActiveCategory} />
-        <MySlider />
+        <MySlider onSliderChange={onSliderChange} sliderValues={sliderValues} />
         <p>
           Displaying {bookPerPage} of {length} books
         </p>

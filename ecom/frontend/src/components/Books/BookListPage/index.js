@@ -20,7 +20,8 @@ class BookList extends React.Component {
     language: "",
     authors: new Map(),
     authorsQueryString: "",
-    category: ""
+    category: "",
+    sliderValues: [10, 30]
   };
   componentDidMount() {
     this.mapLanguageUrlToState(
@@ -191,9 +192,15 @@ class BookList extends React.Component {
     }
   };
 
+  onSliderChange = sliderValues => {
+    this.setState({ sliderValues }, () => {
+      console.log("changed");
+    });
+  };
+
   render() {
     const { data, bookPerPage, _length } = this.props;
-    const { language, authors } = this.state;
+    const { language, authors, sliderValues } = this.state;
     return (
       <Container className="booklist">
         <BookPageWithLoadingAndErrorHandling
@@ -206,6 +213,8 @@ class BookList extends React.Component {
           handleClickOnBook={this.handleClickOnBook}
           handleSetActiveCategory={this.handleSetActiveCategory}
           authors={authors}
+          onSliderChange={this.onSliderChange}
+          sliderValues={sliderValues}
         />
 
         {this.props.children}

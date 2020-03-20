@@ -18,50 +18,41 @@ const railStyle = {
 
 const domain = [0, 100];
 
-export default class MySlider extends React.Component {
-  state = {
-    values: [10, 30]
-  };
+const MySlider = ({ sliderValues, onSliderChange }) => {
+  return (
+    <React.Fragment>
+      <div className="filter-title">Price</div>
+      {/* Wrapper */}
+      <Slider
+        rootStyle={sliderStyle}
+        domain={domain}
+        step={1}
+        mode={2}
+        values={sliderValues}
+        onChange={onSliderChange}
+      >
+        {/* Make rail + make it clickeable */}
+        <div style={railStyle} />
+        {/* Define handles */}
+        <Handles>
+          {({ handles, getHandleProps }) => (
+            <div className="slider-handles">
+              {handles.map(handle => (
+                <Handle
+                  key={handle.id}
+                  handle={handle}
+                  getHandleProps={getHandleProps}
+                />
+              ))}
+            </div>
+          )}
+        </Handles>
+      </Slider>
+    </React.Fragment>
+  );
+};
 
-  onChange = values => {
-    this.setState({ values }, () => {
-      console.log("changed");
-    });
-  };
-  render() {
-    return (
-      <React.Fragment>
-        <div className="filter-title">Price</div>
-        {/* Wrapper */}
-        <Slider
-          rootStyle={sliderStyle}
-          domain={domain}
-          step={1}
-          mode={2}
-          values={this.state.values}
-          onChange={this.onChange}
-        >
-          {/* Make rail + make it clickeable */}
-          <div style={railStyle} />
-          {/* Define handles */}
-          <Handles>
-            {({ handles, getHandleProps }) => (
-              <div className="slider-handles">
-                {handles.map(handle => (
-                  <Handle
-                    key={handle.id}
-                    handle={handle}
-                    getHandleProps={getHandleProps}
-                  />
-                ))}
-              </div>
-            )}
-          </Handles>
-        </Slider>
-      </React.Fragment>
-    );
-  }
-}
+export default MySlider;
 
 const Handle = ({ handle: { id, value, percent }, getHandleProps }) => {
   return (
