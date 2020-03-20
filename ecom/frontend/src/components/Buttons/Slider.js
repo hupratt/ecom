@@ -1,11 +1,11 @@
 import React from "react";
-import { Slider, Rail, Handles, Tracks, Ticks } from "react-compound-slider";
+import { Slider, Rail, Handles } from "react-compound-slider";
 
 const sliderStyle = {
-  // Give the slider some width
   position: "relative",
   width: "100%",
-  height: 80
+  height: 80,
+  marginTop: 20
 };
 
 const railStyle = {
@@ -24,9 +24,12 @@ export default class MySlider extends React.Component {
         domain={[0, 100]}
         step={1}
         mode={2}
-        values={[30]}
+        values={[10, 30]}
       >
-        <div style={railStyle} />
+        {/* Make rail + make it clickeable */}
+        <Rail>
+          {({ getRailProps }) => <div style={railStyle} {...getRailProps()} />}
+        </Rail>
         <Handles>
           {({ handles, getHandleProps }) => (
             <div className="slider-handles">
@@ -40,20 +43,6 @@ export default class MySlider extends React.Component {
             </div>
           )}
         </Handles>
-        <Tracks right={false}>
-          {({ tracks, getTrackProps }) => (
-            <div className="slider-tracks">
-              {tracks.map(({ id, source, target }) => (
-                <Track
-                  key={id}
-                  source={source}
-                  target={target}
-                  getTrackProps={getTrackProps}
-                />
-              ))}
-            </div>
-          )}
-        </Tracks>
       </Slider>
     );
   }
@@ -66,10 +55,10 @@ export function Handle({ handle: { id, value, percent }, getHandleProps }) {
         left: `${percent}%`,
         position: "absolute",
         marginLeft: -15,
-        marginTop: 25,
+        marginTop: 30,
         zIndex: 2,
-        width: 30,
-        height: 30,
+        width: 20,
+        height: 20,
         border: 0,
         textAlign: "center",
         cursor: "pointer",
@@ -83,26 +72,5 @@ export function Handle({ handle: { id, value, percent }, getHandleProps }) {
         {value}
       </div>
     </div>
-  );
-}
-
-function Track({ source, target, getTrackProps }) {
-  return (
-    <div
-      style={{
-        position: "absolute",
-        height: 10,
-        zIndex: 1,
-        marginTop: 35,
-        backgroundColor: "#546C91",
-        borderRadius: 5,
-        cursor: "pointer",
-        left: `${source.percent}%`,
-        width: `${target.percent - source.percent}%`
-      }}
-      {
-        ...getTrackProps() /* this will set up events if you want it to be clickeable (optional) */
-      }
-    />
   );
 }
