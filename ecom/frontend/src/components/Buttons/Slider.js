@@ -1,6 +1,6 @@
 import React from "react";
 import { Slider, Handles } from "react-compound-slider";
-import _ from "lodash";
+import { debounce } from "throttle-debounce";
 
 const sliderStyle = {
   position: "relative",
@@ -24,23 +24,26 @@ const sendQuery = query => console.log(`Querying for ${query}`);
 export default class MySlider extends React.Component {
   constructor(props) {
     super(props);
-    this.componentRef = React.createRef();
+    this.autocompleteSearchDebounced = debounce(500, this.autocompleteSearch);
   }
   state = {
     values: defaultValues.slice(),
     update: defaultValues.slice()
   };
-  delayedQuery = _.debounce(q => sendQuery(q), 500);
 
   onUpdate = update => {
-    this.setState({ update }, () =>
-      console.log(_.debounce(q => sendQuery(q), 500))
-    );
+    this.setState({ update }, () => {
+      console.log("updated");
+    });
   };
 
   onChange = values => {
-    this.setState({ values });
+    this.setState({ values }, () => {
+      this.autocompleteSearchDebounced(this.state.values);
+      console.log("changed");
+    });
   };
+  autocompleteSearch = () => console.log("hello");
   render() {
     return (
       <React.Fragment>
@@ -54,7 +57,6 @@ export default class MySlider extends React.Component {
           values={this.state.values}
           onUpdate={this.onUpdate}
           onChange={this.onChange}
-          ref={this.componentRef}
         >
           {/* Make rail + make it clickeable */}
           <div style={railStyle} />
