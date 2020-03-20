@@ -43,7 +43,11 @@
 }
 
 .container-forms .form:not(:first-child) {
-  margin-top: 26px;
+  margin-top: 20px;
+}
+
+.container-forms .filter-title:not(:first-child) {
+  margin-top: 20px;
 }
 
 .container-forms .form:first-child {
@@ -86,7 +90,7 @@
 .filter-title {
   font-size: 22px;
   font-weight: 600;
-  margin-bottom: 26px;
+  margin-bottom: 20px;
 }
 
 .my-pagination {

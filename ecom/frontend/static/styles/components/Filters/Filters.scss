@@ -36,7 +36,10 @@
 
 .container-forms {
   .form:not(:first-child) {
-    margin-top: 26px;
+    margin-top: 20px;
+  }
+  .filter-title:not(:first-child) {
+    margin-top: 20px;
   }
   .form:first-child {
     margin-top: 10vh;
@@ -69,7 +72,7 @@
 .filter-title {
   font-size: 22px;
   font-weight: 600;
-  margin-bottom: 26px;
+  margin-bottom: 20px;
 }
 
 .my-pagination {
