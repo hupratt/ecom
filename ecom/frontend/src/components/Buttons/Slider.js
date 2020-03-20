@@ -1,9 +1,10 @@
 import React from "react";
-import { Slider, Rail, Handles } from "react-compound-slider";
+import { Slider, Handles } from "react-compound-slider";
+import _ from "lodash";
 
 const sliderStyle = {
   position: "relative",
-  width: "100%",
+  width: "50%",
   height: 70
 };
 
@@ -15,25 +16,44 @@ const railStyle = {
   borderRadius: 5,
   backgroundColor: "rgb(225, 225, 225)"
 };
+
+const domain = [0, 100];
+const defaultValues = [10, 30];
+const sendQuery = query => console.log(`Querying for ${query}`);
+
 export default class MySlider extends React.Component {
+  state = {
+    values: defaultValues.slice(),
+    update: defaultValues.slice()
+  };
+  delayedQuery = _.debounce(q => sendQuery(q), 500);
+
+  onUpdate = update => {
+    this.setState({ update }, () =>
+      console.log(_.debounce(q => sendQuery(q), 500))
+    );
+  };
+
+  onChange = values => {
+    this.setState({ values });
+  };
   render() {
     return (
       <React.Fragment>
         <div className="filter-title">Price</div>
-
+        {/* Wrapper */}
         <Slider
           rootStyle={sliderStyle}
-          domain={[0, 100]}
+          domain={domain}
           step={1}
           mode={2}
-          values={[10, 30]}
+          values={this.state.values}
+          onUpdate={this.onUpdate}
+          onChange={this.onChange}
         >
           {/* Make rail + make it clickeable */}
-          <Rail>
-            {({ getRailProps }) => (
-              <div style={railStyle} {...getRailProps()} />
-            )}
-          </Rail>
+          <div style={railStyle} />
+          {/* Define handles */}
           <Handles>
             {({ handles, getHandleProps }) => (
               <div className="slider-handles">
