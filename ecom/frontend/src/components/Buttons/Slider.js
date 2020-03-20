@@ -1,6 +1,5 @@
 import React from "react";
 import { Slider, Handles } from "react-compound-slider";
-import { debounce } from "throttle-debounce";
 
 const sliderStyle = {
   position: "relative",
@@ -18,32 +17,17 @@ const railStyle = {
 };
 
 const domain = [0, 100];
-const defaultValues = [10, 30];
-const sendQuery = query => console.log(`Querying for ${query}`);
 
 export default class MySlider extends React.Component {
-  constructor(props) {
-    super(props);
-    this.autocompleteSearchDebounced = debounce(500, this.autocompleteSearch);
-  }
   state = {
-    values: defaultValues.slice(),
-    update: defaultValues.slice()
-  };
-
-  onUpdate = update => {
-    this.setState({ update }, () => {
-      console.log("updated");
-    });
+    values: [10, 30]
   };
 
   onChange = values => {
     this.setState({ values }, () => {
-      this.autocompleteSearchDebounced(this.state.values);
       console.log("changed");
     });
   };
-  autocompleteSearch = () => console.log("hello");
   render() {
     return (
       <React.Fragment>
@@ -55,7 +39,6 @@ export default class MySlider extends React.Component {
           step={1}
           mode={2}
           values={this.state.values}
-          onUpdate={this.onUpdate}
           onChange={this.onChange}
         >
           {/* Make rail + make it clickeable */}
