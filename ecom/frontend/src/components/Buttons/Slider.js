@@ -22,6 +22,10 @@ const defaultValues = [10, 30];
 const sendQuery = query => console.log(`Querying for ${query}`);
 
 export default class MySlider extends React.Component {
+  constructor(props) {
+    super(props);
+    this.componentRef = React.createRef();
+  }
   state = {
     values: defaultValues.slice(),
     update: defaultValues.slice()
@@ -50,6 +54,7 @@ export default class MySlider extends React.Component {
           values={this.state.values}
           onUpdate={this.onUpdate}
           onChange={this.onChange}
+          ref={this.componentRef}
         >
           {/* Make rail + make it clickeable */}
           <div style={railStyle} />
@@ -73,7 +78,7 @@ export default class MySlider extends React.Component {
   }
 }
 
-export function Handle({ handle: { id, value, percent }, getHandleProps }) {
+const Handle = ({ handle: { id, value, percent }, getHandleProps }) => {
   return (
     <div
       style={{
@@ -103,4 +108,4 @@ export function Handle({ handle: { id, value, percent }, getHandleProps }) {
       </div>
     </div>
   );
-}
+};
