@@ -4,7 +4,7 @@ import AuthorFilter from "../../Filters/AuthorFilter";
 import CategoryFilter from "../../Filters/CategoryFilter";
 import BookGrid from "./BookGrid";
 import PropTypes from "prop-types";
-import Slider from "../../Buttons/Slider";
+import MySlider from "../../Buttons/Slider";
 
 const propTypes = {
   bookPerPage: PropTypes.number.isRequired,
@@ -31,7 +31,7 @@ const BooksPlusPaginationAndFilters = ({
         <LanguageFilter onSelectRadio={onSelectRadio} language={language} />
         <AuthorFilter onSelectAuthor={onSelectAuthor} authors={authors} />
         <CategoryFilter handleSetActiveCategory={handleSetActiveCategory} />
-        <Slider />
+        <MySlider />
         <p>
           Displaying {bookPerPage} of {length} books
         </p>
