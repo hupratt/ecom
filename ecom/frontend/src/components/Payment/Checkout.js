@@ -94,7 +94,8 @@ class CheckoutForm extends Component {
       selectedBillingAddress,
       selectedShippingAddress,
       stripe,
-      handleSelectChange
+      handleSelectChange,
+      submit
     } = this.props;
     return (
       <div>
