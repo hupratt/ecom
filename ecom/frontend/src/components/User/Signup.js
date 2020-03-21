@@ -86,7 +86,7 @@ class RegistrationForm extends React.Component {
                 />
 
                 <Button
-                  color="#7dcbd8"
+                  color="grey"
                   fluid
                   size="large"
                   loading={loading}
