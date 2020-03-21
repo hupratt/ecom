@@ -196,13 +196,6 @@ textarea:focus {
   outline: none;
 }
 
-a:hover,
-a:focus {
-  text-decoration: none;
-  outline: none;
-  color: #fff;
-}
-
 ul,
 ol {
   padding: 0;
@@ -4433,7 +4426,7 @@ label
 }
 
 .bk-info button {
-  background: #fc756f;
+  background: #7dcbd8;
   border: none;
   color: #fff;
   display: inline-block;
@@ -4777,7 +4770,7 @@ label
 }
 
 .container {
-  max-width: 1450px;
+  max-width: 1460px;
 }
 
 .footer-section {
@@ -4823,5 +4816,13 @@ label
 .inner-header img {
   height: 100px !important;
   margin-left: 50px;
+}
+
+.nav-right a {
+  color: black;
+}
+
+.nav-right a:hover {
+  color: black;
 }
 /*# sourceMappingURL=index.css.map */

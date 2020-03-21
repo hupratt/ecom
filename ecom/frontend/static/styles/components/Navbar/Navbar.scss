@@ -3,7 +3,7 @@
 }
 
 .container {
-  max-width: 1450px;
+  max-width: 1460px;
 }
 
 .footer-section {
@@ -35,5 +35,14 @@
   img {
     height: 100px !important;
     margin-left: 50px;
+  }
+}
+
+.nav-right {
+  a {
+    color: black;
+  }
+  a:hover {
+    color: black;
   }
 }

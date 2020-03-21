@@ -36,13 +36,9 @@ class RegistrationForm extends React.Component {
       return <Redirect to="/" />;
     }
     return (
-      <Grid
-        textAlign="center"
-        style={{ height: "100vh" }}
-        verticalAlign="middle"
-      >
+      <Grid textAlign="center" verticalAlign="middle">
         <Grid.Column style={{ maxWidth: 450 }}>
-          <Header as="h2" color="teal" textAlign="center">
+          <Header as="h2" color="black" textAlign="center">
             Signup to your account
           </Header>
           {error && <p>{this.props.error.message}</p>}
@@ -90,7 +86,7 @@ class RegistrationForm extends React.Component {
                 />
 
                 <Button
-                  color="teal"
+                  color="#7dcbd8"
                   fluid
                   size="large"
                   loading={loading}
