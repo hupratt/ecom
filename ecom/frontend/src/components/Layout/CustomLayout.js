@@ -15,31 +15,46 @@ const propTypes = {
 };
 
 class CustomLayout extends React.Component {
+  trackScrolling = () => {
+    const el = document.getElementById("fixed-header");
+    if (el.getBoundingClientRect().top < -100) {
+      el.classList.add("header-fixed");
+    } else {
+      el.classList.remove("header-fixed");
+    }
+  };
+  componentDidMount() {
+    document.addEventListener("scroll", this.trackScrolling);
+  }
+  componentWillUnmount = () => {
+    document.removeEventListener("scroll", this.trackScrolling);
+  };
   render() {
     const { authenticated, cart, logout } = this.props;
+
     return (
       <React.Fragment>
         {/* Header Section Begin */}
-        <header className="header-section">
-          <div className="wrap-menu-header" />
-          <div className="container">
-            <div className="inner-header">
-              <div className="row">
-                <div className="col-lg-2 col-md-2">
-                  <Link to="/">
-                    <img
-                      className="logo"
-                      src="https://bookshop-images-f1492f08-f236-4a55-afb7-70ded209cb24.s3.eu-west-2.amazonaws.com/resources/logo-petite-portugaise-300.png"
-                      alt="la petite portugaise's logo"
-                    />
-                  </Link>
+        <header className="header-section" id="fixed-header">
+          <div className="wrap-menu-header">
+            <div className="container">
+              <div className="inner-header">
+                <div className="row">
+                  <div className="col-lg-2 col-md-2">
+                    <Link to="/">
+                      <img
+                        className="logo"
+                        src="https://bookshop-images-f1492f08-f236-4a55-afb7-70ded209cb24.s3.eu-west-2.amazonaws.com/resources/logo-petite-portugaise-300.png"
+                        alt="la petite portugaise's logo"
+                      />
+                    </Link>
+                  </div>
+                  <TopNavigationWithAuthenticationHandling
+                    authenticated={authenticated}
+                    cart={cart}
+                    logout={logout}
+                  />
                 </div>
-                <TopNavigationWithAuthenticationHandling
-                  authenticated={authenticated}
-                  cart={cart}
-                  logout={logout}
-                />
-                {/* <BottomNavigation /> */}
               </div>
             </div>
           </div>

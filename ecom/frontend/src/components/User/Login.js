@@ -35,7 +35,7 @@ class LoginForm extends React.Component {
     }
     return (
       <Grid textAlign="center" verticalAlign="middle">
-        <Grid.Column style={{ maxWidth: 450 }}>
+        <Grid.Column style={{ maxWidth: 450, marginTop: 100 }}>
           <Header as="h2" color="black" textAlign="center">
             Log-in to your account
           </Header>

@@ -62,7 +62,7 @@ const Handle = ({ handle: { id, value, percent }, getHandleProps }) => {
         position: "absolute",
         marginLeft: -15,
         marginTop: 30,
-        zIndex: 2,
+        zIndex: 1,
         width: 20,
         height: 20,
         border: 0,

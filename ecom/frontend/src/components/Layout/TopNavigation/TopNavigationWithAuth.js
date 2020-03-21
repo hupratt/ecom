@@ -13,7 +13,6 @@ import { s3_base_url } from "../../../constants";
 
 const propTypes = {
   cart: PropTypes.object,
-  loading: PropTypes.bool.isRequired,
   logout: PropTypes.func.isRequired
 };
 
