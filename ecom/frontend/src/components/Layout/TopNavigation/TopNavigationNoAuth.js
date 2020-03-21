@@ -12,12 +12,12 @@ const TopNavigationNoAuth = () => {
             <div className="row">
               <div className="col-lg-2 col-md-2">
                 <div className="logo">
-                  <a href="./index.html">
+                  <Link to="/">
                     <img
                       src="https://bookshop-images-f1492f08-f236-4a55-afb7-70ded209cb24.s3.eu-west-2.amazonaws.com/resources/logo-petite-portugaise-300.png"
                       alt="la petite portugaise's logo"
                     />
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="col-lg-7 col-md-7">
@@ -27,8 +27,8 @@ const TopNavigationNoAuth = () => {
                   </button>
                   <form action="#" className="input-group">
                     <input type="text" placeholder="What do you need?" />
-                    <button type="button">
-                      <i className="ti-search" />
+                    <button type="button" className="search-button">
+                      <span className="ti-search" />
                     </button>
                   </form>
                 </div>
