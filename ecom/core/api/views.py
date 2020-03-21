@@ -224,14 +224,14 @@ class PaymentView(APIView):
         userprofile = UserProfile.objects.get(user=self.request.user)
         token = request.data.get("stripeToken")
         shipping_address_id = request.data.get("selectedShippingAddress")
-        if len(request.data.get("selectedBillingAddress")) > 0:
+        if request.data.get("selectedBillingAddress") is not None:
             billing_address_id = request.data.get("selectedBillingAddress")
         else:
             billing_address_id = None
 
-        shipping_address = Address.objects.get(id=shipping_address_id)
+        shipping_address = Address.objects.get(id=shipping_address_id, default=None)
         if billing_address_id is not None:
-            billing_address = Address.objects.get(id=billing_address_id)
+            billing_address = Address.objects.get(id=billing_address_id, default=None)
         else:
             billing_address = shipping_address
 

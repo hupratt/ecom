@@ -25,9 +25,9 @@ import {
   handleFetchOrder,
   handleFetchBillingAddresses,
   handleFetchShippingAddresses,
-  handleSelectChange,
-  submit
+  handleSelectChange
 } from "../../actions/checkout";
+import axios from "axios";
 
 const OrderPreview = ({ data }) => {
   return (
@@ -82,21 +82,54 @@ class CheckoutForm extends Component {
     this.props.fetchBillingAddresses();
     this.props.fetchShippingAddresses();
   }
+  state = {
+    loading: false,
+    error: null,
+    success: false
+  };
+  submit = e => {
+    e.preventDefault();
+    this.setState({ loading: true });
+    if (this.props.stripe) {
+      this.props.stripe.createToken().then(result => {
+        if (result.error) {
+          this.setState({ error: result.error.message, loading: false });
+        } else {
+          this.setState({ error: null });
+          const {
+            selectedBillingAddress,
+            selectedShippingAddress
+          } = this.state;
+          axios
+            .post(checkoutURL, {
+              stripeToken: result.token.id,
+              selectedBillingAddress,
+              selectedShippingAddress
+            })
+            .then(res => {
+              this.setState({ loading: false, success: true });
+            })
+            .catch(err => {
+              this.setState({ loading: false, error: err });
+            });
+        }
+      });
+    } else {
+      this.setState({ loading: false, error: "Stripe is not loaded" });
+      console.log("error");
+    }
+  };
 
   render() {
     const {
       data,
-      error,
-      loading,
-      success,
       billingAddresses,
       shippingAddresses,
       selectedBillingAddress,
       selectedShippingAddress,
-      stripe,
-      handleSelectChange,
-      submit
+      handleSelectChange
     } = this.props;
+    const { error, loading, success } = this.state;
     return (
       <div>
         {error && (
@@ -167,11 +200,7 @@ class CheckoutForm extends Component {
               loading={loading}
               disabled={loading}
               primary
-              onClick={submit(
-                stripe,
-                selectedBillingAddress,
-                selectedShippingAddress
-              )}
+              onClick={this.submit}
               style={{ marginTop: "10px" }}
             >
               Submit
@@ -185,10 +214,6 @@ class CheckoutForm extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    submit: (e, stripe, selectedBillingAddress, selectedShippingAddress) =>
-      dispatch(
-        submit(e, stripe, selectedBillingAddress, selectedShippingAddress)
-      ),
     handleSelectChange: (e, { name, value }) =>
       dispatch(handleSelectChange(name, value)),
     fetchOrder: history => dispatch(handleFetchOrder(history)),
@@ -200,9 +225,6 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   return {
     data: state.checkout.data,
-    loading: state.checkout.loading,
-    error: state.checkout.error,
-    success: state.checkout.success,
     shippingAddresses: state.checkout.shippingAddresses,
     billingAddresses: state.checkout.billingAddresses,
     selectedBillingAddress: state.checkout.selectedBillingAddress,
