@@ -13,7 +13,10 @@ const TopNavigationNoAuth = () => {
               <div className="col-lg-2 col-md-2">
                 <div className="logo">
                   <a href="./index.html">
-                    <img src="img/logo.png" alt="" />
+                    <img
+                      src="https://bookshop-images-f1492f08-f236-4a55-afb7-70ded209cb24.s3.eu-west-2.amazonaws.com/resources/logo-petite-portugaise-300.png"
+                      alt="la petite portugaise's logo"
+                    />
                   </a>
                 </div>
               </div>
@@ -100,24 +103,7 @@ const TopNavigationNoAuth = () => {
         </div>
       </header>
       {/* Header End */}
-      {/* Breadcrumb Section Begin */}
-      <div className="breacrumb-section">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12">
-              <div className="breadcrumb-text">
-                <a href="#">
-                  <i className="fa fa-home" /> Home
-                </a>
-                <span>Shop</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* Breadcrumb Section Begin */}
-    </div>
-    //   <Menu.Menu position="left" onClick={() => window.location.reload()}>
+    </div> // <Menu.Menu position="left" onClick={() => window.location.reload()}>
     //   <Link to="/">
     //     <Menu.Item header>Home</Menu.Item>
     //   </Link>

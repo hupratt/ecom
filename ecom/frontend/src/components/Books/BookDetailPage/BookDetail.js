@@ -3,14 +3,16 @@ import PropTypes from "prop-types";
 import { Button, Card, Grid, Icon, Item } from "semantic-ui-react";
 import { s3_base_url } from "../../../constants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar as faStar0 } from "@fortawesome/free-regular-svg-icons";
+import {
+  faStar as faStar0,
+  faHeart
+} from "@fortawesome/free-regular-svg-icons";
+import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 import {
   faHome,
   faSearchPlus,
-  faStar,
-  faStarHalf
+  faStar
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
 
 const propTypes = {
   handleAddToCart: PropTypes.func.isRequired,
@@ -21,23 +23,6 @@ const propTypes = {
 const BookDetail = ({ handleAddToCart, book, isAuthenticated }) => {
   return (
     <div>
-      {/* Breadcrumb Section Begin */}
-      <div className="breacrumb-section">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12">
-              <div className="breadcrumb-text product-more">
-                <Link to="/" onClick={() => window.location.reload()}>
-                  <FontAwesomeIcon icon={faHome} />
-                </Link>
-                <Link to="/">Shop</Link>
-                <span>Detail</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* Breadcrumb Section Begin */}
       {/* Product Shop Section Begin */}
       <section className="product-shop spad page-details">
         <div className="container">
@@ -62,7 +47,7 @@ const BookDetail = ({ handleAddToCart, book, isAuthenticated }) => {
                       <span>oranges</span>
                       <h3>Pure Pineapple</h3>
                       <a href="#" className="heart-icon">
-                        <i className="icon_heart_alt" />
+                        <FontAwesomeIcon icon={faHeart} />
                       </a>
                     </div>
                     <div className="pd-rating">
@@ -364,109 +349,6 @@ const BookDetail = ({ handleAddToCart, book, isAuthenticated }) => {
         </div>
       </section>
       {/* Product Shop Section End */}
-      {/* Footer Section Begin */}
-      <footer className="footer-section">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-3">
-              <div className="footer-left">
-                <div className="footer-logo">
-                  <a href="#">
-                    <img src="img/footer-logo.png" alt="" />
-                  </a>
-                </div>
-                <ul>
-                  <li>Address: 60-49 Road 11378 New York</li>
-                  <li>Phone: +65 11.188.888</li>
-                  <li>Email: hello@gmail.com</li>
-                </ul>
-                <div className="footer-social">
-                  <a href="#">
-                    <i className="fa fa-facebook" />
-                  </a>
-                  <a href="#">
-                    <i className="fa fa-instagram" />
-                  </a>
-                  <a href="#">
-                    <i className="fa fa-twitter" />
-                  </a>
-                  <a href="#">
-                    <i className="fa fa-pinterest" />
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-2 offset-lg-1">
-              <div className="footer-widget">
-                <h5>Information</h5>
-                <ul>
-                  <li>
-                    <a href="#">About Us</a>
-                  </li>
-                  <li>
-                    <a href="#">Checkout</a>
-                  </li>
-                  <li>
-                    <a href="#">Contact</a>
-                  </li>
-                  <li>
-                    <a href="#">Serivius</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className="col-lg-2">
-              <div className="footer-widget">
-                <h5>My Account</h5>
-                <ul>
-                  <li>
-                    <a href="#">My Account</a>
-                  </li>
-                  <li>
-                    <a href="#">Contact</a>
-                  </li>
-                  <li>
-                    <a href="#">Shopping Cart</a>
-                  </li>
-                  <li>
-                    <a href="#">Shop</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className="col-lg-4">
-              <div className="newslatter-item">
-                <h5>Join Our Newsletter Now</h5>
-                <p>
-                  Get E-mail updates about our latest shop and special offers.
-                </p>
-                <form action="#" className="subscribe-form">
-                  <input type="text" placeholder="Enter Your Mail" />
-                  <button type="button">Subscribe</button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="copyright-reserved">
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-12">
-                <div className="copyright-text">
-                  Copyright © All rights reserved | This template is made with{" "}
-                  <i className="fa fa-heart-o" aria-hidden="true" /> by{" "}
-                  <a href="#" target="_blank">
-                    hello
-                  </a>
-                </div>
-                <div className="payment-pic">
-                  <img src="img/payment-method.png" alt="" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
 
     // <React.Fragment>

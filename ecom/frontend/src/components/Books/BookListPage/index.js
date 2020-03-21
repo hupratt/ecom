@@ -8,6 +8,8 @@ import { fetchCart } from "../../../actions/cart";
 import PropTypes from "prop-types";
 import queryString from "query-string";
 import { bookListURL } from "../../../constants";
+import TopNavigationNoAuth from "../../Layout/TopNavigation/TopNavigationNoAuth";
+import { Link } from "react-router-dom";
 
 const propTypes = {
   data: PropTypes.array.isRequired,
@@ -202,23 +204,41 @@ class BookList extends React.Component {
     const { data, bookPerPage, _length } = this.props;
     const { language, authors, sliderValues } = this.state;
     return (
-      <Container className="booklist">
-        <BookPageWithLoadingAndErrorHandling
-          bookPerPage={bookPerPage}
-          length={_length}
-          onSelectRadio={this.onSelectRadio}
-          onSelectAuthor={this.onSelectAuthor}
-          paginatedData={data}
-          language={language}
-          handleClickOnBook={this.handleClickOnBook}
-          handleSetActiveCategory={this.handleSetActiveCategory}
-          authors={authors}
-          onSliderChange={this.onSliderChange}
-          sliderValues={sliderValues}
-        />
+      <React.Fragment>
+        {/* Breadcrumb Section Begin */}
+        <div className="breacrumb-section">
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-12">
+                <div className="breadcrumb-text">
+                  <Link to="/" onClick={() => window.location.reload()}>
+                    <i className="fa fa-home" /> Home
+                  </Link>
+                  <span>Detail</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* Breadcrumb Section Begin */}
+        <Container className="booklist">
+          <BookPageWithLoadingAndErrorHandling
+            bookPerPage={bookPerPage}
+            length={_length}
+            onSelectRadio={this.onSelectRadio}
+            onSelectAuthor={this.onSelectAuthor}
+            paginatedData={data}
+            language={language}
+            handleClickOnBook={this.handleClickOnBook}
+            handleSetActiveCategory={this.handleSetActiveCategory}
+            authors={authors}
+            onSliderChange={this.onSliderChange}
+            sliderValues={sliderValues}
+          />
 
-        {this.props.children}
-      </Container>
+          {this.props.children}
+        </Container>
+      </React.Fragment>
     );
   }
 }
