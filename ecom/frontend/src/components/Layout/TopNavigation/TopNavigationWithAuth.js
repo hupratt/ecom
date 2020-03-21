@@ -1,14 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faHeart,
-  faUser,
-  faAddressCard
-} from "@fortawesome/free-regular-svg-icons";
-import { faShoppingBag, faUserSlash } from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faUser } from "@fortawesome/free-regular-svg-icons";
+import { faShoppingBag } from "@fortawesome/free-solid-svg-icons";
 import PropTypes from "prop-types";
-import { Menu } from "semantic-ui-react";
 import { s3_base_url } from "../../../constants";
 
 const propTypes = {
@@ -36,24 +31,15 @@ const TopNavigationWithAuth = ({ cart, logout }) => {
         <ul className="nav-right">
           <Link to="/profile">
             <li className="user-icon">
-              <FontAwesomeIcon icon={faAddressCard} /> <span></span>
-            </li>
-          </Link>
-          <Link to="/login">
-            <li className="user-icon">
               <FontAwesomeIcon icon={faUser} /> <span></span>
             </li>
           </Link>
-          <Menu.Item onClick={() => logout()}>
-            <li className="user-icon">
-              <FontAwesomeIcon icon={faUserSlash} /> <span></span>
-            </li>
-          </Menu.Item>
+          {/* 
           <li className="heart-icon">
             <a href="#">
-              <FontAwesomeIcon icon={faHeart} /> <span>1</span>
+              <FontAwesomeIcon icon={faHeart} />
             </a>
-          </li>
+          </li> */}
 
           <li className="cart-icon">
             <a href="#">

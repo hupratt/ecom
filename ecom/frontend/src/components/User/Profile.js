@@ -1,7 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
+
 import axios from "axios";
+import { logout } from "../../actions/auth";
 
 import {
   Button,
@@ -442,7 +444,7 @@ class Profile extends React.Component {
 
   render() {
     const { activeItem, error, loading } = this.state;
-    const { isAuthenticated } = this.props;
+    const { isAuthenticated, logout } = this.props;
     if (!isAuthenticated) {
       return <Redirect to="/login" />;
     }
@@ -484,6 +486,7 @@ class Profile extends React.Component {
                 active={activeItem === "paymentHistory"}
                 onClick={() => this.handleItemClick("paymentHistory")}
               />
+              <Menu.Item name="Log out" onClick={() => logout()} />
             </Menu>
           </Grid.Column>
           <Grid.Column width={10}>
@@ -507,4 +510,12 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Profile);
+const mapDispatchToProps = dispatch => {
+  return {
+    logout: () => dispatch(logout())
+  };
+};
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Profile)
+);

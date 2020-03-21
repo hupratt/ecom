@@ -21,10 +21,8 @@ const TopNavigationNoAuth = () => {
       </div>
       <div className="col-lg-3 text-right col-md-3">
         <ul className="nav-right">
-          <Link to="/login">
-            <li className="user-icon">
-              <FontAwesomeIcon icon={faUser} /> <span></span>
-            </li>
+          <Link to="/login" className="hoverbtn">
+            Sign up
           </Link>
         </ul>
       </div>

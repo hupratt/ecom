@@ -35,7 +35,7 @@ const BookDetail = ({ handleAddToCart, book, isAuthenticated }) => {
                       <div className="product-pic-zoom">
                         <img
                           className="product-big-img"
-                          src="img/product-single/product-1.jpg"
+                          src={s3_base_url + book.isbn + ".jpg"}
                           alt=""
                         />
                         <div className="zoom-icon">
@@ -43,11 +43,12 @@ const BookDetail = ({ handleAddToCart, book, isAuthenticated }) => {
                         </div>
                       </div>
                     </div>
+
                     <div className="col-lg-6">
                       <div className="product-details">
                         <div className="pd-title">
-                          <span>oranges</span>
-                          <h3>Pure Pineapple</h3>
+                          <span>{book.auteur_nom}</span>
+                          <h3>{book.titre}</h3>
                           <a href="#" className="heart-icon">
                             <FontAwesomeIcon icon={faHeart} />
                           </a>
@@ -58,16 +59,12 @@ const BookDetail = ({ handleAddToCart, book, isAuthenticated }) => {
                           <FontAwesomeIcon icon={faStar} />
                           <FontAwesomeIcon icon={faStar} />
                           <FontAwesomeIcon icon={faStar0} />
-                          <span>(5)</span>
+                          <span>{book.note} </span>
                         </div>
                         <div className="pd-desc">
-                          <p>
-                            Lorem ipsum dolor sit amet, consectetur ing elit,
-                            sed do eiusmod tempor sum dolor sit amet,
-                            consectetur adipisicing elit, sed do mod tempor
-                          </p>
+                          <p>{book.description}</p>
                           <h4>
-                            $495.00 <span>629.99</span>
+                            {book.prix} €<span>629.99 €</span>
                           </h4>
                         </div>
                         <div className="pd-color">
@@ -127,27 +124,15 @@ const BookDetail = ({ handleAddToCart, book, isAuthenticated }) => {
                         </div>
                         <ul className="pd-tags">
                           <li>
-                            <span>CATEGORIES</span>: More Accessories, Wallets
-                            &amp; Cases
+                            <span>CATEGORY</span>: {book.genre_nom}
                           </li>
                           <li>
-                            <span>TAGS</span>: Clothing, T-shirt, Woman
+                            <span>LANGUAGES</span>: {book.langue_nom}
+                          </li>
+                          <li>
+                            <span>QUANTITY</span>: {book.quantite}
                           </li>
                         </ul>
-                        <div className="pd-share">
-                          <div className="p-code">Sku : 00012</div>
-                          <div className="pd-social">
-                            <a href="#">
-                              <i className="ti-facebook" />
-                            </a>
-                            <a href="#">
-                              <i className="ti-twitter-alt" />
-                            </a>
-                            <a href="#">
-                              <i className="ti-linkedin" />
-                            </a>
-                          </div>
-                        </div>
                       </div>
                     </div>
                   </div>

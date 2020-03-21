@@ -94,7 +94,7 @@ class OrderSummary extends React.Component {
       return <Redirect to="/login" />;
     }
     return (
-      <Container>
+      <Container style={{ marginTop: 200 }}>
         <Header>Order Summary</Header>
         {error && (
           <Message

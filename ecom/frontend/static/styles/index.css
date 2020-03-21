@@ -2173,12 +2173,12 @@ input:nth-child(1) {
 
 .product-details .pd-title span {
   display: block;
-  font-size: 12px;
+  font-size: 18px;
   color: #b2b2b2;
   text-transform: uppercase;
   letter-spacing: 2px;
   font-weight: 700;
-  line-height: 23px;
+  line-height: 30px;
 }
 
 .product-details .pd-title h3 {
@@ -4852,4 +4852,73 @@ label
 .breadcrumb-text {
   margin-top: 10vh;
 }
+
+/* Funky hoverbtn Button Start */
+.hoverbtn {
+  position: absolute;
+  letter-spacing: 0.15em;
+  margin: 0 auto;
+  padding: 0.5rem 2.5rem;
+  background: transparent;
+  outline: none;
+  font-size: 20px;
+  color: #7dcbd8 !important;
+  right: 60px;
+  -webkit-transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.15s;
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.15s;
+  top: -2px;
+}
+
+.hoverbtn::after,
+.hoverbtn::before {
+  content: "";
+  position: absolute;
+  height: 40%;
+  width: 0%;
+  -webkit-transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  z-index: -2;
+  border-radius: 50%;
+}
+
+.hoverbtn::before {
+  background-color: #afdfe7;
+  top: -0.75rem;
+  left: 0.5rem;
+  /* -webkit-animation: top 2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.25s infinite alternate;
+          animation: top 2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.25s infinite alternate; */
+}
+
+.hoverbtn::after {
+  background-color: #7dcbd8;
+  top: 3rem;
+  left: 13rem;
+  /* -webkit-animation: bottom 2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.5s infinite alternate;
+          animation: bottom 2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.5s infinite alternate; */
+}
+
+.hoverbtn:hover {
+  color: white !important;
+}
+
+.hoverbtn:hover::before,
+.hoverbtn:hover::after {
+  top: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: 0;
+  -webkit-animation: none;
+  animation: none;
+}
+
+.hoverbtn:hover::after {
+  left: 0rem;
+}
+
+.hoverbtn:hover::before {
+  top: 0.5rem;
+  left: 0.35rem;
+}
+
+/* Funky Button End */
 /*# sourceMappingURL=index.css.map */

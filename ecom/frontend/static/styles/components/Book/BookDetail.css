@@ -1967,12 +1967,12 @@ input:nth-child(1) {
 
 .product-details .pd-title span {
   display: block;
-  font-size: 12px;
+  font-size: 18px;
   color: #b2b2b2;
   text-transform: uppercase;
   letter-spacing: 2px;
   font-weight: 700;
-  line-height: 23px;
+  line-height: 30px;
 }
 
 .product-details .pd-title h3 {
