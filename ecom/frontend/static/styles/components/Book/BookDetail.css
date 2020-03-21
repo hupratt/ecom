@@ -1352,6 +1352,12 @@ td.si-close {
   margin-bottom: 30px;
 }
 
+.footer-left h5 {
+  color: #ffffff;
+  font-weight: 700;
+  margin-bottom: 26px;
+}
+
 .footer-left .footer-logo {
   margin-bottom: 24px;
 }
@@ -1475,9 +1481,9 @@ td.si-close {
   text-transform: uppercase;
   border: 1px solid #7dcbd8;
   position: absolute;
-  right: 0;
   top: 0;
-  padding: 13px 20px 12px;
+  right: 0;
+  padding: 16px 20px 12px;
   cursor: pointer;
 }
 

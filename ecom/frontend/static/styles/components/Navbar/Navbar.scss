@@ -5,3 +5,13 @@
 .container {
   max-width: 1450px;
 }
+
+.footer-section {
+  padding-right: 150px;
+  padding-left: 150px;
+}
+
+.footer-flex {
+  display: flex;
+  flex-direction: row;
+}

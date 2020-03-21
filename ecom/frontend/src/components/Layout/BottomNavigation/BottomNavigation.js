@@ -1,75 +1,100 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  Container,
-  Divider,
-  Grid,
-  Header,
-  List,
-  Segment
-} from "semantic-ui-react";
+  faFacebookF,
+  faInstagram,
+  faTwitter,
+  faPinterest
+} from "@fortawesome/free-brands-svg-icons";
 
 const BottomNavigation = () => {
   return (
-    <Segment
-      inverted
-      vertical
-      style={{ margin: "5em 0em 0em", padding: "5em 0em" }}
-    >
-      <Container textAlign="center">
-        <Grid divided inverted stackable>
-          <Grid.Column width={3}>
-            <Header inverted as="h4" content="Group 1" />
-            <List link inverted>
-              <List.Item as="a">Link One</List.Item>
-              <List.Item as="a">Link Two</List.Item>
-              <List.Item as="a">Link Three</List.Item>
-              <List.Item as="a">Link Four</List.Item>
-            </List>
-          </Grid.Column>
-          <Grid.Column width={3}>
-            <Header inverted as="h4" content="Group 2" />
-            <List link inverted>
-              <List.Item as="a">Link One</List.Item>
-              <List.Item as="a">Link Two</List.Item>
-              <List.Item as="a">Link Three</List.Item>
-              <List.Item as="a">Link Four</List.Item>
-            </List>
-          </Grid.Column>
-          <Grid.Column width={3}>
-            <Header inverted as="h4" content="Group 3" />
-            <List link inverted>
-              <List.Item as="a">Link One</List.Item>
-              <List.Item as="a">Link Two</List.Item>
-              <List.Item as="a">Link Three</List.Item>
-              <List.Item as="a">Link Four</List.Item>
-            </List>
-          </Grid.Column>
-          <Grid.Column width={7}>
-            <Header inverted as="h4" content="Footer Header" />
-            <p>
-              Extra space for a call to action inside the footer that could help
-              re-engage users.
-            </p>
-          </Grid.Column>
-        </Grid>
+    <React.Fragment>
+      {/* Footer Section Begin */}
+      <footer className="footer-section">
+        <div className="container footer-left footer-flex">
+          <div>
+            <div>
+              <h5>Information</h5>
 
-        <Divider inverted section />
-        <List horizontal inverted divided link size="small">
-          <List.Item as="a" href="#">
-            Site Map
-          </List.Item>
-          <List.Item as="a" href="#">
-            Contact Us
-          </List.Item>
-          <List.Item as="a" href="#">
-            Terms and Conditions
-          </List.Item>
-          <List.Item as="a" href="#">
-            Privacy Policy
-          </List.Item>
-        </List>
-      </Container>
-    </Segment>
+              <ul>
+                <li>Address: 60-49 Road 11378 New York</li>
+                <li>Phone: +65 11.188.888</li>
+                <li>Email: hello@gmail.com</li>
+              </ul>
+              <div className="footer-social">
+                <a href="#">
+                  <FontAwesomeIcon icon={faFacebookF} />
+                </a>
+                <a href="#">
+                  <FontAwesomeIcon icon={faInstagram} />
+                </a>
+                <a href="#">
+                  <FontAwesomeIcon icon={faTwitter} />
+                </a>
+                <a href="#">
+                  <FontAwesomeIcon icon={faPinterest} />
+                </a>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div className="footer-widget">
+              <h5>Links</h5>
+              <ul>
+                <li>
+                  <a href="#">About Us</a>
+                </li>
+                <li>
+                  <a href="#">Checkout</a>
+                </li>
+                <li>
+                  <a href="#">Contact</a>
+                </li>
+                <li>
+                  <a href="#">Serivius</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <div className="newslatter-item">
+              <h5>Join Our Newsletter Now</h5>
+              <p>
+                Get E-mail updates about our latest shop and special offers.
+              </p>
+              <form action="#" className="subscribe-form">
+                <input type="text" placeholder="Enter Your Mail" />
+                <button type="button">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div className="copyright-reserved">
+          <div className="container">
+            <div className="row">
+              <div>
+                <div className="copyright-text">
+                  Copyright © All rights reserved | This template is made with
+                  <i className="fa fa-heart-o" aria-hidden="true" /> by a fellow
+                  member
+                  <a href="#" target="_blank">
+                    hello
+                  </a>
+                </div>
+                <div className="payment-pic">
+                  <img
+                    src="https://bookshop-images-f1492f08-f236-4a55-afb7-70ded209cb24.s3.eu-west-2.amazonaws.com/resources/payment-details.png"
+                    alt="payment-details-icons"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+      {/* Footer Section End */}
+    </React.Fragment>
   );
 };
 

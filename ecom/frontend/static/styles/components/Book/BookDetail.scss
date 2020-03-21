@@ -260,8 +260,10 @@
   padding: 39px 0;
 }
 
-.inner-header .logo img {
-  width: 50%;
+.inner-header {
+  .logo img {
+    width: 50%;
+  }
 }
 
 .inner-header .advanced-search {
@@ -1385,6 +1387,11 @@
 
 .footer-left {
   margin-bottom: 30px;
+  h5 {
+    color: #ffffff;
+    font-weight: 700;
+    margin-bottom: 26px;
+  }
 }
 
 .footer-left .footer-logo {
@@ -1515,9 +1522,9 @@
   text-transform: uppercase;
   border: 1px solid #7dcbd8;
   position: absolute;
-  right: 0;
   top: 0;
-  padding: 13px 20px 12px;
+  right: 0;
+  padding: 16px 20px 12px;
   cursor: pointer;
 }
 
