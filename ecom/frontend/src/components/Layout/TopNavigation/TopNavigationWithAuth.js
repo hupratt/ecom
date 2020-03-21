@@ -1,7 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faUser } from "@fortawesome/free-regular-svg-icons";
+import {
+  faHeart,
+  faUser,
+  faAddressCard
+} from "@fortawesome/free-regular-svg-icons";
 import { faShoppingBag, faUserSlash } from "@fortawesome/free-solid-svg-icons";
 import PropTypes from "prop-types";
 import CartDropDownNoItems from "./CartDropDownNoItems";
@@ -47,6 +51,11 @@ const TopNavigationWithAuth = ({ cart, loading, logout }) => {
               </div>
               <div className="col-lg-3 text-right col-md-3">
                 <ul className="nav-right">
+                  <Link to="/profile">
+                    <li className="user-icon">
+                      <FontAwesomeIcon icon={faAddressCard} /> <span></span>
+                    </li>
+                  </Link>
                   <Link to="/login">
                     <li className="user-icon">
                       <FontAwesomeIcon icon={faUser} /> <span></span>
@@ -62,23 +71,13 @@ const TopNavigationWithAuth = ({ cart, loading, logout }) => {
                       <FontAwesomeIcon icon={faHeart} /> <span>1</span>
                     </a>
                   </li>
-                  <li className="cart-icon">
-                    <a href="#">
-                      <FontAwesomeIcon icon={faShoppingBag} />
-                      <span>{`${
-                        cart !== null ? cart.order_items.length : 0
-                      }`}</span>
-                    </a>
-                    <Dropdown loading={loading} className="link item">
-                      <Dropdown.Menu>
-                        <CartDropDownWithItemsAndNoItems cart={cart} />
-                      </Dropdown.Menu>
-                    </Dropdown>
-                  </li>
+
                   <li className="cart-icon">
                     <a href="#">
                       <FontAwesomeIcon icon={faShoppingBag} /> <span>1</span>
-                      <span>3</span>
+                      <span>{`${
+                        cart !== null ? cart.order_items.length : 0
+                      }`}</span>
                     </a>
                     <React.Fragment>
                       <div className="cart-hover">
@@ -119,20 +118,25 @@ const TopNavigationWithAuth = ({ cart, loading, logout }) => {
                         </div>
                         <div className="select-total">
                           <span>total:</span>
-                          <h5>120 €</h5>
+                          <h5>{cart && cart.total} €</h5>
                         </div>
                         <div className="select-button">
-                          <a href="#" className="primary-btn view-card">
+                          <Link
+                            to="/order-summary"
+                            className="primary-btn view-card"
+                          >
                             VIEW CARD
-                          </a>
-                          <a href="#" className="primary-btn checkout-btn">
+                          </Link>
+                          <Link
+                            to="/checkout"
+                            className="primary-btn checkout-btn"
+                          >
                             CHECK OUT
-                          </a>
+                          </Link>
                         </div>
                       </div>
                     </React.Fragment>
                   </li>
-                  <li className="cart-price">120 €</li>
                 </ul>
               </div>
             </div>
