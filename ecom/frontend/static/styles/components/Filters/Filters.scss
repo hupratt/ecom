@@ -32,6 +32,9 @@
     margin-bottom: 9px;
     border-radius: 2px;
   }
+  a:hover {
+    color: black;
+  }
 }
 
 .container-forms {
@@ -63,6 +66,9 @@
   }
   .h4 {
     padding: 0px;
+  }
+  label:hover {
+    color: black;
   }
 }
 

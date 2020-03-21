@@ -20,4 +20,23 @@
       -ms-flex-direction: row;
           flex-direction: row;
 }
+
+.footer-flex .centermyitems {
+  -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
+  text-align: center;
+}
+
+.copyright-reserved {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.copyright-reserved img {
+  float: right;
+}
 /*# sourceMappingURL=Navbar.css.map */

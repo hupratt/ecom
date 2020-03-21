@@ -42,6 +42,10 @@
   border-radius: 2px;
 }
 
+.book-category a:hover {
+  color: black;
+}
+
 .container-forms .form:not(:first-child) {
   margin-top: 20px;
 }
@@ -81,6 +85,11 @@
 .author-checkbox .h4,
 .radio .h4 {
   padding: 0px;
+}
+
+.author-checkbox label:hover,
+.radio label:hover {
+  color: black;
 }
 
 .filter-title {
