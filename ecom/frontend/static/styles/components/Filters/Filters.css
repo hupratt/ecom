@@ -7,7 +7,7 @@
   display: -ms-flexbox;
   display: flex;
   width: 20vw;
-  position: fixed;
+  position: absolute;
 }
 
 .ui.form.author-checkbox,

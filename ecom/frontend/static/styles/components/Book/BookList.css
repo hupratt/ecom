@@ -1,3 +1,7 @@
+.ui.grid {
+  margin: 0;
+}
+
 .ui.container.booklist {
   width: 80vw;
   -webkit-box-orient: horizontal;
@@ -11,8 +15,14 @@
 
 .ui.divided.grid {
   margin-left: 20vw;
-  top: 10vh;
   position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .ui.divided.grid .column {

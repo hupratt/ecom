@@ -1,16 +1,7 @@
-.ui.inverted.menu {
-  position: fixed;
-  width: 100%;
-  z-index: 2;
-  top: 0;
-  span {
-    color: black;
-  }
-  .arrow {
-    color: black;
-  }
-}
-
 .ui.container {
   margin-top: 50px;
+}
+
+.container {
+  max-width: 1450px;
 }

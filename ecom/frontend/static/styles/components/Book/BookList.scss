@@ -1,3 +1,6 @@
+.ui.grid {
+  margin: 0;
+}
 .ui.container.booklist {
   width: 80vw;
   flex-direction: row;
@@ -23,8 +26,9 @@
     box-shadow: none !important;
   }
   margin-left: 20vw;
-  top: 10vh;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Book tilt effect */
