@@ -21,23 +21,14 @@ class CustomLayout extends React.Component {
     const { authenticated, cart, loading, logout } = this.props;
     return (
       <div>
-        <Menu inverted>
-          <Container>
-            <Menu.Menu position="left" onClick={() => window.location.reload()}>
-              <Link to="/">
-                <Menu.Item header>Home</Menu.Item>
-              </Link>
-            </Menu.Menu>
-            <TopNavigationWithAuthenticationHandling
-              authenticated={authenticated}
-              cart={cart}
-              loading={loading}
-              logout={logout}
-            />
-          </Container>
-        </Menu>
+        <TopNavigationWithAuthenticationHandling
+          authenticated={authenticated}
+          cart={cart}
+          loading={loading}
+          logout={logout}
+        />
         {this.props.children}
-        <BottomNavigation />
+        {/* <BottomNavigation /> */}
       </div>
     );
   }
