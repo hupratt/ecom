@@ -223,17 +223,16 @@ class PaymentView(APIView):
         order = Order.objects.get(user=self.request.user, ordered=False)
         userprofile = UserProfile.objects.get(user=self.request.user)
         token = request.data.get("stripeToken")
-        shipping_address_id = request.data.get("selectedShippingAddress")
-        if request.data.get("selectedBillingAddress") is not None:
+        billing_address = ""
+        shipping_address = ""
+        if "selectedShippingAddress" in request.data.keys():
+            shipping_address_id = request.data.get("selectedShippingAddress")
+            shipping_address = Address.objects.get(id=shipping_address_id)
+            print(shipping_address, shipping_address_id)
+        if "selectedBillingAddress" in request.data.keys():
             billing_address_id = request.data.get("selectedBillingAddress")
-        else:
-            billing_address_id = None
-
-        shipping_address = Address.objects.get(id=shipping_address_id, default=None)
-        if billing_address_id is not None:
-            billing_address = Address.objects.get(id=billing_address_id, default=None)
-        else:
-            billing_address = shipping_address
+            billing_address = Address.objects.get(id=billing_address_id)
+            print(billing_address, billing_address_id)
 
         if (
             userprofile.stripe_customer_id != ""
@@ -256,7 +255,7 @@ class PaymentView(APIView):
             # charge the customer because we cannot charge the token more than once
             charge = stripe.Charge.create(
                 amount=amount,  # cents
-                currency="usd",
+                currency="eur",
                 customer=userprofile.stripe_customer_id,
             )
             # charge once off on the token
@@ -282,8 +281,10 @@ class PaymentView(APIView):
 
             order.ordered = True
             order.payment = payment
-            order.billing_address = billing_address
-            order.shipping_address = shipping_address
+            if len(billing_address) > 0:
+                order.billing_address = billing_address
+            if len(shipping_address) > 0:
+                order.shipping_address = shipping_address
             # order.ref_code = create_ref_code()
             order.save()
 
@@ -334,7 +335,7 @@ class PaymentView(APIView):
         except Exception as e:
             # send an email to ourselves
             return Response(
-                {"message": "A serious error occurred. We have been notifed."},
+                {"message": "A serious error occurred. We have been notifed." + str(e)},
                 status=HTTP_400_BAD_REQUEST,
             )
 
