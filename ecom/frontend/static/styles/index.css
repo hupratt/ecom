@@ -4825,4 +4825,14 @@ label
 .nav-right a:hover {
   color: black;
 }
+
+.wrap-menu-header {
+  position: absolute;
+  width: 100%;
+  height: 120px;
+  top: 0;
+  left: 0;
+  z-index: 11;
+  border-top: 5px solid #7dcbd8;
+}
 /*# sourceMappingURL=index.css.map */

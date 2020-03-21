@@ -9,6 +9,7 @@ const TopNavigationNoAuth = () => {
     <div>
       {/* Header Section Begin */}
       <header className="header-section">
+        <div className="wrap-menu-header" />
         <div className="container">
           <div className="inner-header">
             <div className="row">

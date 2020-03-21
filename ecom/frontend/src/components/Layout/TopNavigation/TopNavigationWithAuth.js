@@ -8,10 +8,7 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import { faShoppingBag, faUserSlash } from "@fortawesome/free-solid-svg-icons";
 import PropTypes from "prop-types";
-import CartDropDownNoItems from "./CartDropDownNoItems";
-import CartDropDownWithItems from "./CartDropDownWithItems";
-import { withItemsInTheCart } from "../../../hoc/hoc";
-import { Dropdown, Menu } from "semantic-ui-react";
+import { Menu } from "semantic-ui-react";
 import { s3_base_url } from "../../../constants";
 
 const propTypes = {
@@ -25,6 +22,8 @@ const TopNavigationWithAuth = ({ cart, loading, logout }) => {
     <div>
       {/* Header Section Begin */}
       <header className="header-section">
+        <div className="wrap-menu-header" />
+
         <div className="container">
           <div className="inner-header">
             <div className="row">
@@ -151,8 +150,3 @@ const TopNavigationWithAuth = ({ cart, loading, logout }) => {
 TopNavigationWithAuth.propTypes = propTypes;
 
 export default TopNavigationWithAuth;
-
-const CartDropDownWithItemsAndNoItems = withItemsInTheCart(
-  CartDropDownWithItems,
-  CartDropDownNoItems
-);
