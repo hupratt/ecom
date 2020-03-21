@@ -93,7 +93,8 @@ class CheckoutForm extends Component {
       shippingAddresses,
       selectedBillingAddress,
       selectedShippingAddress,
-      stripe
+      stripe,
+      handleSelectChange
     } = this.props;
     return (
       <div>
@@ -187,8 +188,8 @@ const mapDispatchToProps = dispatch => {
       dispatch(
         submit(e, stripe, selectedBillingAddress, selectedShippingAddress)
       ),
-    handleSelectChange: (e, obj) =>
-      dispatch(handleSelectChange({ name, value })),
+    handleSelectChange: (e, { name, value }) =>
+      dispatch(handleSelectChange(name, value)),
     fetchOrder: history => dispatch(handleFetchOrder(history)),
     fetchBillingAddresses: () => dispatch(handleFetchBillingAddresses()),
     fetchShippingAddresses: () => dispatch(handleFetchShippingAddresses())
@@ -218,8 +219,8 @@ const InjectedForm = withRouter(injectStripe(CheckoutFormWithRedux));
 const WrappedForm = () => (
   <Container text>
     <StripeProvider apiKey="pk_test_eRajPaamV4LUIhBv3oFmauqn">
-      <div>
-        <h1>Complete your order</h1>
+      <div style={{ marginTop: 200 }}>
+        <h2>Complete your order</h2>
         <Elements>
           <InjectedForm />
         </Elements>

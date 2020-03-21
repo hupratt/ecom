@@ -87,7 +87,7 @@ const TopNavigationWithAuth = ({ cart, logout }) => {
                 </div>
                 <div className="select-button">
                   <Link to="/order-summary" className="primary-btn view-card">
-                    VIEW CARD
+                    VIEW CART
                   </Link>
                   <Link to="/checkout" className="primary-btn checkout-btn">
                     CHECK OUT
