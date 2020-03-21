@@ -1605,13 +1605,18 @@ td.si-close {
 }
 
 .breadcrumb-text a:after {
+  content: "\f000";
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+  /*--adjust as necessary--*/
+  color: #000;
+  font-size: 18px;
+  padding-right: 0.5em;
   position: absolute;
-  right: -18px;
-  top: 0px;
-  content: "";
-  font-family: "FontAwesome";
-  font-size: 16px;
-  color: #b2b2b2;
+  top: 10px;
+  left: 0;
 }
 
 .breadcrumb-text span {

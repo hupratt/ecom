@@ -1789,8 +1789,9 @@ td.si-close {
   position: absolute;
   right: -18px;
   top: 0px;
-  content: "";
-  font-family: "FontAwesome";
+  content: "\f105";
+  font-weight: 900;
+  font-family: "Font Awesome 5 Free";
   font-size: 16px;
   color: #b2b2b2;
 }
@@ -2122,37 +2123,6 @@ input:nth-child(1) {
 
 .prduct-list .product-item {
   margin-bottom: 25px;
-}
-
-.loading-more {
-  text-align: center;
-  padding-top: 10px;
-}
-
-.loading-more i {
-  font-size: 22px;
-  color: #663333;
-  margin-right: 6px;
-  position: relative;
-  top: 7px;
-}
-
-.loading-more a {
-  font-size: 18px;
-  font-weight: 700;
-  color: #252525;
-  position: relative;
-  display: inline-block;
-}
-
-.loading-more a:before {
-  position: absolute;
-  left: 0;
-  bottom: -4px;
-  width: 100%;
-  height: 2px;
-  background: #e7ab3c;
-  content: "";
 }
 
 /*---------------------

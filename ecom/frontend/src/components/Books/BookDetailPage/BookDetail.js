@@ -2,6 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Button, Card, Grid, Icon, Item } from "semantic-ui-react";
 import { s3_base_url } from "../../../constants";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar as faStar0 } from "@fortawesome/free-regular-svg-icons";
+import {
+  faHome,
+  faSearchPlus,
+  faStar,
+  faStarHalf
+} from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 const propTypes = {
   handleAddToCart: PropTypes.func.isRequired,
@@ -18,10 +27,10 @@ const BookDetail = ({ handleAddToCart, book, isAuthenticated }) => {
           <div className="row">
             <div className="col-lg-12">
               <div className="breadcrumb-text product-more">
-                <a href="./home.html">
-                  <i className="fa fa-home" /> Home
-                </a>
-                <a href="./shop.html">Shop</a>
+                <Link to="/" onClick={() => window.location.reload()}>
+                  <FontAwesomeIcon icon={faHome} />
+                </Link>
+                <Link to="/">Shop</Link>
                 <span>Detail</span>
               </div>
             </div>
@@ -43,35 +52,7 @@ const BookDetail = ({ handleAddToCart, book, isAuthenticated }) => {
                       alt=""
                     />
                     <div className="zoom-icon">
-                      <i className="fa fa-search-plus" />
-                    </div>
-                  </div>
-                  <div className="product-thumbs">
-                    <div className="product-thumbs-track ps-slider owl-carousel">
-                      <div
-                        className="pt active"
-                        data-imgbigurl="img/product-single/product-1.jpg"
-                      >
-                        <img src="img/product-single/product-1.jpg" alt="" />
-                      </div>
-                      <div
-                        className="pt"
-                        data-imgbigurl="img/product-single/product-2.jpg"
-                      >
-                        <img src="img/product-single/product-2.jpg" alt="" />
-                      </div>
-                      <div
-                        className="pt"
-                        data-imgbigurl="img/product-single/product-3.jpg"
-                      >
-                        <img src="img/product-single/product-3.jpg" alt="" />
-                      </div>
-                      <div
-                        className="pt"
-                        data-imgbigurl="img/product-single/product-3.jpg"
-                      >
-                        <img src="img/product-single/product-3.jpg" alt="" />
-                      </div>
+                      <FontAwesomeIcon icon={faSearchPlus} />
                     </div>
                   </div>
                 </div>
@@ -85,11 +66,11 @@ const BookDetail = ({ handleAddToCart, book, isAuthenticated }) => {
                       </a>
                     </div>
                     <div className="pd-rating">
-                      <i className="fa fa-star" />
-                      <i className="fa fa-star" />
-                      <i className="fa fa-star" />
-                      <i className="fa fa-star" />
-                      <i className="fa fa-star-o" />
+                      <FontAwesomeIcon icon={faStar} />
+                      <FontAwesomeIcon icon={faStar} />
+                      <FontAwesomeIcon icon={faStar} />
+                      <FontAwesomeIcon icon={faStar} />
+                      <FontAwesomeIcon icon={faStar0} />
                       <span>(5)</span>
                     </div>
                     <div className="pd-desc">
