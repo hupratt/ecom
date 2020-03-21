@@ -18,7 +18,6 @@ const propTypes = {
   errorCart: PropTypes.object,
   error: PropTypes.object
 };
-import BottomNavigation from "../../Layout/BottomNavigation/BottomNavigation";
 
 class BookDetailPage extends React.Component {
   componentDidMount() {
@@ -63,7 +62,6 @@ class BookDetailPage extends React.Component {
             isAuthenticated={isAuthenticated}
           />
         </Container>
-        <BottomNavigation />
       </React.Fragment>
     );
   }

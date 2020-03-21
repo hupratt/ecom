@@ -1,35 +1,54 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
-import { Container, Menu } from "semantic-ui-react";
 import { logout } from "../../actions/auth";
 import { withAuthentication } from "../../hoc/hoc";
-import BottomNavigation from "./BottomNavigation/BottomNavigation";
 import TopNavigationNoAuth from "./TopNavigation/TopNavigationNoAuth";
 import TopNavigationWithAuth from "./TopNavigation/TopNavigationWithAuth";
 import PropTypes from "prop-types";
+import BottomNavigation from "../Layout/BottomNavigation/BottomNavigation";
 
 const propTypes = {
   authenticated: PropTypes.bool.isRequired,
   cart: PropTypes.object,
-  loading: PropTypes.bool.isRequired,
   logout: PropTypes.func.isRequired
 };
 
 class CustomLayout extends React.Component {
   render() {
-    const { authenticated, cart, loading, logout } = this.props;
+    const { authenticated, cart, logout } = this.props;
     return (
-      <div>
-        <TopNavigationWithAuthenticationHandling
-          authenticated={authenticated}
-          cart={cart}
-          loading={loading}
-          logout={logout}
-        />
+      <React.Fragment>
+        {/* Header Section Begin */}
+        <header className="header-section">
+          <div className="wrap-menu-header" />
+          <div className="container">
+            <div className="inner-header">
+              <div className="row">
+                <div className="col-lg-2 col-md-2">
+                  <Link to="/">
+                    <img
+                      className="logo"
+                      src="https://bookshop-images-f1492f08-f236-4a55-afb7-70ded209cb24.s3.eu-west-2.amazonaws.com/resources/logo-petite-portugaise-300.png"
+                      alt="la petite portugaise's logo"
+                    />
+                  </Link>
+                </div>
+                <TopNavigationWithAuthenticationHandling
+                  authenticated={authenticated}
+                  cart={cart}
+                  logout={logout}
+                />
+                {/* <BottomNavigation /> */}
+              </div>
+            </div>
+          </div>
+        </header>
         {this.props.children}
-        {/* <BottomNavigation /> */}
-      </div>
+        <BottomNavigation />
+
+        {/* Header End */}
+      </React.Fragment>
     );
   }
 }
@@ -44,8 +63,7 @@ CustomLayout.propTypes = propTypes;
 const mapStateToProps = state => {
   return {
     authenticated: state.auth.token !== null,
-    cart: state.cart.shoppingCart,
-    loading: state.cart.loading
+    cart: state.cart.shoppingCart
   };
 };
 
