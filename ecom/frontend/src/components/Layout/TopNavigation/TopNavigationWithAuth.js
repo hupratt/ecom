@@ -8,6 +8,7 @@ import CartDropDownNoItems from "./CartDropDownNoItems";
 import CartDropDownWithItems from "./CartDropDownWithItems";
 import { withItemsInTheCart } from "../../../hoc/hoc";
 import { Dropdown, Menu } from "semantic-ui-react";
+import { s3_base_url } from "../../../constants";
 
 const propTypes = {
   cart: PropTypes.object,
@@ -79,56 +80,59 @@ const TopNavigationWithAuth = ({ cart, loading, logout }) => {
                       <FontAwesomeIcon icon={faShoppingBag} /> <span>1</span>
                       <span>3</span>
                     </a>
-                    <div className="cart-hover">
-                      <div className="select-items">
-                        <table>
-                          <tbody>
-                            <tr>
-                              <td className="si-pic">
-                                <img src="img/select-product-1.jpg" alt="" />
-                              </td>
-                              <td className="si-text">
-                                <div className="product-selected">
-                                  <p>$60.00 x 1</p>
-                                  <h6>Kabino Bedside Table</h6>
-                                </div>
-                              </td>
-                              <td className="si-close">
-                                <i className="ti-close" />
-                              </td>
-                            </tr>
-                            <tr>
-                              <td className="si-pic">
-                                <img src="img/select-product-2.jpg" alt="" />
-                              </td>
-                              <td className="si-text">
-                                <div className="product-selected">
-                                  <p>$60.00 x 1</p>
-                                  <h6>Kabino Bedside Table</h6>
-                                </div>
-                              </td>
-                              <td className="si-close">
-                                <i className="ti-close" />
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
+                    <React.Fragment>
+                      <div className="cart-hover">
+                        <div className="select-items">
+                          <table>
+                            <tbody>
+                              {cart &&
+                                cart.order_items.map(order_item => {
+                                  return (
+                                    <tr key={order_item.id}>
+                                      <td className="si-pic">
+                                        <img
+                                          src={
+                                            s3_base_url +
+                                            order_item.livre.isbn +
+                                            ".jpg"
+                                          }
+                                          alt=""
+                                        />
+                                      </td>
+                                      <td className="si-text">
+                                        <div className="product-selected">
+                                          <p>
+                                            {order_item.livre.prix} x{" "}
+                                            {order_item.quantity} €
+                                          </p>
+                                          <h6>{order_item.livre.titre}</h6>
+                                        </div>
+                                      </td>
+                                      <td className="si-close">
+                                        <i className="ti-close" />
+                                      </td>
+                                    </tr>
+                                  );
+                                })}
+                            </tbody>
+                          </table>
+                        </div>
+                        <div className="select-total">
+                          <span>total:</span>
+                          <h5>120 €</h5>
+                        </div>
+                        <div className="select-button">
+                          <a href="#" className="primary-btn view-card">
+                            VIEW CARD
+                          </a>
+                          <a href="#" className="primary-btn checkout-btn">
+                            CHECK OUT
+                          </a>
+                        </div>
                       </div>
-                      <div className="select-total">
-                        <span>total:</span>
-                        <h5>$120.00</h5>
-                      </div>
-                      <div className="select-button">
-                        <a href="#" className="primary-btn view-card">
-                          VIEW CARD
-                        </a>
-                        <a href="#" className="primary-btn checkout-btn">
-                          CHECK OUT
-                        </a>
-                      </div>
-                    </div>
+                    </React.Fragment>
                   </li>
-                  <li className="cart-price">$150.00</li>
+                  <li className="cart-price">120 €</li>
                 </ul>
               </div>
             </div>
