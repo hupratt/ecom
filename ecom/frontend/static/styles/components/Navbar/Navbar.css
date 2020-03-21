@@ -39,4 +39,15 @@
 .copyright-reserved img {
   float: right;
 }
+
+.inner-header .row {
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+}
+
+.inner-header img {
+  height: 100px !important;
+  margin-left: 50px;
+}
 /*# sourceMappingURL=Navbar.css.map */

@@ -260,12 +260,6 @@
   padding: 39px 0;
 }
 
-.inner-header {
-  .logo img {
-    width: 50%;
-  }
-}
-
 .inner-header .advanced-search {
   height: 50px;
   border: 1px solid #ebebeb;
@@ -283,6 +277,7 @@
   font-size: 16px;
   color: #252525;
   position: relative;
+  height: 50px;
 }
 
 .inner-header .advanced-search .category-btn:before {
@@ -298,7 +293,7 @@
 .inner-header .advanced-search .category-btn:after {
   position: absolute;
   right: 11px;
-  top: 10px;
+  top: 15px;
   content: "\f107";
   font-family: "Font Awesome 5 Free";
   font-size: 16px;

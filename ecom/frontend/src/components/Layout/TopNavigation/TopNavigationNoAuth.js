@@ -1,9 +1,8 @@
 import React from "react";
-import { Menu } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import { faHeart } from "@fortawesome/free-regular-svg-icons";
+import { faShoppingBag } from "@fortawesome/free-solid-svg-icons";
 const TopNavigationNoAuth = () => {
   return (
     <div>
@@ -13,14 +12,10 @@ const TopNavigationNoAuth = () => {
           <div className="inner-header">
             <div className="row">
               <div className="col-lg-2 col-md-2">
-                <div className="logo">
-                  <Link to="/">
-                    <img
-                      src="https://bookshop-images-f1492f08-f236-4a55-afb7-70ded209cb24.s3.eu-west-2.amazonaws.com/resources/logo-petite-portugaise-300.png"
-                      alt="la petite portugaise's logo"
-                    />
-                  </Link>
-                </div>
+                <img
+                  src="https://bookshop-images-f1492f08-f236-4a55-afb7-70ded209cb24.s3.eu-west-2.amazonaws.com/resources/logo-petite-portugaise-300.png"
+                  alt="la petite portugaise's logo"
+                />
               </div>
               <div className="col-lg-7 col-md-7">
                 <div className="advanced-search">
@@ -39,13 +34,12 @@ const TopNavigationNoAuth = () => {
                 <ul className="nav-right">
                   <li className="heart-icon">
                     <a href="#">
-                      <i className="icon_heart_alt" />
-                      <span>1</span>
+                      <FontAwesomeIcon icon={faHeart} /> <span>1</span>
                     </a>
                   </li>
                   <li className="cart-icon">
                     <a href="#">
-                      <i className="icon_bag_alt" />
+                      <FontAwesomeIcon icon={faShoppingBag} /> <span>1</span>
                       <span>3</span>
                     </a>
                     <div className="cart-hover">

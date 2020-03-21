@@ -467,10 +467,6 @@ ol {
   padding: 39px 0;
 }
 
-.inner-header .logo img {
-  width: 50%;
-}
-
 .inner-header .advanced-search {
   height: 50px;
   border: 1px solid #ebebeb;
@@ -488,6 +484,7 @@ ol {
   font-size: 16px;
   color: #252525;
   position: relative;
+  height: 50px;
 }
 
 .inner-header .advanced-search .category-btn:before {
@@ -503,7 +500,7 @@ ol {
 .inner-header .advanced-search .category-btn:after {
   position: absolute;
   right: 11px;
-  top: 10px;
+  top: 15px;
   content: "\f107";
   font-family: "Font Awesome 5 Free";
   font-size: 16px;
@@ -4815,5 +4812,16 @@ label
 
 .copyright-reserved img {
   float: right;
+}
+
+.inner-header .row {
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+}
+
+.inner-header img {
+  height: 100px !important;
+  margin-left: 50px;
 }
 /*# sourceMappingURL=index.css.map */
