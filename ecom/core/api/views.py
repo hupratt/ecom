@@ -39,7 +39,8 @@ from core.models import (
     Livre,
 )
 
-
+from django.contrib.postgres.search import SearchVector
+from django.db.models import Q
 import stripe
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -92,7 +93,6 @@ def serialize_URL_params(query_param):
 class BookListView(ListAPIView):
     permission_classes = (AllowAny,)
     serializer_class = BookSerializer
-    queryset = Livre.objects.all()
     paginate_by_param = "limit"
 
     def get_queryset(self):
@@ -105,12 +105,28 @@ class BookListView(ListAPIView):
         authors = self.request.query_params.get("authors", "")
         search_for_authors = serialize_URL_params(self.request.query_params)
         category = self.request.query_params.get("category", "")
+        free_text = self.request.query_params.get("text", "")
+        price_range = self.request.query_params.get("price", "")
+
+        if free_text != "":
+            queryset = queryset.annotate(
+                search=SearchVector("genre_nom", "auteur_nom")
+            ).filter(search__icontains=free_text)
+
+        if price_range != "":
+            min_price, max_price = price_range.split(",")
+            print(min_price, max_price)
+            queryset = queryset.filter(prix__range=(int(min_price), int(max_price)))
+
         if language != "":
             queryset = queryset.filter(langue_nom__contains=language)
+
         if category != "":
             queryset = queryset.filter(genre_nom__contains=category)
+
         if authors != "" and len(search_for_authors) > 0:
             queryset = queryset.filter(auteur_nom__in=search_for_authors)
+
         return queryset
 
 

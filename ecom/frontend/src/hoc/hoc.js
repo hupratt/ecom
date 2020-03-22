@@ -62,7 +62,9 @@ export const withAuthentication = (WrappedComponent1, WrappedComponent2) => {
       if (this.props.authenticated) {
         return <WrappedComponent1 {...this.props} />;
       }
-      return <WrappedComponent2 {...this.props} />;
+      const { authenticated, ...passed } = this.props;
+      // pass only necessary props to the function
+      return <WrappedComponent2 {...passed} />;
     }
   }
   return HOC;
