@@ -1,6 +1,5 @@
 const path = require("path");
 const Dotenv = require("dotenv-webpack");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   watch: true,
@@ -51,17 +50,5 @@ module.exports = {
     historyApiFallback: true,
     hot: true
   },
-  plugins: [
-    new Dotenv({ path: "./.env.development" }),
-    new HtmlWebpackPlugin({
-      template: path.join(
-        __dirname,
-        "ecom/frontend/templates/frontend/index.html"
-      ),
-      favicon: path.join(
-        __dirname,
-        "ecom/frontend/static/icons/logopetiteportugaise300.png"
-      )
-    })
-  ]
+  plugins: [new Dotenv({ path: "./.env.development" })]
 };
