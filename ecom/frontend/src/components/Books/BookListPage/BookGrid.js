@@ -77,6 +77,7 @@ const BookGrid = ({ paginatedData, handleClickOnBook }) => {
                       <span>{item.titre}</span>
                     </h3>
                     <p>
+                      {item.langue_nom} {item.genre_nom} {"    "}
                       Social prophecy? Black comedy? Study of freewill? A
                       Clockwork Orange is all of these. It is also a dazzling
                       experiment in language, as Burghiss creates a new language

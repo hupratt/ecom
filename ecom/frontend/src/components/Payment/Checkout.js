@@ -192,7 +192,8 @@ class CheckoutForm extends Component {
               <Message positive>
                 <Message.Header>Your payment was successful</Message.Header>
                 <p>
-                  Go to your <b>profile</b> to see the order delivery status.
+                  Go to your <Link to="/profile">profile</Link> to see the order
+                  delivery status.
                 </p>
               </Message>
             )}

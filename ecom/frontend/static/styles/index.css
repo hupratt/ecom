@@ -1733,6 +1733,7 @@ td.si-close {
   color: #252525;
 }
 
+.breadcrumb-text p,
 .breadcrumb-text a {
   display: inline-block;
   font-size: 16px;
@@ -4834,7 +4835,7 @@ label
   left: 0;
   border-top: 5px solid #7dcbd8;
   z-index: 2;
-  background-color: #7dcbd8;
+  background-color: #ffffff;
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
   max-height: 0;
@@ -4850,7 +4851,7 @@ label
 }
 
 .breadcrumb-text {
-  margin-top: 10vh;
+  margin-top: 15vh;
 }
 
 /* Funky hoverbtn Button Start */

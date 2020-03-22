@@ -5,6 +5,7 @@ import { faHeart, faUser } from "@fortawesome/free-regular-svg-icons";
 import { faShoppingBag } from "@fortawesome/free-solid-svg-icons";
 import PropTypes from "prop-types";
 import { s3_base_url } from "../../../constants";
+import SearchNav from "./SearchNav";
 
 const propTypes = {
   cart: PropTypes.object,
@@ -14,19 +15,7 @@ const propTypes = {
 const TopNavigationWithAuth = ({ cart, logout }) => {
   return (
     <React.Fragment>
-      <div className="col-lg-7 col-md-7">
-        <div className="advanced-search">
-          <button type="button" className="category-btn">
-            All Categories
-          </button>
-          <form action="#" className="input-group">
-            <input type="text" placeholder="What do you need?" />
-            <button type="button" className="search-button">
-              <span className="ti-search" />
-            </button>
-          </form>
-        </div>
-      </div>
+      <SearchNav />
       <div className="col-lg-3 text-right col-md-3">
         <ul className="nav-right">
           <Link to="/profile">
