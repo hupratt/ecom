@@ -48,10 +48,11 @@ class BookList extends React.Component {
         }
       );
     } else {
-      this.props.fetchBooks(
-        bookListURL(this.props.offset, this.state.language)
-      );
-      this.props.refreshCart();
+      const { offset, fetchBooks, refreshCart } = this.props;
+      const { language } = this.state;
+
+      fetchBooks(bookListURL(offset, language));
+      refreshCart();
       document.addEventListener("scroll", this.trackScrolling);
     }
   };
@@ -63,14 +64,11 @@ class BookList extends React.Component {
           category: category_param
         },
         () => {
-          this.props.fetchBooks(
-            bookListURL(
-              this.props.offset,
-              this.state.language,
-              Array.from(this.state.authors.entries()).join(","),
-              this.state.category
-            )
-          );
+          const { offset, fetchBooks } = this.props;
+          const { language, category, authors } = this.state;
+          const authors_array = Array.from(authors.entries()).join(",");
+
+          fetchBooks(bookListURL(offset, language, authors_array, category));
         }
       );
     }
@@ -93,12 +91,12 @@ class BookList extends React.Component {
           authors: urlAuthorMap
         },
         () => {
-          const url_endpoint = bookListURL(
-            this.props.offset,
-            this.state.language,
-            Array.from(this.state.authors.entries()).join(",")
-          );
-          this.props.fetchBooks(url_endpoint);
+          const { offset, fetchBooks } = this.props;
+          const { language, authors } = this.state;
+          const authors_array = Array.from(authors.entries()).join(",");
+          const url_endpoint = bookListURL(offset, language, authors_array);
+
+          fetchBooks(url_endpoint);
         }
       );
     }
@@ -116,44 +114,21 @@ class BookList extends React.Component {
     this.setState({ category: event.currentTarget.text }, () => {
       const { offset, fetchBooks, history } = this.props;
       const { language, category, authors } = this.state;
-      history.push(
-        bookListURL(
-          offset,
-          language,
-          Array.from(authors.entries()).join(","),
-          category
-        )
-      );
-      fetchBooks(
-        bookListURL(
-          offset,
-          language,
-          Array.from(authors.entries()).join(","),
-          category
-        )
-      );
+      const authors_array = Array.from(authors.entries()).join(",");
+
+      history.push(bookListURL(offset, language, authors_array, category));
+      fetchBooks(bookListURL(offset, language, authors_array, category));
     });
   };
+
   onSelectRadio = event => {
     this.setState({ language: event.currentTarget.value }, () => {
       const { offset, fetchBooks, history } = this.props;
       const { language, category, authors } = this.state;
-      history.push(
-        bookListURL(
-          offset,
-          language,
-          Array.from(authors.entries()).join(","),
-          category
-        )
-      );
-      fetchBooks(
-        bookListURL(
-          offset,
-          language,
-          Array.from(authors.entries()).join(","),
-          category
-        )
-      );
+      const authors_array = Array.from(authors.entries()).join(",");
+
+      history.push(bookListURL(offset, language, authors_array, category));
+      fetchBooks(bookListURL(offset, language, authors_array, category));
     });
   };
 
@@ -167,19 +142,10 @@ class BookList extends React.Component {
       () => {
         const { offset, fetchBooks, history } = this.props;
         const { language, category, authors } = this.state;
-        history.push(
-          bookListURL(
-            offset,
-            language,
-            Array.from(authors.entries()).join(","),
-            category
-          )
-        );
-        const url_endpoint = bookListURL(
-          offset,
-          language,
-          Array.from(authors.entries()).join(",")
-        );
+        const authors_array = Array.from(authors.entries()).join(",");
+        const url_endpoint = bookListURL(offset, language, authors_array);
+
+        history.push(bookListURL(offset, language, authors_array, category));
         fetchBooks(url_endpoint);
       }
     );
