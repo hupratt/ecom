@@ -1,15 +1,14 @@
-import React from "react";
-import { fetchCart, handleAddToCart } from "../../../actions/cart";
-import PropTypes from "prop-types";
-import { withRouter } from "react-router-dom";
-import { connect } from "react-redux";
-import { fetchBook } from "../../../actions/book";
-import BookDetail from "./BookDetail";
-import { Container } from "semantic-ui-react";
-import { withLoading, withError } from "../../../hoc/hoc";
-import { Link } from "react-router-dom";
+import { faHome, faLongArrowAltLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome } from "@fortawesome/free-solid-svg-icons";
+import PropTypes from "prop-types";
+import React from "react";
+import { connect } from "react-redux";
+import { Link, withRouter } from "react-router-dom";
+import { Container } from "semantic-ui-react";
+import { fetchBook } from "../../../actions/book";
+import { fetchCart, handleAddToCart } from "../../../actions/cart";
+import { withError, withLoading } from "../../../hoc/hoc";
+import BookDetail from "./BookDetail";
 
 const propTypes = {
   book: PropTypes.object.isRequired,
@@ -27,7 +26,14 @@ class BookDetailPage extends React.Component {
     );
     this.props.refreshCart();
   }
+  // onGoBack = () => {
+  //   const { offset, fetchBooks, history } = this.props;
+  //   const { language, category, authors } = this.state;
+  //   const authors_array = Array.from(authors.entries()).join(",");
 
+  //   history.push(bookListSuffix(offset, language, authors_array, category));
+  //   fetchBooks(bookListURL(offset, language, authors_array, category));
+  // };
   render() {
     const { book, handleAddToCart, isAuthenticated } = this.props;
     return (

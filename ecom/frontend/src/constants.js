@@ -7,7 +7,7 @@ export const endpoint = `${localhost}${apiURL}`;
 export const productListURL = `${endpoint}/products/`;
 
 export const bookListSuffix = (
-  offset,
+  offset = 0,
   language,
   checkedItems = "",
   category = "",
@@ -17,7 +17,7 @@ export const bookListSuffix = (
   `/?limit=12&offset=${offset}&language=${language}&authors=${checkedItems}&category=${category}&price=${price}&text=${text}`;
 
 export const bookListURL = (
-  offset,
+  offset = 0,
   language,
   checkedItems = "",
   category = "",

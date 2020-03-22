@@ -25,16 +25,12 @@ class BookList extends React.Component {
     sliderValues: [10, 30]
   };
   componentDidMount() {
-    this.mapLanguageUrlToState(
-      queryString.parse(this.props.location.search).language
-    );
-    this.mapAuthorUrlToState(
-      queryString.parse(this.props.location.search).authors
-    );
-    this.mapCategoryUrlToState(
-      queryString.parse(this.props.location.search).category
-    );
+    const q = queryString.parse(this.props.location.search);
+    this.mapLanguageUrlToState(q.language);
+    this.mapAuthorUrlToState(q.authors);
+    this.mapCategoryUrlToState(q.category);
   }
+
   mapLanguageUrlToState = lang_param => {
     if (lang_param !== undefined) {
       this.setState(
