@@ -10,7 +10,11 @@ import Checkout from "./components/Payment/Checkout";
 import Profile from "./components/User/Profile";
 import BookDetail from "./components/Books/BookDetailPage";
 
-const BaseRouter = () => (
+const MyBookList = props => {
+  return <BookList {...props} />;
+};
+
+const BaseRouter = props => (
   <Hoc>
     <Route exact path="/books/:bookID" component={BookDetail} />
     <Route path="/login" component={Login} />
@@ -18,7 +22,7 @@ const BaseRouter = () => (
     <Route path="/order-summary" component={OrderSummary} />
     <Route path="/checkout" component={Checkout} />
     <Route path="/profile" component={Profile} />
-    <Route exact path="/" component={BookList} />
+    <Route exact path="/" component={props => MyBookList} />
   </Hoc>
 );
 
