@@ -60,11 +60,9 @@ export const withAuthentication = (WrappedComponent1, WrappedComponent2) => {
   class HOC extends React.Component {
     render() {
       if (this.props.authenticated) {
-        return (
-          <WrappedComponent1 {...this.props}/>
-        );
+        return <WrappedComponent1 {...this.props} />;
       }
-      return <WrappedComponent2 />;
+      return <WrappedComponent2 {...this.props} />;
     }
   }
   return HOC;
@@ -73,14 +71,11 @@ export const withAuthentication = (WrappedComponent1, WrappedComponent2) => {
 export const withItemsInTheCart = (WrappedComponent1, WrappedComponent2) => {
   class HOC extends React.Component {
     render() {
-      if (this.props.cart !== null ) {
-        return (
-          <WrappedComponent1 {...this.props}/>
-        );
+      if (this.props.cart !== null) {
+        return <WrappedComponent1 {...this.props} />;
       }
       return <WrappedComponent2 />;
     }
   }
   return HOC;
 };
-

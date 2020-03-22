@@ -11,10 +11,10 @@ const propTypes = {
   cart: PropTypes.object
 };
 
-const TopNavigationWithAuth = ({ cart }) => {
+const TopNavigationWithAuth = ({ cart, onSearchChange }) => {
   return (
     <React.Fragment>
-      <SearchNav />
+      <SearchNav onSearchChange={onSearchChange} />
       <div className="col-lg-3 text-right col-md-3">
         <ul className="nav-right">
           <Link to="/profile">

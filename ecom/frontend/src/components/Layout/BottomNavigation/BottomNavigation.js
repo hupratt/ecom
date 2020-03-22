@@ -52,6 +52,12 @@ const BottomNavigation = () => {
               <li>
                 <a href="https://www.lapetiteportugaise.eu">Contact</a>
               </li>
+              <li>
+                <a href="https://www.lapetiteportugaise.eu">Privacy Policy</a>
+              </li>
+              <li>
+                <a href="https://www.lapetiteportugaise.eu">Terms of Use</a>
+              </li>
             </ul>
           </div>
           <div className="newslatter-item centermyitems">

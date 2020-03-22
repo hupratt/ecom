@@ -1,6 +1,6 @@
 import React from "react";
 
-const SearchNav = () => {
+const SearchNav = ({ onSearchChange }) => {
   return (
     <React.Fragment>
       <div className="col-lg-7 col-md-7">
@@ -13,6 +13,7 @@ const SearchNav = () => {
               type="text"
               placeholder="What are you looking for?"
               style={{ color: "#0f0f0f" }}
+              onChange={onSearchChange}
             />
           </form>
         </div>

@@ -6,6 +6,8 @@ import TopNavigationNoAuth from "./TopNavigation/TopNavigationNoAuth";
 import TopNavigationWithAuth from "./TopNavigation/TopNavigationWithAuth";
 import PropTypes from "prop-types";
 import BottomNavigation from "../Layout/BottomNavigation/BottomNavigation";
+// debounce so that each state change of the search query does not DDOS our backend
+import { debounce } from "throttle-debounce";
 
 const propTypes = {
   authenticated: PropTypes.bool.isRequired,
@@ -13,6 +15,17 @@ const propTypes = {
 };
 
 class CustomLayout extends React.Component {
+  state = { searchTerm: "" };
+  constructor(props) {
+    super(props);
+    this.autocompleteSearchDebounced = debounce(500, this.autocompleteSearch);
+  }
+  onSearchChange = event => {
+    this.setState({ searchTerm: event.target.value }, () => {
+      this.autocompleteSearchDebounced(this.state.searchTerm);
+    });
+  };
+  autocompleteSearch = () => console.log("hello");
   trackScrolling = () => {
     const el = document.getElementById("fixed-header");
     if (el.getBoundingClientRect().top < -100) {
@@ -55,6 +68,7 @@ class CustomLayout extends React.Component {
                   <TopNavigationWithAuthenticationHandling
                     authenticated={authenticated}
                     cart={cart}
+                    onSearchChange={this.onSearchChange}
                   />
                 </div>
               </div>
