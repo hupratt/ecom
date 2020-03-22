@@ -44,7 +44,7 @@
     "react-popopo": "^2.1.9",
     "react-redux": "^6.0.0",
     "react-resize-image": "^1.0.4",
-    "react-router-dom": "^4.3.1",
+    "react-router-dom": "^5.1.2",
     "react-stripe-elements": "^5.1.0",
     "react-transition-group": "^2.5.3",
     "redux": "^4.0.1",

@@ -214,14 +214,12 @@ class CustomLayout extends React.Component {
             </div>
           </div>
         </header>
-        <BaseRouter>
-          <BookListWrapper
-            onSelectAuthor={this.onSelectAuthor}
-            onSliderChange={this.onSliderChange}
-            onSelectRadio={this.onSelectRadio}
-            handleSetActiveCategory={this.handleSetActiveCategory}
-          />
-        </BaseRouter>
+        <BaseRouter
+          onSelectAuthor={this.onSelectAuthor}
+          onSliderChange={this.onSliderChange}
+          onSelectRadio={this.onSelectRadio}
+          handleSetActiveCategory={this.handleSetActiveCategory}
+        />
         <BottomNavigation />
 
         {/* Header End */}

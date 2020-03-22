@@ -11,7 +11,7 @@ import Profile from "./components/User/Profile";
 import BookDetail from "./components/Books/BookDetailPage";
 
 const BaseRouter = props => {
-  console.log(props);
+  // console.log(props);
   return (
     <Hoc>
       <Route exact path="/books/:bookID" component={BookDetail} />
@@ -20,7 +20,7 @@ const BaseRouter = props => {
       <Route path="/order-summary" component={OrderSummary} />
       <Route path="/checkout" component={Checkout} />
       <Route path="/profile" component={Profile} />
-      <Route exact path="/" component={BookListWrapper} />
+      <Route exact path="/" render={() => <BookListWrapper {...props} />} />
     </Hoc>
   );
 };
