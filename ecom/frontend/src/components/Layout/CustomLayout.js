@@ -69,7 +69,7 @@ class CustomLayout extends React.Component {
         const { offset, fetchBooks, history } = this.props;
         const { language, category, authors, sliderValues } = this.state;
         const authors_array = Array.from(authors.entries()).join(",");
-        const url_endpoint = bookListURL(offset, language, authors_array);
+
         const endpoint = bookListURL(
           offset,
           language,
@@ -80,7 +80,7 @@ class CustomLayout extends React.Component {
         history.push(
           endpoint.slice(endpoint.indexOf("?limit"), endpoint.length)
         );
-        fetchBooks(url_endpoint);
+        fetchBooks(endpoint);
       }
     );
   };
@@ -106,11 +106,15 @@ class CustomLayout extends React.Component {
       const { offset, fetchBooks, history } = this.props;
       const { language, category, authors, sliderValues } = this.state;
       const authors_array = Array.from(authors.entries()).join(",");
-      const endpoint = bookListURL(offset, language, authors_array, category);
-      history.push(endpoint.slice(endpoint.indexOf("?limit"), endpoint.length));
-      fetchBooks(
-        bookListURL(offset, language, authors_array, category, sliderValues)
+      const endpoint = bookListURL(
+        offset,
+        language,
+        authors_array,
+        category,
+        sliderValues
       );
+      history.push(endpoint.slice(endpoint.indexOf("?limit"), endpoint.length));
+      fetchBooks(endpoint);
     });
   };
   onSliderChange = sliderValues => {
@@ -118,11 +122,15 @@ class CustomLayout extends React.Component {
       const { offset, fetchBooks, history } = this.props;
       const { language, category, authors, sliderValues } = this.state;
       const authors_array = Array.from(authors.entries()).join(",");
-      const endpoint = bookListURL(offset, language, authors_array, category);
-      history.push(endpoint.slice(endpoint.indexOf("?limit"), endpoint.length));
-      fetchBooks(
-        bookListURL(offset, language, authors_array, category, sliderValues)
+      const endpoint = bookListURL(
+        offset,
+        language,
+        authors_array,
+        category,
+        sliderValues
       );
+      history.push(endpoint.slice(endpoint.indexOf("?limit"), endpoint.length));
+      fetchBooks(endpoint);
     });
   };
 
@@ -142,9 +150,16 @@ class CustomLayout extends React.Component {
       );
     } else {
       const { offset, fetchBooks, refreshCart } = this.props;
-      const { language } = this.state;
-
-      fetchBooks(bookListURL(offset, language));
+      const { language, category, authors, sliderValues } = this.state;
+      const authors_array = Array.from(authors.entries()).join(",");
+      const endpoint = bookListURL(
+        offset,
+        language,
+        authors_array,
+        category,
+        sliderValues
+      );
+      fetchBooks(endpoint);
       refreshCart();
       document.addEventListener("scroll", this.trackScrolling);
     }
@@ -158,10 +173,16 @@ class CustomLayout extends React.Component {
         },
         () => {
           const { offset, fetchBooks } = this.props;
-          const { language, category, authors } = this.state;
+          const { language, category, authors, sliderValues } = this.state;
           const authors_array = Array.from(authors.entries()).join(",");
-
-          fetchBooks(bookListURL(offset, language, authors_array, category));
+          const endpoint = bookListURL(
+            offset,
+            language,
+            authors_array,
+            category,
+            sliderValues
+          );
+          fetchBooks(endpoint);
         }
       );
     }
@@ -185,11 +206,16 @@ class CustomLayout extends React.Component {
         },
         () => {
           const { offset, fetchBooks } = this.props;
-          const { language, authors } = this.state;
+          const { language, category, authors, sliderValues } = this.state;
           const authors_array = Array.from(authors.entries()).join(",");
-          const url_endpoint = bookListURL(offset, language, authors_array);
-
-          fetchBooks(url_endpoint);
+          const endpoint = bookListURL(
+            offset,
+            language,
+            authors_array,
+            category,
+            sliderValues
+          );
+          fetchBooks(endpoint);
         }
       );
     }
