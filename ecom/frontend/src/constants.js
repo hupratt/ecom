@@ -9,9 +9,11 @@ export const bookListURL = (
   offset,
   language,
   checkedItems = "",
-  category = ""
+  category = "",
+  price = "",
+  text = ""
 ) =>
-  `${endpoint}/books/?limit=12&offset=${offset}&language=${language}&authors=${checkedItems}&category=${category}`;
+  `${endpoint}/books/?limit=12&offset=${offset}&language=${language}&authors=${checkedItems}&category=${category}&price=${price}&text=${text}`;
 export const productDetailURL = id => `${endpoint}/products/${id}/`;
 export const bookDetailURL = id => `${endpoint}/books/${id}/`;
 export const addToCartURL = `${endpoint}/add-to-cart/`;

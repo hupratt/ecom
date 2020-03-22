@@ -8,7 +8,6 @@ import { fetchCart } from "../../../actions/cart";
 import PropTypes from "prop-types";
 import queryString from "query-string";
 import { bookListURL } from "../../../constants";
-import TopNavigationNoAuth from "../../Layout/TopNavigation/TopNavigationNoAuth";
 import { Link } from "react-router-dom";
 
 const propTypes = {
@@ -115,34 +114,44 @@ class BookList extends React.Component {
 
   handleSetActiveCategory = event => {
     this.setState({ category: event.currentTarget.text }, () => {
-      this.props.history.push(
-        `/?language=${this.state.language}&authors=${Array.from(
-          this.state.authors.entries()
-        ).join(",")}&category=${this.state.category}`
-      );
-      this.props.fetchBooks(
+      const { offset, fetchBooks, history } = this.props;
+      const { language, category, authors } = this.state;
+      history.push(
         bookListURL(
-          this.props.offset,
-          this.state.language,
-          Array.from(this.state.authors.entries()).join(","),
-          this.state.category
+          offset,
+          language,
+          Array.from(authors.entries()).join(","),
+          category
+        )
+      );
+      fetchBooks(
+        bookListURL(
+          offset,
+          language,
+          Array.from(authors.entries()).join(","),
+          category
         )
       );
     });
   };
   onSelectRadio = event => {
     this.setState({ language: event.currentTarget.value }, () => {
-      this.props.history.push(
-        `/?language=${this.state.language}&authors=${Array.from(
-          this.state.authors.entries()
-        ).join(",")}&category=${this.state.category}`
-      );
-      this.props.fetchBooks(
+      const { offset, fetchBooks, history } = this.props;
+      const { language, category, authors } = this.state;
+      history.push(
         bookListURL(
-          this.props.offset,
-          this.state.language,
-          Array.from(this.state.authors.entries()).join(","),
-          this.state.category
+          offset,
+          language,
+          Array.from(authors.entries()).join(","),
+          category
+        )
+      );
+      fetchBooks(
+        bookListURL(
+          offset,
+          language,
+          Array.from(authors.entries()).join(","),
+          category
         )
       );
     });
@@ -156,17 +165,22 @@ class BookList extends React.Component {
         authors: prevState.authors.set(item, isChecked)
       }),
       () => {
-        this.props.history.push(
-          `/?language=${this.state.language}&authors=${Array.from(
-            this.state.authors.entries()
-          ).join(",")}&category=${this.state.category}`
+        const { offset, fetchBooks, history } = this.props;
+        const { language, category, authors } = this.state;
+        history.push(
+          bookListURL(
+            offset,
+            language,
+            Array.from(authors.entries()).join(","),
+            category
+          )
         );
         const url_endpoint = bookListURL(
-          this.props.offset,
-          this.state.language,
-          Array.from(this.state.authors.entries()).join(",")
+          offset,
+          language,
+          Array.from(authors.entries()).join(",")
         );
-        this.props.fetchBooks(url_endpoint);
+        fetchBooks(url_endpoint);
       }
     );
   };
