@@ -129,7 +129,21 @@ class BookList extends React.Component {
       fetchBooks(bookListURL(offset, language, authors_array, category));
     });
   };
+  onSliderChange = sliderValues => {
+    this.setState({ sliderValues: sliderValues }, () => {
+      console.log("changed", this.state.sliderValues);
+      const { offset, fetchBooks, history } = this.props;
+      const { language, category, authors, sliderValues } = this.state;
+      const authors_array = Array.from(authors.entries()).join(",");
 
+      history.push(
+        bookListSuffix(offset, language, authors_array, category, sliderValues)
+      );
+      fetchBooks(
+        bookListURL(offset, language, authors_array, category, sliderValues)
+      );
+    });
+  };
   onSelectAuthor = (e, data) => {
     const item = e.target.textContent;
     const isChecked = data.checked;
@@ -170,12 +184,6 @@ class BookList extends React.Component {
         this.props.offset + 12
       );
     }
-  };
-
-  onSliderChange = sliderValues => {
-    this.setState({ sliderValues }, () => {
-      console.log("changed");
-    });
   };
 
   render() {
