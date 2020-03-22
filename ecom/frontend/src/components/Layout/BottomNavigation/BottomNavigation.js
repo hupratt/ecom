@@ -18,9 +18,6 @@ const BottomNavigation = () => {
             <ul>
               <li>Chaussée de Wavre 214B, 1050 Ixelles</li>
               <li>admin@lapetiteportugaise.com </li>
-              <li>Tuesday to Friday: 12:00 - 15:00</li>
-              <li>Saturday: 13:00 - 17:00</li>
-              <li>Sunday: 14:00 - 17:00 </li>
             </ul>
             <div className="footer-social">
               <a href="https://www.facebook.com/lapetiteportugaisebxl/">
@@ -33,6 +30,15 @@ const BottomNavigation = () => {
                 <FontAwesomeIcon icon={faGithub} />
               </a>
             </div>
+          </div>
+          <div className="centermyitems">
+            <h5>Opening Times</h5>
+
+            <ul>
+              <li>Tuesday to Friday: 12:00 - 15:00</li>
+              <li>Saturday: 13:00 - 17:00</li>
+              <li>Sunday: 14:00 - 17:00 </li>
+            </ul>
           </div>
           <div className="footer-widget centermyitems">
             <h5>Links</h5>

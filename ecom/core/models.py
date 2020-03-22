@@ -22,11 +22,42 @@ class UserProfile(models.Model):
         return self.user.username
 
 
+
+class ImageAuteur(models.Model):
+    image = models.FileField(
+        blank=True, null=True, help_text="(optional) room image field"
+    )
+    auteur = models.ForeignKey(
+        "Auteur",
+        on_delete=models.CASCADE,
+        related_name="room_image",
+        help_text="(automatic) room model linkage",
+    )
+    created = models.DateTimeField(
+        auto_now_add=True, help_text="(automatic) created date"
+    )
+    alt = models.CharField(
+        max_length=120,
+        default="blank",
+        help_text="(required) SEO for images in order to provide accessibility for the visually impaired",
+    )
+
+    def __str__(self):
+        return self.alt
+
+    def __unicode__(self):
+        return self.alt
+
+    def get_ordering_queryset(self):
+        return self.auteur.images.all()
+
+
 class Livre(models.Model):
     titre = models.CharField(max_length=50)
     isbn = models.CharField(max_length=50, default="unknown", null=True)
     date_publication = models.DateTimeField(blank=True, null=True)
     prix = models.FloatField(blank=True, null=True)
+    prix_barre = models.FloatField(blank=True, null=True)
     date_achat = models.DateTimeField(blank=True, null=True)
     date_lecture = models.DateTimeField(blank=True, null=True)
     date_entree = models.DateTimeField(blank=True, null=True)
@@ -46,6 +77,11 @@ class Livre(models.Model):
 
     def get_remove_from_cart_url(self):
         return reverse("core:remove-from-cart", kwargs={"id": self.id})
+
+
+class Auteur(models.Model):
+    nom = models.CharField(max_length=50)
+    livre = models.ForeignKey(Livre, on_delete=models.CASCADE, default=1)
 
 
 class ImageLivre(models.Model):
@@ -257,4 +293,3 @@ def userprofile_receiver(sender, instance, created, *args, **kwargs):
 
 
 post_save.connect(userprofile_receiver, sender=settings.AUTH_USER_MODEL)
-
