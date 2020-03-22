@@ -5,6 +5,17 @@ const apiURL = "/api";
 
 export const endpoint = `${localhost}${apiURL}`;
 export const productListURL = `${endpoint}/products/`;
+
+export const bookListSuffix = (
+  offset,
+  language,
+  checkedItems = "",
+  category = "",
+  price = "",
+  text = ""
+) =>
+  `/?limit=12&offset=${offset}&language=${language}&authors=${checkedItems}&category=${category}&price=${price}&text=${text}`;
+
 export const bookListURL = (
   offset,
   language,
@@ -14,6 +25,7 @@ export const bookListURL = (
   text = ""
 ) =>
   `${endpoint}/books/?limit=12&offset=${offset}&language=${language}&authors=${checkedItems}&category=${category}&price=${price}&text=${text}`;
+
 export const productDetailURL = id => `${endpoint}/products/${id}/`;
 export const bookDetailURL = id => `${endpoint}/books/${id}/`;
 export const addToCartURL = `${endpoint}/add-to-cart/`;

@@ -7,7 +7,7 @@ import { withLoading, withError } from "../../../hoc/hoc";
 import { fetchCart } from "../../../actions/cart";
 import PropTypes from "prop-types";
 import queryString from "query-string";
-import { bookListURL } from "../../../constants";
+import { bookListURL, bookListSuffix } from "../../../constants";
 import { Link } from "react-router-dom";
 
 const propTypes = {
@@ -42,7 +42,9 @@ class BookList extends React.Component {
           language: lang_param
         },
         () => {
-          this.props.fetchBooks(bookListURL(this.props.offset, lang_param));
+          this.props.fetchBooks(
+            bookListURL(this.props.offset, this.state.language)
+          );
           this.props.refreshCart();
           document.addEventListener("scroll", this.trackScrolling);
         }
@@ -116,7 +118,7 @@ class BookList extends React.Component {
       const { language, category, authors } = this.state;
       const authors_array = Array.from(authors.entries()).join(",");
 
-      history.push(bookListURL(offset, language, authors_array, category));
+      history.push(bookListSuffix(offset, language, authors_array, category));
       fetchBooks(bookListURL(offset, language, authors_array, category));
     });
   };
@@ -127,7 +129,7 @@ class BookList extends React.Component {
       const { language, category, authors } = this.state;
       const authors_array = Array.from(authors.entries()).join(",");
 
-      history.push(bookListURL(offset, language, authors_array, category));
+      history.push(bookListSuffix(offset, language, authors_array, category));
       fetchBooks(bookListURL(offset, language, authors_array, category));
     });
   };
@@ -145,7 +147,7 @@ class BookList extends React.Component {
         const authors_array = Array.from(authors.entries()).join(",");
         const url_endpoint = bookListURL(offset, language, authors_array);
 
-        history.push(bookListURL(offset, language, authors_array, category));
+        history.push(bookListSuffix(offset, language, authors_array, category));
         fetchBooks(url_endpoint);
       }
     );
