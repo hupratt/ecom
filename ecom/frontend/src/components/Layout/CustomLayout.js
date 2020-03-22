@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
-import { logout } from "../../actions/auth";
 import { withAuthentication } from "../../hoc/hoc";
 import TopNavigationNoAuth from "./TopNavigation/TopNavigationNoAuth";
 import TopNavigationWithAuth from "./TopNavigation/TopNavigationWithAuth";
@@ -10,8 +9,7 @@ import BottomNavigation from "../Layout/BottomNavigation/BottomNavigation";
 
 const propTypes = {
   authenticated: PropTypes.bool.isRequired,
-  cart: PropTypes.object,
-  logout: PropTypes.func.isRequired
+  cart: PropTypes.object
 };
 
 class CustomLayout extends React.Component {
@@ -30,7 +28,7 @@ class CustomLayout extends React.Component {
     document.removeEventListener("scroll", this.trackScrolling);
   };
   render() {
-    const { authenticated, cart, logout } = this.props;
+    const { authenticated, cart } = this.props;
 
     return (
       <React.Fragment>
@@ -57,7 +55,6 @@ class CustomLayout extends React.Component {
                   <TopNavigationWithAuthenticationHandling
                     authenticated={authenticated}
                     cart={cart}
-                    logout={logout}
                   />
                 </div>
               </div>
@@ -87,12 +84,4 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    logout: () => dispatch(logout())
-  };
-};
-
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(CustomLayout)
-);
+export default withRouter(connect(mapStateToProps)(CustomLayout));

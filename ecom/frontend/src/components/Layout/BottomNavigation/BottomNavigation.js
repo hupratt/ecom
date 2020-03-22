@@ -3,8 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebookF,
   faInstagram,
-  faTwitter,
-  faPinterest
+  faGithub
 } from "@fortawesome/free-brands-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 const BottomNavigation = () => {
@@ -17,22 +16,21 @@ const BottomNavigation = () => {
             <h5>Information</h5>
 
             <ul>
-              <li>Address: 60-49 Road 11378 New York</li>
-              <li>Phone: +65 11.188.888</li>
-              <li>Email: hello@gmail.com</li>
+              <li>Chaussée de Wavre 214B, 1050 Ixelles</li>
+              <li>admin@lapetiteportugaise.com </li>
+              <li>Tuesday to Friday: 12:00 - 15:00</li>
+              <li>Saturday: 13:00 - 17:00</li>
+              <li>Sunday: 14:00 - 17:00 </li>
             </ul>
             <div className="footer-social">
-              <a href="#">
+              <a href="https://www.facebook.com/lapetiteportugaisebxl/">
                 <FontAwesomeIcon icon={faFacebookF} />
               </a>
-              <a href="#">
+              <a href="https://www.instagram.com/lapetiteportugaise.bxl/">
                 <FontAwesomeIcon icon={faInstagram} />
               </a>
-              <a href="#">
-                <FontAwesomeIcon icon={faTwitter} />
-              </a>
-              <a href="#">
-                <FontAwesomeIcon icon={faPinterest} />
+              <a href="https://github.com/hupratt/ecom">
+                <FontAwesomeIcon icon={faGithub} />
               </a>
             </div>
           </div>
@@ -40,16 +38,13 @@ const BottomNavigation = () => {
             <h5>Links</h5>
             <ul>
               <li>
-                <a href="#">About Us</a>
+                <a href="https://www.lapetiteportugaise.eu">About Us</a>
               </li>
               <li>
-                <a href="#">Checkout</a>
+                <a href="https://www.lapetiteportugaise.eu">Events</a>
               </li>
               <li>
-                <a href="#">Contact</a>
-              </li>
-              <li>
-                <a href="#">Serivius</a>
+                <a href="https://www.lapetiteportugaise.eu">Contact</a>
               </li>
             </ul>
           </div>

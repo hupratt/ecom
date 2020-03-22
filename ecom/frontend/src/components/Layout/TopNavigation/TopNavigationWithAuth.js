@@ -8,11 +8,10 @@ import { s3_base_url } from "../../../constants";
 import SearchNav from "./SearchNav";
 
 const propTypes = {
-  cart: PropTypes.object,
-  logout: PropTypes.func.isRequired
+  cart: PropTypes.object
 };
 
-const TopNavigationWithAuth = ({ cart, logout }) => {
+const TopNavigationWithAuth = ({ cart }) => {
   return (
     <React.Fragment>
       <SearchNav />
