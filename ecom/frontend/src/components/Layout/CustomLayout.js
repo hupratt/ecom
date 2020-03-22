@@ -15,6 +15,9 @@ import { bookListURL } from "../../constants";
 import { fetchBooks, loadmoar } from "../../actions/books";
 import { fetchCart } from "../../actions/cart";
 import queryString from "query-string";
+import BookListWrapper from "../../hoc/BookListWrapper";
+
+import BookListPage from "../Books/BookListPage";
 
 // const propTypes = {
 //   authenticated: PropTypes.bool.isRequired,
@@ -211,12 +214,14 @@ class CustomLayout extends React.Component {
             </div>
           </div>
         </header>
-        <BaseRouter
-          onSelectAuthor={this.onSelectAuthor}
-          onSliderChange={this.onSliderChange}
-          onSelectRadio={this.onSelectRadio}
-          handleSetActiveCategory={this.handleSetActiveCategory}
-        />
+        <BaseRouter>
+          <BookListWrapper
+            onSelectAuthor={this.onSelectAuthor}
+            onSliderChange={this.onSliderChange}
+            onSelectRadio={this.onSelectRadio}
+            handleSetActiveCategory={this.handleSetActiveCategory}
+          />
+        </BaseRouter>
         <BottomNavigation />
 
         {/* Header End */}

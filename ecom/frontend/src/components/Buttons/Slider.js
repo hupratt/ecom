@@ -23,31 +23,33 @@ const MySlider = ({ sliderValues, onSliderChange }) => {
     <React.Fragment>
       <div className="filter-title">Price</div>
       {/* Wrapper */}
-      <Slider
-        rootStyle={sliderStyle}
-        domain={domain}
-        step={1}
-        mode={2}
-        values={sliderValues}
-        onChange={onSliderChange}
-      >
-        {/* Make rail + make it clickeable */}
-        <div style={railStyle} />
-        {/* Define handles */}
-        <Handles>
-          {({ handles, getHandleProps }) => (
-            <div className="slider-handles">
-              {handles.map(handle => (
-                <Handle
-                  key={handle.id}
-                  handle={handle}
-                  getHandleProps={getHandleProps}
-                />
-              ))}
-            </div>
-          )}
-        </Handles>
-      </Slider>
+      {sliderValues && (
+        <Slider
+          rootStyle={sliderStyle}
+          domain={domain}
+          step={1}
+          mode={2}
+          values={sliderValues}
+          onChange={onSliderChange}
+        >
+          {/* Make rail + make it clickeable */}
+          <div style={railStyle} />
+          {/* Define handles */}
+          <Handles>
+            {({ handles, getHandleProps }) => (
+              <div className="slider-handles">
+                {handles.map(handle => (
+                  <Handle
+                    key={handle.id}
+                    handle={handle}
+                    getHandleProps={getHandleProps}
+                  />
+                ))}
+              </div>
+            )}
+          </Handles>
+        </Slider>
+      )}
     </React.Fragment>
   );
 };
