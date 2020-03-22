@@ -1,9 +1,10 @@
-// export const localhost = "https://shop.lapetiteportugaise.eu";
-export const localhost = "http://127.0.0.1:8000";
+import config from "./config";
+// export const base = "https://shop.lapetiteportugaise.eu";
+export const base = "http://127.0.0.1:8000";
 
 const apiURL = "/api";
 
-export const endpoint = `${localhost}${apiURL}`;
+export const endpoint = `${base}${apiURL}`;
 export const productListURL = `${endpoint}/products/`;
 
 export const bookListURL = (

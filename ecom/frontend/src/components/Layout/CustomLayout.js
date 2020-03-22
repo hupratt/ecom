@@ -8,6 +8,8 @@ import PropTypes from "prop-types";
 import BottomNavigation from "../Layout/BottomNavigation/BottomNavigation";
 // debounce so that each state change of the search query does not DDOS our backend
 import { debounce } from "throttle-debounce";
+import { searchThis } from "../../actions/navigation";
+import BaseRouter from "../../routes";
 
 const propTypes = {
   authenticated: PropTypes.bool.isRequired,
@@ -15,14 +17,13 @@ const propTypes = {
 };
 
 class CustomLayout extends React.Component {
-  state = { searchTerm: "" };
   constructor(props) {
     super(props);
     this.autocompleteSearchDebounced = debounce(500, this.autocompleteSearch);
   }
   onSearchChange = event => {
-    this.setState({ searchTerm: event.target.value }, () => {
-      this.autocompleteSearchDebounced(this.state.searchTerm);
+    this.props.searchThis(event.target, () => {
+      this.autocompleteSearchDebounced(this.props.searchTerm);
     });
   };
   autocompleteSearch = () => console.log("hello");
@@ -70,7 +71,7 @@ class CustomLayout extends React.Component {
             </div>
           </div>
         </header>
-        {this.props.children}
+        <BaseRouter />
         <BottomNavigation />
 
         {/* Header End */}
@@ -89,8 +90,17 @@ CustomLayout.propTypes = propTypes;
 const mapStateToProps = state => {
   return {
     authenticated: state.auth.token !== null,
-    cart: state.cart.shoppingCart
+    cart: state.cart.shoppingCart,
+    searchTerm: state.navigation.searchTerm
   };
 };
 
-export default withRouter(connect(mapStateToProps)(CustomLayout));
+const mapDispatchToProps = dispatch => {
+  return {
+    searchThis: (e, callback) => dispatch(searchThis(e, callback))
+  };
+};
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(CustomLayout)
+);

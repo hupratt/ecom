@@ -131,7 +131,6 @@ class BookList extends React.Component {
   };
   onSliderChange = sliderValues => {
     this.setState({ sliderValues: sliderValues }, () => {
-      console.log("changed", this.state.sliderValues);
       const { offset, fetchBooks, history } = this.props;
       const { language, category, authors, sliderValues } = this.state;
       const authors_array = Array.from(authors.entries()).join(",");
@@ -142,6 +141,7 @@ class BookList extends React.Component {
       );
     });
   };
+
   onSelectAuthor = (e, data) => {
     const item = e.target.textContent;
     const isChecked = data.checked;
@@ -234,7 +234,8 @@ const mapDispatchToProps = dispatch => {
     loadMoar: (url_endpoint, bookPerPage, offset) =>
       dispatch(loadmoar(url_endpoint, bookPerPage, offset)),
     fetchBooks: url_endpoint => dispatch(fetchBooks(url_endpoint)),
-    refreshCart: () => dispatch(fetchCart())
+    refreshCart: () => dispatch(fetchCart()),
+    searchThis: (e, callback) => dispatch(searchThis(e, callback))
   };
 };
 
@@ -248,7 +249,8 @@ const mapStateToProps = state => {
     offset: state.books.offset,
     bookPerPage: state.books.bookPerPage,
     dataIsCached: state.books.data.length != 0,
-    _length: state.books._length
+    _length: state.books._length,
+    searchTerm: state.navigation.searchTerm
   };
 };
 

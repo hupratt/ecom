@@ -1,24 +1,40 @@
+const path = require("path");
+
 module.exports = {
+  entry: "./ecom/frontend/src/index.js",
+  output: {
+    filename: "main.js",
+    path: path.resolve(__dirname, "./frontend/static/frontend/main.js")
+  },
   module: {
     rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader"
-        }
+        use: ["babel-loader"]
       },
       {
-        test: /\.css$/,
-        loader: "style-loader!css-loader"
+        test: /\.s?css$/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: { sourceMap: true }
+          },
+          {
+            loader: "sass-loader",
+            options: { sourceMap: true }
+          }
+        ]
       },
       {
-        test: /\.s[a|c]ss$/,
-        loader: "sass-loader!style-loader!css-loader"
-      },
-      {
-        test: /\.(jpg|png|gif|jpeg|woff|woff2|eot|ttf|svg)$/,
-        loader: "url-loader?limit=100000"
+        test: /\.(jpe?g|png|gif|woff2?|eot|ttf|otf|svg)$/,
+        use: [
+          {
+            loader: "url-loader",
+            options: { limit: 25000 }
+          }
+        ]
       }
     ]
   }

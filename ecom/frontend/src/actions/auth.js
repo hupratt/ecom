@@ -1,6 +1,6 @@
 import axios from "axios";
 import * as actionTypes from "./actionTypes";
-import { localhost } from "../constants";
+import { base } from "../constants";
 
 export const authStart = () => {
   return {
@@ -42,7 +42,7 @@ export const authLogin = (username, password) => {
   return dispatch => {
     dispatch(authStart());
     axios
-      .post(`${localhost}/rest-auth/login/`, {
+      .post(`${base}/rest-auth/login/`, {
         username: username,
         password: password
       })
@@ -65,7 +65,7 @@ export const authSignup = (username, email, password1, password2) => {
   return dispatch => {
     dispatch(authStart());
     axios
-      .post(`${localhost}/rest-auth/registration/`, {
+      .post(`${base}/rest-auth/registration/`, {
         username: username,
         email: email,
         password1: password1,

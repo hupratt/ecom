@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode development --watch ./$npm_package_name/frontend/src/index.js --output ./$npm_package_name/frontend/static/frontend/main.js",
+    "dev": "webpack --mode development --config webpack.config.js --watch ./$npm_package_name/frontend/src/index.js",
     "build": "webpack --mode production ./$npm_package_name/frontend/src/index.js --output ./$npm_package_name/frontend/static/frontend/main.js"
   },
   "devDependencies": {

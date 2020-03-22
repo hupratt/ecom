@@ -3,6 +3,7 @@ import cartReducer from "./cart";
 import booksReducer from "./books";
 import bookReducer from "./book";
 import checkoutReducer from "./checkout";
+import navigationReducer from "./navigation";
 import { createStore, compose, applyMiddleware, combineReducers } from "redux";
 // thunk allows to run async tasks in our action creators
 import thunk from "redux-thunk";
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
   cart: cartReducer,
   books: booksReducer,
   checkout: checkoutReducer,
-  book: bookReducer
+  book: bookReducer,
+  navigation: navigationReducer
 });
 
 export const store = createStore(

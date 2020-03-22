@@ -23,3 +23,4 @@ export const SELECT_CHANGE = "SELECT_CHANGE";
 export const START = "START";
 export const ERROR = "ERROR";
 export const PAYMENT_SUCCESS = "PAYMENT_SUCCESS";
+export const SEARCH = "SEARCH";
