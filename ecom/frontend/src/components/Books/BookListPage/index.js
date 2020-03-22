@@ -6,7 +6,7 @@ import BooksPlusPaginationAndFilters from "./BooksPlusPaginationAndFilters";
 import { withLoading, withError } from "../../../hoc/hoc";
 import PropTypes from "prop-types";
 import { bookListURL } from "../../../constants";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 const propTypes = {
   data: PropTypes.array.isRequired,
@@ -20,6 +20,7 @@ class BookList extends React.Component {
   };
 
   handleClickOnBook = id => {
+    console.log("clicked");
     this.props.history.push(`/books/${id}`);
   };
 
@@ -56,7 +57,6 @@ class BookList extends React.Component {
       authors,
       sliderValues,
       onSelectRadio,
-      handleClickOnBook,
       handleSetActiveCategory,
       onSliderChange
     } = this.props;
@@ -87,7 +87,7 @@ class BookList extends React.Component {
             onSelectAuthor={onSelectAuthor}
             paginatedData={data}
             language={language}
-            handleClickOnBook={handleClickOnBook}
+            handleClickOnBook={this.handleClickOnBook}
             handleSetActiveCategory={handleSetActiveCategory}
             authors={authors}
             onSliderChange={onSliderChange}
@@ -123,4 +123,6 @@ const mapStateToProps = state => {
 
 BookList.propTypes = propTypes;
 
-export default connect(mapStateToProps, mapDispatchToProps)(BookList);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(BookList)
+);

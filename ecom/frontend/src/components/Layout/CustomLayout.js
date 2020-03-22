@@ -15,9 +15,6 @@ import { bookListURL } from "../../constants";
 import { fetchBooks, loadmoar } from "../../actions/books";
 import { fetchCart } from "../../actions/cart";
 import queryString from "query-string";
-import BookListWrapper from "../../hoc/BookListWrapper";
-
-import BookListPage from "../Books/BookListPage";
 
 // const propTypes = {
 //   authenticated: PropTypes.bool.isRequired,
@@ -63,7 +60,6 @@ class CustomLayout extends React.Component {
 
   onSelectAuthor = (e, data) => {
     const item = e.target.textContent;
-    console.log("onselectAuthor");
     const isChecked = data.checked;
     this.setState(
       prevState => ({
@@ -71,10 +67,16 @@ class CustomLayout extends React.Component {
       }),
       () => {
         const { offset, fetchBooks, history } = this.props;
-        const { language, category, authors } = this.state;
+        const { language, category, authors, sliderValues } = this.state;
         const authors_array = Array.from(authors.entries()).join(",");
         const url_endpoint = bookListURL(offset, language, authors_array);
-        const endpoint = bookListURL(offset, language, authors_array, category);
+        const endpoint = bookListURL(
+          offset,
+          language,
+          authors_array,
+          category,
+          sliderValues
+        );
         history.push(
           endpoint.slice(endpoint.indexOf("?limit"), endpoint.length)
         );
@@ -85,9 +87,15 @@ class CustomLayout extends React.Component {
   handleSetActiveCategory = event => {
     this.setState({ category: event.currentTarget.text }, () => {
       const { offset, fetchBooks, history } = this.props;
-      const { language, category, authors } = this.state;
+      const { language, category, authors, sliderValues } = this.state;
       const authors_array = Array.from(authors.entries()).join(",");
-      const endpoint = bookListURL(offset, language, authors_array, category);
+      const endpoint = bookListURL(
+        offset,
+        language,
+        authors_array,
+        category,
+        sliderValues
+      );
       history.push(endpoint.slice(endpoint.indexOf("?limit"), endpoint.length));
       fetchBooks(endpoint);
     });
@@ -96,11 +104,13 @@ class CustomLayout extends React.Component {
   onSelectRadio = event => {
     this.setState({ language: event.currentTarget.value }, () => {
       const { offset, fetchBooks, history } = this.props;
-      const { language, category, authors } = this.state;
+      const { language, category, authors, sliderValues } = this.state;
       const authors_array = Array.from(authors.entries()).join(",");
       const endpoint = bookListURL(offset, language, authors_array, category);
       history.push(endpoint.slice(endpoint.indexOf("?limit"), endpoint.length));
-      fetchBooks(bookListURL(offset, language, authors_array, category));
+      fetchBooks(
+        bookListURL(offset, language, authors_array, category, sliderValues)
+      );
     });
   };
   onSliderChange = sliderValues => {
@@ -186,6 +196,7 @@ class CustomLayout extends React.Component {
   };
   render() {
     const { authenticated, cart } = this.props;
+    const { language, sliderValues, authors } = this.state;
 
     return (
       <React.Fragment>
@@ -219,6 +230,9 @@ class CustomLayout extends React.Component {
           onSliderChange={this.onSliderChange}
           onSelectRadio={this.onSelectRadio}
           handleSetActiveCategory={this.handleSetActiveCategory}
+          language={language}
+          sliderValues={sliderValues}
+          authors={authors}
         />
         <BottomNavigation />
 

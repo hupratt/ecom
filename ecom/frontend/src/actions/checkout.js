@@ -62,7 +62,6 @@ export const handleFetchBillingAddresses = () => {
             value: a.id
           };
         });
-        console.log("billingAddresses");
         const selectedBillingAddress = handleGetDefaultAddress(res.data);
         dispatch(billingSuccess(billingAddresses, selectedBillingAddress));
       })

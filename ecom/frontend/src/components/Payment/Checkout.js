@@ -116,7 +116,6 @@ class CheckoutForm extends Component {
       });
     } else {
       this.setState({ loading: false, error: "Stripe is not loaded" });
-      console.log("error");
     }
   };
 

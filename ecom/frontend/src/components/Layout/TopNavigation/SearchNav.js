@@ -6,7 +6,7 @@ const SearchNav = ({ onSearchChange }) => {
       <div className="col-lg-7 col-md-7">
         <div className="advanced-search">
           <button type="button" className="category-btn">
-            All Categories
+            All Fields
           </button>
           <form action="#" className="input-group">
             <input
