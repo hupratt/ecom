@@ -1,6 +1,4 @@
-import config from "./config";
-// export const base = "https://shop.lapetiteportugaise.eu";
-export const base = "http://127.0.0.1:8000";
+export const base = process.env.REACT_APP_BASE;
 
 const apiURL = "/api";
 

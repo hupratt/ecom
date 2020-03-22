@@ -1,10 +1,12 @@
 const path = require("path");
+const Dotenv = require("dotenv-webpack");
 
 module.exports = {
+  watch: true,
   entry: "./ecom/frontend/src/index.js",
   output: {
     filename: "main.js",
-    path: path.resolve(__dirname, "./frontend/static/frontend/main.js")
+    path: path.resolve(__dirname, "ecom/frontend/static/frontend/main.js")
   },
   module: {
     rules: [
@@ -37,5 +39,6 @@ module.exports = {
         ]
       }
     ]
-  }
+  },
+  plugins: [new Dotenv({ path: "./.env.development" })]
 };

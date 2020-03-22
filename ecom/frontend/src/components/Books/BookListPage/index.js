@@ -189,6 +189,7 @@ class BookList extends React.Component {
   render() {
     const { data, bookPerPage, _length } = this.props;
     const { language, authors, sliderValues } = this.state;
+
     return (
       <React.Fragment>
         {/* Breadcrumb Section Begin */}

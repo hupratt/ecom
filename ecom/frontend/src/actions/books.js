@@ -5,6 +5,9 @@ export const fetchBooks = url_endpoint => {
   return dispatch => {
     dispatch({ type: actionTypes.LOADING });
     console.log("running axios to fetch first 12 books", url_endpoint);
+    console.log(process.env.NODE_ENV);
+    console.log(process.env.REACT_APP_LOCALHOST);
+    console.log("hello");
     axios
       .get(url_endpoint)
       .then(res => {
