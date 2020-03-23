@@ -27,7 +27,7 @@ class CustomLayout extends React.Component {
     authors: new Map(),
     authorsQueryString: "",
     category: "",
-    sliderValues: [10, 30]
+    sliderValues: [0, 100]
   };
   constructor(props) {
     super(props);
@@ -48,15 +48,12 @@ class CustomLayout extends React.Component {
     }
   };
   componentDidMount() {
-    document.addEventListener("scroll", this.trackScrolling);
     const q = queryString.parse(this.props.location.search);
     this.mapLanguageUrlToState(q.language);
     this.mapAuthorUrlToState(q.authors);
     this.mapCategoryUrlToState(q.category);
+    this.props.refreshCart();
   }
-  componentWillUnmount = () => {
-    document.removeEventListener("scroll", this.trackScrolling);
-  };
 
   onSelectAuthor = (e, data) => {
     const item = e.target.textContent;
@@ -222,7 +219,7 @@ class CustomLayout extends React.Component {
   };
   render() {
     const { authenticated, cart } = this.props;
-    const { language, sliderValues, authors } = this.state;
+    const { language, sliderValues, authors, category } = this.state;
 
     return (
       <React.Fragment>
@@ -259,6 +256,7 @@ class CustomLayout extends React.Component {
           language={language}
           sliderValues={sliderValues}
           authors={authors}
+          category={category}
         />
         <BottomNavigation />
 

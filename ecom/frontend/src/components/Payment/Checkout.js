@@ -28,6 +28,7 @@ import {
   handleSelectChange
 } from "../../actions/checkout";
 import axios from "axios";
+import { fetchCart } from "../../actions/cart";
 
 const OrderPreview = ({ data }) => {
   return (
@@ -47,7 +48,7 @@ const OrderPreview = ({ data }) => {
                       {orderItem.quantity} x {orderItem.livre.titre}
                     </Item.Header>
                     <Item.Extra>
-                      <Label>${orderItem.livre.prix}</Label>
+                      <Label>{orderItem.livre.prix} €</Label>
                     </Item.Extra>
                   </Item.Content>
                 </Item>
@@ -59,11 +60,11 @@ const OrderPreview = ({ data }) => {
             <Item>
               <Item.Content>
                 <Item.Header>
-                  Order Total: ${data.total}
+                  Order Total: {data.total} €
                   {data.coupon && (
                     <Label color="green" style={{ marginLeft: "10px" }}>
-                      Current coupon: {data.coupon.code} for $
-                      {data.coupon.amount}
+                      Current coupon: {data.coupon.code} for
+                      {data.coupon.amount} €
                     </Label>
                   )}
                 </Item.Header>
@@ -108,6 +109,8 @@ class CheckoutForm extends Component {
             })
             .then(res => {
               this.setState({ loading: false, success: true });
+              console.log("refresh cart");
+              this.props.refreshCart();
             })
             .catch(err => {
               this.setState({ loading: false, error: err });
@@ -218,7 +221,8 @@ const mapDispatchToProps = dispatch => {
       dispatch(handleSelectChange(name, value)),
     fetchOrder: history => dispatch(handleFetchOrder(history)),
     fetchBillingAddresses: () => dispatch(handleFetchBillingAddresses()),
-    fetchShippingAddresses: () => dispatch(handleFetchShippingAddresses())
+    fetchShippingAddresses: () => dispatch(handleFetchShippingAddresses()),
+    refreshCart: () => dispatch(fetchCart())
   };
 };
 

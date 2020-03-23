@@ -13,7 +13,11 @@ import BookListPage from "./components/Books/BookListPage";
 const BaseRouter = props => {
   return (
     <Hoc>
-      <Route exact path="/books/:bookID" component={BookDetail} />
+      <Route
+        exact
+        path="/books/:bookID"
+        component={() => <BookDetail {...props} />}
+      />
       <Route path="/login" component={Login} />
       <Route path="/signup" component={Signup} />
       <Route path="/order-summary" component={OrderSummary} />

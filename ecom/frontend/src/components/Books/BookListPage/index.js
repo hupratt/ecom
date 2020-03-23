@@ -7,6 +7,7 @@ import { withLoading, withError } from "../../../hoc/hoc";
 import PropTypes from "prop-types";
 import { bookListURL } from "../../../constants";
 import { Link, withRouter } from "react-router-dom";
+import { fetchCart } from "../../../actions/cart";
 
 const propTypes = {
   data: PropTypes.array.isRequired,
@@ -15,12 +16,20 @@ const propTypes = {
   bookPerPage: PropTypes.number.isRequired
 };
 class BookList extends React.Component {
+  componentDidMount() {
+    window.scrollTo(0, 0);
+    document.addEventListener("scroll", this.trackScrolling);
+    console.log("language", this.props.language.length > 0);
+    console.log("authors", this.props.authors.size > 0);
+    console.log("category", this.props.category.length > 0);
+    console.log("sliderValues", this.props.sliderValues.length > 0);
+    console.log("searchTerm", this.props.searchTerm == undefined);
+  }
   componentWillUnmount = () => {
     document.removeEventListener("scroll", this.trackScrolling);
   };
 
   handleClickOnBook = id => {
-    console.log("clicked");
     this.props.history.push(`/books/${id}`);
   };
 
@@ -38,8 +47,8 @@ class BookList extends React.Component {
       this.props.loadMoar(
         bookListURL(
           this.props.offset + 12,
-          this.state.language,
-          Array.from(this.state.authors.entries()).join(",")
+          this.props.language,
+          Array.from(this.props.authors.entries()).join(",")
         ),
         this.props.bookPerPage + 12,
         this.props.offset + 12
@@ -104,7 +113,8 @@ class BookList extends React.Component {
 const mapDispatchToProps = dispatch => {
   return {
     loadMoar: (url_endpoint, bookPerPage, offset) =>
-      dispatch(loadmoar(url_endpoint, bookPerPage, offset))
+      dispatch(loadmoar(url_endpoint, bookPerPage, offset)),
+    refreshCart: () => dispatch(fetchCart())
   };
 };
 
@@ -117,7 +127,8 @@ const mapStateToProps = state => {
     loading: state.books.loading,
     offset: state.books.offset,
     bookPerPage: state.books.bookPerPage,
-    _length: state.books._length
+    _length: state.books._length,
+    searchTerm: state.navigation.searchTerm
   };
 };
 

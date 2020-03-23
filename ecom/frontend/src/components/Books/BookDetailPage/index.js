@@ -9,6 +9,8 @@ import { fetchBook } from "../../../actions/book";
 import { fetchCart, handleAddToCart } from "../../../actions/cart";
 import { withError, withLoading } from "../../../hoc/hoc";
 import BookDetail from "./BookDetail";
+import { bookListURL } from "../../../constants";
+import { fetchBooks } from "../../../actions/books";
 
 const propTypes = {
   book: PropTypes.object.isRequired,
@@ -20,20 +22,14 @@ const propTypes = {
 
 class BookDetailPage extends React.Component {
   componentDidMount() {
+    window.scrollTo(0, 0);
     this.props.fetchBook(
       this.props.match.params.bookID,
       this.props.dataIsCached
     );
     this.props.refreshCart();
   }
-  // onGoBack = () => {
-  //   const { offset, fetchBooks, history } = this.props;
-  //   const { language, category, authors } = this.state;
-  //   const authors_array = Array.from(authors.entries()).join(",");
 
-  //   history.push(bookListSuffix(offset, language, authors_array, category));
-  //   fetchBooks(bookListURL(offset, language, authors_array, category));
-  // };
   render() {
     const { book, handleAddToCart, isAuthenticated } = this.props;
     return (
@@ -46,7 +42,8 @@ class BookDetailPage extends React.Component {
               <div className="col-lg-12">
                 <div className="breadcrumb-text product-more">
                   <Link to="/">
-                    <FontAwesomeIcon icon={faHome} /> Home
+                    <FontAwesomeIcon icon={faHome} />
+                    Home
                   </Link>
                   <span
                     style={{
@@ -78,6 +75,8 @@ const BookDetailWithLoadingAndErrorHandling = withError(BookDetailWithLoading);
 
 const mapDispatchToProps = dispatch => {
   return {
+    fetchBooks: url_endpoint => dispatch(fetchBooks(url_endpoint)),
+
     refreshCart: () => dispatch(fetchCart()),
     fetchBook: (id, dataIsCached) => dispatch(fetchBook(id, dataIsCached)),
     handleAddToCart: (id, isAuthenticated) =>
@@ -94,7 +93,8 @@ const mapStateToProps = state => {
     data: state.book.data,
     book: state.book.book,
     dataIsCached: state.book.dataIsCached,
-    shoppingCart: state.cart.shoppingCart
+    shoppingCart: state.cart.shoppingCart,
+    offset: state.books.offset
   };
 };
 

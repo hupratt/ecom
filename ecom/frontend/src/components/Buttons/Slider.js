@@ -3,8 +3,9 @@ import { Slider, Handles } from "react-compound-slider";
 
 const sliderStyle = {
   position: "relative",
-  width: "50%",
-  height: 70
+  width: "80%",
+  height: 70,
+  marginLeft: 11
 };
 
 const railStyle = {
