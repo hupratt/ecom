@@ -2,6 +2,7 @@ import * as actionTypes from "./actionTypes";
 
 export const searchThis = (e, callback) => {
   return dispatch => {
-    callback(dispatch({ type: actionTypes.SEARCH, event: e }));
+    dispatch({ type: actionTypes.SEARCH, searchTerm: e.target.value });
+    callback(e.target.value);
   };
 };

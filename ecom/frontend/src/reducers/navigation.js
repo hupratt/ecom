@@ -7,7 +7,7 @@ const initState = {
 
 const updateSearch = (state, action) => {
   return updateObject(state, {
-    searchTerm: action.value
+    searchTerm: action.searchTerm
   });
 };
 

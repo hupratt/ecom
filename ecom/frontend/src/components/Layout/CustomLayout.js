@@ -34,11 +34,27 @@ class CustomLayout extends React.Component {
     this.autocompleteSearchDebounced = debounce(500, this.autocompleteSearch);
   }
   onSearchChange = event => {
-    this.props.searchThis(event.target, () => {
-      this.autocompleteSearchDebounced(this.props.searchTerm);
+    this.props.searchThis(event, () => {
+      this.autocompleteSearchDebounced();
     });
   };
-  autocompleteSearch = () => console.log("hello");
+  autocompleteSearch = () => {
+    const { offset, fetchBooks, history, searchTerm } = this.props;
+    const { language, category, authors, sliderValues } = this.state;
+    const authors_array = Array.from(authors.entries()).join(",");
+
+    const endpoint = bookListURL(
+      offset,
+      language,
+      authors_array,
+      category,
+      sliderValues,
+      searchTerm
+    );
+    console.log("searchTerm", searchTerm);
+    history.push(endpoint.slice(endpoint.indexOf("?limit"), endpoint.length));
+    fetchBooks(endpoint);
+  };
   trackScrolling = () => {
     const el = document.getElementById("fixed-header");
     if (el.getBoundingClientRect().top < -100) {
@@ -63,7 +79,7 @@ class CustomLayout extends React.Component {
         authors: prevState.authors.set(item, isChecked)
       }),
       () => {
-        const { offset, fetchBooks, history } = this.props;
+        const { offset, fetchBooks, history, searchTerm } = this.props;
         const { language, category, authors, sliderValues } = this.state;
         const authors_array = Array.from(authors.entries()).join(",");
 
@@ -72,7 +88,8 @@ class CustomLayout extends React.Component {
           language,
           authors_array,
           category,
-          sliderValues
+          sliderValues,
+          searchTerm
         );
         history.push(
           endpoint.slice(endpoint.indexOf("?limit"), endpoint.length)
@@ -83,7 +100,7 @@ class CustomLayout extends React.Component {
   };
   handleSetActiveCategory = event => {
     this.setState({ category: event.currentTarget.text }, () => {
-      const { offset, fetchBooks, history } = this.props;
+      const { offset, fetchBooks, history, searchTerm } = this.props;
       const { language, category, authors, sliderValues } = this.state;
       const authors_array = Array.from(authors.entries()).join(",");
       const endpoint = bookListURL(
@@ -91,7 +108,8 @@ class CustomLayout extends React.Component {
         language,
         authors_array,
         category,
-        sliderValues
+        sliderValues,
+        searchTerm
       );
       history.push(endpoint.slice(endpoint.indexOf("?limit"), endpoint.length));
       fetchBooks(endpoint);
@@ -100,7 +118,7 @@ class CustomLayout extends React.Component {
 
   onSelectRadio = event => {
     this.setState({ language: event.currentTarget.value }, () => {
-      const { offset, fetchBooks, history } = this.props;
+      const { offset, fetchBooks, history, searchTerm } = this.props;
       const { language, category, authors, sliderValues } = this.state;
       const authors_array = Array.from(authors.entries()).join(",");
       const endpoint = bookListURL(
@@ -108,7 +126,8 @@ class CustomLayout extends React.Component {
         language,
         authors_array,
         category,
-        sliderValues
+        sliderValues,
+        searchTerm
       );
       history.push(endpoint.slice(endpoint.indexOf("?limit"), endpoint.length));
       fetchBooks(endpoint);
@@ -116,7 +135,7 @@ class CustomLayout extends React.Component {
   };
   onSliderChange = sliderValues => {
     this.setState({ sliderValues: sliderValues }, () => {
-      const { offset, fetchBooks, history } = this.props;
+      const { offset, fetchBooks, history, searchTerm } = this.props;
       const { language, category, authors, sliderValues } = this.state;
       const authors_array = Array.from(authors.entries()).join(",");
       const endpoint = bookListURL(
@@ -124,7 +143,8 @@ class CustomLayout extends React.Component {
         language,
         authors_array,
         category,
-        sliderValues
+        sliderValues,
+        searchTerm
       );
       history.push(endpoint.slice(endpoint.indexOf("?limit"), endpoint.length));
       fetchBooks(endpoint);
@@ -146,7 +166,7 @@ class CustomLayout extends React.Component {
         }
       );
     } else {
-      const { offset, fetchBooks, refreshCart } = this.props;
+      const { offset, fetchBooks, refreshCart, searchTerm } = this.props;
       const { language, category, authors, sliderValues } = this.state;
       const authors_array = Array.from(authors.entries()).join(",");
       const endpoint = bookListURL(
@@ -154,7 +174,8 @@ class CustomLayout extends React.Component {
         language,
         authors_array,
         category,
-        sliderValues
+        sliderValues,
+        searchTerm
       );
       fetchBooks(endpoint);
       refreshCart();
@@ -169,7 +190,7 @@ class CustomLayout extends React.Component {
           category: category_param
         },
         () => {
-          const { offset, fetchBooks } = this.props;
+          const { offset, fetchBooks, searchTerm } = this.props;
           const { language, category, authors, sliderValues } = this.state;
           const authors_array = Array.from(authors.entries()).join(",");
           const endpoint = bookListURL(
@@ -177,7 +198,8 @@ class CustomLayout extends React.Component {
             language,
             authors_array,
             category,
-            sliderValues
+            sliderValues,
+            searchTerm
           );
           fetchBooks(endpoint);
         }
@@ -202,7 +224,7 @@ class CustomLayout extends React.Component {
           authors: urlAuthorMap
         },
         () => {
-          const { offset, fetchBooks } = this.props;
+          const { offset, fetchBooks, searchTerm } = this.props;
           const { language, category, authors, sliderValues } = this.state;
           const authors_array = Array.from(authors.entries()).join(",");
           const endpoint = bookListURL(
@@ -210,7 +232,8 @@ class CustomLayout extends React.Component {
             language,
             authors_array,
             category,
-            sliderValues
+            sliderValues,
+            searchTerm
           );
           fetchBooks(endpoint);
         }

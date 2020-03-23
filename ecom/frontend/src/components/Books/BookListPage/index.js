@@ -19,16 +19,41 @@ class BookList extends React.Component {
   componentDidMount() {
     window.scrollTo(0, 0);
     document.addEventListener("scroll", this.trackScrolling);
-    console.log("language", this.props.language.length > 0);
-    console.log("authors", this.props.authors.size > 0);
-    console.log("category", this.props.category.length > 0);
-    console.log("sliderValues", this.props.sliderValues.length > 0);
-    console.log("searchTerm", this.props.searchTerm == undefined);
+    if (
+      (this.props.language.length > 0) |
+      (this.props.authors.size > 0) |
+      (this.props.category.length > 0) |
+      (this.props.searchTerm.length > 0)
+    ) {
+      this.mapStateToUrl();
+    }
   }
   componentWillUnmount = () => {
     document.removeEventListener("scroll", this.trackScrolling);
   };
 
+  mapStateToUrl = () => {
+    const {
+      offset,
+      history,
+      searchTerm,
+      language,
+      category,
+      authors,
+      sliderValues
+    } = this.props;
+    const authors_array = Array.from(authors.entries()).join(",");
+
+    const endpoint = bookListURL(
+      offset,
+      language,
+      authors_array,
+      category,
+      sliderValues,
+      searchTerm
+    );
+    history.push(endpoint.slice(endpoint.indexOf("?limit"), endpoint.length));
+  };
   handleClickOnBook = id => {
     this.props.history.push(`/books/${id}`);
   };
