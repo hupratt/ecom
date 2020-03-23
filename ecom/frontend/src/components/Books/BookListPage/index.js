@@ -23,6 +23,8 @@ class BookList extends React.Component {
       (this.props.language.length > 0) |
       (this.props.authors.size > 0) |
       (this.props.category.length > 0) |
+      (JSON.stringify(this.props.sliderValues) !==
+        JSON.stringify(Array(0, 100))) |
       (this.props.searchTerm.length > 0)
     ) {
       this.mapStateToUrl();

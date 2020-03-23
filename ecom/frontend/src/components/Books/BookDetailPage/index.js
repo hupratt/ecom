@@ -34,7 +34,6 @@ class BookDetailPage extends React.Component {
     const { book, handleAddToCart, isAuthenticated } = this.props;
     return (
       <React.Fragment>
-        {" "}
         {/* Breadcrumb Section Begin */}
         <div className="breacrumb-section">
           <div className="container">
@@ -42,8 +41,7 @@ class BookDetailPage extends React.Component {
               <div className="col-lg-12">
                 <div className="breadcrumb-text product-more">
                   <Link to="/">
-                    <FontAwesomeIcon icon={faHome} />
-                    Home
+                    <FontAwesomeIcon icon={faHome} /> Home
                   </Link>
                   <span
                     style={{
