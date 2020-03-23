@@ -111,11 +111,10 @@ class BookListView(ListAPIView):
         if free_text != "":
             queryset = queryset.annotate(
                 search=SearchVector("genre_nom", "auteur_nom")
-            ).filter(search__icontains=free_text)
+            ).filter(search=free_text)
 
         if price_range != "":
             min_price, max_price = price_range.split(",")
-            print(min_price, max_price)
             queryset = queryset.filter(prix__range=(int(min_price), int(max_price)))
 
         if language != "":
