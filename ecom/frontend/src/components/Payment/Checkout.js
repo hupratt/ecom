@@ -108,9 +108,12 @@ class CheckoutForm extends Component {
               selectedShippingAddress
             })
             .then(res => {
-              this.setState({ loading: false, success: true });
-              console.log("refresh cart");
-              this.props.refreshCart();
+              this.setState({ loading: false, success: true }, () => {
+                console.log("refresh cart");
+                this.props.refreshCart();
+                // fix me, refresh not working as we are not dispatching the purge
+                // we are handling the state locally only
+              });
             })
             .catch(err => {
               this.setState({ loading: false, error: err });
