@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.sites",
+    "django.contrib.postgres",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
@@ -170,4 +171,3 @@ if os.environ.get("DJANGO_DEVELOPMENT") is None:
     # Tells the browser to set the cookie only when an HTTPS connection is established
     CSRF_COOKIE_SECURE = True
     SECURE_HSTS_PRELOAD = True
-

@@ -110,7 +110,7 @@ class BookListView(ListAPIView):
 
         if free_text != "":
             queryset = queryset.annotate(
-                search=SearchVector("genre_nom", "auteur_nom")
+                search=SearchVector("genre_nom", "auteur_nom", config="french_unaccent")
             ).filter(search=free_text)
 
         if price_range != "":
