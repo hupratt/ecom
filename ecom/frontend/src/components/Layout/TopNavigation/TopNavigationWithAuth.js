@@ -1,8 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faUser } from "@fortawesome/free-regular-svg-icons";
-import { faShoppingBag } from "@fortawesome/free-solid-svg-icons";
 import PropTypes from "prop-types";
 import { s3_base_url } from "../../../constants";
 import SearchNav from "./SearchNav";
@@ -19,20 +16,20 @@ const TopNavigationWithAuth = ({ cart, onSearchChange }) => {
         <ul className="nav-right">
           <Link to="/profile">
             <li className="user-icon">
-              <FontAwesomeIcon icon={faUser} /> <span></span>
+              <i className="far fa-user" /> <span></span>
             </li>
           </Link>
-          {/* 
+
           <li className="heart-icon">
             <a href="#">
-              <FontAwesomeIcon icon={faHeart} />
+              <i className="far fa-heart" />
             </a>
-          </li> */}
+          </li>
 
           <li className="cart-icon">
             <a href="#">
-              <FontAwesomeIcon icon={faShoppingBag} />
-              {cart !== null ? <span>{cart.order_items.length}</span> : ""}
+              <i className="fa fa-shopping-bag" />
+              {cart && <span>{cart.order_items.length}</span>}
             </a>
             {cart && (
               <div className="cart-hover">

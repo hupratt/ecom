@@ -1,5 +1,3 @@
-import { faHome } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PropTypes from "prop-types";
 import React from "react";
 import { connect } from "react-redux";
@@ -40,7 +38,7 @@ class BookDetailPage extends React.Component {
               <div className="col-lg-12">
                 <div className="breadcrumb-text product-more">
                   <Link to="/">
-                    <FontAwesomeIcon icon={faHome} /> Home
+                    <i className="fas fa-home" /> Home
                   </Link>
                   <span
                     style={{

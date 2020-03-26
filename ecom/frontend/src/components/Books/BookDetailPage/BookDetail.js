@@ -1,12 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { s3_base_url } from "../../../constants";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faStar as faStar0,
-  faHeart
-} from "@fortawesome/free-regular-svg-icons";
-import { faSearchPlus, faStar } from "@fortawesome/free-solid-svg-icons";
 
 const propTypes = {
   handleAddToCart: PropTypes.func.isRequired,
@@ -34,7 +28,7 @@ const BookDetail = ({ handleAddToCart, book, isAuthenticated }) => {
                           alt=""
                         />
                         <div className="zoom-icon">
-                          <FontAwesomeIcon icon={faSearchPlus} />
+                          <i className="fa fa-search-plus" />
                         </div>
                       </div>
                     </div>
@@ -45,15 +39,23 @@ const BookDetail = ({ handleAddToCart, book, isAuthenticated }) => {
                           <span>{book.auteur_nom}</span>
                           <h3>{book.titre}</h3>
                           <a href="#" className="heart-icon">
-                            <FontAwesomeIcon icon={faHeart} />
+                            <i className="far fa-heart" />
                           </a>
                         </div>
                         <div className="pd-rating">
                           {[...Array(book.note)].map((e, i) => (
-                            <FontAwesomeIcon icon={faStar} key={i} />
+                            <i
+                              className="fas fa-star"
+                              key={i}
+                              style={{ color: "#252525" }}
+                            />
                           ))}
                           {[...Array(stars_number_inverse || 0)].map((e, i) => (
-                            <FontAwesomeIcon icon={faStar0} key={i} />
+                            <i
+                              className="far fa-star"
+                              key={i}
+                              style={{ color: "#252525" }}
+                            />
                           ))}
 
                           <span>({book.note}) </span>

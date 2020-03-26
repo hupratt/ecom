@@ -3,7 +3,6 @@ import {
   Container,
   Dimmer,
   Header,
-  Icon,
   Loader,
   Table,
   Button,
@@ -18,9 +17,6 @@ import {
   orderItemUpdateQuantityURL
 } from "../../constants";
 import axios from "axios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
-import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 import { fetchCart } from "../../actions/cart";
 
 class OrderSummary extends React.Component {
@@ -135,16 +131,16 @@ class OrderSummary extends React.Component {
                     </Table.Cell>
                     <Table.Cell>${orderItem.livre.prix}</Table.Cell>
                     <Table.Cell textAlign="center">
-                      <FontAwesomeIcon
-                        icon={faMinus}
+                      <i
+                        className="fas fa-minus"
                         style={{ float: "left", cursor: "pointer" }}
                         onClick={() => {
                           this.handleRemoveQuantityFromCart(orderItem.livre.id);
                         }}
                       />
                       {orderItem.quantity}
-                      <FontAwesomeIcon
-                        icon={faPlus}
+                      <i
+                        className="fas fa-plus"
                         style={{ float: "right", cursor: "pointer" }}
                         onClick={() => {
                           this.handleAddQuantityToCart(orderItem.livre.id);
@@ -152,11 +148,14 @@ class OrderSummary extends React.Component {
                       />
                     </Table.Cell>
                     <Table.Cell>
-                      ${data.total}
-                      <FontAwesomeIcon
-                        icon={faTrashAlt}
-                        color="red"
-                        style={{ float: "right", cursor: "pointer" }}
+                      ${orderItem.quantity * orderItem.livre.prix}
+                      <i
+                        className="far fa-trash-alt"
+                        style={{
+                          float: "right",
+                          cursor: "pointer",
+                          color: "red"
+                        }}
                         onClick={() => {
                           this.handleCancelOrder(orderItem.id);
                         }}
@@ -205,4 +204,6 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(OrderSummary);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(OrderSummary)
+);

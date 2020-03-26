@@ -1,11 +1,5 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faFacebookF,
-  faInstagram,
-  faGithub
-} from "@fortawesome/free-brands-svg-icons";
-import { faHeart } from "@fortawesome/free-regular-svg-icons";
+
 const BottomNavigation = () => {
   return (
     <React.Fragment>
@@ -21,13 +15,13 @@ const BottomNavigation = () => {
             </ul>
             <div className="footer-social">
               <a href="https://www.facebook.com/lapetiteportugaisebxl/">
-                <FontAwesomeIcon icon={faFacebookF} />
+                <i className="fab fa-facebook-f" />
               </a>
               <a href="https://www.instagram.com/lapetiteportugaise.bxl/">
-                <FontAwesomeIcon icon={faInstagram} />
+                <i className="fab fa-instagram" />
               </a>
               <a href="https://github.com/hupratt/ecom">
-                <FontAwesomeIcon icon={faGithub} />
+                <i className="fab fa-github" />
               </a>
             </div>
           </div>
@@ -72,8 +66,8 @@ const BottomNavigation = () => {
         <div className="copyright-reserved">
           <div className="copyright-text">
             Copyright © All rights reserved | Made with
-            <FontAwesomeIcon
-              icon={faHeart}
+            <i
+              className="fas fa-heart"
               style={{
                 marginLeft: "10px",
                 marginRight: "10px",
