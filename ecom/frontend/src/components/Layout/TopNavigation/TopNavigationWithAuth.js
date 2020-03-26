@@ -31,41 +31,40 @@ const TopNavigationWithAuth = ({ cart, onSearchChange }) => {
 
           <li className="cart-icon">
             <a href="#">
-              <FontAwesomeIcon icon={faShoppingBag} /> <span>1</span>
-              <span>{`${cart !== null ? cart.order_items.length : 0}`}</span>
+              <FontAwesomeIcon icon={faShoppingBag} />
+              {cart !== null ? <span>{cart.order_items.length}</span> : ""}
             </a>
-            <React.Fragment>
+            {cart && (
               <div className="cart-hover">
                 <div className="select-items">
                   <table>
                     <tbody>
-                      {cart &&
-                        cart.order_items.map(order_item => {
-                          return (
-                            <tr key={order_item.id}>
-                              <td className="si-pic">
-                                <img
-                                  src={
-                                    s3_base_url + order_item.livre.isbn + ".jpg"
-                                  }
-                                  alt=""
-                                />
-                              </td>
-                              <td className="si-text">
-                                <div className="product-selected">
-                                  <p>
-                                    {order_item.livre.prix} x{" "}
-                                    {order_item.quantity} €
-                                  </p>
-                                  <h6>{order_item.livre.titre}</h6>
-                                </div>
-                              </td>
-                              <td className="si-close">
-                                <i className="ti-close" />
-                              </td>
-                            </tr>
-                          );
-                        })}
+                      {cart.order_items.map(order_item => {
+                        return (
+                          <tr key={order_item.id}>
+                            <td className="si-pic">
+                              <img
+                                src={
+                                  s3_base_url + order_item.livre.isbn + ".jpg"
+                                }
+                                alt=""
+                              />
+                            </td>
+                            <td className="si-text">
+                              <div className="product-selected">
+                                <p>
+                                  {order_item.livre.prix} x{" "}
+                                  {order_item.quantity} €
+                                </p>
+                                <h6>{order_item.livre.titre}</h6>
+                              </div>
+                            </td>
+                            <td className="si-close">
+                              <i className="ti-close" />
+                            </td>
+                          </tr>
+                        );
+                      })}
                     </tbody>
                   </table>
                 </div>
@@ -82,7 +81,7 @@ const TopNavigationWithAuth = ({ cart, onSearchChange }) => {
                   </Link>
                 </div>
               </div>
-            </React.Fragment>
+            )}
           </li>
         </ul>
       </div>
