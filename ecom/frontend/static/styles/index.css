@@ -4393,6 +4393,7 @@ label
           justify-content: space-between;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  min-height: 700px;
 }
 
 .bk-list li {

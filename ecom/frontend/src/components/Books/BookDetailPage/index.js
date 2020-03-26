@@ -9,7 +9,6 @@ import { fetchBook } from "../../../actions/book";
 import { fetchCart, handleAddToCart } from "../../../actions/cart";
 import { withError, withLoading } from "../../../hoc/hoc";
 import BookDetail from "./BookDetail";
-import { bookListURL } from "../../../constants";
 import { fetchBooks } from "../../../actions/books";
 
 const propTypes = {
