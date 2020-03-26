@@ -15,6 +15,7 @@ const propTypes = {
 };
 
 const BookDetail = ({ handleAddToCart, book, isAuthenticated }) => {
+  const stars_number_inverse = 5 - book.note;
   return (
     <div>
       {/* Product Shop Section Begin */}
@@ -48,12 +49,14 @@ const BookDetail = ({ handleAddToCart, book, isAuthenticated }) => {
                           </a>
                         </div>
                         <div className="pd-rating">
-                          <FontAwesomeIcon icon={faStar} />
-                          <FontAwesomeIcon icon={faStar} />
-                          <FontAwesomeIcon icon={faStar} />
-                          <FontAwesomeIcon icon={faStar} />
-                          <FontAwesomeIcon icon={faStar0} />
-                          <span>{book.note} </span>
+                          {[...Array(book.note)].map((e, i) => (
+                            <FontAwesomeIcon icon={faStar} key={i} />
+                          ))}
+                          {[...Array(stars_number_inverse || 0)].map((e, i) => (
+                            <FontAwesomeIcon icon={faStar0} key={i} />
+                          ))}
+
+                          <span>({book.note}) </span>
                         </div>
                         <div className="pd-desc">
                           <p>{book.description}</p>
