@@ -35,12 +35,14 @@ const BooksPlusPaginationAndFilters = ({
         <CategoryFilter handleSetActiveCategory={handleSetActiveCategory} />
         <MySlider onSliderChange={onSliderChange} sliderValues={sliderValues} />
         <p>
-          Displaying {bookPerPage} of {length} books
+          Displaying {paginatedData.length} of {length} books
         </p>
       </div>
       <BookGrid
         paginatedData={paginatedData}
         handleClickOnBook={handleClickOnBook}
+        paginatedDataLength={paginatedData.length}
+        length={length}
       />
     </React.Fragment>
   );

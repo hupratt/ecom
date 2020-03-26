@@ -26,7 +26,14 @@ const propTypes = {
   handleClickOnBook: PropTypes.func.isRequired
 };
 
-const BookGrid = ({ paginatedData, handleClickOnBook }) => {
+const BookGrid = ({
+  paginatedData,
+  handleClickOnBook,
+  paginatedDataLength,
+  length
+}) => {
+  console.log(length, paginatedDataLength);
+
   return (
     <React.Fragment>
       <Grid divided>
@@ -88,49 +95,50 @@ const BookGrid = ({ paginatedData, handleClickOnBook }) => {
               </li>
             );
           })}
-          {[...Array(8)].map((e, i) => (
-            <li key={i}>
-              <div className="bk-book bk-bookdefault">
-                <div className="bk-front" id="loadmoar">
-                  <div className="bk-cover-back"></div>
-                  <Segment>
-                    <Dimmer active inverted>
-                      <Loader inverted>Loading</Loader>
-                    </Dimmer>
-                  </Segment>
-                </div>
-                <div className="bk-page">
-                  <div className="bk-content bk-content-current"></div>
-                </div>
-                <div className="bk-back"></div>
-                <div className="bk-right"></div>
+          {length - paginatedDataLength > 0 &&
+            [...Array(length - paginatedDataLength || 0)].map((e, i) => (
+              <li key={i}>
+                <div className="bk-book bk-bookdefault">
+                  <div className="bk-front" id="loadmoar">
+                    <div className="bk-cover-back"></div>
+                    <Segment>
+                      <Dimmer active inverted>
+                        <Loader inverted>Loading</Loader>
+                      </Dimmer>
+                    </Segment>
+                  </div>
+                  <div className="bk-page">
+                    <div className="bk-content bk-content-current"></div>
+                  </div>
+                  <div className="bk-back"></div>
+                  <div className="bk-right"></div>
 
-                <div className="bk-left">
-                  <h2>
+                  <div className="bk-left">
+                    <h2>
+                      <span>Lorem, ipsum.</span>
+                      <span>Lorem, ipsum.</span>
+                    </h2>
+                  </div>
+                  <div className="bk-top"></div>
+                  <div className="bk-bottom"></div>
+                </div>
+
+                <div className="bk-info">
+                  <FlipButton />
+                  <ViewInsideButton />
+                  <h3>
                     <span>Lorem, ipsum.</span>
                     <span>Lorem, ipsum.</span>
-                  </h2>
+                  </h3>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Officia soluta beatae nesciunt hic debitis repellat nobis
+                    alias sapiente blanditiis, laboriosam natus nemo?
+                    Consequatur maxime fugit tempora molestiae sunt culpa omnis?
+                  </p>
                 </div>
-                <div className="bk-top"></div>
-                <div className="bk-bottom"></div>
-              </div>
-
-              <div className="bk-info">
-                <FlipButton />
-                <ViewInsideButton />
-                <h3>
-                  <span>Lorem, ipsum.</span>
-                  <span>Lorem, ipsum.</span>
-                </h3>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Officia soluta beatae nesciunt hic debitis repellat nobis
-                  alias sapiente blanditiis, laboriosam natus nemo? Consequatur
-                  maxime fugit tempora molestiae sunt culpa omnis?
-                </p>
-              </div>
-            </li>
-          ))}
+              </li>
+            ))}
         </ul>
       </Grid>
     </React.Fragment>

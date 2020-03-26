@@ -70,15 +70,28 @@ class BookList extends React.Component {
 
   trackScrolling = () => {
     const wrappedElement = document.getElementById("loadmoar");
-    if (this.isBottom(wrappedElement) && this.props.loading == false) {
-      this.props.loadMoar(
+    const {
+      _length,
+      loading,
+      loadMoar,
+      offset,
+      language,
+      authors,
+      bookPerPage
+    } = this.props;
+    if (
+      this.isBottom(wrappedElement) &&
+      loading == false &&
+      offset + 12 < _length
+    ) {
+      loadMoar(
         bookListURL(
-          this.props.offset + 12,
-          this.props.language,
-          Array.from(this.props.authors.entries()).join(",")
+          offset + 12,
+          language,
+          Array.from(authors.entries()).join(",")
         ),
-        this.props.bookPerPage + 12,
-        this.props.offset + 12
+        bookPerPage + 12,
+        offset + 12
       );
     }
   };
@@ -96,7 +109,6 @@ class BookList extends React.Component {
       handleSetActiveCategory,
       onSliderChange
     } = this.props;
-
     return (
       <React.Fragment>
         {/* Breadcrumb Section Begin */}
