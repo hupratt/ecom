@@ -4762,6 +4762,14 @@ label
 }
 
 /* End Individual style & artwork */
+i.icon::before {
+  font-family: "Font Awesome 5 Free";
+}
+
+i.icon.lock::before {
+  content: "\f585";
+}
+
 .ui.container {
   margin-top: 50px;
 }
@@ -4806,6 +4814,7 @@ label
 .footer-section {
   background: #222222;
   padding-top: 75px;
+  margin-top: 15vh;
 }
 
 .inner-header .row {

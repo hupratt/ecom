@@ -1,1 +1,6 @@
-
+i.icon::before {
+  font-family: "Font Awesome 5 Free";
+}
+i.icon.lock::before {
+  content: "\f585";
+}
