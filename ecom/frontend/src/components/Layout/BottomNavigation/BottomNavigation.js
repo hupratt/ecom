@@ -67,11 +67,12 @@ const BottomNavigation = () => {
           <div className="copyright-text">
             Copyright © All rights reserved | Made with
             <i
-              className="fas fa-heart"
+              className="far fa-heart"
               style={{
-                marginLeft: "10px",
-                marginRight: "10px",
-                marginTop: "3px"
+                marginLeft: "7px",
+                marginRight: "7px",
+                marginTop: "3px",
+                color: "#b2b2b2"
               }}
             />
             by a fellow member

@@ -6,12 +6,6 @@
   max-width: 1460px;
 }
 
-.footer-section {
-  padding-right: 150px;
-  padding-left: 150px;
-  margin-top: 15vh;
-}
-
 .footer-flex {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -29,16 +23,25 @@
 }
 
 .copyright-reserved {
+  background: #111111;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-flow: row wrap;
           flex-flow: row wrap;
   -ms-flex-pack: distribute;
       justify-content: space-around;
+  padding-right: 150px;
+  padding-left: 150px;
+  margin-top: 15vh;
 }
 
 .copyright-reserved img {
   float: right;
+}
+
+.footer-section {
+  background: #222222;
+  padding-top: 75px;
 }
 
 .inner-header .row {

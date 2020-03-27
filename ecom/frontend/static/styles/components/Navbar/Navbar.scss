@@ -6,12 +6,6 @@
   max-width: 1460px;
 }
 
-.footer-section {
-  padding-right: 150px;
-  padding-left: 150px;
-  margin-top: 15vh;
-}
-
 .footer-flex {
   display: flex;
   flex-direction: row;
@@ -22,11 +16,20 @@
 }
 
 .copyright-reserved {
+  background: #111111;
   img {
     float: right;
   }
   flex-flow: row wrap;
   justify-content: space-around;
+  padding-right: 150px;
+  padding-left: 150px;
+  margin-top: 15vh;
+}
+
+.footer-section {
+  background: #222222;
+  padding-top: 75px;
 }
 
 .inner-header {
