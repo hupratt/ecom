@@ -3,9 +3,11 @@ asgiref==3.2.3
 astroid==2.2.5
 attrs==19.3.0
 autopep8==1.4.4
+beautifulsoup4==4.8.2
 black==19.3b0
 boto3==1.11.9
 botocore==1.14.9
+bs4==0.0.1
 certifi==2019.6.16
 cffi==1.13.1
 chardet==3.0.4
@@ -34,7 +36,9 @@ lazy-object-proxy==1.4.1
 mccabe==0.6.1
 mypy==0.761
 mypy-extensions==0.4.3
+numpy==1.18.2
 oauthlib==3.0.1
+pandas==1.0.3
 pep8==1.7.1
 Pillow==6.2.1
 pkg-resources==0.0.0
@@ -50,6 +54,7 @@ s3transfer==0.3.2
 selenium==3.141.0
 sentry-sdk==0.14.1
 six==1.14.0
+soupsieve==2.0
 sqlparse==0.3.0
 stripe==2.38.0
 toml==0.10.0
