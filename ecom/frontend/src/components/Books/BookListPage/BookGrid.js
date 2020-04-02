@@ -99,6 +99,7 @@ const BookGrid = ({
                       <h3>
                         <span>{item.auteur_nom}</span>
                         <span>{item.titre}</span>
+                        <span>{item.isbn}</span>
                       </h3>
                       <p>
                         {item.langue_nom} {item.genre_nom} {"    "}
