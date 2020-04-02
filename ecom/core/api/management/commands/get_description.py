@@ -4,7 +4,7 @@ isbn_list = [5601072406254,	5601072496293,	9781447299844,	9781521470879,	9781717
 ]
 
 
-
+from selenium.webdriver.common.keys import Keys
 from django.db import IntegrityError
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -82,16 +82,20 @@ def create_connection(db_file):
 
 def make_webdriver():
     options = Options()
-    options.add_argument('--headless')
+    # options.add_argument('--headless')
     options.add_argument('--disable-gpu')
     options.add_argument('--no-sandbox')
     options.add_argument("user-agent=[User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:74.0) Gecko/20100101 Firefox/74.0]")
     driver = webdriver.Chrome('/usr/bin/chromedriver', chrome_options=options)
     return driver
 
-def grab_from_amazon(url, driver):
-
+def grab_from_amazon(url, isbn, driver):
+    search_query = 'site:amazon.com.br/ AND ' + str(isbn)
     driver.get(url)
+    search_query = driver.find_element_by_name('q').send_keys(search_query)
+    time.sleep(0.5)
+    driver.find_element_by_name('q').send_keys(Keys.RETURN)
+    time.sleep(3)
     soup = BeautifulSoup(driver.page_source, features="html.parser")
     text = soup.find_all(text=True)
     output = ''
@@ -192,7 +196,7 @@ def main():
     # url = 'https://www.amazon.com.br/dp/'
     url = 'https://www.google.pt/'
     for isbn in isbn_list:
-        description = grab_from_amazon(url+str(isbn)+'/', make_webdriver())
+        description = grab_from_amazon(url,isbn, make_webdriver())
         print(description)
         # create_excel(json, len_json)
         # add_to_sqlite(json, database)
