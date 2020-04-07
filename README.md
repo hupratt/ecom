@@ -44,19 +44,3 @@ echo '*' > .mypy_cache/.gitignore
 
 REACT_APP_BASE=https://shop.lapetiteportugaise.eu
 REACT_APP_BASE=http://127.0.0.1:8000
-
-        # find element 'f-productSummary-readMore'
-        # try:
-        #     acceptbutton = driver.find_element_by_class_name('accept-cookies-button')
-        #     driver.execute_script("window.scrollTo(0, 600)")
-        #     time.sleep(2)
-        #     acceptbutton.click()
-        #     time.sleep(2)
-        #     button = driver.find_element_by_class_name('f-productSummary-readMore')
-        #     button.click()
-
-        # except NoSuchElementException:
-        #     pass
-        # except ElementNotVisibleException:
-        #     pass
-        # text = soup.findAll("span", {"class":"js-ProductSummary-truncate"})[0].contents[0]
