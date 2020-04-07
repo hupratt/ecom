@@ -41,3 +41,6 @@ npm run dev
 ```
 echo '*' > .mypy_cache/.gitignore
 ```
+
+REACT_APP_BASE=https://shop.lapetiteportugaise.eu
+REACT_APP_BASE=http://127.0.0.1:8000
