@@ -94,6 +94,46 @@ def grab_from_amazon(url, isbn, driver):
             print(f'url {isbn} has no description')
         return output
 
+def grab_from_fnac(url, isbn, driver):
+    search_query = 'site:fnac.pt/ AND ' + str(isbn)
+    driver.get(url)
+    search_query = driver.find_element_by_name('q').send_keys(search_query)
+    time.sleep(0.5)
+    driver.find_element_by_name('q').send_keys(Keys.RETURN)
+    time.sleep(3)
+    soup = BeautifulSoup(driver.page_source, features="html.parser")
+    cites = driver.find_elements_by_tag_name('cite')
+    output = ''
+    for cite in cites:
+        if len(cite.text)>0:
+           index = cite.text.find("› ")
+           output = cite.text[index+2:]
+           break
+    url = ''
+    for a in soup.find_all('a'):
+        if 'href' in a.attrs:
+            if output[:output.find('...')] in a['href']:
+                url = a['href']
+                l = [m.start() for m in re.finditer(r"https",url)]
+                url = url[l[-1]:]
+                break
+    if len(url)>0:
+        driver.get(url)
+        soup = BeautifulSoup(driver.page_source, features="html.parser")
+        text = soup.find_all(text=True)
+        output = ''
+        whitelist = 'noscript'
+        for t in text:
+            if t.parent.name == whitelist:
+                output += '{} '.format(t)
+
+        start = output.find("<div>") + 6
+        end = output.find("</div>")
+        output = output[start:end]
+        if len(output)==0:
+            print(f'url {isbn} has no description')
+        return output
+
 def add_to_postgres(json):
     print("trying to connect to db ...")
     c, conn = create_connection_postgres()
@@ -120,8 +160,11 @@ def main():
     url = 'https://www.google.pt/'
     driver = make_webdriver()
     _json = dict()
+    description = ''
     for isbn in isbn_list:
         description = grab_from_amazon(url, str(isbn), driver)
+        if len(description) == 0:
+            description = grab_from_fnac(url, str(isbn), driver)
         _json[isbn] = description
         print(isbn, description[:3])
 
