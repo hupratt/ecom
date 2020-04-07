@@ -22,7 +22,6 @@ class UserProfile(models.Model):
         return self.user.username
 
 
-
 class ImageAuteur(models.Model):
     image = models.FileField(
         blank=True, null=True, help_text="(optional) room image field"
@@ -54,6 +53,7 @@ class ImageAuteur(models.Model):
 
 class Livre(models.Model):
     titre = models.CharField(max_length=50)
+    description = models.TextField(default="")
     isbn = models.CharField(max_length=50, default="unknown", null=True)
     date_publication = models.DateTimeField(blank=True, null=True)
     prix = models.FloatField(blank=True, null=True)
