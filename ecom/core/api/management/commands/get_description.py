@@ -54,6 +54,8 @@ def make_webdriver():
     options.add_argument('--disable-gpu')
     options.add_argument('--no-sandbox')
     options.add_argument("user-agent=[User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:74.0) Gecko/20100101 Firefox/74.0]")
+    
+    options.add_argument("user-data-dir = /home/ubuntu/.config/google-chrome/Default") #Extract this path from "chrome://version/"
     driver = webdriver.Chrome('/usr/bin/chromedriver', chrome_options=options)
     return driver
 
@@ -70,7 +72,7 @@ def grab_from_amazon(url, isbn, driver):
         driver.find_element_by_name('q').send_keys(Keys.RETURN)
     except NoSuchElementException:
         pass
-    time.sleep(3)
+    time.sleep(25)
     soup = BeautifulSoup(driver.page_source, features="html.parser")
     try:
         cites = driver.find_elements_by_tag_name('cite')
@@ -122,7 +124,7 @@ def grab_from_fnac(url, isbn, driver):
         driver.find_element_by_name('q').send_keys(Keys.RETURN)
     except NoSuchElementException:
         pass
-    time.sleep(3)
+    time.sleep(25)
     soup = BeautifulSoup(driver.page_source, features="html.parser")
     try:
         cites = driver.find_elements_by_tag_name('cite')
@@ -189,7 +191,7 @@ def grab_from_bertrand(url, isbn, driver):
         driver.find_element_by_name('q').send_keys(Keys.RETURN)
     except NoSuchElementException:
         pass
-    time.sleep(3)
+    time.sleep(25)
     soup = BeautifulSoup(driver.page_source, features="html.parser")
     try:
         cites = driver.find_elements_by_tag_name('cite')
@@ -218,6 +220,7 @@ def grab_from_bertrand(url, isbn, driver):
                         break
         if len(url)>0:
             driver.get(url)
+            time.sleep(25)
             text = ''
             soup = BeautifulSoup(driver.page_source, features="html.parser")
             time.sleep(2)
@@ -250,6 +253,32 @@ def grab_from_bertrand(url, isbn, driver):
     else:
         return ''
 
+def check_desc_already_exists(isbn):
+    c, conn = create_connection_postgres()
+    try:
+        c.execute(
+            "SELECT description FROM core_livre WHERE isbn='%s'", (isbn,))
+        if len(c.fetchone()[0]) == 0:
+            return False
+        return True
+
+    except psycopg2.IntegrityError:
+        conn.rollback()
+    except (Exception, psycopg2.Error) as error:
+        print(error)
+    if(conn):
+        c.close()
+        conn.close()
+
+def login_google(driver):
+    time.sleep(5)
+    driver.find_element_by_name('identifier').send_keys(os.environ.get('mail'))
+    driver.find_element_by_id("identifierNext").click()
+    time.sleep(7)
+    driver.find_element_by_name('password').send_keys(os.environ.get('password_gmail'))
+    driver.find_element_by_name('password').send_keys(Keys.RETURN)
+    time.sleep(25)
+
 def add_to_postgres(json):
     c, conn = create_connection_postgres()
     for isbn, description in json.items():
@@ -258,11 +287,12 @@ def add_to_postgres(json):
             #     "SELECT description FROM core_livre WHERE isbn='%s'", (isbn,))
             # isbn exists and description is empty
             # if c.fetchone() is not None and len(c.fetchone()[0]) == 0:
-            c.execute("UPDATE core_livre SET description='%s' WHERE isbn='%s' ", (description, isbn))
-            print('added comment:', description)
+            c.execute("UPDATE core_livre SET description='%s' WHERE isbn='%s' ", (description.replace("'",""), isbn))
             conn.commit()
+            print('commit success')
         except psycopg2.IntegrityError:
             conn.rollback()
+            print('IntegrityError')
         except (Exception, psycopg2.Error) as error:
             print(error)
     if(conn):
@@ -270,20 +300,24 @@ def add_to_postgres(json):
         conn.close()
 
 def main():
+    # url = 'https://www.google.com/accounts/Login?hl=pt&continue=https://www.google.pt/'
     url = 'https://www.google.pt/'
     driver = make_webdriver()
+    # driver.get(url)
+    # login_google(driver)
     description = ''
     for isbn in isbn_list:
         _json = dict()
-        description = grab_from_fnac(url, str(isbn), driver) 
-        if len(description) == 0:
-            description = grab_from_bertrand(url, str(isbn), driver)
+        if check_desc_already_exists(isbn) is False:
+            description = grab_from_fnac(url, str(isbn), driver) 
             if len(description) == 0:
-                description = grab_from_amazon(url, str(isbn), driver)
-        _json[isbn] = description
-        print(_json)
-        print(f"{isbn} recorded in db")
-        add_to_postgres(_json)
+                description = grab_from_bertrand(url, str(isbn), driver)
+                if len(description) == 0:
+                    description = grab_from_amazon(url, str(isbn), driver)
+            if len(description) != 0:
+                _json[isbn] = description
+                add_to_postgres(_json)
+                print(f"{isbn} recorded in db")
 
     
 

@@ -1,1 +1,3 @@
-﻿UPDATE core_livre SET description=hello WHERE isbn='9789896659080';  
+﻿SELECT id, titre, isbn, description
+  FROM public.core_livre WHERE length(description)>2
+
