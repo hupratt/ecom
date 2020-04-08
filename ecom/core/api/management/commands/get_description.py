@@ -251,17 +251,16 @@ def grab_from_bertrand(url, isbn, driver):
         return ''
 
 def add_to_postgres(json):
-    print("trying to connect to db ...")
     c, conn = create_connection_postgres()
-    print("started commiting to db .")
     for isbn, description in json.items():
         try:
-            c.execute(
-                'SELECT description FROM core_livre WHERE isbn=%s', isbn)
-            if c.fetchone() is None:
-                c.execute("UPDATE core_livre SET description='%s' WHERE isbn='%s' ", (description, isbn))
-                print('added comment:', description)
-                conn.commit()
+            # c.execute(
+            #     "SELECT description FROM core_livre WHERE isbn='%s'", (isbn,))
+            # isbn exists and description is empty
+            # if c.fetchone() is not None and len(c.fetchone()[0]) == 0:
+            c.execute("UPDATE core_livre SET description='%s' WHERE isbn='%s' ", (description, isbn))
+            print('added comment:', description)
+            conn.commit()
         except psycopg2.IntegrityError:
             conn.rollback()
         except (Exception, psycopg2.Error) as error:
@@ -269,8 +268,6 @@ def add_to_postgres(json):
     if(conn):
         c.close()
         conn.close()
-        print("PostgreSQL connection is closed")
-
 
 def main():
     url = 'https://www.google.pt/'
@@ -284,6 +281,8 @@ def main():
             if len(description) == 0:
                 description = grab_from_amazon(url, str(isbn), driver)
         _json[isbn] = description
+        print(_json)
+        print(f"{isbn} recorded in db")
         add_to_postgres(_json)
 
     
