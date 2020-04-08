@@ -260,18 +260,18 @@ def add_to_postgres(json):
 def main():
     url = 'https://www.google.pt/'
     driver = make_webdriver()
-    _json = dict()
     description = ''
     for isbn in isbn_list:
+        _json = dict()
         description = grab_from_fnac(url, str(isbn), driver) 
         if len(description) == 0:
             description = grab_from_bertrand(url, str(isbn), driver)
             if len(description) == 0:
                 description = grab_from_amazon(url, str(isbn), driver)
         _json[isbn] = description
-        print(isbn, description[:3])
+        add_to_postgres(_json)
 
-    add_to_postgres(_json)
+    
 
 
 if __name__ == '__main__':
