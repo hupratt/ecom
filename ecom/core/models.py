@@ -56,7 +56,7 @@ class LivreItem(models.Model):
     date_lecture = models.DateTimeField(blank=True, null=True)
     date_entree = models.DateTimeField(blank=True, null=True)
     quantity = models.ForeignKey(
-        "Livre", on_delete=models.CASCADE, related_name="book_quantity", default=1
+        "Livre", on_delete=models.CASCADE, related_name="book_quantity", default=0
     )
 
 

@@ -13,6 +13,7 @@ from .models import (
     ItemVariation,
     Livre,
     ImageLivre,
+    LivreItem,
 )
 
 
@@ -129,6 +130,10 @@ class ImageLivreInLineAdmin(admin.ModelAdmin):
     ]
 
 
+class LivreItemInLineAdmin(admin.ModelAdmin):
+    model = LivreItem
+
+
 class VariationAdmin(admin.ModelAdmin):
     list_display = ["item", "name"]
     list_filter = ["item"]
@@ -138,6 +143,7 @@ class VariationAdmin(admin.ModelAdmin):
 
 admin.site.register(ItemVariation, ItemVariationAdmin)
 admin.site.register(Livre, LivreInLineAdmin)
+admin.site.register(LivreItem, LivreItemInLineAdmin)
 admin.site.register(ImageLivre, ImageLivreInLineAdmin)
 admin.site.register(Variation, VariationAdmin)
 admin.site.register(Item)
