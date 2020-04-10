@@ -5,6 +5,7 @@ import CategoryFilter from "../../Filters/CategoryFilter";
 import BookGrid from "./BookGrid";
 import PropTypes from "prop-types";
 import MySlider from "../../Buttons/Slider";
+import { Container } from "semantic-ui-react";
 
 const propTypes = {
   bookPerPage: PropTypes.number.isRequired,
@@ -28,23 +29,28 @@ const BooksPlusPaginationAndFilters = ({
   sliderValues
 }) => {
   return (
-    <React.Fragment>
-      <div className="container container-forms">
-        <LanguageFilter onSelectRadio={onSelectRadio} language={language} />
-        <AuthorFilter onSelectAuthor={onSelectAuthor} authors={authors} />
-        <CategoryFilter handleSetActiveCategory={handleSetActiveCategory} />
-        <MySlider onSliderChange={onSliderChange} sliderValues={sliderValues} />
-        <p>
-          Displaying {paginatedData.length} of {length} books
-        </p>
-      </div>
-      <BookGrid
-        paginatedData={paginatedData}
-        handleClickOnBook={handleClickOnBook}
-        paginatedDataLength={paginatedData.length}
-        length={length}
-      />
-    </React.Fragment>
+    <Container className="booklist">
+      <React.Fragment>
+        <div className="container container-forms">
+          <LanguageFilter onSelectRadio={onSelectRadio} language={language} />
+          <AuthorFilter onSelectAuthor={onSelectAuthor} authors={authors} />
+          <CategoryFilter handleSetActiveCategory={handleSetActiveCategory} />
+          <MySlider
+            onSliderChange={onSliderChange}
+            sliderValues={sliderValues}
+          />
+          <p>
+            Displaying {paginatedData.length} of {length} books
+          </p>
+        </div>
+        <BookGrid
+          paginatedData={paginatedData}
+          handleClickOnBook={handleClickOnBook}
+          paginatedDataLength={paginatedData.length}
+          length={length}
+        />
+      </React.Fragment>
+    </Container>
   );
 };
 

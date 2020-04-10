@@ -68,7 +68,9 @@ class CustomLayout extends React.Component {
     this.mapLanguageUrlToState(q.language);
     this.mapAuthorUrlToState(q.authors);
     this.mapCategoryUrlToState(q.category);
-    this.props.refreshCart();
+    if (this.props.isAuthenticated == true) {
+      this.props.refreshCart();
+    }
   }
 
   onSelectAuthor = (e, data) => {
@@ -161,12 +163,20 @@ class CustomLayout extends React.Component {
           this.props.fetchBooks(
             bookListURL(this.props.offset, this.state.language)
           );
-          this.props.refreshCart();
+          if (this.props.isAuthenticated == true) {
+            this.props.refreshCart();
+          }
           document.addEventListener("scroll", this.trackScrolling);
         }
       );
     } else {
-      const { offset, fetchBooks, refreshCart, searchTerm } = this.props;
+      const {
+        offset,
+        fetchBooks,
+        refreshCart,
+        searchTerm,
+        isAuthenticated
+      } = this.props;
       const { language, category, authors, sliderValues } = this.state;
       const authors_array = Array.from(authors.entries()).join(",");
       const endpoint = bookListURL(
@@ -178,7 +188,9 @@ class CustomLayout extends React.Component {
         searchTerm
       );
       fetchBooks(endpoint);
-      refreshCart();
+      if (isAuthenticated == true) {
+        refreshCart();
+      }
       document.addEventListener("scroll", this.trackScrolling);
     }
   };
@@ -242,7 +254,7 @@ class CustomLayout extends React.Component {
   };
 
   render() {
-    const { authenticated, cart } = this.props;
+    const { authenticated, cart, error, errorCart } = this.props;
     const { language, sliderValues, authors, category } = this.state;
 
     return (
@@ -288,6 +300,8 @@ class CustomLayout extends React.Component {
           sliderValues={sliderValues}
           authors={authors}
           category={category}
+          error={error}
+          errorCart={errorCart}
         />
         <BottomNavigation />
 
@@ -309,7 +323,9 @@ const mapStateToProps = state => {
     authenticated: state.auth.token !== null,
     cart: state.cart.shoppingCart,
     searchTerm: state.navigation.searchTerm,
-    offset: state.books.offset
+    offset: state.books.offset,
+    error: state.book.error,
+    errorCart: state.cart.error
   };
 };
 
