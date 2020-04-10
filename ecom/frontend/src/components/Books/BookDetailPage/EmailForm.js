@@ -1,5 +1,6 @@
 import React from "react";
 import { Message } from "semantic-ui-react";
+import { sendForm } from "emailjs-com";
 export default class extends React.Component {
   constructor(props) {
     super(props);
@@ -84,9 +85,10 @@ export default class extends React.Component {
   };
 
   sendFeedback = (templateId, variables) => {
+    const userId = "user_mQ8MeAwQ0zwwc5ftEn2LO";
     if (variables.message_html.length > 0) {
-      window.emailjs
-        .send("default_service", templateId, variables)
+      sendForm
+        .send("default_service", templateId, variables, userId)
         .then(res => {
           this.setState({ success: `Email successfully sent!` });
         })
