@@ -13,6 +13,42 @@ export default class extends React.Component {
     };
   }
 
+  handleChange = event => {
+    this.setState({ feedback: event.target.value });
+  };
+
+  handleSubmit = event => {
+    const templateId = "template_9gmUuqgs";
+
+    this.sendFeedback(templateId, {
+      message_html: this.state.feedback,
+      reply_to: this.state.email,
+      isbn: this.props.isbn
+    });
+  };
+
+  showEmailForm = () => {
+    this.setState({ showForm: true });
+  };
+
+  sendFeedback = (templateId, variables) => {
+    const userId = "user_mQ8MeAwQ0zwwc5ftEn2LO";
+    if (variables.message_html.length > 0) {
+      sendForm("default_service", templateId, variables, userId)
+        .then(res => {
+          this.setState({ success: `Email successfully sent!` });
+        })
+        .catch(err => {
+          this.setState({
+            error: `The email could not be sent: ${err.text}`
+          });
+        });
+    } else {
+      this.setState({
+        error: "No message"
+      });
+    }
+  };
   render() {
     const { success, error, showForm, feedback } = this.state;
     return (
@@ -65,42 +101,4 @@ export default class extends React.Component {
       </React.Fragment>
     );
   }
-
-  handleChange = event => {
-    this.setState({ feedback: event.target.value });
-  };
-
-  handleSubmit = event => {
-    const templateId = "template_9gmUuqgs";
-
-    this.sendFeedback(templateId, {
-      message_html: this.state.feedback,
-      reply_to: this.state.email,
-      isbn: this.props.isbn
-    });
-  };
-
-  showEmailForm = () => {
-    this.setState({ showForm: true });
-  };
-
-  sendFeedback = (templateId, variables) => {
-    const userId = "user_mQ8MeAwQ0zwwc5ftEn2LO";
-    if (variables.message_html.length > 0) {
-      sendForm
-        .send("default_service", templateId, variables, userId)
-        .then(res => {
-          this.setState({ success: `Email successfully sent!` });
-        })
-        .catch(err => {
-          this.setState({
-            error: `The email could not be sent: ${err.text}`
-          });
-        });
-    } else {
-      this.setState({
-        error: "No message"
-      });
-    }
-  };
 }

@@ -271,7 +271,7 @@ class CustomLayout extends React.Component {
                       onClick={() => {
                         new Promise(resolve =>
                           resolve(this.props.history.push("/"))
-                        ).then(window.location.reload());
+                        ); //.then(window.location.reload());
                       }}
                     >
                       <img
