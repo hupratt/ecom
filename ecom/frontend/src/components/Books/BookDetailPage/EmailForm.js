@@ -22,7 +22,7 @@ export default class extends React.Component {
 
     this.sendFeedback(templateId, {
       message_html: this.state.feedback,
-      reply_to: this.state.email,
+      email: this.state.email,
       isbn: this.props.isbn
     });
   };
