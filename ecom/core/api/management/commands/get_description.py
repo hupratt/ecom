@@ -165,7 +165,7 @@ def grab_from_yahoo_amazon(url, isbn, driver):
             soup = BeautifulSoup(driver.page_source, features="html.parser")
             description = soup.find(id="productDescription_fullView")
             desc_p=''
-            if description.find('p') is not None:
+            if description is not None and description.find('p') is not None:
                 desc_p = description.find('p').text
             if len(desc_p)==0:
                 print(f'url {isbn} has no description')
@@ -269,7 +269,7 @@ def grab_from_yahoo_fnac(url, isbn, driver):
             soup = BeautifulSoup(driver.page_source, features="html.parser")
             desc = soup.find('section',attrs={"class":"FA-editeur"})
             desc_p=''
-            if desc.find('p', attrs={"align":"justify"}) is not None:
+            if desc is not None and desc.find('p', attrs={"align":"justify"}) is not None:
                 desc_p = desc.find('p', attrs={"align":"justify"}).text
             if len(desc_p)==0:
                 print(f'url {isbn} has no description')
@@ -306,7 +306,7 @@ def grab_from_yahoo_bertrand(url, isbn, driver):
             soup = BeautifulSoup(driver.page_source, features="html.parser")
             desc = soup.find(id="productPageSectionAboutBook-sinopse")
             desc_p=''
-            if desc.find('p') is not None:
+            if desc is not None and desc.find('p') is not None:
                 desc_p = desc.find('p').text
             if len(desc_p)==0:
                 print(f'url {isbn} has no description')
