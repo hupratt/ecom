@@ -276,6 +276,43 @@ def grab_from_yahoo_fnac(url, isbn, driver):
             return desc_p
     else:
         return ''
+def grab_from_yahoo_bertrand(url, isbn, driver):
+    search_query = 'site:bertrand.pt/ AND ' + str(isbn)
+    driver.get(url)
+    try:
+        driver.find_element_by_name('agree').click()
+    except NoSuchElementException:
+        pass
+    time.sleep(0.5)
+    try:
+        search_query = driver.find_element_by_name('p').send_keys(search_query)
+    except NoSuchElementException:
+        pass
+    time.sleep(0.5)
+    try:
+        driver.find_element_by_name('p').send_keys(Keys.RETURN)
+    except NoSuchElementException:
+        pass
+    time.sleep(5)
+    soup = BeautifulSoup(driver.page_source, features="html.parser")
+    try:
+        cites = soup.find_all('a', class_="s-title")
+    except NoSuchElementException:
+        pass
+    output = ''
+    if len(cites)>0:
+        if len(cites[0].attrs['href'])>0:
+            driver.get(cites[0].attrs['href'])
+            soup = BeautifulSoup(driver.page_source, features="html.parser")
+            desc = soup.find(id="productPageSectionAboutBook-sinopse")
+            desc_p=''
+            if desc.find('p') is not None:
+                desc_p = desc.find('p').text
+            if len(desc_p)==0:
+                print(f'url {isbn} has no description')
+            return desc_p
+    else:
+        return ''
 
 def grab_from_bertrand(url, isbn, driver):
     search_query = 'site:bertrand.pt/ AND ' + str(isbn)
@@ -409,9 +446,9 @@ def main():
     for isbn in isbn_list:
         _json = dict()
         if check_desc_already_exists(isbn) is False:
-            description = grab_from_yahoo_fnac(url, str(isbn), driver) 
+            description = grab_from_yahoo_bertrand(url, str(isbn), driver) 
             if len(description) == 0:
-                description = grab_from_bertrand(url, str(isbn), driver)
+                description = grab_from_yahoo_fnac(url, str(isbn), driver)
                 if len(description) == 0:
                     description = grab_from_yahoo_amazon(url, str(isbn), driver)
             if len(description) != 0:
