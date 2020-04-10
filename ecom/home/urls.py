@@ -4,6 +4,7 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from django.views.generic import TemplateView
 from django.shortcuts import render
+import debug_toolbar
 
 
 def index(request):
@@ -16,13 +17,10 @@ urlpatterns = [
     path("rest-auth/registration/", include("rest_auth.registration.urls")),
     path("admin/", admin.site.urls),
     path("api/", include("core.api.urls")),
-    re_path(r"^.*", index),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+# make sure this is always last
+urlpatterns += [re_path(r"^.*", index)]
 
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    import debug_toolbar
-
     urlpatterns += [path("__debug__/", include(debug_toolbar.urls))]
-

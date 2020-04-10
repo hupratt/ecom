@@ -13,6 +13,7 @@ from .models import (
     ItemVariation,
     Livre,
     ImageLivre,
+    LivreItem,
 )
 
 
@@ -80,11 +81,57 @@ class ItemVariationInLineAdmin(admin.TabularInline):
 
 
 class LivreInLineAdmin(admin.ModelAdmin):
+    list_display = [
+        "titre",
+        "date_publication",
+        "isbn",
+        "get_quantity",
+        "prix",
+        "auteur_nom",
+        "langue_nom",
+        "genre_nom",
+        "description",
+    ]
+    list_filter = ["auteur_nom"]
+    search_fields = [
+        "titre",
+        "date_publication",
+        "isbn",
+        "prix",
+        "auteur_nom",
+        "langue_nom",
+        "genre_nom",
+        "description",
+    ]
     model = Livre
 
 
 class ImageLivreInLineAdmin(admin.ModelAdmin):
     model = ImageLivre
+    list_display = [
+        "livre",
+        "auteur",
+        "genre_nom",
+        "titre",
+        "langue_nom",
+        "alt",
+        "created",
+        "image",
+    ]
+    search_fields = [
+        "livre",
+        "image",
+        "auteur",
+        "genre_nom",
+        "titre",
+        "langue_nom",
+        "alt",
+        "created",
+    ]
+
+
+class LivreItemInLineAdmin(admin.ModelAdmin):
+    model = LivreItem
 
 
 class VariationAdmin(admin.ModelAdmin):
@@ -96,6 +143,7 @@ class VariationAdmin(admin.ModelAdmin):
 
 admin.site.register(ItemVariation, ItemVariationAdmin)
 admin.site.register(Livre, LivreInLineAdmin)
+admin.site.register(LivreItem, LivreItemInLineAdmin)
 admin.site.register(ImageLivre, ImageLivreInLineAdmin)
 admin.site.register(Variation, VariationAdmin)
 admin.site.register(Item)

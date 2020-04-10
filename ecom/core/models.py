@@ -51,6 +51,15 @@ class ImageAuteur(models.Model):
         return self.auteur.images.all()
 
 
+class LivreItem(models.Model):
+    date_achat = models.DateTimeField(blank=True, null=True)
+    date_lecture = models.DateTimeField(blank=True, null=True)
+    date_entree = models.DateTimeField(blank=True, null=True)
+    quantity = models.ForeignKey(
+        "Livre", on_delete=models.CASCADE, related_name="book_quantity", default=0
+    )
+
+
 class Livre(models.Model):
     titre = models.CharField(max_length=50)
     description = models.TextField(default="")
@@ -58,16 +67,12 @@ class Livre(models.Model):
     date_publication = models.DateTimeField(blank=True, null=True)
     prix = models.FloatField(blank=True, null=True)
     prix_barre = models.FloatField(blank=True, null=True)
-    date_achat = models.DateTimeField(blank=True, null=True)
-    date_lecture = models.DateTimeField(blank=True, null=True)
-    date_entree = models.DateTimeField(blank=True, null=True)
     note = models.IntegerField(blank=True, null=True)
     nb_pages = models.IntegerField(blank=True, null=True)
     date_maj = models.DateTimeField(auto_now_add=True)
     auteur_nom = models.CharField(max_length=50, default="unknown", null=True)
     langue_nom = models.CharField(max_length=50, default="unknown", null=True)
     genre_nom = models.CharField(max_length=50, default="unknown", null=True)
-    quantite = models.IntegerField(default=1)
 
     def get_absolute_url(self):
         return reverse("core:product", kwargs={"id": self.id})
@@ -77,6 +82,15 @@ class Livre(models.Model):
 
     def get_remove_from_cart_url(self):
         return reverse("core:remove-from-cart", kwargs={"id": self.id})
+
+    def get_quantity(self):
+        return self.book_quantity.all().count()
+
+    def __str__(self):
+        return self.isbn
+
+    def __unicode__(self):
+        return self.isbn
 
 
 class Auteur(models.Model):
@@ -91,7 +105,7 @@ class ImageLivre(models.Model):
     livre = models.ForeignKey(
         "Livre",
         on_delete=models.CASCADE,
-        related_name="room_image",
+        related_name="livre_name",
         help_text="(automatic) room model linkage",
     )
     created = models.DateTimeField(
@@ -109,8 +123,20 @@ class ImageLivre(models.Model):
     def __unicode__(self):
         return self.alt
 
-    def get_ordering_queryset(self):
-        return self.livre.images.all()
+    def get_isbn(self):
+        return self.livre
+
+    def auteur(self):
+        return self.livre.auteur_nom
+
+    def genre_nom(self):
+        return self.livre.genre_nom
+
+    def titre(self):
+        return self.livre.titre
+
+    def langue_nom(self):
+        return self.livre.langue_nom
 
 
 class Item(models.Model):
