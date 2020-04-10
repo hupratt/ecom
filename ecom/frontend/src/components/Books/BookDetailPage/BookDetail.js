@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { s3_base_url } from "../../../constants";
+import { mediaEndpoint } from "../../../constants";
 
 const propTypes = {
   handleAddToCart: PropTypes.func.isRequired,
   book: PropTypes.object.isRequired,
-  isAuthenticated: PropTypes.bool.isRequired
+  isAuthenticated: PropTypes.bool.isRequired,
 };
 
 const BookDetail = ({ handleAddToCart, book, isAuthenticated }) => {
@@ -24,7 +24,7 @@ const BookDetail = ({ handleAddToCart, book, isAuthenticated }) => {
                       <div className="product-pic-zoom">
                         <img
                           className="product-big-img"
-                          src={s3_base_url + book.isbn + ".jpg"}
+                          src={mediaEndpoint + book.isbn + ".jpg"}
                           alt=""
                         />
                         <div className="zoom-icon">

@@ -1,13 +1,13 @@
 import React from "react";
 import { Grid, Dimmer, Loader, Segment } from "semantic-ui-react";
-import { s3_base_url } from "../../../constants";
+import { s3_base_url, mediaEndpoint } from "../../../constants";
 import styled, { ThemeProvider } from "styled-components";
 import FlipButton from "../../Buttons/FlipButton";
 import ViewInsideButton from "../../Buttons/ViewInsideButton";
 import PropTypes from "prop-types";
 // Define our button, but with the use of props.theme this time
 const TiltBook = styled.img`
-  background-image: url(${props => props.theme.url});
+  background-image: url(${(props) => props.theme.url});
   height: 100%;
   width: 100%;
   background-size: cover;
@@ -16,13 +16,13 @@ const TiltBook = styled.img`
 // We are passing a default theme for Buttons that arent wrapped in the ThemeProvider
 TiltBook.defaultProps = {
   theme: {
-    url: "http://www.images/1.png"
-  }
+    url: "http://www.images/1.png",
+  },
 };
 
 const propTypes = {
   paginatedData: PropTypes.array.isRequired,
-  handleClickOnBook: PropTypes.func.isRequired
+  handleClickOnBook: PropTypes.func.isRequired,
 };
 
 const CoolSVGResultsIsEmpty = () => {
@@ -32,7 +32,7 @@ const CoolSVGResultsIsEmpty = () => {
         style={{
           display: "flex",
           alignItems: "center",
-          justifyContent: "center"
+          justifyContent: "center",
         }}
       >
         <img
@@ -48,16 +48,16 @@ const BookGrid = ({
   paginatedData,
   handleClickOnBook,
   paginatedDataLength,
-  length
+  length,
 }) => {
   return (
     <React.Fragment>
       <Grid divided>
         <ul id="bk-list" className="bk-list clearfix">
           {paginatedData ? (
-            paginatedData.map(item => {
+            paginatedData.map((item) => {
               const theme = {
-                url: `${s3_base_url}${item.isbn}.jpg`
+                url: `${mediaEndpoint}${item.isbn}.jpg`,
               };
               return (
                 <li key={item.id}>

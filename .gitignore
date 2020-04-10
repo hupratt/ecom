@@ -2,7 +2,6 @@ env
 **/*.pyc
 **/__pycache__
 build
-media
 package-lock.json
 bin
 lib
@@ -13,7 +12,6 @@ db.sqlite3
 sqlite3
 /thumbnails
 /node_modules
-media
 *.db
 share
 .mypy_cache/
