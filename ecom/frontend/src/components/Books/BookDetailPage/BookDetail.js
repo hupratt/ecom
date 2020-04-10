@@ -1,11 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { mediaEndpoint } from "../../../constants";
+import EmailForm from "./EmailForm";
 
 const propTypes = {
   handleAddToCart: PropTypes.func.isRequired,
   book: PropTypes.object.isRequired,
-  isAuthenticated: PropTypes.bool.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired
 };
 
 const BookDetail = ({ handleAddToCart, book, isAuthenticated }) => {
@@ -63,8 +64,8 @@ const BookDetail = ({ handleAddToCart, book, isAuthenticated }) => {
                           </h4>
                         </div>
                         {[
-                          ...Array((book.langue_nom || "none").split("/")),
-                        ].forEach((el) => (
+                          ...Array((book.langue_nom || "none").split("/"))
+                        ].forEach(el => (
                           <div className="pd-lang-choose">
                             <div className="sc-lang">
                               <input type="radio" id="sm-size" />
@@ -73,12 +74,12 @@ const BookDetail = ({ handleAddToCart, book, isAuthenticated }) => {
                           </div>
                         ))}
                         {Array((book.langue_nom || "none").split("/")).forEach(
-                          (el) => (
-                            <input type="radio" id="sm-size" />
+                          el => (
+                            <a>{el}</a>
                           )
                         )}
 
-                        <div className="quantity">
+                        <div className="addcart">
                           <a
                             href="#"
                             className="primary-btn pd-cart"
@@ -89,6 +90,8 @@ const BookDetail = ({ handleAddToCart, book, isAuthenticated }) => {
                             Add To Cart
                           </a>
                         </div>
+
+                        <EmailForm isbn={book.isbn} />
                         <ul className="pd-tags">
                           <li>
                             <span>CATEGORY</span>: {book.genre_nom}

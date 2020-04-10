@@ -2306,48 +2306,37 @@ input:nth-child(1) {
   color: #ffffff;
 }
 
-.product-details .quantity {
+.product-details .addcart {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   margin-bottom: 33px;
-}
-
-.product-details .quantity .pro-qty {
-  width: 123px;
-  height: 46px;
-  border: 2px solid #ebebeb;
-  padding: 0 15px;
-  float: left;
-  margin-right: 14px;
-}
-
-.product-details .quantity .pro-qty .qtybtn {
-  font-size: 24px;
-  color: #b2b2b2;
-  float: left;
-  line-height: 38px;
-  cursor: pointer;
-  width: 18px;
-}
-
-.product-details .quantity .pro-qty .qtybtn.dec {
-  font-size: 30px;
-}
-
-.product-details .quantity .pro-qty input {
   text-align: center;
-  width: 52px;
-  font-size: 14px;
-  font-weight: 700;
-  border: none;
-  color: #4c4c4c;
-  line-height: 40px;
-  float: left;
 }
 
-.product-details .quantity .primary-btn.pd-cart {
-  padding: 14px 70px 10px;
+.product-details .addcart a:hover {
+  color: white;
+}
+
+.primary-btn {
+  width: 250px;
+  color: white !important;
+}
+
+.product-details .email {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 33px;
+  text-align: center;
+}
+
+.product-details .email a:hover {
+  color: white;
+}
+
+.product-details .mailing textarea {
+  width: 250px !important;
 }
 
 .product-details .pd-tags {
