@@ -61,7 +61,7 @@ class LivreItem(models.Model):
 
 
 class Livre(models.Model):
-    titre = models.CharField(max_length=50)
+    titre = models.CharField(max_length=100)
     auteur_nom = models.CharField(max_length=50, default="unknown", null=True)
     langue_nom = models.CharField(max_length=50, default="unknown", null=True)
     genre_nom = models.CharField(max_length=50, default="unknown", null=True)

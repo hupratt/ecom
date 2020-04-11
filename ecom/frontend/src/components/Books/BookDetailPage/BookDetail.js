@@ -36,6 +36,7 @@ const BookDetail = ({ handleAddToCart, book, isAuthenticated }) => {
                         <div className="pd-title">
                           <span>{book.auteur_nom}</span>
                           <h3>{book.titre}</h3>
+                          <h3>{book.isbn}</h3>
                         </div>
                         <div className="pd-rating">
                           {[...Array(book.note)].map((e, i) => (
