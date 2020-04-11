@@ -62,7 +62,10 @@ class LivreItem(models.Model):
 
 class Livre(models.Model):
     titre = models.CharField(max_length=50)
-    description = models.TextField(default="")
+    auteur_nom = models.CharField(max_length=50, default="unknown", null=True)
+    langue_nom = models.CharField(max_length=50, default="unknown", null=True)
+    genre_nom = models.CharField(max_length=50, default="unknown", null=True)
+
     isbn = models.CharField(max_length=50, default="unknown", null=True)
     date_publication = models.DateTimeField(blank=True, null=True)
     prix = models.FloatField(blank=True, null=True)
@@ -70,9 +73,7 @@ class Livre(models.Model):
     note = models.IntegerField(blank=True, null=True)
     nb_pages = models.IntegerField(blank=True, null=True)
     date_maj = models.DateTimeField(auto_now_add=True)
-    auteur_nom = models.CharField(max_length=50, default="unknown", null=True)
-    langue_nom = models.CharField(max_length=50, default="unknown", null=True)
-    genre_nom = models.CharField(max_length=50, default="unknown", null=True)
+    description = models.TextField(default="", null=True, blank=True)
 
     def get_absolute_url(self):
         return reverse("core:product", kwargs={"id": self.id})

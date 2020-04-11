@@ -37,6 +37,9 @@ class BookSerializer(serializers.ModelSerializer):
             "auteur_nom",
             "langue_nom",
             "genre_nom",
+            "get_quantity",
+            "prix_barre",
+            "description",
         )
 
 

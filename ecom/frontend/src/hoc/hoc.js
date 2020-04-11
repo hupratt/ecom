@@ -43,7 +43,7 @@ export const withError = WrappedComponent => {
             <Message
               error
               header="There was some errors with your submission"
-              content={JSON.stringify(errorCart)}
+              content={JSON.stringify(error)}
             />
             <WrappedComponent {...this.props} />
           </React.Fragment>

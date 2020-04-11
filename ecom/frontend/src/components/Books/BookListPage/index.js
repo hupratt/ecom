@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Container } from "semantic-ui-react";
 import { loadmoar } from "../../../actions/books";
 import BooksPlusPaginationAndFilters from "./BooksPlusPaginationAndFilters";
 import { withLoading, withError } from "../../../hoc/hoc";
@@ -107,7 +106,9 @@ class BookList extends React.Component {
       sliderValues,
       onSelectRadio,
       handleSetActiveCategory,
-      onSliderChange
+      onSliderChange,
+      error,
+      errorCart
     } = this.props;
     return (
       <React.Fragment>
@@ -127,23 +128,24 @@ class BookList extends React.Component {
           </div>
         </div>
         {/* Breadcrumb Section Begin */}
-        <Container className="booklist">
-          <BookPageWithLoadingAndErrorHandling
-            bookPerPage={bookPerPage}
-            length={_length}
-            onSelectRadio={onSelectRadio}
-            onSelectAuthor={onSelectAuthor}
-            paginatedData={data}
-            language={language}
-            handleClickOnBook={this.handleClickOnBook}
-            handleSetActiveCategory={handleSetActiveCategory}
-            authors={authors}
-            onSliderChange={onSliderChange}
-            sliderValues={sliderValues}
-          />
 
-          {this.props.children}
-        </Container>
+        <BookPageWithLoadingAndErrorHandling
+          bookPerPage={bookPerPage}
+          length={_length}
+          onSelectRadio={onSelectRadio}
+          onSelectAuthor={onSelectAuthor}
+          paginatedData={data}
+          language={language}
+          handleClickOnBook={this.handleClickOnBook}
+          handleSetActiveCategory={handleSetActiveCategory}
+          authors={authors}
+          onSliderChange={onSliderChange}
+          sliderValues={sliderValues}
+          error={error}
+          errorCart={errorCart}
+        />
+
+        {this.props.children}
       </React.Fragment>
     );
   }
@@ -167,7 +169,9 @@ const mapStateToProps = state => {
     offset: state.books.offset,
     bookPerPage: state.books.bookPerPage,
     _length: state.books._length,
-    searchTerm: state.navigation.searchTerm
+    searchTerm: state.navigation.searchTerm,
+    error: state.book.error,
+    errorCart: state.cart.error
   };
 };
 

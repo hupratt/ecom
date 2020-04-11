@@ -72,14 +72,11 @@ const BookGrid = ({
                       </div>
                       <div className="bk-page">
                         <div className="bk-content bk-content-current">
-                          <p>Red snapper KafuReReReReReReRe</p>
+                          <p>{item.description}</p>
                         </div>
                       </div>
                       <div className="bk-back">
-                        <p>
-                          In thRe-year-old Alex andReinquency and the State
-                          tries to reform him - but at what cost?
-                        </p>
+                        <p>{item.description}</p>
                       </div>
                       <div className="bk-right"></div>
 
@@ -99,16 +96,8 @@ const BookGrid = ({
                       <h3>
                         <span>{item.auteur_nom}</span>
                         <span>{item.titre}</span>
-                        <span>{item.isbn}</span>
                       </h3>
-                      <p>
-                        {item.langue_nom} {item.genre_nom} {"    "}
-                        Social prophecy? Black comedy? Study of freewill? A
-                        Clockwork Orange is all of these. It is also a dazzling
-                        experiment in language, as Burghiss creates a new
-                        language - 'meow', the cat slang of a not-too-distant
-                        future.
-                      </p>
+                      <p>{item.description}</p>
                     </div>
                   </ThemeProvider>
                 </li>

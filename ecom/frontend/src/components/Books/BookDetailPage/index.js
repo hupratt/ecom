@@ -24,11 +24,19 @@ class BookDetailPage extends React.Component {
       this.props.match.params.bookID,
       this.props.dataIsCached
     );
-    this.props.refreshCart();
+    if (this.props.isAuthenticated == true) {
+      this.props.refreshCart();
+    }
   }
 
   render() {
-    const { book, handleAddToCart, isAuthenticated } = this.props;
+    const {
+      book,
+      handleAddToCart,
+      isAuthenticated,
+      error,
+      errorCart
+    } = this.props;
     return (
       <React.Fragment>
         {/* Breadcrumb Section Begin */}
@@ -58,6 +66,8 @@ class BookDetailPage extends React.Component {
             handleAddToCart={handleAddToCart}
             book={book}
             isAuthenticated={isAuthenticated}
+            error={error}
+            errorCart={errorCart}
           />
         </Container>
       </React.Fragment>

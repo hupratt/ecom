@@ -5,7 +5,7 @@ import { s3_base_url } from "../../../constants";
 import SearchNav from "./SearchNav";
 
 const propTypes = {
-  cart: PropTypes.object
+  cart: PropTypes.object,
 };
 
 const TopNavigationWithAuth = ({ cart, onSearchChange }) => {
@@ -20,12 +20,6 @@ const TopNavigationWithAuth = ({ cart, onSearchChange }) => {
             </li>
           </Link>
 
-          <li className="heart-icon">
-            <a href="#">
-              <i className="far fa-heart" />
-            </a>
-          </li>
-
           <li className="cart-icon">
             <a href="#">
               <i className="fa fa-shopping-bag" />
@@ -36,7 +30,7 @@ const TopNavigationWithAuth = ({ cart, onSearchChange }) => {
                 <div className="select-items">
                   <table>
                     <tbody>
-                      {cart.order_items.map(order_item => {
+                      {cart.order_items.map((order_item) => {
                         return (
                           <tr key={order_item.id}>
                             <td className="si-pic">
