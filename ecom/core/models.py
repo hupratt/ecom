@@ -4,7 +4,7 @@ from django.db import models
 from django.db.models import Sum
 from django.shortcuts import reverse
 from django_countries.fields import CountryField
-
+from datetime import datetime
 
 CATEGORY_CHOICES = (("S", "Shirt"), ("SW", "Sport wear"), ("OW", "Outwear"))
 
@@ -54,6 +54,7 @@ class ImageAuteur(models.Model):
 class LivreItem(models.Model):
     date_achat = models.DateTimeField(blank=True, null=True)
     date_lecture = models.DateTimeField(blank=True, null=True)
+    updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     date_entree = models.DateTimeField(blank=True, null=True)
     livre = models.ForeignKey(
         "Livre", on_delete=models.CASCADE, related_name="book_quantity", default=0
@@ -65,7 +66,7 @@ class Livre(models.Model):
     auteur_nom = models.CharField(max_length=50, default="unknown", null=True)
     langue_nom = models.CharField(max_length=50, default="unknown", null=True)
     genre_nom = models.CharField(max_length=50, default="unknown", null=True)
-
+    updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     isbn = models.CharField(max_length=50, default="unknown", null=True)
     date_publication = models.DateTimeField(blank=True, null=True)
     prix = models.FloatField(blank=True, null=True)
@@ -121,6 +122,7 @@ class ImageLivre(models.Model):
         default="blank",
         help_text="(required) SEO for images in order to provide accessibility for the visually impaired",
     )
+    updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 
     def __str__(self):
         return self.alt
