@@ -100,7 +100,8 @@ class BookListView(ListAPIView):
         Optionally restricts the returned books to a given set of parameters.
         It filters `authors` and `language` query parameters in the URL.
         """
-        queryset = Livre.objects.all()
+        queryset = Livre.objects.filter(book_quantity__gte=0).distinct()
+
         language = self.request.query_params.get("language", "")
         authors = self.request.query_params.get("authors", "")
         search_for_authors = serialize_URL_params(self.request.query_params)
@@ -112,7 +113,6 @@ class BookListView(ListAPIView):
             queryset = queryset.annotate(
                 search=SearchVector("genre_nom", "auteur_nom", config="french_unaccent")
             ).filter(search=free_text)
-
         if price_range != "":
             min_price, max_price = price_range.split(",")
             queryset = queryset.filter(prix__range=(int(min_price), int(max_price)))

@@ -55,7 +55,7 @@ class LivreItem(models.Model):
     date_achat = models.DateTimeField(blank=True, null=True)
     date_lecture = models.DateTimeField(blank=True, null=True)
     date_entree = models.DateTimeField(blank=True, null=True)
-    quantity = models.ForeignKey(
+    livre = models.ForeignKey(
         "Livre", on_delete=models.CASCADE, related_name="book_quantity", default=0
     )
 
@@ -85,7 +85,11 @@ class Livre(models.Model):
         return reverse("core:remove-from-cart", kwargs={"id": self.id})
 
     def get_quantity(self):
-        return self.book_quantity.all().count()
+        return self.book_quantity.count()
+
+    def show_homepage(self):
+        if self.book_quantity.count() > 0:
+            return True
 
     def __str__(self):
         return self.isbn
