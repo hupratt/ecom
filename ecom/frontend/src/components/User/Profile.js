@@ -472,14 +472,14 @@ class Profile extends React.Component {
           <Grid.Column width={6}>
             <Menu pointing vertical fluid>
               <Menu.Item
-                name="Billing Address"
-                active={activeItem === "billingAddress"}
-                onClick={() => this.handleItemClick("billingAddress")}
-              />
-              <Menu.Item
                 name="Shipping Address"
                 active={activeItem === "shippingAddress"}
                 onClick={() => this.handleItemClick("shippingAddress")}
+              />
+              <Menu.Item
+                name="Billing Address"
+                active={activeItem === "billingAddress"}
+                onClick={() => this.handleItemClick("billingAddress")}
               />
               <Menu.Item
                 name="Payment history"

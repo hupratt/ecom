@@ -60,7 +60,7 @@ const OrderPreview = ({ data }) => {
             <Item>
               <Item.Content>
                 <Item.Header>
-                  Order Total: {data.total} €
+                  Total: {data.total} €
                   {data.coupon && (
                     <Label color="green" style={{ marginLeft: "10px" }}>
                       Current coupon: {data.coupon.code} for
@@ -151,12 +151,10 @@ class CheckoutForm extends Component {
             </Dimmer>
           </Segment>
         )}
-
         <OrderPreview data={data} />
         <Divider />
-
-        <Header>Select a shipping address</Header>
-        {shippingAddresses.length > 0 ? (
+        <Header>Shipping</Header>
+        {shippingAddresses.length > 0 && (
           <Select
             name="selectedShippingAddress"
             value={selectedShippingAddress}
@@ -165,13 +163,9 @@ class CheckoutForm extends Component {
             selection
             onChange={handleSelectChange}
           />
-        ) : (
-          <p>
-            You need to <Link to="/profile">add a shipping address</Link>
-          </p>
         )}
-        <Header>Select a billing address</Header>
-        {billingAddresses.length > 0 ? (
+        <Header>Billing</Header>
+        {shippingAddresses.length == 1 && billingAddresses.length > 0 ? (
           <Select
             name="selectedBillingAddress"
             value={selectedBillingAddress}
@@ -181,17 +175,22 @@ class CheckoutForm extends Component {
             onChange={handleSelectChange}
           />
         ) : (
-          <p>
-            Add a billing address <Link to="/profile">here</Link>
-          </p>
+          shippingAddresses.length == 1 && (
+            <p>
+              Add a billing address <Link to="/profile">here</Link>
+            </p>
+          )
         )}
         <Divider />
-
         {shippingAddresses.length < 1 ? (
-          <p>You need to add addresses before you can complete your purchase</p>
+          <p>
+            Add at least
+            <Link to="/profile"> one shipping address</Link> to complete your
+            purchase
+          </p>
         ) : (
           <React.Fragment>
-            <Header>Would you like to complete the purchase?</Header>
+            <Header>Payment Details</Header>
             <CardElement />
             {success && (
               <Message positive>

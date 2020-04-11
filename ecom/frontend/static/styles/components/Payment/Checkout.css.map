@@ -1,6 +1,6 @@
 {
     "version": 3,
-    "mappings": "",
+    "mappings": "AAAA,AAAA,SAAS,AAAA,KAAK,CAAC;EACb,OAAO,EAAE,kBAAkB;EAC3B,WAAW,EAAE,gCAAgC;EAC7C,WAAW,EAAE,cAAc;CAC5B",
     "sources": [
         "Checkout.scss"
     ],

@@ -169,7 +169,7 @@ class OrderSummary extends React.Component {
                 <Table.Cell />
                 <Table.Cell />
                 <Table.Cell textAlign="right" colSpan="2">
-                  Order Total: ${data.total}
+                  Total: ${data.total}
                 </Table.Cell>
               </Table.Row>
             </Table.Body>

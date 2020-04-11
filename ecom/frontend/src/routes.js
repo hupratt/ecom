@@ -18,11 +18,15 @@ const BaseRouter = props => {
         path="/books/:bookID"
         render={() => <BookDetail {...props} />}
       />
-      <Route path="/login" component={Login} />
-      <Route path="/signup" component={Signup} />
-      <Route path="/order-summary" component={OrderSummary} />
-      <Route path="/checkout" component={Checkout} />
-      <Route path="/profile" component={Profile} />
+      <Route exact path="/login" render={() => <Login {...props} />} />
+      <Route exact path="/signup" render={() => <Signup {...props} />} />
+      <Route
+        exact
+        path="/order-summary"
+        render={() => <OrderSummary {...props} />}
+      />
+      <Route exact path="/checkout" render={() => <Checkout {...props} />} />
+      <Route exact path="/profile" render={() => <Profile {...props} />} />
       <Route exact path="/" render={() => <BookListPage {...props} />} />
     </Hoc>
   );
