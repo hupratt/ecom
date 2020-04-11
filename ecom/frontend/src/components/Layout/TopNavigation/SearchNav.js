@@ -8,7 +8,13 @@ const SearchNav = ({ onSearchChange }) => {
           <button type="button" className="category-btn">
             All Fields
           </button>
-          <form action="#" className="input-group">
+          <form
+            action="#"
+            className="input-group"
+            onSubmit={e => {
+              e.preventDefault();
+            }}
+          >
             <input
               type="text"
               placeholder="What are you looking for?"

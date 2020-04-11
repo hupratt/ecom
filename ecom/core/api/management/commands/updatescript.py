@@ -5289,7 +5289,7 @@ def check_isbn_exists(isbn):
 
 def create_product(isbn, titre, auteur_nom, genre_nom, langue_nom, prix=0):
     book_instance = check_isbn_exists(isbn)
-    if isinstance(book_instance, Livre) and prix != 0:
+    if isinstance(book_instance, Livre) and prix == 0:
         book_instance.titre = titre
         book_instance.auteur_nom = auteur_nom
         book_instance.genre_nom = genre_nom
@@ -5297,7 +5297,7 @@ def create_product(isbn, titre, auteur_nom, genre_nom, langue_nom, prix=0):
         book_instance.save()
         b = LivreItem(quantity=book_instance)
         b.save()
-    if isinstance(book_instance, Livre):
+    elif isinstance(book_instance, Livre):
         book_instance.prix = prix
         book_instance.titre = titre
         book_instance.auteur_nom = auteur_nom

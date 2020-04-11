@@ -44,3 +44,8 @@ echo '*' > .mypy_cache/.gitignore
 
 REACT_APP_BASE=https://shop.lapetiteportugaise.eu
 REACT_APP_BASE=http://127.0.0.1:8000
+
+## Set the right encoding to avoid non ASCI chars displaying with weird characters
+
+export LANG=en_US.UTF-8
+unset PYTHONIOENCODING

@@ -123,7 +123,6 @@ def grab_from_amazon(url, isbn, driver):
     else:
         return ''
 
-
 def grab_from_fnac(url, isbn, driver):
     search_query = 'site:fnac.pt/ AND ' + str(isbn)
     driver.get(url)
@@ -161,6 +160,7 @@ def grab_from_fnac(url, isbn, driver):
             return desc_p
     else:
         return ''
+
 def grab_from_bertrand(url, isbn, driver):
     search_query = 'site:bertrand.pt/ AND ' + str(isbn)
     driver.get(url)
@@ -236,7 +236,6 @@ def grab_from_franceloisir(url, isbn, driver):
             return desc_p
     else:
         return ''
-
 
 def grab_from_wook(url, isbn, driver):
     search_query = 'site:wook.pt/ AND ' + str(isbn)
@@ -506,6 +505,7 @@ def grab_from_ombresblanches(url, isbn, driver):
             return desc_p
     else:
         return ''
+
 def grab_from_amazoncom(url, isbn, driver):
     search_query = 'site:amazon.com/ AND ' + str(isbn)
     driver.get(url)
