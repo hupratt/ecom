@@ -26,7 +26,6 @@ for (x in labels) {
 				stage ('Build') {
 					
 					sh """ 
-
 					cd $PROJECT
 					sudo chmod -R 770 $PROJECT
 					sudo chown -R ubuntu:www-data $PROJECT
