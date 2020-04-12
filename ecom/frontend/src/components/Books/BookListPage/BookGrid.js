@@ -57,7 +57,7 @@ const BookGrid = ({
           {paginatedData ? (
             paginatedData.map(item => {
               const theme = {
-                url: `${mediaEndpoint}${item.isbn}.jpg`
+                url: `${s3_base_url}${item.isbn}.jpg`
               };
               return (
                 <li key={item.id}>

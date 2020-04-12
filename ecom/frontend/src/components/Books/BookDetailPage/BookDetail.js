@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { mediaEndpoint } from "../../../constants";
+import { s3_base_url } from "../../../constants";
 import EmailForm from "./EmailForm";
 
 const propTypes = {
@@ -25,7 +25,7 @@ const BookDetail = ({ handleAddToCart, book, isAuthenticated }) => {
                       <div className="product-pic-zoom">
                         <img
                           className="product-big-img"
-                          src={mediaEndpoint + book.isbn + ".jpg"}
+                          src={s3_base_url + book.isbn + ".jpg"}
                           alt=""
                         />
                       </div>
@@ -54,7 +54,6 @@ const BookDetail = ({ handleAddToCart, book, isAuthenticated }) => {
                           ))}
                         </div>
                         <div className="pd-desc">
-                          <p>{book.description}</p>
                           <h4>
                             {book.prix} €
                             <span>
@@ -63,6 +62,7 @@ const BookDetail = ({ handleAddToCart, book, isAuthenticated }) => {
                             </span>
                           </h4>
                         </div>
+
                         {[
                           ...Array((book.langue_nom || "none").split("/"))
                         ].forEach(el => (
@@ -79,18 +79,6 @@ const BookDetail = ({ handleAddToCart, book, isAuthenticated }) => {
                           )
                         )}
 
-                        <div className="addcart">
-                          <a
-                            href="#"
-                            className="primary-btn pd-cart"
-                            onClick={() =>
-                              handleAddToCart(book.id, isAuthenticated)
-                            }
-                          >
-                            Add To Cart
-                          </a>
-                        </div>
-
                         <EmailForm isbn={book.isbn} />
                         <ul className="pd-tags">
                           <li>
@@ -103,6 +91,9 @@ const BookDetail = ({ handleAddToCart, book, isAuthenticated }) => {
                             <span>QUANTITY</span>: {book.get_quantity}
                           </li>
                         </ul>
+                        <div className="pd-desc">
+                          <p>{book.description}</p>
+                        </div>
                       </div>
                     </div>
                   </div>
