@@ -19,3 +19,4 @@ share
 .env.development
 *.bak
 /ecom/frontend/static/frontend/main.js
+.~lock*
