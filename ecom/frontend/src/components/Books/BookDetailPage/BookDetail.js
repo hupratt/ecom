@@ -11,6 +11,8 @@ const propTypes = {
 
 const BookDetail = ({ handleAddToCart, book, isAuthenticated }) => {
   const stars_number_inverse = 5 - book.note;
+  console.log("stars_number_inverse", stars_number_inverse);
+  console.log("book.note", book.note);
   return (
     <div>
       {/* Product Shop Section Begin */}
@@ -38,20 +40,24 @@ const BookDetail = ({ handleAddToCart, book, isAuthenticated }) => {
                           <h3>{book.titre}</h3>
                         </div>
                         <div className="pd-rating">
-                          {[...Array(book.note)].map((e, i) => (
-                            <i
-                              className="fas fa-star"
-                              key={i}
-                              style={{ color: "#252525" }}
-                            />
-                          ))}
-                          {[...Array(stars_number_inverse || 0)].map((e, i) => (
-                            <i
-                              className="far fa-star"
-                              key={i}
-                              style={{ color: "#252525" }}
-                            />
-                          ))}
+                          {book.note &&
+                            [...Array(book.note)].map((e, i) => (
+                              <i
+                                className="fas fa-star"
+                                key={i}
+                                style={{ color: "#252525" }}
+                              />
+                            ))}
+                          {book.note &&
+                            [
+                              ...Array(stars_number_inverse || 0)
+                            ].map((e, i) => (
+                              <i
+                                className="far fa-star"
+                                key={i}
+                                style={{ color: "#252525" }}
+                              />
+                            ))}
                         </div>
                         <div className="pd-desc">
                           <h4>
