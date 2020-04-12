@@ -91,6 +91,7 @@ class LivreInLineAdmin(admin.ModelAdmin):
         "langue_nom",
         "genre_nom",
         "description",
+        "updated",
     ]
     list_filter = ["auteur_nom"]
     search_fields = [
@@ -117,6 +118,7 @@ class ImageLivreInLineAdmin(admin.ModelAdmin):
         "alt",
         "created",
         "image",
+        "updated",
     ]
     search_fields = [
         "livre",
@@ -132,6 +134,16 @@ class ImageLivreInLineAdmin(admin.ModelAdmin):
 
 class LivreItemInLineAdmin(admin.ModelAdmin):
     model = LivreItem
+    list_display = [
+        "get_isbn",
+        "get_auteur_nom",
+        "get_titre",
+        "date_achat",
+        "date_lecture",
+        "date_entree",
+        "updated",
+    ]
+    search_fields = ["livre__isbn", "livre__auteur_nom", "livre__titre"]
 
 
 class VariationAdmin(admin.ModelAdmin):

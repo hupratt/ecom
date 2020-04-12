@@ -60,6 +60,15 @@ class LivreItem(models.Model):
         "Livre", on_delete=models.CASCADE, related_name="book_quantity", default=0
     )
 
+    def get_isbn(self):
+        return self.livre.isbn
+
+    def get_titre(self):
+        return self.livre.titre
+
+    def get_auteur_nom(self):
+        return self.livre.auteur_nom
+
 
 class Livre(models.Model):
     titre = models.CharField(max_length=100)
