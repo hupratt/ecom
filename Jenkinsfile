@@ -29,6 +29,7 @@ for (x in labels) {
 					sh """ 
 
 					cd $PROJECT
+					npm run build
 					sudo chmod -R 770 $PROJECT
 					sudo chown -R ubuntu:www-data $PROJECT
 					. bin/activate
@@ -44,14 +45,12 @@ for (x in labels) {
 					echo 'var import done'
 					
 					cd ecom
-					#$PYTHON_P manage.py makemigrations                  
-
-					#$PYTHON_P manage.py migrate                  
+					$PYTHON_P manage.py migrate                  
 					echo 'manage.py migrate done'
 
 					# sudo /usr/local/bin/compile_messages
 
-					$PYTHON_P manage.py collectstatic --noinput --settings=home.settings
+					# $PYTHON_P manage.py collectstatic --noinput --settings=home.settings
 					echo 'manage.py collectstatic done'
 
 					deactivate # quit the virtual environment

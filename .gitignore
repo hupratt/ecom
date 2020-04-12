@@ -17,3 +17,4 @@ share
 .mypy_cache/
 .env
 .env.development
+*.bak
