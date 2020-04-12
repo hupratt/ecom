@@ -11,7 +11,6 @@ for (x in labels) {
 				
 				def PROJECT="/home/ubuntu/Dev/ecom"
 				def PYTHON_P="$PROJECT/bin/python3.6"
-				def GET_SECRET="/var/lib/jenkins/run_vars_ecom.py"
 				
 				stage ('Checkout') {
 					// checkout scm
@@ -42,8 +41,6 @@ for (x in labels) {
 					echo 'pip upgrade done'
 					$PYTHON_P -m pip install -r requirements.txt # Install or upgrade dependencies
 					echo 'pip install done'
-					$PYTHON_P $GET_SECRET
-					echo 'var import done'
 					
 					cd ecom
 					$PYTHON_P manage.py migrate                  
