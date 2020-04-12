@@ -63,14 +63,23 @@ class CustomLayout extends React.Component {
     }
   };
   componentDidMount() {
+    document.addEventListener("scroll", this.trackScrolling);
     const q = queryString.parse(this.props.location.search);
-    this.mapLanguageUrlToState(q.language);
-    this.mapAuthorUrlToState(q.authors);
-    this.mapCategoryUrlToState(q.category);
+    if (Object.keys(q).length == 0) {
+      this.props.fetchBooks(bookListURL());
+    } else {
+      this.mapLanguageUrlToState(q.language);
+      this.mapAuthorUrlToState(q.authors);
+      this.mapCategoryUrlToState(q.category);
+    }
     if (this.props.isAuthenticated == true) {
       this.props.refreshCart();
     }
   }
+
+  componentWillUnmount = () => {
+    document.removeEventListener("scroll", this.trackScrolling);
+  };
 
   onSelectAuthor = (e, data) => {
     const item = e.target.textContent;
@@ -168,30 +177,6 @@ class CustomLayout extends React.Component {
           document.addEventListener("scroll", this.trackScrolling);
         }
       );
-    } else {
-      const {
-        offset,
-        fetchBooks,
-        refreshCart,
-        searchTerm,
-        isAuthenticated
-      } = this.props;
-      const { language, category, authors, sliderValues } = this.state;
-      const authors_array = Array.from(authors.entries()).join(",");
-      const endpoint = bookListURL(
-        offset,
-        language,
-        authors_array,
-        category,
-        sliderValues,
-        searchTerm
-      );
-      fetchBooks(endpoint);
-      console.log(endpoint);
-      if (isAuthenticated == true) {
-        refreshCart();
-      }
-      document.addEventListener("scroll", this.trackScrolling);
     }
   };
 

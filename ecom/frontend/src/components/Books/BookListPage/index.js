@@ -44,7 +44,6 @@ class BookList extends React.Component {
       sliderValues
     } = this.props;
     const authors_array = Array.from(authors.entries()).join(",");
-
     const endpoint = bookListURL(
       offset,
       language,

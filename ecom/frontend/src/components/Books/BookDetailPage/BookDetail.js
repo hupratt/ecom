@@ -11,8 +11,6 @@ const propTypes = {
 
 const BookDetail = ({ handleAddToCart, book, isAuthenticated }) => {
   const stars_number_inverse = 5 - book.note;
-  console.log("stars_number_inverse", stars_number_inverse);
-  console.log("book.note", book.note);
   return (
     <div>
       {/* Product Shop Section Begin */}
