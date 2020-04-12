@@ -29,17 +29,16 @@ for (x in labels) {
 
 					cd $PROJECT
 					sudo chmod -R 770 $PROJECT
-					#sudo chown -R ubuntu:www-data $PROJECT
+					sudo chown -R ubuntu:www-data $PROJECT
 					npm install
 					npm run build
 					. bin/activate
 					echo 'which python are you running?'
 					which python
 					
-
-					$PYTHON_P -m pip install --upgrade pip # Upgrade pip
+					$PYTHON_P -m pip install --upgrade pip 
 					echo 'pip upgrade done'
-					$PYTHON_P -m pip install -r requirements.txt # Install or upgrade dependencies
+					$PYTHON_P -m pip install -r requirements.txt
 					echo 'pip install done'
 					
 					$PYTHON_P ./ecom/manage.py migrate                  
@@ -52,7 +51,7 @@ for (x in labels) {
 
 					$PYTHON_P ./ecom/manage.py check --deploy
 
-					deactivate # quit the virtual environment
+					deactivate 
 
 					sudo service apache2 start
 
