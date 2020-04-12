@@ -5,6 +5,29 @@ import styled, { ThemeProvider } from "styled-components";
 import FlipButton from "../../Buttons/FlipButton";
 import ViewInsideButton from "../../Buttons/ViewInsideButton";
 import PropTypes from "prop-types";
+
+const getPosition = (string, subString, index) =>
+  string.split(subString, index).join(subString).length;
+
+const shortDescr = description => {
+  if (description.length > 0) {
+    var shortVersion = description;
+    var i = 1;
+    if (description.indexOf(".") < 60) {
+      while (getPosition(shortVersion, ".", i) < 60) {
+        shortVersion = description.slice(0, getPosition(description, ".", i));
+        i++;
+
+        if (i > 5) {
+          break;
+        }
+      }
+      return shortVersion;
+    } else {
+      return description.slice(0, 60) + " (...)";
+    }
+  }
+};
 // Define our button, but with the use of props.theme this time
 const TiltBook = styled.img`
   background-image: url(${props => props.theme.url});
@@ -72,11 +95,11 @@ const BookGrid = ({
                       </div>
                       <div className="bk-page">
                         <div className="bk-content bk-content-current">
-                          <p>{item.description}</p>
+                          <p>{shortDescr(item.description)}</p>
                         </div>
                       </div>
                       <div className="bk-back">
-                        <p>{item.description}</p>
+                        <p>{shortDescr(item.description)}</p>
                       </div>
                       <div className="bk-right"></div>
 
@@ -100,7 +123,17 @@ const BookGrid = ({
                         <span>{item.auteur_nom}</span>
                         <span>{item.titre}</span>
                       </h3>
-                      <p>{item.description}</p>
+                      <p>
+                        {shortDescr(item.description)}
+                        {item.description && (
+                          <a
+                            style={{ fontStyle: "italic" }}
+                            onClick={() => handleClickOnBook(item.id)}
+                          >
+                            . Read More
+                          </a>
+                        )}
+                      </p>
                     </div>
                   </ThemeProvider>
                 </li>
