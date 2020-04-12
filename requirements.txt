@@ -20,6 +20,7 @@ django-cors-headers==3.0.2
 django-countries==5.3.3
 django-crispy-forms==1.8.0
 django-debug-toolbar==2.2
+django-dotenv==1.4.2
 django-ipware==2.1.0
 django-klingon==0.0.8
 django-rest-auth==0.9.5
