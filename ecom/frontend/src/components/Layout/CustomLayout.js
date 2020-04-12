@@ -51,7 +51,6 @@ class CustomLayout extends React.Component {
       sliderValues,
       searchTerm
     );
-    console.log("searchTerm", searchTerm);
     history.push(endpoint.slice(endpoint.indexOf("?limit"), endpoint.length));
     fetchBooks(endpoint);
   };
@@ -188,6 +187,7 @@ class CustomLayout extends React.Component {
         searchTerm
       );
       fetchBooks(endpoint);
+      console.log(endpoint);
       if (isAuthenticated == true) {
         refreshCart();
       }

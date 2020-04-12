@@ -18,8 +18,8 @@ for (x in labels) {
 					whoami
 					sudo service apache2 stop
 					cd $PROJECT
-					sudo git fetch --all
-					sudo git reset --hard origin/master
+					git fetch --all
+					git reset --hard origin/master
 					"""
 				}
 
@@ -28,10 +28,10 @@ for (x in labels) {
 					sh """ 
 
 					cd $PROJECT
+					sudo chmod -R 770 $PROJECT
+					#sudo chown -R ubuntu:www-data $PROJECT
 					npm install
 					npm run build
-					sudo chmod -R 770 $PROJECT
-					sudo chown -R ubuntu:www-data $PROJECT
 					. bin/activate
 					echo 'which python are you running?'
 					which python
@@ -46,11 +46,13 @@ for (x in labels) {
 					$PYTHON_P manage.py migrate                  
 					echo 'manage.py migrate done'
 
-					# sudo /usr/local/bin/compile_messages
+					$PYTHON_P manage.py compilemessages --settings=home.settings
 
-					# $PYTHON_P manage.py collectstatic --noinput --settings=home.settings
+					$PYTHON_P manage.py collectstatic --noinput --settings=home.settings
 					echo 'manage.py collectstatic done'
 
+					$PYTHON_P manage.py check --deploy
+					
 					deactivate # quit the virtual environment
 
 					sudo service apache2 start
