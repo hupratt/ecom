@@ -29,7 +29,7 @@ for (x in labels) {
 					sh """ 
 
 					cd $PROJECT
-					npm install --production
+					npm install
 					npm run build
 					sudo chmod -R 770 $PROJECT
 					sudo chown -R ubuntu:www-data $PROJECT
