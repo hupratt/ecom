@@ -42,17 +42,16 @@ for (x in labels) {
 					$PYTHON_P -m pip install -r requirements.txt # Install or upgrade dependencies
 					echo 'pip install done'
 					
-					cd ecom
-					$PYTHON_P manage.py migrate                  
+					$PYTHON_P ./ecom/manage.py migrate                  
 					echo 'manage.py migrate done'
 
-					$PYTHON_P manage.py compilemessages --settings=home.settings
+					$PYTHON_P ./ecom/manage.py compilemessages --settings=home.settings
 
-					$PYTHON_P manage.py collectstatic --noinput --settings=home.settings
+					$PYTHON_P ./ecom/manage.py collectstatic --noinput --settings=home.settings
 					echo 'manage.py collectstatic done'
 
-					$PYTHON_P manage.py check --deploy
-					
+					$PYTHON_P ./ecom/manage.py check --deploy
+
 					deactivate # quit the virtual environment
 
 					sudo service apache2 start
