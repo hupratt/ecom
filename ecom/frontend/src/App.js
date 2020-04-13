@@ -1,7 +1,6 @@
-import React, { Component } from "react";
+import React, { Component, Suspense } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { connect } from "react-redux";
-import BaseRouter from "./routes";
 
 import * as actions from "./actions/auth";
 import "semantic-ui-css/semantic.min.css";
@@ -15,9 +14,13 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
-        <CustomLayout {...this.props} />
-      </Router>
+      // i18n translations might still be loaded by the xhr backend
+      // use react's Suspense
+      <Suspense fallback="loading">
+        <Router>
+          <CustomLayout {...this.props} />
+        </Router>
+      </Suspense>
     );
   }
 }

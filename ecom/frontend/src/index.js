@@ -4,6 +4,7 @@ import App from "./App";
 import registerServiceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
 import { store } from "./reducers";
+import "./i18n";
 
 const app = (
   <Provider store={store}>
