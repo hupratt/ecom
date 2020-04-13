@@ -4,7 +4,6 @@ import { Link, withRouter } from "react-router-dom";
 import { withAuthentication } from "../../hoc/hoc";
 import TopNavigationNoAuth from "./TopNavigation/TopNavigationNoAuth";
 import TopNavigationWithAuth from "./TopNavigation/TopNavigationWithAuth";
-// import PropTypes from "prop-types";
 import BottomNavigation from "../Layout/BottomNavigation/BottomNavigation";
 // debounce so that each state change of the search query does not DDOS our backend
 import { debounce } from "throttle-debounce";
@@ -15,11 +14,6 @@ import { bookListURL } from "../../constants";
 import { fetchBooks, loadmoar } from "../../actions/books";
 import { fetchCart } from "../../actions/cart";
 import queryString from "query-string";
-
-// const propTypes = {
-//   authenticated: PropTypes.bool.isRequired,
-//   cart: PropTypes.object
-// };
 
 class CustomLayout extends React.Component {
   state = {
@@ -66,8 +60,12 @@ class CustomLayout extends React.Component {
     document.addEventListener("scroll", this.trackScrolling);
     const q = queryString.parse(this.props.location.search);
     if (Object.keys(q).length == 0) {
+      // vanilla search, no string parameters
+      // e.g. visit '/'
       this.props.fetchBooks(bookListURL());
     } else {
+      // parameter search, handle string parameters
+      // e.g. visit '?limit=12&offset=0&language=&authors=blabla'
       this.mapUrlToState(q);
     }
     if (this.props.isAuthenticated == true) {
@@ -75,10 +73,11 @@ class CustomLayout extends React.Component {
     }
   }
 
-  mapUrlToState = queryMap => {
+  handleAuthorStringParams = queryMap => {
     const authors_param = queryMap.authors;
-    var queryMap = queryMap;
     if (authors_param !== undefined) {
+      // authors_param string --> authors_param Map
+      // e.g. Eça de Queirós,true -->  Map{ "Eça de Queirós" → true }
       let urlAuthorMap = new Map();
       let result = [];
       for (var i = 0; i < authors_param.split(",").length; i += 2) {
@@ -90,16 +89,18 @@ class CustomLayout extends React.Component {
       result.forEach(element => {
         urlAuthorMap.set(element[0], element[1] === "true");
       });
-      queryMap = { ...queryMap, authors: urlAuthorMap };
+      return { ...queryMap, authors: urlAuthorMap };
     }
-    console.log("queryMap", queryMap);
+    return queryMap;
+  };
+
+  mapUrlToState = queryMap => {
+    const queryMap = this.handleAuthorStringParams(queryMap);
 
     this.setState(queryMap, () => {
-      // queryMap Map { "Eça de Queirós" → true }
       const { offset, fetchBooks, searchTerm } = this.props;
       const { language, category, authors, sliderValues } = this.state;
       let authors_array = "";
-      // Eça de Queirós,true
       if (queryMap.authors) {
         authors_array = Array.from(queryMap.authors.entries()).join(",");
       }
@@ -147,6 +148,7 @@ class CustomLayout extends React.Component {
       }
     );
   };
+
   handleSetActiveCategory = event => {
     this.setState({ category: event.currentTarget.text }, () => {
       const { offset, fetchBooks, history, searchTerm } = this.props;
@@ -182,6 +184,7 @@ class CustomLayout extends React.Component {
       fetchBooks(endpoint);
     });
   };
+
   onSliderChange = sliderValues => {
     this.setState({ sliderValues: sliderValues }, () => {
       const { offset, fetchBooks, history, searchTerm } = this.props;
