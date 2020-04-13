@@ -25,9 +25,9 @@ class CustomLayout extends React.Component {
   state = {
     language: "",
     authors: new Map(),
-    authorsQueryString: "",
     category: "",
-    sliderValues: [0, 100]
+    sliderValues: [0, 100],
+    search: ""
   };
   constructor(props) {
     super(props);
@@ -68,14 +68,53 @@ class CustomLayout extends React.Component {
     if (Object.keys(q).length == 0) {
       this.props.fetchBooks(bookListURL());
     } else {
-      this.mapLanguageUrlToState(q.language);
-      this.mapAuthorUrlToState(q.authors);
-      this.mapCategoryUrlToState(q.category);
+      this.mapUrlToState(q);
     }
     if (this.props.isAuthenticated == true) {
       this.props.refreshCart();
     }
   }
+
+  mapUrlToState = queryMap => {
+    const authors_param = queryMap.authors;
+    var queryMap = queryMap;
+    if (authors_param !== undefined) {
+      let urlAuthorMap = new Map();
+      let result = [];
+      for (var i = 0; i < authors_param.split(",").length; i += 2) {
+        result.push([
+          authors_param.split(",")[i],
+          authors_param.split(",")[i + 1]
+        ]);
+      }
+      result.forEach(element => {
+        urlAuthorMap.set(element[0], element[1] === "true");
+      });
+      queryMap = { ...queryMap, authors: urlAuthorMap };
+    }
+    console.log("queryMap", queryMap);
+
+    this.setState(queryMap, () => {
+      // queryMap Map { "Eça de Queirós" → true }
+      const { offset, fetchBooks, searchTerm } = this.props;
+      const { language, category, authors, sliderValues } = this.state;
+      let authors_array = "";
+      // Eça de Queirós,true
+      if (queryMap.authors) {
+        authors_array = Array.from(queryMap.authors.entries()).join(",");
+      }
+
+      const endpoint = bookListURL(
+        offset,
+        language,
+        authors_array,
+        category,
+        sliderValues,
+        searchTerm
+      );
+      fetchBooks(endpoint);
+    });
+  };
 
   componentWillUnmount = () => {
     document.removeEventListener("scroll", this.trackScrolling);
@@ -159,83 +198,6 @@ class CustomLayout extends React.Component {
       history.push(endpoint.slice(endpoint.indexOf("?limit"), endpoint.length));
       fetchBooks(endpoint);
     });
-  };
-
-  mapLanguageUrlToState = lang_param => {
-    if (lang_param !== undefined) {
-      this.setState(
-        {
-          language: lang_param
-        },
-        () => {
-          this.props.fetchBooks(
-            bookListURL(this.props.offset, this.state.language)
-          );
-          if (this.props.isAuthenticated == true) {
-            this.props.refreshCart();
-          }
-          document.addEventListener("scroll", this.trackScrolling);
-        }
-      );
-    }
-  };
-
-  mapCategoryUrlToState = category_param => {
-    if (category_param !== undefined) {
-      this.setState(
-        {
-          category: category_param
-        },
-        () => {
-          const { offset, fetchBooks, searchTerm } = this.props;
-          const { language, category, authors, sliderValues } = this.state;
-          const authors_array = Array.from(authors.entries()).join(",");
-          const endpoint = bookListURL(
-            offset,
-            language,
-            authors_array,
-            category,
-            sliderValues,
-            searchTerm
-          );
-          fetchBooks(endpoint);
-        }
-      );
-    }
-  };
-  mapAuthorUrlToState = authors_param => {
-    if (authors_param !== undefined) {
-      let urlAuthorMap = new Map();
-      let result = [];
-      for (var i = 0; i < authors_param.split(",").length; i += 2) {
-        result.push([
-          authors_param.split(",")[i],
-          authors_param.split(",")[i + 1]
-        ]);
-      }
-      result.forEach(element => {
-        urlAuthorMap.set(element[0], element[1] === "true");
-      });
-      this.setState(
-        {
-          authors: urlAuthorMap
-        },
-        () => {
-          const { offset, fetchBooks, searchTerm } = this.props;
-          const { language, category, authors, sliderValues } = this.state;
-          const authors_array = Array.from(authors.entries()).join(",");
-          const endpoint = bookListURL(
-            offset,
-            language,
-            authors_array,
-            category,
-            sliderValues,
-            searchTerm
-          );
-          fetchBooks(endpoint);
-        }
-      );
-    }
   };
 
   render() {
