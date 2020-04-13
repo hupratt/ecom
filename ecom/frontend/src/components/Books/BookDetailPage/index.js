@@ -8,6 +8,7 @@ import { fetchCart, handleAddToCart } from "../../../actions/cart";
 import { withError, withLoading } from "../../../hoc/hoc";
 import BookDetail from "./BookDetail";
 import { fetchBooks } from "../../../actions/books";
+import { Trans } from "react-i18next";
 
 const propTypes = {
   book: PropTypes.object.isRequired,
@@ -46,14 +47,14 @@ class BookDetailPage extends React.Component {
               <div className="col-lg-12">
                 <div className="breadcrumb-text product-more">
                   <Link to="/">
-                    <i className="fas fa-home" /> Home
+                    <i className="fas fa-home" /> <Trans i18nKey="Home" />
                   </Link>
                   <span
                     style={{
                       color: "#252525"
                     }}
                   >
-                    Detail
+                    <Trans i18nKey="Detail" />
                   </span>
                 </div>
               </div>

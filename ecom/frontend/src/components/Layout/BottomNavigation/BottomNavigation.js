@@ -1,13 +1,16 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const BottomNavigation = () => {
+  const { t } = useTranslation();
+
   return (
     <React.Fragment>
       {/* Footer Section Begin */}
       <footer className="footer-section">
         <div className="container footer-left footer-flex">
           <div className="centermyitems">
-            <h5>Information</h5>
+            <h5> {t("Information")}</h5>
 
             <ul>
               <li>Chaussée de Wavre 214B, 1050 Ixelles</li>
@@ -26,56 +29,52 @@ const BottomNavigation = () => {
             </div>
           </div>
           <div className="centermyitems">
-            <h5>Opening Times</h5>
+            <h5> {t("Opening Times")}</h5>
 
             <ul>
-              <li>Tuesday to Friday: 12:00 - 15:00</li>
-              <li>Saturday: 13:00 - 17:00</li>
-              <li>Sunday: 14:00 - 17:00 </li>
+              <li> {t("T-F")}12:00 - 15:00</li>
+              <li> {t("S")}13:00 - 17:00</li>
+              <li> {t("Sun")}14:00 - 17:00 </li>
             </ul>
           </div>
           <div className="footer-widget centermyitems">
             <h5>Links</h5>
             <ul>
               <li>
-                <a href="https://www.lapetiteportugaise.eu">About Us</a>
+                <a href="https://www.lapetiteportugaise.eu">{t("About Us")}</a>
               </li>
               <li>
-                <a href="https://www.lapetiteportugaise.eu">Events</a>
+                <a href="https://www.lapetiteportugaise.eu">{t("Events")}</a>
               </li>
               <li>
-                <a href="https://www.lapetiteportugaise.eu">Contact</a>
+                <a href="https://www.lapetiteportugaise.eu">{t("Contact")}</a>
               </li>
               <li>
-                <a href="https://www.lapetiteportugaise.eu">Privacy Policy</a>
+                <a href="https://www.lapetiteportugaise.eu">
+                  {t("Privacy Policy")}
+                </a>
               </li>
               <li>
-                <a href="https://www.lapetiteportugaise.eu">Terms of Use</a>
+                <a href="https://www.lapetiteportugaise.eu">
+                  {t("Terms of Use")}
+                </a>
               </li>
             </ul>
           </div>
           <div className="newslatter-item centermyitems">
-            <h5>Join Our Newsletter Now</h5>
-            <p>Get E-mail updates about our latest shop and special offers.</p>
+            <h5> {t("Join Our Newsletter Now")}</h5>
+            <p>{t("E-mail updates")}</p>
             <form action="#" className="subscribe-form">
-              <input type="text" placeholder="Enter Your Mail" />
-              <button type="button">Submit</button>
+              <input type="text" placeholder={t("Enter Your Mail")} />
+              <button type="button"> {t("Submit")}</button>
             </form>
           </div>
         </div>
         <div className="copyright-reserved">
           <div className="copyright-text">
-            Copyright © All rights reserved | Made with
-            <i
-              className="far fa-heart"
-              style={{
-                marginLeft: "7px",
-                marginRight: "7px",
-                marginTop: "3px",
-                color: "#b2b2b2"
-              }}
-            />
-            by a fellow member
+            {t("Copyright")}
+            <i className="far fa-heart" />
+            {t("Made By")}
           </div>
           <img
             src="https://bookshop-images-f1492f08-f236-4a55-afb7-70ded209cb24.s3.eu-west-2.amazonaws.com/resources/payment-details.png"

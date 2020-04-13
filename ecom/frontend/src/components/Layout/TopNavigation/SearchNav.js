@@ -1,12 +1,15 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const SearchNav = ({ onSearchChange }) => {
+  const { t } = useTranslation();
+
   return (
     <React.Fragment>
       <div className="col-lg-7 col-md-7">
         <div className="advanced-search">
           <button type="button" className="category-btn">
-            All Fields
+            {t("All Fields")}
           </button>
           <form
             action="#"
@@ -17,7 +20,7 @@ const SearchNav = ({ onSearchChange }) => {
           >
             <input
               type="text"
-              placeholder="What are you looking for?"
+              placeholder={t("What are you looking for?")}
               style={{ color: "#0f0f0f" }}
               onChange={onSearchChange}
             />

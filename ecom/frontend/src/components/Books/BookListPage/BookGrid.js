@@ -6,6 +6,7 @@ import FlipButton from "../../Buttons/FlipButton";
 import ViewInsideButton from "../../Buttons/ViewInsideButton";
 import PropTypes from "prop-types";
 import { shortDescr } from "../../utility";
+import { useTranslation } from "react-i18next";
 
 // Define our button, but with the use of props.theme this time
 const TiltBook = styled.img`
@@ -52,6 +53,7 @@ const BookGrid = ({
   paginatedDataLength,
   length
 }) => {
+  const { t } = useTranslation();
   return (
     <React.Fragment>
       <Grid divided>
@@ -96,7 +98,7 @@ const BookGrid = ({
                       <FlipButton isbn={item.isbn} />
                       <ViewInsideButton isbn={item.isbn} />
                       <button onClick={() => handleClickOnBook(item.id)}>
-                        Buy
+                        {t("Buy")}
                       </button>
                       <h3>
                         <span>{item.auteur_nom}</span>
@@ -111,7 +113,7 @@ const BookGrid = ({
                             style={{ fontStyle: "italic" }}
                             onClick={() => handleClickOnBook(item.id)}
                           >
-                            . Read More
+                            . {t("Read More")}
                           </a>
                         )}
                       </p>

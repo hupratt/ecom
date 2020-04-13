@@ -13,7 +13,7 @@ const LanguageFilter = ({ language, onSelectRadio }) => {
 
   return (
     <Form className="radio">
-      <div className="filter-title">Language</div>
+      <div className="filter-title">{t("Language")}</div>
 
       <ul>
         <RadioButton
@@ -26,14 +26,14 @@ const LanguageFilter = ({ language, onSelectRadio }) => {
         <RadioButton
           handleChange={onSelectRadio}
           language={language}
-          label="French"
+          label={t("French")}
           value="FR"
           id="2"
         />
         <RadioButton
           handleChange={onSelectRadio}
           language={language}
-          label="English"
+          label={t("English")}
           value="EN"
           id="3"
         />
@@ -41,7 +41,7 @@ const LanguageFilter = ({ language, onSelectRadio }) => {
           handleChange={onSelectRadio}
           language={language}
           value=""
-          label="All"
+          label={t("All")}
           id="4"
         />
       </ul>

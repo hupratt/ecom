@@ -1,6 +1,8 @@
 import React from "react";
 import { Message } from "semantic-ui-react";
 import { send } from "emailjs-com";
+import { Trans } from "react-i18next";
+
 export default class extends React.Component {
   constructor(props) {
     super(props);
@@ -74,7 +76,7 @@ export default class extends React.Component {
               className="primary-btn"
               onClick={() => this.showEmailForm()}
             >
-              Email Us
+              <Trans i18nKey="Email Us" />
             </a>
           </div>
         ) : (
@@ -93,7 +95,7 @@ export default class extends React.Component {
 
             <div className="email">
               <a className="primary-btn" href="#" onClick={this.handleSubmit}>
-                Submit
+                <Trans i18nKey="Submit" />
               </a>
             </div>
           </form>

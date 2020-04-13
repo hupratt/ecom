@@ -6,6 +6,7 @@ import BookGrid from "./BookGrid";
 import PropTypes from "prop-types";
 import MySlider from "../../Buttons/Slider";
 import { Container } from "semantic-ui-react";
+import { useTranslation } from "react-i18next";
 
 const propTypes = {
   bookPerPage: PropTypes.number.isRequired,
@@ -28,6 +29,7 @@ const BooksPlusPaginationAndFilters = ({
   onSliderChange,
   sliderValues
 }) => {
+  const { t } = useTranslation();
   return (
     <Container className="booklist">
       <React.Fragment>
@@ -40,7 +42,10 @@ const BooksPlusPaginationAndFilters = ({
             sliderValues={sliderValues}
           />
           <p>
-            Displaying {paginatedData.length} of {length} books
+            {t("Displaying x of y", {
+              fraction: paginatedData.length,
+              total: length
+            })}
           </p>
         </div>
         <BookGrid

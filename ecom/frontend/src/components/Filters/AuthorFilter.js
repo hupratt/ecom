@@ -1,12 +1,14 @@
 import React from "react";
 import { Form, Checkbox } from "semantic-ui-react";
+import { useTranslation } from "react-i18next";
 
 const AuthorFilter = ({ onSelectAuthor, authors }) => {
+  const { t } = useTranslation();
   return (
     <React.Fragment>
       {authors && (
         <Form className="author-checkbox">
-          <div className="filter-title">Author</div>
+          <div className="filter-title">{t("Author")}</div>
           <ul>
             <Checkbox
               label="Fernando Pessoa"

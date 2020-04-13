@@ -1,25 +1,27 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const CategoryFilter = ({ handleSetActiveCategory }) => {
+  const { t } = useTranslation();
   return (
     <React.Fragment>
       <div className="ui form">
-        <div className="filter-title">Category</div>
+        <div className="filter-title"> {t("Category")}</div>
         <div className="book-category">
           <a href="#" onClick={handleSetActiveCategory}>
-            Romance
+            {t("Romance")}
           </a>
           <a href="#" onClick={handleSetActiveCategory}>
-            História
+            {t("História")}
           </a>
           <a href="#" onClick={handleSetActiveCategory}>
-            Poesia
+            {t("Poesia")}
           </a>
           <a href="#" onClick={handleSetActiveCategory}>
-            Contos
+            {t("Contos")}
           </a>
           <a href="#" onClick={handleSetActiveCategory}>
-            Crónicas
+            {t("Crónicas")}
           </a>
         </div>
       </div>

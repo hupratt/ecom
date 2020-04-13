@@ -1,3 +1,4 @@
 {
-  "Portuguese": "Portuguese"
+  "Portuguese": "Portuguese",
+  "Displaying x of y": "Displaying {{fraction}} of {{total}} books"
 }

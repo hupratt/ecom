@@ -1,5 +1,6 @@
 import React from "react";
 import { Slider, Handles } from "react-compound-slider";
+import { useTranslation } from "react-i18next";
 
 const sliderStyle = {
   position: "relative",
@@ -20,9 +21,10 @@ const railStyle = {
 const domain = [0, 100];
 
 const MySlider = ({ sliderValues, onSliderChange }) => {
+  const { t } = useTranslation();
   return (
     <React.Fragment>
-      <div className="filter-title">Price</div>
+      <div className="filter-title">{t("Price")}</div>
       {/* Wrapper */}
       {sliderValues && (
         <Slider

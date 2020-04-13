@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import { bookListURL } from "../../../constants";
 import { Link, withRouter } from "react-router-dom";
 import { fetchCart } from "../../../actions/cart";
+import { Trans } from "react-i18next";
 
 const propTypes = {
   data: PropTypes.array.isRequired,
@@ -118,9 +119,11 @@ class BookList extends React.Component {
               <div className="col-lg-12">
                 <div className="breadcrumb-text">
                   <Link to="/" onClick={() => window.location.reload()}>
-                    <i className="fa fa-home" /> Home
+                    <i className="fa fa-home" /> <Trans i18nKey="Home" />
                   </Link>
-                  <span>Detail</span>
+                  <span>
+                    <Trans i18nKey="Detail" />
+                  </span>
                 </div>
               </div>
             </div>

@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { s3_base_url } from "../../../constants";
 import EmailForm from "./EmailForm";
 import { shortDescr } from "../../utility";
+import { Trans } from "react-i18next";
 
 const propTypes = {
   handleAddToCart: PropTypes.func.isRequired,
@@ -96,13 +97,22 @@ class BookDetail extends React.Component {
                           <EmailForm isbn={book.isbn} />
                           <ul className="pd-tags">
                             <li>
-                              <span>CATEGORY</span>: {book.genre_nom}
+                              <span>
+                                <Trans i18nKey="CATEGORY" />
+                              </span>
+                              : {book.genre_nom}
                             </li>
                             <li>
-                              <span>LANGUAGES</span>: {book.langue_nom}
+                              <span>
+                                <Trans i18nKey="LANGUAGES" />
+                              </span>
+                              : {book.langue_nom}
                             </li>
                             <li>
-                              <span>QUANTITY</span>: {book.get_quantity}
+                              <span>
+                                <Trans i18nKey="QUANTITY" />
+                              </span>
+                              : {book.get_quantity}
                             </li>
                           </ul>
                           <div className="pd-desc">
@@ -115,7 +125,7 @@ class BookDetail extends React.Component {
                                   style={{ fontStyle: "italic" }}
                                   onClick={() => this.showFullDescription()}
                                 >
-                                  Read More
+                                  <Trans i18nKey="Read More" />
                                 </a>
                               </React.Fragment>
                             )}

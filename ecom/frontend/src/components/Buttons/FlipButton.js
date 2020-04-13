@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 
 const propTypes = {
   isbn: PropTypes.string
@@ -16,13 +17,14 @@ const handleFlip = isbn => {
   }
 };
 const FlipButton = ({ isbn }) => {
+  const { t } = useTranslation();
   return (
     <button
       onClick={() => {
         handleFlip(isbn);
       }}
     >
-      Flip
+      {t("Flip")}
     </button>
   );
 };
