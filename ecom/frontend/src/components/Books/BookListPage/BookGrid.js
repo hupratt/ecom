@@ -101,11 +101,12 @@ const BookGrid = ({
                       <h3>
                         <span>{item.auteur_nom}</span>
                         <span>{item.titre}</span>
-                        <span>{item.isbn}</span>
                       </h3>
+                      <span>ISBN: {item.isbn}</span>
+
                       <p>
                         {shortDescr(item.description)}
-                        {item.description && (
+                        {item.description && item.description.length > 1 && (
                           <a
                             style={{ fontStyle: "italic" }}
                             onClick={() => handleClickOnBook(item.id)}
