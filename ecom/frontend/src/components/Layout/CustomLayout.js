@@ -111,7 +111,7 @@ class CustomLayout extends React.Component {
         authors_array,
         category,
         sliderValues,
-        searchTerm
+        searchTerm || queryMap.text
       );
       fetchBooks(endpoint);
     });
