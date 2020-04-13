@@ -99,9 +99,9 @@ const BookGrid = ({
                         Buy
                       </button>
                       <h3>
-                        <span>{item.auteur_nom}</span>
-                        <span>{item.titre}</span>
-                        {/* <span>{item.isbn}</span> */}
+                        {/* <span>{item.auteur_nom}</span> */}
+                        {/* <span>{item.titre}</span> */}
+                        <span>{item.isbn}</span>
                       </h3>
                       <p>
                         {shortDescr(item.description)}

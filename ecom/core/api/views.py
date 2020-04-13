@@ -100,7 +100,11 @@ class BookListView(ListAPIView):
         Optionally restricts the returned books to a given set of parameters.
         It filters `authors` and `language` query parameters in the URL.
         """
-        queryset = Livre.objects.filter(book_quantity__gte=0).distinct()
+        queryset = (
+            Livre.objects.filter(book_quantity__gte=0)
+            .filter(book_quantity__date_achat=None)
+            .distinct()
+        )
 
         language = self.request.query_params.get("language", "")
         authors = self.request.query_params.get("authors", "")
