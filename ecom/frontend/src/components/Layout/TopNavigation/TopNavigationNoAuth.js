@@ -8,9 +8,9 @@ const TopNavigationNoAuth = ({ onSearchChange }) => {
       <SearchNav onSearchChange={onSearchChange} />
       <div className="col-lg-3 text-right col-md-3">
         <ul className="nav-right">
-          <Link to="/login" className="hoverbtn">
+          {/* <Link to="/login" className="hoverbtn">
             Sign up
-          </Link>
+          </Link> */}
         </ul>
       </div>
     </React.Fragment>
