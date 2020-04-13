@@ -95,7 +95,7 @@ class CustomLayout extends React.Component {
   };
 
   mapUrlToState = queryMap => {
-    const queryMap = this.handleAuthorStringParams(queryMap);
+    queryMap = this.handleAuthorStringParams(queryMap);
 
     this.setState(queryMap, () => {
       const { offset, fetchBooks, searchTerm } = this.props;
