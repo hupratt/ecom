@@ -115,7 +115,7 @@ class BookDetail extends React.Component {
                                   style={{ fontStyle: "italic" }}
                                   onClick={() => this.showFullDescription()}
                                 >
-                                  . Read More
+                                  Read More
                                 </a>
                               </React.Fragment>
                             )}
