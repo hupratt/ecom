@@ -44,7 +44,8 @@
 
 .bk-info {
   position: relative;
-  margin-top: 440px;
+  margin-top: 460px;
+  margin-bottom: 20px;
   h3 {
     padding: 25px 0 10px;
     margin-bottom: 20px;
@@ -94,7 +95,7 @@
 .bk-list li .bk-book {
   position: absolute;
   width: 100%;
-  height: 400px;
+  height: 430px;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   -webkit-transition: -webkit-transform 0.5s;
@@ -137,7 +138,7 @@
   transform: translate3d(0, 0, 19px);
   display: none;
   width: 295px;
-  height: 390px;
+  height: 420px;
   top: 5px;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
@@ -148,7 +149,7 @@
 .bk-list li .bk-back,
 .bk-list li .bk-front > div {
   width: 300px;
-  height: 400px;
+  height: 430px;
 }
 
 .bk-list li .bk-left,
@@ -190,7 +191,7 @@
 }
 
 .bk-list li .bk-left {
-  height: 400px;
+  height: 430px;
   -webkit-transform: rotate3d(0, 1, 0, -90deg);
   transform: rotate3d(0, 1, 0, -90deg);
 }
@@ -263,7 +264,7 @@
 }
 
 .bk-left h2 {
-  width: 400px;
+  width: 430px;
   height: 40px;
   -webkit-transform-origin: 0 0;
   -moz-transform-origin: 0 0;
