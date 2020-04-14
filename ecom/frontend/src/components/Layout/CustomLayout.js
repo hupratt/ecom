@@ -150,21 +150,26 @@ class CustomLayout extends React.Component {
   };
 
   handleSetActiveCategory = event => {
-    this.setState({ category: event.currentTarget.text }, () => {
-      const { offset, fetchBooks, history, searchTerm } = this.props;
-      const { language, category, authors, sliderValues } = this.state;
-      const authors_array = Array.from(authors.entries()).join(",");
-      const endpoint = bookListURL(
-        offset,
-        language,
-        authors_array,
-        category,
-        sliderValues,
-        searchTerm
-      );
-      history.push(endpoint.slice(endpoint.indexOf("?limit"), endpoint.length));
-      fetchBooks(endpoint);
-    });
+    this.setState(
+      { category: event.currentTarget.attributes.val.value },
+      () => {
+        const { offset, fetchBooks, history, searchTerm } = this.props;
+        const { language, category, authors, sliderValues } = this.state;
+        const authors_array = Array.from(authors.entries()).join(",");
+        const endpoint = bookListURL(
+          offset,
+          language,
+          authors_array,
+          category,
+          sliderValues,
+          searchTerm
+        );
+        history.push(
+          endpoint.slice(endpoint.indexOf("?limit"), endpoint.length)
+        );
+        fetchBooks(endpoint);
+      }
+    );
   };
 
   onSelectRadio = event => {

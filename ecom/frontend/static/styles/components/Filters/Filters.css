@@ -107,6 +107,10 @@
   margin-top: auto;
 }
 
+.advanced-search .category-btn {
+  font-size: 0.95em !important;
+}
+
 .container-forms label {
   font-size: 16px;
   color: #636363;

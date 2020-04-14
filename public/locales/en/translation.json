@@ -32,7 +32,7 @@
   "Privacy Policy": "Privacy Policy",
   "Terms of Use": "Terms of Use",
   "Join Our Newsletter Now": "Join Our Newsletter Now",
-  "E-mail updates": "E-mail updates",
+  "E-mail updates": "Get notified of our special offers with our newsletter",
   "Displaying x of y": "Displaying {{fraction}} of {{total}} books",
   "All Fields": "All Fields",
   "What are you looking for?": "What are you looking for?",
@@ -41,5 +41,8 @@
   "T-F": "Tuesday to Thursday: ",
   "S": "Saturday: ",
   "Sun": "Sunday: ",
-  "Enter Your Mail": "Enter Your Mail"
+  "Enter Your Mail": "Enter Your Mail",
+  "Literatura": "Literature",
+  "Arte": "Art",
+  "Gastronomia": "Gastronomy"
 }

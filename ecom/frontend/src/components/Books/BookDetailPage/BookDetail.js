@@ -106,10 +106,6 @@ class BookDetail extends React.Component {
                               <span>{this.props.t("LANGUAGES")}</span>:{" "}
                               {book.langue_nom}
                             </li>
-                            <li>
-                              <span>{this.props.t("QUANTITY")}</span>:{" "}
-                              {book.get_quantity}
-                            </li>
                           </ul>
                           <div className="pd-desc">
                             {this.state.bookDetailClicked ? (

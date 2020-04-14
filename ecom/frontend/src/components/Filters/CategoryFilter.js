@@ -8,20 +8,20 @@ const CategoryFilter = ({ handleSetActiveCategory }) => {
       <div className="ui form">
         <div className="filter-title"> {t("Category")}</div>
         <div className="book-category">
-          <a href="#" onClick={handleSetActiveCategory}>
-            {t("Romance")}
+          <a href="#" onClick={handleSetActiveCategory} val="Literatura">
+            {t("Literatura")}
           </a>
-          <a href="#" onClick={handleSetActiveCategory}>
+          <a href="#" onClick={handleSetActiveCategory} val="Arte">
+            {t("Arte")}
+          </a>
+          <a href="#" onClick={handleSetActiveCategory} val="Gastronomia">
+            {t("Gastronomia")}
+          </a>
+          <a href="#" onClick={handleSetActiveCategory} val="História">
             {t("História")}
           </a>
-          <a href="#" onClick={handleSetActiveCategory}>
+          <a href="#" onClick={handleSetActiveCategory} val="Poesia">
             {t("Poesia")}
-          </a>
-          <a href="#" onClick={handleSetActiveCategory}>
-            {t("Contos")}
-          </a>
-          <a href="#" onClick={handleSetActiveCategory}>
-            {t("Crónicas")}
           </a>
         </div>
       </div>
