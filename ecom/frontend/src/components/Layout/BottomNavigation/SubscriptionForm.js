@@ -64,7 +64,7 @@ export default class extends React.Component {
         )}
         <form className="mailing">
           <input
-            type="text"
+            type="email"
             placeholder={placeholder}
             onChange={this.handleChange}
             value={from}

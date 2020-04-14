@@ -81,17 +81,15 @@ export default class extends React.Component {
           </div>
         ) : (
           <form className="mailing">
-            <div>
-              <textarea
-                id="mailing"
-                name="mailing"
-                onChange={this.handleChange}
-                placeholder={this.props.placeholder}
-                required
-                value={feedback}
-                style={{ width: "100%", height: "150px" }}
-              />
-            </div>
+            <textarea
+              id="mailing"
+              name="mailing"
+              onChange={this.handleChange}
+              placeholder={this.props.placeholder}
+              required
+              value={feedback}
+              style={{ width: "100%", height: "150px" }}
+            />
 
             <div className="email">
               <a className="primary-btn" href="#" onClick={this.handleSubmit}>

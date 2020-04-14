@@ -19,7 +19,6 @@ class BookDetail extends React.Component {
     this.setState({ bookDetailClicked: true });
   };
   render() {
-    console.log(this.state.clicked);
     const { handleAddToCart, book, isAuthenticated } = this.props;
     const stars_number_inverse = 5 - book.note;
     return (
