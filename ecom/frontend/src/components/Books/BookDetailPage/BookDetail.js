@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { s3_base_url } from "../../../constants";
 import EmailForm from "./EmailForm";
 import { shortDescr } from "../../utility";
-import { Trans } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 const propTypes = {
   handleAddToCart: PropTypes.func.isRequired,
@@ -94,25 +94,22 @@ class BookDetail extends React.Component {
                             <a>{el}</a>
                           ))}
 
-                          <EmailForm isbn={book.isbn} />
+                          <EmailForm
+                            isbn={book.isbn}
+                            placeholder={this.props.t("Would buy")}
+                          />
                           <ul className="pd-tags">
                             <li>
-                              <span>
-                                <Trans i18nKey="CATEGORY" />
-                              </span>
-                              : {book.genre_nom}
+                              <span>{this.props.t("CATEGORY")}</span>:{" "}
+                              {book.genre_nom}
                             </li>
                             <li>
-                              <span>
-                                <Trans i18nKey="LANGUAGES" />
-                              </span>
-                              : {book.langue_nom}
+                              <span>{this.props.t("LANGUAGES")}</span>:{" "}
+                              {book.langue_nom}
                             </li>
                             <li>
-                              <span>
-                                <Trans i18nKey="QUANTITY" />
-                              </span>
-                              : {book.get_quantity}
+                              <span>{this.props.t("QUANTITY")}</span>:{" "}
+                              {book.get_quantity}
                             </li>
                           </ul>
                           <div className="pd-desc">
@@ -125,7 +122,7 @@ class BookDetail extends React.Component {
                                   style={{ fontStyle: "italic" }}
                                   onClick={() => this.showFullDescription()}
                                 >
-                                  <Trans i18nKey="Read More" />
+                                  {this.props.t("Read More")}
                                 </a>
                               </React.Fragment>
                             )}
@@ -146,4 +143,6 @@ class BookDetail extends React.Component {
 
 BookDetail.propTypes = propTypes;
 
-export default BookDetail;
+const BookDetailWithTranslation = withTranslation()(BookDetail);
+
+export default BookDetailWithTranslation;

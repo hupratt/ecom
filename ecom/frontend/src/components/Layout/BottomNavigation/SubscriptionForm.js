@@ -7,35 +7,27 @@ export default class extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      feedback: "",
       email: "lapetiteportugaise.bxl@gmail.com",
       success: undefined,
       error: undefined,
-      showForm: false
+      from: ""
     };
   }
-
   handleChange = event => {
-    this.setState({ feedback: event.target.value });
+    this.setState({ from: event.target.value });
   };
-
   handleSubmit = event => {
-    const templateId = "template_9gmUuqgs";
+    const templateId = "template_subscription";
 
     this.sendFeedback(templateId, {
-      message_html: this.state.feedback,
       email: this.state.email,
-      isbn: this.props.isbn
+      from: this.state.from
     });
-  };
-
-  showEmailForm = () => {
-    this.setState({ showForm: true });
   };
 
   sendFeedback = (templateId, variables) => {
     const userId = "user_mQ8MeAwQ0zwwc5ftEn2LO";
-    if (variables.message_html.length > 0) {
+    if (variables.from.length > 0) {
       send("default_service", templateId, variables, userId)
         .then(res => {
           this.setState({ success: `Email successfully sent!` });
@@ -52,7 +44,8 @@ export default class extends React.Component {
     }
   };
   render() {
-    const { success, error, showForm, feedback } = this.state;
+    const { success, error, from } = this.state;
+    const { placeholder } = this.props;
     return (
       <React.Fragment>
         {success && (
@@ -69,37 +62,17 @@ export default class extends React.Component {
             content={JSON.stringify(`${error}. Our teams are looking into it`)}
           />
         )}
-        {showForm == false ? (
-          <div className="email">
-            <a
-              href="#"
-              className="primary-btn"
-              onClick={() => this.showEmailForm()}
-            >
-              <Trans i18nKey="Email Us" />
-            </a>
-          </div>
-        ) : (
-          <form className="mailing">
-            <div>
-              <textarea
-                id="mailing"
-                name="mailing"
-                onChange={this.handleChange}
-                placeholder={this.props.placeholder}
-                required
-                value={feedback}
-                style={{ width: "100%", height: "150px" }}
-              />
-            </div>
-
-            <div className="email">
-              <a className="primary-btn" href="#" onClick={this.handleSubmit}>
-                <Trans i18nKey="Submit" />
-              </a>
-            </div>
-          </form>
-        )}
+        <form className="mailing">
+          <input
+            type="text"
+            placeholder={placeholder}
+            onChange={this.handleChange}
+            value={from}
+          />
+          <button type="button" onClick={this.handleSubmit}>
+            <Trans i18nKey="Submit" />
+          </button>
+        </form>
       </React.Fragment>
     );
   }

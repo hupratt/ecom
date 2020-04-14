@@ -1,5 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import SubscriptionForm from "./SubscriptionForm";
 
 const BottomNavigation = () => {
   const { t } = useTranslation();
@@ -65,8 +66,7 @@ const BottomNavigation = () => {
             <h5> {t("Join Our Newsletter Now")}</h5>
             <p>{t("E-mail updates")}</p>
             <form action="#" className="subscribe-form">
-              <input type="text" placeholder={t("Enter Your Mail")} />
-              <button type="button"> {t("Submit")}</button>
+              <SubscriptionForm placeholder={t("Enter Your Mail")} />
             </form>
           </div>
         </div>

@@ -29,7 +29,7 @@ i18n
   // init i18next
   .init({
     fallbackLng: "en",
-    debug: true,
+    debug: false,
     resources: resources,
     interpolation: {
       escapeValue: false
