@@ -13,7 +13,7 @@ const propTypes = {
   data: PropTypes.array.isRequired,
   error: PropTypes.object,
   loading: PropTypes.bool,
-  bookPerPage: PropTypes.number.isRequired
+  bookPerPage: PropTypes.number.isRequired,
 };
 class BookList extends React.Component {
   componentDidMount() {
@@ -42,7 +42,7 @@ class BookList extends React.Component {
       language,
       category,
       authors,
-      sliderValues
+      sliderValues,
     } = this.props;
     const authors_array = Array.from(authors.entries()).join(",");
     const endpoint = bookListURL(
@@ -55,11 +55,11 @@ class BookList extends React.Component {
     );
     history.push(endpoint.slice(endpoint.indexOf("?limit"), endpoint.length));
   };
-  handleClickOnBook = id => {
+  handleClickOnBook = (id) => {
     this.props.history.push(`/books/${id}`);
   };
 
-  isBottom = el => {
+  isBottom = (el) => {
     if (el)
       return (
         el.getBoundingClientRect().bottom <=
@@ -76,7 +76,7 @@ class BookList extends React.Component {
       offset,
       language,
       authors,
-      bookPerPage
+      bookPerPage,
     } = this.props;
     if (
       this.isBottom(wrappedElement) &&
@@ -108,9 +108,13 @@ class BookList extends React.Component {
       handleSetActiveCategory,
       onSliderChange,
       error,
-      errorCart
+      errorCart,
+      loading,
     } = this.props;
-    return (
+
+    return loading ? (
+      <div className="youtube youtube-animate" />
+    ) : (
       <React.Fragment>
         {/* Breadcrumb Section Begin */}
         <div className="breacrumb-section">
@@ -153,18 +157,18 @@ class BookList extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     loadMoar: (url_endpoint, bookPerPage, offset) =>
       dispatch(loadmoar(url_endpoint, bookPerPage, offset)),
-    refreshCart: () => dispatch(fetchCart())
+    refreshCart: () => dispatch(fetchCart()),
   };
 };
 
 const BookPageWithLoading = withLoading(BooksPlusPaginationAndFilters);
 const BookPageWithLoadingAndErrorHandling = withError(BookPageWithLoading);
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     data: state.books.data,
     loading: state.books.loading,
@@ -173,7 +177,7 @@ const mapStateToProps = state => {
     _length: state.books._length,
     searchTerm: state.navigation.searchTerm,
     error: state.book.error,
-    errorCart: state.cart.error
+    errorCart: state.cart.error,
   };
 };
 
