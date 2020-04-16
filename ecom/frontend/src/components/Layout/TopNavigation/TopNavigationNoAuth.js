@@ -1,11 +1,12 @@
 import React from "react";
 import SearchNav from "./SearchNav";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 const TopNavigationNoAuth = ({ onSearchChange }) => {
   const { i18n } = useTranslation();
 
-  const changeLanguage = lng => i18n.changeLanguage(lng);
+  const changeLanguage = (lng) => i18n.changeLanguage(lng);
 
   return (
     <React.Fragment>

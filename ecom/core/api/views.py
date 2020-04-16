@@ -408,6 +408,12 @@ class AddressUpdateView(UpdateAPIView):
     queryset = Address.objects.all()
 
 
+class BookUpdateView(UpdateAPIView):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = BookSerializer
+    queryset = Livre.objects.all()
+
+
 class AddressDeleteView(DestroyAPIView):
     permission_classes = (IsAuthenticated,)
     queryset = Address.objects.all()
