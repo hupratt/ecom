@@ -20,4 +20,4 @@ share
 *.bak
 /ecom/frontend/static/frontend/main.js
 .~lock*
-
+creditcard

@@ -10,9 +10,10 @@ class BookUpdate extends React.Component {
       this.props.fetchBook(this.props.match.params.bookID);
     }
   }
+  handleChange = () => {};
+  handleSubmit = () => {};
   render() {
-    const { book, isAuthenticated } = this.props;
-    const stars_number_inverse = 5 - book.note;
+    const { book } = this.props;
     return (
       <div>
         {book && (
@@ -33,67 +34,59 @@ class BookUpdate extends React.Component {
 
                     <div className="col-lg-6">
                       <div className="product-details">
-                        <div className="pd-title">
-                          <span>{book.auteur_nom}</span>
-                          <h3>{book.titre}</h3>
-                        </div>
-                        <div className="pd-rating">
-                          {book.note &&
-                            [...Array(book.note)].map((e, i) => (
-                              <i
-                                className="fas fa-star"
-                                key={i}
-                                style={{ color: "#252525" }}
-                              />
-                            ))}
-                          {book.note &&
-                            [
-                              ...Array(stars_number_inverse || 0),
-                            ].map((e, i) => (
-                              <i
-                                className="far fa-star"
-                                key={i}
-                                style={{ color: "#252525" }}
-                              />
-                            ))}
-                        </div>
-                        <div className="pd-desc">
-                          <h4>
-                            {book.prix} €
-                            <span>
-                              {" "}
-                              {book.prix_barre} {book.prix_barre && "€"}
-                            </span>
-                          </h4>
-                        </div>
-
-                        {[
-                          ...Array((book.langue_nom || "none").split("/")),
-                        ].forEach((el) => (
-                          <div className="pd-lang-choose">
-                            <div className="sc-lang">
-                              <input type="radio" id="sm-size" />
-                              <label htmlFor="sm-lang">{el}</label>
-                            </div>
-                          </div>
-                        ))}
-                        {Array((book.langue_nom || "none").split("/")).forEach(
-                          (el) => (
-                            <a>{el}</a>
-                          )
-                        )}
-
-                        <ul className="pd-tags">
-                          <li>
-                            <span>CATEGORY</span>: {book.genre_nom}
-                          </li>
-                          <li>
-                            <span>LANGUAGES</span>: {book.langue_nom}
-                          </li>
-                        </ul>
-                        <div className="pd-desc">
-                          <p>{book.description}</p>
-                        </div>
+                        <form className="product-details">
+                          <input
+                            type="text"
+                            placeholder={book.auteur_nom}
+                            value={book.auteur_nom}
+                            onChange={this.handleChange}
+                          />
+                          <input
+                            type="text"
+                            placeholder={book.isbn}
+                            value={book.isbn}
+                            onChange={this.handleChange}
+                          />
+                          <input
+                            type="text"
+                            placeholder={book.titre}
+                            value={book.titre}
+                            onChange={this.handleChange}
+                          />
+                          <input
+                            type="text"
+                            placeholder={book.note}
+                            value={book.note}
+                            onChange={this.handleChange}
+                          />
+                          <input
+                            type="text"
+                            placeholder={book.prix}
+                            value={book.prix}
+                            onChange={this.handleChange}
+                          />
+                          <input
+                            type="text"
+                            placeholder={book.langue_nom}
+                            value={book.langue_nom}
+                            onChange={this.handleChange}
+                          />
+                          <input
+                            type="text"
+                            placeholder={book.genre_nom}
+                            value={book.genre_nom}
+                            onChange={this.handleChange}
+                          />
+                          <textarea
+                            type="text"
+                            placeholder={book.langue_nom}
+                            value={book.langue_nom}
+                            onChange={this.handleChange}
+                          />
+                          <button type="button" onClick={this.handleSubmit}>
+                            Submit
+                          </button>
+                        </form>
                       </div>
                     </div>
                   </div>
