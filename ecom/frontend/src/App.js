@@ -18,13 +18,8 @@ class App extends Component {
       // i18n translations might still be loaded by the xhr backend
       // use react's Suspense
       <Suspense fallback="loading">
-        <CSSTransition
-          in={true}
-          appear
-          classNames="youtubeLoading"
-          timeout={400}
-        >
-          <div className="youtubeLoading" />
+        <CSSTransition in={true} appear classNames="youtube" timeout={100}>
+          <div />
         </CSSTransition>
         <Router>
           <CustomLayout {...this.props} />

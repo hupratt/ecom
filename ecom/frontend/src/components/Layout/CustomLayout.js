@@ -210,16 +210,13 @@ class CustomLayout extends React.Component {
   };
 
   render() {
-    const { authenticated, cart, error, errorCart } = this.props;
+    const { authenticated, cart, error, errorCart, loading } = this.props;
     const { language, sliderValues, authors, category } = this.state;
 
     return (
       <React.Fragment>
         {/* Header Section Begin */}
         <header className="header-section" id="fixed-header">
-          <CSSTransition in={true} appear classNames="youtube" timeout={400}>
-            <div className="youtube" />
-          </CSSTransition>
           <div className="wrap-menu-header">
             <div className="container">
               <div className="inner-header">
@@ -285,6 +282,7 @@ const mapStateToProps = (state) => {
     offset: state.books.offset,
     error: state.book.error,
     errorCart: state.cart.error,
+    loading: state.books.loading,
   };
 };
 
