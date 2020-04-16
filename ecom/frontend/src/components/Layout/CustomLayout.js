@@ -14,6 +14,7 @@ import { bookListURL } from "../../constants";
 import { fetchBooks, loadmoar } from "../../actions/books";
 import { fetchCart } from "../../actions/cart";
 import queryString from "query-string";
+import { CSSTransition } from "react-transition-group";
 
 class CustomLayout extends React.Component {
   state = {
@@ -21,13 +22,13 @@ class CustomLayout extends React.Component {
     authors: new Map(),
     category: "",
     sliderValues: [0, 100],
-    search: ""
+    search: "",
   };
   constructor(props) {
     super(props);
     this.autocompleteSearchDebounced = debounce(500, this.autocompleteSearch);
   }
-  onSearchChange = event => {
+  onSearchChange = (event) => {
     this.props.searchThis(event, () => {
       this.autocompleteSearchDebounced();
     });
@@ -73,7 +74,7 @@ class CustomLayout extends React.Component {
     }
   }
 
-  handleAuthorStringParams = queryMap => {
+  handleAuthorStringParams = (queryMap) => {
     const authors_param = queryMap.authors;
     if (authors_param !== undefined) {
       // authors_param string --> authors_param Map
@@ -83,10 +84,10 @@ class CustomLayout extends React.Component {
       for (var i = 0; i < authors_param.split(",").length; i += 2) {
         result.push([
           authors_param.split(",")[i],
-          authors_param.split(",")[i + 1]
+          authors_param.split(",")[i + 1],
         ]);
       }
-      result.forEach(element => {
+      result.forEach((element) => {
         urlAuthorMap.set(element[0], element[1] === "true");
       });
       return { ...queryMap, authors: urlAuthorMap };
@@ -94,7 +95,7 @@ class CustomLayout extends React.Component {
     return queryMap;
   };
 
-  mapUrlToState = queryMap => {
+  mapUrlToState = (queryMap) => {
     queryMap = this.handleAuthorStringParams(queryMap);
 
     this.setState(queryMap, () => {
@@ -125,8 +126,8 @@ class CustomLayout extends React.Component {
     const item = e.target.textContent;
     const isChecked = data.checked;
     this.setState(
-      prevState => ({
-        authors: prevState.authors.set(item, isChecked)
+      (prevState) => ({
+        authors: prevState.authors.set(item, isChecked),
       }),
       () => {
         const { offset, fetchBooks, history, searchTerm } = this.props;
@@ -149,7 +150,7 @@ class CustomLayout extends React.Component {
     );
   };
 
-  handleSetActiveCategory = event => {
+  handleSetActiveCategory = (event) => {
     this.setState(
       { category: event.currentTarget.attributes.val.value },
       () => {
@@ -172,7 +173,7 @@ class CustomLayout extends React.Component {
     );
   };
 
-  onSelectRadio = event => {
+  onSelectRadio = (event) => {
     this.setState({ language: event.currentTarget.value }, () => {
       const { offset, fetchBooks, history, searchTerm } = this.props;
       const { language, category, authors, sliderValues } = this.state;
@@ -190,7 +191,7 @@ class CustomLayout extends React.Component {
     });
   };
 
-  onSliderChange = sliderValues => {
+  onSliderChange = (sliderValues) => {
     this.setState({ sliderValues: sliderValues }, () => {
       const { offset, fetchBooks, history, searchTerm } = this.props;
       const { language, category, authors, sliderValues } = this.state;
@@ -216,6 +217,9 @@ class CustomLayout extends React.Component {
       <React.Fragment>
         {/* Header Section Begin */}
         <header className="header-section" id="fixed-header">
+          <CSSTransition in={true} appear classNames="youtube" timeout={400}>
+            <div className="youtube" />
+          </CSSTransition>
           <div className="wrap-menu-header">
             <div className="container">
               <div className="inner-header">
@@ -224,7 +228,7 @@ class CustomLayout extends React.Component {
                     <Link
                       to="/"
                       onClick={() => {
-                        new Promise(resolve =>
+                        new Promise((resolve) =>
                           resolve(this.props.history.push("/"))
                         ); //.then(window.location.reload());
                       }}
@@ -273,25 +277,25 @@ const TopNavigationWithAuthenticationHandling = withAuthentication(
 
 // CustomLayout.propTypes = propTypes;
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     authenticated: state.auth.token !== null,
     cart: state.cart.shoppingCart,
     searchTerm: state.navigation.searchTerm,
     offset: state.books.offset,
     error: state.book.error,
-    errorCart: state.cart.error
+    errorCart: state.cart.error,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     searchThis: (e, callback) => dispatch(searchThis(e, callback)),
     loadMoar: (url_endpoint, bookPerPage, offset) =>
       dispatch(loadmoar(url_endpoint, bookPerPage, offset)),
-    fetchBooks: url_endpoint => dispatch(fetchBooks(url_endpoint)),
+    fetchBooks: (url_endpoint) => dispatch(fetchBooks(url_endpoint)),
     refreshCart: () => dispatch(fetchCart()),
-    searchThis: (e, callback) => dispatch(searchThis(e, callback))
+    searchThis: (e, callback) => dispatch(searchThis(e, callback)),
   };
 };
 

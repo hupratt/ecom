@@ -62,13 +62,6 @@ const BottomNavigation = () => {
               </li>
             </ul>
           </div>
-          <div className="newslatter-item centermyitems">
-            <h5> {t("Join Our Newsletter Now")}</h5>
-            <p>{t("E-mail updates")}</p>
-            <form action="#" className="subscribe-form">
-              <SubscriptionForm placeholder={t("Enter Your Mail")} />
-            </form>
-          </div>
         </div>
         <div className="copyright-reserved">
           <div className="copyright-text">

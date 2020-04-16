@@ -6,6 +6,7 @@ import * as actions from "./actions/auth";
 import "semantic-ui-css/semantic.min.css";
 import CustomLayout from "./components/Layout/CustomLayout";
 import "../static/styles/index.css";
+import { CSSTransition } from "react-transition-group";
 
 class App extends Component {
   componentDidMount() {
@@ -17,6 +18,14 @@ class App extends Component {
       // i18n translations might still be loaded by the xhr backend
       // use react's Suspense
       <Suspense fallback="loading">
+        <CSSTransition
+          in={true}
+          appear
+          classNames="youtubeLoading"
+          timeout={400}
+        >
+          <div className="youtubeLoading" />
+        </CSSTransition>
         <Router>
           <CustomLayout {...this.props} />
         </Router>

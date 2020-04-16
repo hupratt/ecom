@@ -112,9 +112,7 @@ class BookList extends React.Component {
       loading,
     } = this.props;
 
-    return loading ? (
-      <div className="youtube youtube-animate" />
-    ) : (
+    return (
       <React.Fragment>
         {/* Breadcrumb Section Begin */}
         <div className="breacrumb-section">
