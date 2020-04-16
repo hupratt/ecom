@@ -15,7 +15,7 @@ const propTypes = {
   handleAddToCart: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   errorCart: PropTypes.object,
-  error: PropTypes.object
+  error: PropTypes.object,
 };
 
 class BookDetailPage extends React.Component {
@@ -36,7 +36,8 @@ class BookDetailPage extends React.Component {
       handleAddToCart,
       isAuthenticated,
       error,
-      errorCart
+      errorCart,
+      history,
     } = this.props;
     return (
       <React.Fragment>
@@ -51,7 +52,7 @@ class BookDetailPage extends React.Component {
                   </Link>
                   <span
                     style={{
-                      color: "#252525"
+                      color: "#252525",
                     }}
                   >
                     <Trans i18nKey="Detail" />
@@ -69,6 +70,7 @@ class BookDetailPage extends React.Component {
             isAuthenticated={isAuthenticated}
             error={error}
             errorCart={errorCart}
+            history={history}
           />
         </Container>
       </React.Fragment>
@@ -79,18 +81,18 @@ class BookDetailPage extends React.Component {
 const BookDetailWithLoading = withLoading(BookDetail);
 const BookDetailWithLoadingAndErrorHandling = withError(BookDetailWithLoading);
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    fetchBooks: url_endpoint => dispatch(fetchBooks(url_endpoint)),
+    fetchBooks: (url_endpoint) => dispatch(fetchBooks(url_endpoint)),
 
     refreshCart: () => dispatch(fetchCart()),
     fetchBook: (id, dataIsCached) => dispatch(fetchBook(id, dataIsCached)),
     handleAddToCart: (id, isAuthenticated) =>
-      dispatch(handleAddToCart(id, isAuthenticated))
+      dispatch(handleAddToCart(id, isAuthenticated)),
   };
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     isAuthenticated: state.auth.token !== null,
     loading: state.book.loading,
@@ -100,7 +102,7 @@ const mapStateToProps = state => {
     book: state.book.book,
     dataIsCached: state.book.dataIsCached,
     shoppingCart: state.cart.shoppingCart,
-    offset: state.books.offset
+    offset: state.books.offset,
   };
 };
 

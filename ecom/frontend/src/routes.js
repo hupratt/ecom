@@ -9,14 +9,20 @@ import Checkout from "./components/Payment/Checkout";
 import Profile from "./components/User/Profile";
 import BookDetail from "./components/Books/BookDetailPage";
 import BookListPage from "./components/Books/BookListPage";
+import BookUpdate from "./components/Books/BookDetailPage/BookUpdatePage";
 
-const BaseRouter = props => {
+const BaseRouter = (props) => {
   return (
     <Hoc>
       <Route
         exact
         path="/books/:bookID"
         render={() => <BookDetail {...props} />}
+      />
+      <Route
+        exact
+        path="/books/:bookID/edit"
+        render={() => <BookUpdate {...props} />}
       />
       <Route exact path="/login" render={() => <Login {...props} />} />
       <Route exact path="/signup" render={() => <Signup {...props} />} />

@@ -8,15 +8,18 @@ import { withTranslation } from "react-i18next";
 const propTypes = {
   handleAddToCart: PropTypes.func.isRequired,
   book: PropTypes.object.isRequired,
-  isAuthenticated: PropTypes.bool.isRequired
+  isAuthenticated: PropTypes.bool.isRequired,
 };
 
 class BookDetail extends React.Component {
   state = {
-    bookDetailClicked: false
+    bookDetailClicked: false,
   };
   showFullDescription = () => {
     this.setState({ bookDetailClicked: true });
+  };
+  visitEditPage = (id) => {
+    this.props.history.push(`/books/${id}/edit`);
   };
   render() {
     const { handleAddToCart, book, isAuthenticated } = this.props;
@@ -32,6 +35,11 @@ class BookDetail extends React.Component {
                   <div className="col-lg-12">
                     <div className="row">
                       <div className="col-lg-6">
+                        {isAuthenticated && (
+                          <button onClick={() => this.visitEditPage(book.id)}>
+                            Edit
+                          </button>
+                        )}
                         <div className="product-pic-zoom">
                           <img
                             className="product-big-img"
@@ -58,7 +66,7 @@ class BookDetail extends React.Component {
                               ))}
                             {book.note &&
                               [
-                                ...Array(stars_number_inverse || 0)
+                                ...Array(stars_number_inverse || 0),
                               ].map((e, i) => (
                                 <i
                                   className="far fa-star"
@@ -78,8 +86,8 @@ class BookDetail extends React.Component {
                           </div>
 
                           {[
-                            ...Array((book.langue_nom || "none").split("/"))
-                          ].forEach(el => (
+                            ...Array((book.langue_nom || "none").split("/")),
+                          ].forEach((el) => (
                             <div className="pd-lang-choose">
                               <div className="sc-lang">
                                 <input type="radio" id="sm-size" />
@@ -89,7 +97,7 @@ class BookDetail extends React.Component {
                           ))}
                           {Array(
                             (book.langue_nom || "none").split("/")
-                          ).forEach(el => (
+                          ).forEach((el) => (
                             <a>{el}</a>
                           ))}
 
