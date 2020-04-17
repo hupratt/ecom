@@ -1,9 +1,9 @@
 import React from "react";
 import { Dimmer, Loader, Segment, Message } from "semantic-ui-react";
 
-export const Hoc = props => props.children;
+export const Hoc = (props) => props.children;
 
-export const withLoading = WrappedComponent => {
+export const withLoading = (WrappedComponent) => {
   class HOC extends React.Component {
     render() {
       if (this.props.loading) {
@@ -21,29 +21,29 @@ export const withLoading = WrappedComponent => {
   return HOC;
 };
 
-export const withError = WrappedComponent => {
+export const withError = (WrappedComponent) => {
   class HOC extends React.Component {
     render() {
       const { error, errorCart } = this.props;
-      if (error) {
+      if (error !== null) {
         return (
           <React.Fragment>
             <Message
               error
               header="There was some errors with your submission"
-              content={JSON.stringify(error)}
+              content={JSON.stringify(error.request.statusText)}
             />
             <WrappedComponent {...this.props} />
           </React.Fragment>
         );
       }
-      if (errorCart) {
+      if (errorCart !== null && errorCart.request.status !== 404) {
         return (
           <React.Fragment>
             <Message
               error
               header="There was some errors with your submission"
-              content={JSON.stringify(error)}
+              content={JSON.stringify(errorCart.request.statusText)}
             />
             <WrappedComponent {...this.props} />
           </React.Fragment>

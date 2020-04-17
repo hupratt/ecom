@@ -20,6 +20,7 @@ const propTypes = {
 
 class BookDetailPage extends React.Component {
   componentDidMount() {
+    console.log(this.props.isAuthenticated);
     window.scrollTo(0, 0);
     this.props.fetchBook(
       this.props.match.params.bookID,

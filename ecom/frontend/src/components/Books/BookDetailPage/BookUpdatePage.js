@@ -5,13 +5,65 @@ import { connect } from "react-redux";
 import { fetchBook } from "../../../actions/book";
 
 class BookUpdate extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      updatedBook: {
+        auteur_nom: "",
+        isbn: "",
+        note: "",
+        titre: "",
+        prix: "",
+        langue_nom: "",
+        genre_nom: "",
+      },
+
+      genderOptions: ["Male", "Female", "Others"],
+      skillOptions: ["Programming", "Development", "Design", "Testing"],
+    };
+  }
   componentDidMount() {
+    console.log(this.props.isAuthenticated);
     if (this.props.isAuthenticated == true) {
       this.props.fetchBook(this.props.match.params.bookID);
+      console.log(this.props.book);
     }
   }
-  handleChange = () => {};
-  handleSubmit = () => {};
+
+  handleInput(e) {
+    let value = e.target.value;
+    let name = e.target.name;
+    this.setState(
+      (prevState) => {
+        return {
+          newUser: {
+            ...prevState.newUser,
+            [name]: value,
+          },
+        };
+      },
+      () => console.log(this.state.newUser)
+    );
+  }
+  handleFormSubmit(e) {
+    e.preventDefault();
+    let userData = this.state.newUser;
+
+    fetch("http://example.com", {
+      method: "POST",
+      body: JSON.stringify(userData),
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    }).then((response) => {
+      response.json().then((data) => {
+        console.log("Successful" + data);
+      });
+    });
+  }
+
   render() {
     const { book } = this.props;
     return (
@@ -34,58 +86,78 @@ class BookUpdate extends React.Component {
 
                     <div className="col-lg-6">
                       <div className="product-details">
-                        <form className="product-details">
-                          <input
-                            type="text"
-                            placeholder={book.auteur_nom}
+                        <form
+                          className="product-details"
+                          onSubmit={this.handleFormSubmit}
+                        >
+                          <Input
+                            name={"auteur_nom"}
+                            title={"Author"}
+                            type={"text"}
                             value={book.auteur_nom}
-                            onChange={this.handleChange}
+                            handleChange={this.handleInput}
+                            placeholder={book.auteur_nom}
                           />
-                          <input
-                            type="text"
-                            placeholder={book.isbn}
+                          <Input
+                            name={"isbn"}
+                            title={"ISBN"}
+                            type={"text"}
                             value={book.isbn}
-                            onChange={this.handleChange}
+                            handleChange={this.handleInput}
+                            placeholder={book.isbn}
                           />
-                          <input
-                            type="text"
-                            placeholder={book.titre}
+                          <Input
+                            name={"titre"}
+                            title={"Titre"}
+                            type={"text"}
                             value={book.titre}
-                            onChange={this.handleChange}
+                            handleChange={this.handleInput}
+                            placeholder={book.titre}
                           />
-                          <input
-                            type="text"
-                            placeholder={book.note}
+                          <Input
+                            name={"note"}
+                            title={"Note"}
+                            type={"text"}
                             value={book.note}
-                            onChange={this.handleChange}
+                            handleChange={this.handleInput}
+                            placeholder={book.note}
                           />
-                          <input
-                            type="text"
-                            placeholder={book.prix}
+                          <Input
+                            name={"prix"}
+                            title={"Prix"}
+                            type={"text"}
                             value={book.prix}
-                            onChange={this.handleChange}
+                            handleChange={this.handleInput}
+                            placeholder={book.prix}
                           />
-                          <input
-                            type="text"
-                            placeholder={book.langue_nom}
+                          <Input
+                            name={"langue_nom"}
+                            title={"Langue"}
+                            type={"text"}
                             value={book.langue_nom}
-                            onChange={this.handleChange}
+                            handleChange={this.handleInput}
+                            placeholder={book.langue_nom}
                           />
-                          <input
-                            type="text"
-                            placeholder={book.genre_nom}
+                          <Input
+                            name={"genre_nom"}
+                            title={"Genre"}
+                            type={"text"}
                             value={book.genre_nom}
-                            onChange={this.handleChange}
+                            handleChange={this.handleInput}
+                            placeholder={book.genre_nom}
                           />
-                          <textarea
-                            type="text"
-                            placeholder={book.langue_nom}
-                            value={book.langue_nom}
-                            onChange={this.handleChange}
+                          <TextArea
+                            name={"description"}
+                            title={"Description"}
+                            type={"text"}
+                            value={book.description}
+                            handleChange={this.handleInput}
+                            placeholder={book.description}
+                            rows={15}
+                            cols={1}
                           />
-                          <button type="button" onClick={this.handleSubmit}>
-                            Submit
-                          </button>
+
+                          <button type="button">Submit</button>
                         </form>
                       </div>
                     </div>
@@ -99,6 +171,40 @@ class BookUpdate extends React.Component {
     );
   }
 }
+
+const Input = (props) => {
+  return (
+    <div className="form-group">
+      <label htmlFor={props.name} className="form-label">
+        {props.title}
+      </label>
+      <input
+        className="form-input"
+        id={props.name}
+        name={props.name}
+        type={props.type}
+        value={props.value}
+        onChange={props.handleChange}
+        placeholder={props.placeholder}
+      />
+    </div>
+  );
+};
+
+const TextArea = (props) => (
+  <div className="form-group">
+    <label className="form-label">{props.title}</label>
+    <textarea
+      className="form-control"
+      name={props.name}
+      rows={props.rows}
+      cols={props.cols}
+      value={props.value}
+      onChange={props.handleChange}
+      placeholder={props.placeholder}
+    />
+  </div>
+);
 
 const mapDispatchToProps = (dispatch) => {
   return {
