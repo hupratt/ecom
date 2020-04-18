@@ -16,10 +16,16 @@ const FileForm = ({ book }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
-    console.log(file);
     formData.append("picture", file);
-    formData.append("titre", "title3");
-
+    for (var key in book) {
+      if (
+        book[key] !== undefined &&
+        key !== "picture" &&
+        key !== "prix_barre"
+      ) {
+        formData.append(key, book[key]);
+      }
+    }
     axios
       .put(`${endpoint}/books/${book.id}/update/`, formData, {
         headers: {
