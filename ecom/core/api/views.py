@@ -420,13 +420,13 @@ class AddressUpdateView(UpdateAPIView):
 
 
 class BookUpdateView(UpdateAPIView):
-
+    permission_classes = (IsAuthenticated,)
     serializer_class = BookSerializer
     queryset = Livre.objects.all()
 
-    def put(self, request, pk, *args, **kwargs):
-        book = get_object_or_404(Livre, id=pk)
-        return self.update(request, *args, **kwargs)
+    # def put(self, request, pk, *args, **kwargs):
+    #     book = get_object_or_404(Livre, id=pk)
+    #     return self.update(request, *args, **kwargs)
 
 
 class AddressDeleteView(DestroyAPIView):

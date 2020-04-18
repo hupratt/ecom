@@ -17,8 +17,8 @@ const FileForm = ({ book }) => {
     e.preventDefault();
     const formData = new FormData();
     console.log(file);
-    formData.append("file", file);
-    formData.set("titre", "title");
+    formData.append("picture", file);
+    formData.append("titre", "title3");
 
     axios
       .put(`${endpoint}/books/${book.id}/update/`, formData, {
@@ -40,15 +40,15 @@ const FileForm = ({ book }) => {
   return (
     <Fragment>
       {message ? <Message msg={message} /> : null}
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} enctype="multipart/form-data">
         <div className="custom-file mb-4">
           <input
             type="file"
             className="custom-file-input"
-            id="customFile"
+            id="picture"
             onChange={onChange}
           />
-          <label className="custom-file-label" htmlFor="customFile">
+          <label className="custom-file-label" htmlFor="picture">
             {filename}
           </label>
         </div>

@@ -41,37 +41,34 @@ class BookUpdate extends React.Component {
     }
   };
 
-  handleFormSubmit = (e) => {
-    e.preventDefault();
-    let formData = new FormData();
+  // onChange = (e) => {
+  //   setFile(e.target.files[0]);
+  //   setFilename(e.target.files[0].name);
+  // };
 
-    for (var key in this.state.updatedBook) {
-      if (key !== "picture") {
-        formData.append(key, this.state.updatedBook[key]);
-      }
-    }
-    formData.append("picture", this.state.updatedBook.picture);
-    try {
-      const res = axios({
-        url: `${endpoint}/books/${this.props.book.id}/update/`,
-        method: "PUT",
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: "Token " + localStorage.getItem("token"),
-        },
-        data: formData,
-      })
-        .then((response) => {
-          if (response.status == 200) {
-            this.setState({
-              success: true,
-              url: `${s3_base_url}${this.state.updatedBook.picture}`,
-            });
-          }
-        })
-        .catch((err) => console.log(err));
-    } catch (err) {}
-  };
+  // onSubmit = (e) => {
+  //   e.preventDefault();
+  //   const formData = new FormData();
+  //   console.log(file);
+  //   formData.append("picture", file);
+  //   formData.append("titre", "title3");
+
+  //   axios
+  //     .put(`${endpoint}/books/${book.id}/update/`, formData, {
+  //       headers: {
+  //         "Content-Type": "multipart/form-data",
+  //       },
+  //       onUploadProgress: (progressEvent) => {
+  //         setUploadPercentage(
+  //           parseInt(
+  //             Math.round((progressEvent.loaded * 100) / progressEvent.total)
+  //           )
+  //         );
+  //       },
+  //     })
+  //     .then(console.log(`${s3_base_url}${file.name}`))
+  //     .catch((err) => console.log(err));
+  // };
   render() {
     const {
       auteur_nom,
@@ -102,9 +99,9 @@ class BookUpdate extends React.Component {
                     <FileForm book={this.state.updatedBook} />
                   </div>
                   <div className="col-lg-6">
-                    <div className="product-details">
+                    <div className="product-update">
                       <form
-                        className="product-details"
+                        className="product-update"
                         enctype="multipart/form-data"
                         onSubmit={this.handleFormSubmit}
                       >
