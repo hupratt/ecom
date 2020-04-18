@@ -26,6 +26,7 @@ django-klingon==0.0.8
 django-rest-auth==0.9.5
 django-rest-knox==4.1.0
 django-robots==3.1.0
+django-storages==1.9.1
 djangorestframework==3.9.4
 docutils==0.15.2
 google-images-download==2.8.0
