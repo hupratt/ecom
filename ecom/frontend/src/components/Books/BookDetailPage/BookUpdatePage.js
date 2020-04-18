@@ -15,6 +15,7 @@ class BookUpdate extends React.Component {
 
   handleInput = (e) => {
     const imagefile = this.fileUpload;
+    console.log(imagefile);
     if (imagefile && imagefile.files.length > 0) {
       this.setState((prevState) => {
         return {
@@ -23,7 +24,7 @@ class BookUpdate extends React.Component {
             picture: imagefile.files[0],
           },
         };
-      }, console.log(this.state.updatedBook.picture));
+      }, console.log(this.fileUpload));
     } else {
       const value = e.target.value;
       const name = e.target.name;
@@ -34,26 +35,27 @@ class BookUpdate extends React.Component {
             [name]: value,
           },
         };
-      }, console.log(this.state.updatedBook.picture));
+      }, console.log(this.fileUpload));
     }
   };
 
   handleFormSubmit = (e) => {
     e.preventDefault();
     let formData = new FormData();
-    formData.append(this.state.updatedBook);
-    axios({
-      url: `${endpoint}/books/${this.props.book.id}/update/`,
+    formData.append("picture", this.state.updatedBook.picture);
+    formData.append("title", "rand");
+    console.log(this.state.updatedBook.picture);
+    fetch(`${endpoint}/books/${this.props.book.id}/update/`, {
       method: "PUT",
+      redirect: "follow",
+      body: JSON.stringify(this.state.updatedBook),
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json",
         Authorization: "Token " + localStorage.getItem("token"),
+        "Content-Type": "application/json",
       },
-      data: formData,
     }).then((response) => {
       console.log(response);
-      console.log(this.state.updatedBook.picture);
       if (response.status == 200) {
         this.setState({
           success: true,
@@ -62,6 +64,41 @@ class BookUpdate extends React.Component {
       }
     });
   };
+
+  // handleFormSubmit = (e) => {
+  //   e.preventDefault();
+  //   let formData = new FormData();
+
+  //   for (var key in this.state.updatedBook) {
+  //     if (key !== "picture") {
+  //       formData.append(key, this.state.updatedBook[key]);
+  //     }
+  //   }
+  //   // formData.append("picture", new Blob(), {
+  //   //   type: "image/png",
+  //   //   // filename: "kdb.png",
+  //   // });
+  //   axios({
+  //     url: `${endpoint}/books/${this.props.book.id}/update/`,
+  //     method: "PUT",
+  //     headers: {
+  //       "content-type": "multipart/form-data",
+  //       Authorization: "Token " + localStorage.getItem("token"),
+  //     },
+  //     data: formData,
+  //   })
+  //     .then((response) => {
+  //       console.log(response);
+  //       console.log(this.state.updatedBook.picture);
+  //       if (response.status == 200) {
+  //         this.setState({
+  //           success: true,
+  //           url: `${s3_base_url}${this.state.updatedBook.picture}`,
+  //         });
+  //       }
+  //     })
+  //     .catch((response) => console.log(response));
+  // };
   render() {
     const {
       auteur_nom,
