@@ -4,15 +4,25 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchBook } from "../../../actions/book";
 import axios from "axios";
-
+import ReactS3 from "react-s3";
 class BookUpdate extends React.Component {
-  state = { updatedBook: {} };
+  state = { updatedBook: {}, success: false, url: "" };
   componentDidMount() {
     console.log(this.props.isAuthenticated);
     this.setState({
       updatedBook: this.props.book,
     });
   }
+  handleChangeFile = (e) => {
+    this.setState({ success: false, url: "" });
+  }; // Perform the upload
+  handleUploadFile = (e) => {
+    console.log(e.target);
+    // let fileParts = e.target.files[0].name.split(".");
+    // let fileName = fileParts[0];
+    // let fileType = fileParts[1];
+    // ReactS3.upload(fileName).then((data) => console.log(data.location));
+  };
 
   handleInput = (e) => {
     let value = e.target.value;
@@ -46,7 +56,6 @@ class BookUpdate extends React.Component {
       }
     });
   };
-
   render() {
     const {
       auteur_nom,
@@ -59,9 +68,16 @@ class BookUpdate extends React.Component {
       description,
       history,
     } = this.state.updatedBook;
-    console.log(this.props);
+
     return (
       <div>
+        {this.state.success ? (
+          <div style={{ padding: 50 }}>
+            <h3 style={{ color: "green" }}>SUCCESSFUL UPLOAD</h3>
+            <a href={this.state.url}>Access the file here</a>
+            <br />
+          </div>
+        ) : null}
         <section className="product-shop spad page-details">
           <div className="container">
             <div className="row">
@@ -70,6 +86,16 @@ class BookUpdate extends React.Component {
                   <div className="col-lg-6">
                     <div className="product-details">
                       <form className="product-details">
+                        <Input
+                          name={"file"}
+                          title={"File"}
+                          type={"file"}
+                          value={""}
+                          handleChange={this.handleChangeFile}
+                          placeholder={auteur_nom}
+                          uploadInput={this.uploadInput}
+                        />
+                        <button onClick={this.handleUploadFile}>UPLOAD</button>
                         <Input
                           name={"auteur_nom"}
                           title={"Author"}
@@ -155,22 +181,44 @@ class BookUpdate extends React.Component {
 }
 
 const Input = (props) => {
-  return (
-    <div className="form-group">
-      <label htmlFor={props.name} className="form-label">
-        {props.title}
-      </label>
-      <input
-        className="form-input"
-        id={props.name}
-        name={props.name}
-        type={props.type}
-        value={props.value}
-        onChange={props.handleChange}
-        placeholder={props.placeholder}
-      />
-    </div>
-  );
+  if (props.uploadInput) {
+    return (
+      <div className="form-group">
+        <label htmlFor={props.name} className="form-label">
+          {props.title}
+        </label>
+        <input
+          className="form-input"
+          id={props.name}
+          name={props.name}
+          type={props.type}
+          value={props.value}
+          onChange={props.handleChange}
+          placeholder={props.placeholder}
+          ref={(ref) => {
+            props.uploadInput = ref;
+          }}
+        />
+      </div>
+    );
+  } else {
+    return (
+      <div className="form-group">
+        <label htmlFor={props.name} className="form-label">
+          {props.title}
+        </label>
+        <input
+          className="form-input"
+          id={props.name}
+          name={props.name}
+          type={props.type}
+          value={props.value}
+          onChange={props.handleChange}
+          placeholder={props.placeholder}
+        />
+      </div>
+    );
+  }
 };
 
 const TextArea = (props) => (

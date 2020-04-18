@@ -143,6 +143,8 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
+AWS_BUCKET_NAME = os.environ.get("AWS_BUCKET_NAME")
+
 if os.environ.get("DJANGO_DEVELOPMENT") is None:
     # Sentry
     import sentry_sdk  # pylint: disable=import-error

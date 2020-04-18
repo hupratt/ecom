@@ -39,6 +39,17 @@ from core.models import (
     Livre,
 )
 
+import os, boto3
+from botocore.client import Config
+
+from django.conf import settings
+
+from rest_framework import parsers
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.renderers import JSONRenderer
+
 from django.contrib.postgres.search import SearchVector
 from django.db.models import Q
 import stripe
@@ -412,7 +423,36 @@ class BookUpdateView(UpdateAPIView):
     permission_classes = (IsAuthenticated,)
     serializer_class = BookSerializer
     queryset = Livre.objects.all()
+    AWS_BUCKET_NAME = settings.AWS_BUCKET_NAME
+    permission_classes = (IsAuthenticated,)
+    parser_classes = (
+        parsers.FormParser,
+        parsers.MultiPartParser,
+        parsers.JSONParser,
+    )
+    renderer_classes = (JSONRenderer,)
 
+    def get(self, request):
+    	file_name = request.query_params.get('file-name')
+    	file_type = request.query_params.get('file-type')
+
+    	s3 = boto3.client('s3', config=Config(signature_version='s3v4'))
+
+    	presigned_post = s3.generate_presigned_post(
+            Bucket = AWS_BUCKET_NAME,
+            Key = file_name,
+            Fields = {"acl": "public-read", "Content-Type": file_type},
+            Conditions = [
+                {"acl": "public-read"},
+                {"Content-Type": file_type}
+            ],
+            ExpiresIn = 3600
+    	)
+
+    	return Response({
+    		'data': presigned_post,
+    		'url': 'https://s3.amazonaws.com/%s/%s' % (AWS_BUCKET_NAME, file_name)
+    	})
 
 class AddressDeleteView(DestroyAPIView):
     permission_classes = (IsAuthenticated,)
