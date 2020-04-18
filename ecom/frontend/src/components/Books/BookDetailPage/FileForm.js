@@ -1,8 +1,8 @@
 import React, { Fragment, useState } from "react";
 import axios from "axios";
-import { endpoint } from "../../constants";
+import { endpoint, s3_base_url } from "../../../constants";
 
-const FileUpload = ({ id }) => {
+const FileForm = ({ book }) => {
   const [file, setFile] = useState("");
   const [filename, setFilename] = useState("Choose File");
   const [message, setMessage] = useState("");
@@ -16,11 +16,12 @@ const FileUpload = ({ id }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
+    console.log(file);
     formData.append("file", file);
     formData.set("titre", "title");
 
-    const res = axios
-      .put(`${endpoint}/books/${id}/update/`, formData, {
+    axios
+      .put(`${endpoint}/books/${book.id}/update/`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -32,7 +33,7 @@ const FileUpload = ({ id }) => {
           );
         },
       })
-      .then(console.log(res))
+      .then(console.log(`${s3_base_url}${file.name}`))
       .catch((err) => console.log(err));
   };
 
@@ -93,4 +94,4 @@ const Progress = ({ percentage }) => {
     </div>
   );
 };
-export default FileUpload;
+export default FileForm;

@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchBook } from "../../../actions/book";
 import axios from "axios";
-import FileUpload from "../../Buttons/FileUpload";
+import FileForm from "./FileForm";
 
 class BookUpdate extends React.Component {
   state = { updatedBook: { picture: null }, success: false, url: "" };
@@ -62,8 +62,6 @@ class BookUpdate extends React.Component {
         data: formData,
       })
         .then((response) => {
-          console.log(response);
-          console.log(this.state.updatedBook.picture);
           if (response.status == 200) {
             this.setState({
               success: true,
@@ -71,11 +69,8 @@ class BookUpdate extends React.Component {
             });
           }
         })
-        .catch((response) => console.log(response));
-      console.log(res);
-    } catch (err) {
-      console.log(err);
-    }
+        .catch((err) => console.log(err));
+    } catch (err) {}
   };
   render() {
     const {
@@ -87,7 +82,6 @@ class BookUpdate extends React.Component {
       langue_nom,
       genre_nom,
       description,
-      picture,
     } = this.state.updatedBook;
 
     return (
@@ -105,31 +99,16 @@ class BookUpdate extends React.Component {
               <div className="col-lg-12">
                 <div className="row">
                   <div className="col-lg-6">
+                    <FileForm book={this.state.updatedBook} />
+                  </div>
+                  <div className="col-lg-6">
                     <div className="product-details">
-                      {/* <form
+                      <form
                         className="product-details"
                         enctype="multipart/form-data"
                         onSubmit={this.handleFormSubmit}
-                      > */}
-                      {/* <Input
-                          name={"picture"}
-                          title={"Picture"}
-                          type={"file"}
-                          value={picture}
-                          handleChange={this.handleInput}
-                          ref={(ref) => (this.fileUpload = ref)}
-                        /> */}
-                      <FileUpload
-                        id={this.props.book.id}
-                        name={"picture"}
-                        title={"Picture"}
-                        type={"file"}
-                        value={picture}
-                        handleChange={this.handleInput}
-                        ref={(ref) => (this.fileUpload = ref)}
-                      />
-
-                      {/* <Input
+                      >
+                        <Input
                           name={"auteur_nom"}
                           title={"Author"}
                           type={"text"}
@@ -144,16 +123,16 @@ class BookUpdate extends React.Component {
                           value={isbn}
                           handleChange={this.handleInput}
                           placeholder={isbn}
-                        /> */}
-                      {/* <Input
+                        />
+                        <Input
                           name={"titre"}
                           title={"Titre"}
                           type={"text"}
                           value={titre}
                           handleChange={this.handleInput}
                           placeholder={titre}
-                        /> */}
-                      {/* <Input
+                        />
+                        <Input
                           name={"note"}
                           title={"Note"}
                           type={"text"}
@@ -194,10 +173,10 @@ class BookUpdate extends React.Component {
                           placeholder={description}
                           rows={15}
                           cols={1}
-                        /> */}
+                        />
 
-                      {/* <button type="submit">Submit</button>
-                      </form> */}
+                        <button type="submit">Submit</button>
+                      </form>
                     </div>
                   </div>
                 </div>
