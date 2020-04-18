@@ -3,6 +3,7 @@ import { endpoint } from "../../../constants";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchBook } from "../../../actions/book";
+import axios from "axios";
 
 class BookUpdate extends React.Component {
   state = { updatedBook: {} };
@@ -27,19 +28,22 @@ class BookUpdate extends React.Component {
   };
   handleFormSubmit = (e) => {
     e.preventDefault();
-    const bookData = this.state.updatedBook;
-    console.log(bookData);
+
     fetch(`${endpoint}/books/${this.props.book.id}/update/`, {
-      method: "POST",
-      body: JSON.stringify(bookData),
+      method: "PUT",
+      redirect: "follow",
+      body: JSON.stringify(this.state.updatedBook),
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        Authorization: "Token " + localStorage.getItem("token"),
       },
     }).then((response) => {
-      response.json().then((data) => {
-        console.log(response);
-      });
+      console.log(response);
+      if (response.status == 200) {
+        alert(`${this.props.book.isbn} successfully changed`);
+        this.props.history.push(`/books/${this.props.book.id}`);
+      }
     });
   };
 
@@ -53,7 +57,9 @@ class BookUpdate extends React.Component {
       langue_nom,
       genre_nom,
       description,
+      history,
     } = this.state.updatedBook;
+    console.log(this.props);
     return (
       <div>
         <section className="product-shop spad page-details">
