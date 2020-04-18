@@ -4,6 +4,8 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchBook } from "../../../actions/book";
 import axios from "axios";
+import FileUpload from "../../Buttons/FileUpload";
+
 class BookUpdate extends React.Component {
   state = { updatedBook: { picture: null }, success: false, url: "" };
   componentDidMount() {
@@ -42,63 +44,39 @@ class BookUpdate extends React.Component {
   handleFormSubmit = (e) => {
     e.preventDefault();
     let formData = new FormData();
-    formData.append("picture", this.state.updatedBook.picture);
-    formData.append("title", "rand");
-    console.log(this.state.updatedBook.picture);
-    fetch(`${endpoint}/books/${this.props.book.id}/update/`, {
-      method: "PUT",
-      redirect: "follow",
-      body: JSON.stringify(this.state.updatedBook),
-      headers: {
-        Accept: "application/json",
-        Authorization: "Token " + localStorage.getItem("token"),
-        "Content-Type": "application/json",
-      },
-    }).then((response) => {
-      console.log(response);
-      if (response.status == 200) {
-        this.setState({
-          success: true,
-          url: `${s3_base_url}${this.state.updatedBook.picture}`,
-        });
+
+    for (var key in this.state.updatedBook) {
+      if (key !== "picture") {
+        formData.append(key, this.state.updatedBook[key]);
       }
-    });
+    }
+    formData.append("picture", this.state.updatedBook.picture);
+    try {
+      const res = axios({
+        url: `${endpoint}/books/${this.props.book.id}/update/`,
+        method: "PUT",
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: "Token " + localStorage.getItem("token"),
+        },
+        data: formData,
+      })
+        .then((response) => {
+          console.log(response);
+          console.log(this.state.updatedBook.picture);
+          if (response.status == 200) {
+            this.setState({
+              success: true,
+              url: `${s3_base_url}${this.state.updatedBook.picture}`,
+            });
+          }
+        })
+        .catch((response) => console.log(response));
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
   };
-
-  // handleFormSubmit = (e) => {
-  //   e.preventDefault();
-  //   let formData = new FormData();
-
-  //   for (var key in this.state.updatedBook) {
-  //     if (key !== "picture") {
-  //       formData.append(key, this.state.updatedBook[key]);
-  //     }
-  //   }
-  //   // formData.append("picture", new Blob(), {
-  //   //   type: "image/png",
-  //   //   // filename: "kdb.png",
-  //   // });
-  //   axios({
-  //     url: `${endpoint}/books/${this.props.book.id}/update/`,
-  //     method: "PUT",
-  //     headers: {
-  //       "content-type": "multipart/form-data",
-  //       Authorization: "Token " + localStorage.getItem("token"),
-  //     },
-  //     data: formData,
-  //   })
-  //     .then((response) => {
-  //       console.log(response);
-  //       console.log(this.state.updatedBook.picture);
-  //       if (response.status == 200) {
-  //         this.setState({
-  //           success: true,
-  //           url: `${s3_base_url}${this.state.updatedBook.picture}`,
-  //         });
-  //       }
-  //     })
-  //     .catch((response) => console.log(response));
-  // };
   render() {
     const {
       auteur_nom,
@@ -128,21 +106,30 @@ class BookUpdate extends React.Component {
                 <div className="row">
                   <div className="col-lg-6">
                     <div className="product-details">
-                      <form
+                      {/* <form
                         className="product-details"
                         enctype="multipart/form-data"
                         onSubmit={this.handleFormSubmit}
-                      >
-                        <Input
+                      > */}
+                      {/* <Input
                           name={"picture"}
                           title={"Picture"}
                           type={"file"}
                           value={picture}
                           handleChange={this.handleInput}
                           ref={(ref) => (this.fileUpload = ref)}
-                        />
+                        /> */}
+                      <FileUpload
+                        id={this.props.book.id}
+                        name={"picture"}
+                        title={"Picture"}
+                        type={"file"}
+                        value={picture}
+                        handleChange={this.handleInput}
+                        ref={(ref) => (this.fileUpload = ref)}
+                      />
 
-                        <Input
+                      {/* <Input
                           name={"auteur_nom"}
                           title={"Author"}
                           type={"text"}
@@ -157,16 +144,16 @@ class BookUpdate extends React.Component {
                           value={isbn}
                           handleChange={this.handleInput}
                           placeholder={isbn}
-                        />
-                        <Input
+                        /> */}
+                      {/* <Input
                           name={"titre"}
                           title={"Titre"}
                           type={"text"}
                           value={titre}
                           handleChange={this.handleInput}
                           placeholder={titre}
-                        />
-                        <Input
+                        /> */}
+                      {/* <Input
                           name={"note"}
                           title={"Note"}
                           type={"text"}
@@ -207,10 +194,10 @@ class BookUpdate extends React.Component {
                           placeholder={description}
                           rows={15}
                           cols={1}
-                        />
+                        /> */}
 
-                        <button type="submit">Submit</button>
-                      </form>
+                      {/* <button type="submit">Submit</button>
+                      </form> */}
                     </div>
                   </div>
                 </div>
