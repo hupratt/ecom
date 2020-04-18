@@ -109,6 +109,8 @@ if USE_S3:
     # s3 static settings
     STATIC_LOCATION = "static"
     STATIC_URL = "/static/"
+    STATIC_ROOT = os.path.join(BASE_DIR, "static")
+    MEDIA_ROOT = os.path.join(BASE_DIR, "media")
     # STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/"
     # STATICFILES_STORAGE = "home.storage_backends.StaticStorage"
     # s3 public media settings
