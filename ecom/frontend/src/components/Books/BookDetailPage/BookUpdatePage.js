@@ -1,17 +1,8 @@
 import React from "react";
-import { endpoint } from "../../../constants";
+import { endpoint, s3_base_url } from "../../../constants";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchBook } from "../../../actions/book";
-import ReactS3 from "react-s3";
-
-const s3config = {
-  bucketName: process.env.bucketName,
-  albumName: process.env.albumName,
-  region: process.env.region,
-  accessKeyId: process.env.accessKeyId,
-  secretAccessKey: process.env.secretAccessKey,
-};
 
 class BookUpdate extends React.Component {
   state = { updatedBook: {}, success: false, url: "" };
@@ -21,18 +12,6 @@ class BookUpdate extends React.Component {
       updatedBook: this.props.book,
     });
   }
-
-  handleChangeFile = (e) => {
-    this.setState({ success: false, url: "" });
-  }; // Perform the upload
-  handleUploadFile = (e) => {
-    // let fileParts = e.target.files[0].name.split(".");
-    // let fileName = fileParts[0];
-    // let fileType = fileParts[1];
-    // ReactS3.upload(fileName, s3config)
-    //   .then((response) => console.log(response))
-    //   .catch((err) => console.error(err));
-  };
 
   handleInput = (e) => {
     let value = e.target.value;
@@ -61,8 +40,10 @@ class BookUpdate extends React.Component {
     }).then((response) => {
       console.log(response);
       if (response.status == 200) {
-        alert(`${this.props.book.isbn} successfully changed`);
-        this.props.history.push(`/books/${this.props.book.id}`);
+        this.setState({
+          success: true,
+          url: `${s3_base_url}${this.state.updatedBook.picture}`,
+        });
       }
     });
   };
@@ -76,7 +57,7 @@ class BookUpdate extends React.Component {
       langue_nom,
       genre_nom,
       description,
-      history,
+      picture,
     } = this.state.updatedBook;
 
     return (
@@ -95,17 +76,17 @@ class BookUpdate extends React.Component {
                 <div className="row">
                   <div className="col-lg-6">
                     <div className="product-details">
-                      <form className="product-details">
+                      <form
+                        className="product-details"
+                        enctype="multipart/form-data"
+                      >
                         <Input
-                          name={"file"}
-                          title={"File"}
+                          name={"picture"}
+                          title={"Picture"}
                           type={"file"}
-                          value={""}
-                          // handleChange={this.handleUploadFile}
-                          placeholder={auteur_nom}
-                          uploadInput={this.uploadInput}
+                          value={picture}
+                          placeholder={picture}
                         />
-                        <button onClick={this.handleUploadFile}>UPLOAD</button>
                         <Input
                           name={"auteur_nom"}
                           title={"Author"}
@@ -190,46 +171,22 @@ class BookUpdate extends React.Component {
   }
 }
 
-const Input = (props) => {
-  if (props.uploadInput) {
-    return (
-      <div className="form-group">
-        <label htmlFor={props.name} className="form-label">
-          {props.title}
-        </label>
-        <input
-          className="form-input"
-          id={props.name}
-          name={props.name}
-          type={props.type}
-          value={props.value}
-          onChange={props.handleChange}
-          placeholder={props.placeholder}
-          ref={(ref) => {
-            props.uploadInput = ref;
-          }}
-        />
-      </div>
-    );
-  } else {
-    return (
-      <div className="form-group">
-        <label htmlFor={props.name} className="form-label">
-          {props.title}
-        </label>
-        <input
-          className="form-input"
-          id={props.name}
-          name={props.name}
-          type={props.type}
-          value={props.value}
-          onChange={props.handleChange}
-          placeholder={props.placeholder}
-        />
-      </div>
-    );
-  }
-};
+const Input = (props) => (
+  <div className="form-group">
+    <label htmlFor={props.name} className="form-label">
+      {props.title}
+    </label>
+    <input
+      className="form-input"
+      id={props.name}
+      name={props.name}
+      type={props.type}
+      value={props.value}
+      onChange={props.handleChange}
+      placeholder={props.placeholder}
+    />
+  </div>
+);
 
 const TextArea = (props) => (
   <div className="form-group">

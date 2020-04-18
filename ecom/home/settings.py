@@ -116,6 +116,8 @@ if USE_S3:
     # MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/"
     MEDIA_URL = "/media/"
     # DEFAULT_FILE_STORAGE = "home.storage_backends.PublicMediaStorage"
+    DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+    AWS_S3_REGION_NAME = os.getenv("AWS_S3_REGION_NAME")
 else:
     STATIC_URL = "/static/"
     MEDIA_URL = "/media/"
