@@ -3,9 +3,9 @@ import { endpoint, s3_base_url } from "../../../constants";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchBook } from "../../../actions/book";
-
+import axios from "axios";
 class BookUpdate extends React.Component {
-  state = { updatedBook: {}, success: false, url: "" };
+  state = { updatedBook: { picture: null }, success: false, url: "" };
   componentDidMount() {
     console.log(this.props.isAuthenticated);
     this.setState({
@@ -14,31 +14,46 @@ class BookUpdate extends React.Component {
   }
 
   handleInput = (e) => {
-    let value = e.target.value;
-    let name = e.target.name;
-    this.setState((prevState) => {
-      return {
-        updatedBook: {
-          ...prevState.updatedBook,
-          [name]: value,
-        },
-      };
-    });
+    const imagefile = this.fileUpload;
+    if (imagefile && imagefile.files.length > 0) {
+      this.setState((prevState) => {
+        return {
+          updatedBook: {
+            ...prevState.updatedBook,
+            picture: imagefile.files[0],
+          },
+        };
+      }, console.log(this.state.updatedBook.picture));
+    } else {
+      const value = e.target.value;
+      const name = e.target.name;
+      this.setState((prevState) => {
+        return {
+          updatedBook: {
+            ...prevState.updatedBook,
+            [name]: value,
+          },
+        };
+      }, console.log(this.state.updatedBook.picture));
+    }
   };
+
   handleFormSubmit = (e) => {
     e.preventDefault();
-
-    fetch(`${endpoint}/books/${this.props.book.id}/update/`, {
+    let formData = new FormData();
+    formData.append(this.state.updatedBook);
+    axios({
+      url: `${endpoint}/books/${this.props.book.id}/update/`,
       method: "PUT",
-      redirect: "follow",
-      body: JSON.stringify(this.state.updatedBook),
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
         Authorization: "Token " + localStorage.getItem("token"),
       },
+      data: formData,
     }).then((response) => {
       console.log(response);
+      console.log(this.state.updatedBook.picture);
       if (response.status == 200) {
         this.setState({
           success: true,
@@ -79,14 +94,17 @@ class BookUpdate extends React.Component {
                       <form
                         className="product-details"
                         enctype="multipart/form-data"
+                        onSubmit={this.handleFormSubmit}
                       >
                         <Input
                           name={"picture"}
                           title={"Picture"}
                           type={"file"}
                           value={picture}
-                          placeholder={picture}
+                          handleChange={this.handleInput}
+                          ref={(ref) => (this.fileUpload = ref)}
                         />
+
                         <Input
                           name={"auteur_nom"}
                           title={"Author"}
@@ -154,9 +172,7 @@ class BookUpdate extends React.Component {
                           cols={1}
                         />
 
-                        <button type="button" onClick={this.handleFormSubmit}>
-                          Submit
-                        </button>
+                        <button type="submit">Submit</button>
                       </form>
                     </div>
                   </div>
@@ -184,6 +200,7 @@ const Input = (props) => (
       value={props.value}
       onChange={props.handleChange}
       placeholder={props.placeholder}
+      ref={props.ref}
     />
   </div>
 );
