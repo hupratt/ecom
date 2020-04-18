@@ -3,8 +3,16 @@ import { endpoint } from "../../../constants";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchBook } from "../../../actions/book";
-import axios from "axios";
 import ReactS3 from "react-s3";
+
+const s3config = {
+  bucketName: process.env.bucketName,
+  albumName: process.env.albumName,
+  region: process.env.region,
+  accessKeyId: process.env.accessKeyId,
+  secretAccessKey: process.env.secretAccessKey,
+};
+
 class BookUpdate extends React.Component {
   state = { updatedBook: {}, success: false, url: "" };
   componentDidMount() {
@@ -13,15 +21,17 @@ class BookUpdate extends React.Component {
       updatedBook: this.props.book,
     });
   }
+
   handleChangeFile = (e) => {
     this.setState({ success: false, url: "" });
   }; // Perform the upload
   handleUploadFile = (e) => {
-    console.log(e.target);
     // let fileParts = e.target.files[0].name.split(".");
     // let fileName = fileParts[0];
     // let fileType = fileParts[1];
-    // ReactS3.upload(fileName).then((data) => console.log(data.location));
+    // ReactS3.upload(fileName, s3config)
+    //   .then((response) => console.log(response))
+    //   .catch((err) => console.error(err));
   };
 
   handleInput = (e) => {
@@ -91,7 +101,7 @@ class BookUpdate extends React.Component {
                           title={"File"}
                           type={"file"}
                           value={""}
-                          handleChange={this.handleChangeFile}
+                          // handleChange={this.handleUploadFile}
                           placeholder={auteur_nom}
                           uploadInput={this.uploadInput}
                         />

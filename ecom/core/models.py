@@ -84,6 +84,7 @@ class Livre(models.Model):
     nb_pages = models.IntegerField(blank=True, null=True)
     date_maj = models.DateTimeField(auto_now_add=True)
     description = models.TextField(default="", null=True, blank=True)
+    picture = models.FileField(null=True, blank=True)
 
     def get_absolute_url(self):
         return reverse("core:product", kwargs={"id": self.id})

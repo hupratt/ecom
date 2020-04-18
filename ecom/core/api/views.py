@@ -419,40 +419,45 @@ class AddressUpdateView(UpdateAPIView):
     queryset = Address.objects.all()
 
 
-class BookUpdateView(UpdateAPIView):
-    permission_classes = (IsAuthenticated,)
-    serializer_class = BookSerializer
-    queryset = Livre.objects.all()
-    AWS_BUCKET_NAME = settings.AWS_BUCKET_NAME
-    permission_classes = (IsAuthenticated,)
-    parser_classes = (
-        parsers.FormParser,
-        parsers.MultiPartParser,
-        parsers.JSONParser,
-    )
+class SignS3RequestView(APIView):
+    # permission_classes = (IsAuthenticated,)
+    parser_classes = (parsers.FormParser, parsers.MultiPartParser, parsers.JSONParser)
     renderer_classes = (JSONRenderer,)
+    # queryset = Livre.objects.all()[0]
 
     def get(self, request):
-    	file_name = request.query_params.get('file-name')
-    	file_type = request.query_params.get('file-type')
+        file_name = request.query_params.get("file-name")
+        file_type = request.query_params.get("file-type")
 
-    	s3 = boto3.client('s3', config=Config(signature_version='s3v4'))
+        s3 = boto3.client("s3", config=Config(signature_version="s3v4"))
 
-    	presigned_post = s3.generate_presigned_post(
-            Bucket = AWS_BUCKET_NAME,
-            Key = file_name,
-            Fields = {"acl": "public-read", "Content-Type": file_type},
-            Conditions = [
-                {"acl": "public-read"},
-                {"Content-Type": file_type}
-            ],
-            ExpiresIn = 3600
-    	)
+        presigned_post = s3.generate_presigned_post(
+            Bucket=settings.AWS_BUCKET_NAME,
+            Key=file_name,
+            Fields={"acl": "public-read", "Content-Type": file_type},
+            Conditions=[{"acl": "public-read"}, {"Content-Type": file_type}],
+            ExpiresIn=3600,
+        )
 
-    	return Response({
-    		'data': presigned_post,
-    		'url': 'https://s3.amazonaws.com/%s/%s' % (AWS_BUCKET_NAME, file_name)
-    	})
+        return Response(
+            {
+                "data": presigned_post,
+                "url": "https://s3.amazonaws.com/%s/%s"
+                % (settings.AWS_BUCKET_NAME, file_name),
+            }
+        )
+
+
+class BookUpdateView(UpdateAPIView):
+
+    serializer_class = BookSerializer
+    queryset = Livre.objects.all()
+
+    def put(self, request, pk, *args, **kwargs):
+        book = get_object_or_404(Livre, id=pk)
+        print("book", book)
+        return self.update(request, *args, **kwargs)
+
 
 class AddressDeleteView(DestroyAPIView):
     permission_classes = (IsAuthenticated,)

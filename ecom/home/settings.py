@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     "core",
     "frontend",
     "home",
+    "storages",
 ]
 
 MIDDLEWARE = [
@@ -94,16 +95,31 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-STATIC_URL = "/static/"
-MEDIA_URL = "/media/"
 
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, "ecom", "frontend", "static", "frontend"),
-# ]
+USE_S3 = os.getenv("USE_S3") == "TRUE"
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-SITE_ID = 1
+if USE_S3:
+    # aws settings
+    AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
+    AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
+    AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
+    AWS_DEFAULT_ACL = None
+    AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
+    AWS_S3_OBJECT_PARAMETERS = {"CacheControl": "max-age=86400"}
+    # s3 static settings
+    STATIC_LOCATION = "static"
+    STATIC_URL = "/static/"
+    # STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/"
+    # STATICFILES_STORAGE = "home.storage_backends.StaticStorage"
+    # s3 public media settings
+    PUBLIC_MEDIA_LOCATION = "media"
+    # MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/"
+    MEDIA_URL = "/media/"
+    # DEFAULT_FILE_STORAGE = "home.storage_backends.PublicMediaStorage"
+else:
+    STATIC_URL = "/static/"
+    MEDIA_URL = "/media/"
+
 
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.AllowAny",),
