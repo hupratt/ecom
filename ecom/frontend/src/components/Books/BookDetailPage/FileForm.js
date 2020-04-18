@@ -16,7 +16,9 @@ const FileForm = ({ book }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("picture", file);
+    if (file !== undefined) {
+      formData.append("picture", file);
+    }
     for (var key in book) {
       if (
         book[key] !== undefined &&
@@ -63,7 +65,7 @@ const FileForm = ({ book }) => {
 
         <input
           type="submit"
-          value="Upload"
+          value="Save"
           className="btn btn-primary btn-block mt-4"
         />
       </form>

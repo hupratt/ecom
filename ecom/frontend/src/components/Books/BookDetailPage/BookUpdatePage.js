@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchBook } from "../../../actions/book";
 import FileForm from "./FileForm";
+import { s3_base_url } from "../../../constants";
 
 class BookUpdate extends React.Component {
   state = { updatedBook: { picture: null }, success: false, url: "" };
@@ -15,7 +16,6 @@ class BookUpdate extends React.Component {
   }
 
   handleInput = (e) => {
-    const imagefile = this.fileUpload;
     const value = e.target.value;
     const name = e.target.name;
     this.setState((prevState) => {
@@ -55,8 +55,14 @@ class BookUpdate extends React.Component {
               <div className="col-lg-12">
                 <div className="row">
                   <div className="col-lg-6">
+                    <img
+                      className="product-big-img"
+                      src={s3_base_url + this.props.book.isbn + ".jpg"}
+                      alt=""
+                    />
                     <FileForm book={this.state.updatedBook} />
                   </div>
+
                   <div className="col-lg-6">
                     <div className="product-update">
                       <Input

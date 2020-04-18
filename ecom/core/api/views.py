@@ -2,7 +2,7 @@ from django_countries import countries
 from django.db.models import Q
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from rest_framework.generics import (
@@ -423,6 +423,11 @@ class BookUpdateView(UpdateAPIView):
     permission_classes = (IsAuthenticated,)
     serializer_class = BookSerializer
     queryset = Livre.objects.all()
+
+    def put(self, request, *args, **kwargs):
+        if self.request.user.is_staff:
+            return self.update(request, *args, **kwargs)
+        return HttpResponse("<h1>You are not authorized to perform this action</h1>")
 
     # def put(self, request, pk, *args, **kwargs):
     #     book = get_object_or_404(Livre, id=pk)
