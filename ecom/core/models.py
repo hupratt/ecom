@@ -113,6 +113,7 @@ class Livre(models.Model):
             alt=f"Book import image for isbn: {self.isbn}"
         )
         if len(fil_list) > 0:
+            # Fix me: image.url is wrong for some reason, appends https twice
             image_name = fil_list[0].image.name
             path = f"{settings.AWS_S3_CUSTOM_DOMAIN}/{image_name}"
             return path
@@ -164,6 +165,9 @@ class ImageLivre(models.Model):
 
     def langue_nom(self):
         return self.livre.langue_nom
+
+    def get_image(self):
+        return self.image.url[8:]
 
 
 class Item(models.Model):

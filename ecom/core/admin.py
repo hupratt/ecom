@@ -118,19 +118,11 @@ class ImageLivreInLineAdmin(admin.ModelAdmin):
         "langue_nom",
         "alt",
         "created",
-        "image",
+        "get_image",
         "updated",
+        "get_isbn",
     ]
-    search_fields = [
-        "livre",
-        "image",
-        "auteur",
-        "genre_nom",
-        "titre",
-        "langue_nom",
-        "alt",
-        "created",
-    ]
+    search_fields = ["livre__isbn", "livre__auteur_nom", "livre__titre", "image"]
 
 
 class LivreItemInLineAdmin(admin.ModelAdmin):
