@@ -16,8 +16,11 @@ const FileForm = ({ book }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
+    const formData2 = new FormData();
+    console.log(file);
     if (file !== undefined) {
-      formData.append("picture", file);
+      formData2.append("image", file);
+      formData2.append("alt", "blank");
     }
     for (var key in book) {
       if (
@@ -30,6 +33,20 @@ const FileForm = ({ book }) => {
     }
     axios
       .put(`${endpoint}/books/${book.id}/update/`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        onUploadProgress: (progressEvent) => {
+          setUploadPercentage(
+            parseInt(
+              Math.round((progressEvent.loaded * 100) / progressEvent.total)
+            )
+          );
+        },
+      })
+      .catch((err) => console.log(err));
+    axios
+      .put(`${endpoint}/bookimages/${book.pictureid}/update/`, formData2, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

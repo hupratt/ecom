@@ -57,3 +57,7 @@ unset PYTHONIOENCODING
 ## useful git commands
 
 git rm -r --cached .
+
+## am i being ddosed
+
+netstat -ntu|awk '{print \$5}'|cut -d: -f1 -s|sort|uniq -c|sort -nk1 -r

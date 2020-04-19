@@ -47,6 +47,8 @@ class BookSerializer(serializers.ModelSerializer):
             "get_quantity",
             "prix_barre",
             "description",
+            "picture",
+            "pictureid",
         )
 
 

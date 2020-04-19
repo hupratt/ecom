@@ -117,6 +117,12 @@ class Livre(models.Model):
             return path
         return f"{settings.AWS_S3_CUSTOM_DOMAIN}/resources/no-image-icon.png"
 
+    def pictureid(self):
+        image = self.livre_name.get_queryset().order_by("-updated").first()
+        if image is not None:
+            return image.id
+        return ""
+
 
 class Auteur(models.Model):
     nom = models.CharField(max_length=50)
