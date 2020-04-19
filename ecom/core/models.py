@@ -24,7 +24,7 @@ class UserProfile(models.Model):
 
 class ImageAuteur(models.Model):
     image = models.FileField(
-        blank=True, null=True, help_text="(optional) room image field"
+        blank=True, null=True, help_text="(optional) author image field"
     )
     auteur = models.ForeignKey(
         "Auteur",
@@ -84,7 +84,6 @@ class Livre(models.Model):
     nb_pages = models.IntegerField(blank=True, null=True)
     date_maj = models.DateTimeField(auto_now_add=True)
     description = models.TextField(default="", null=True, blank=True)
-    picture = models.FileField(null=True, blank=True)
 
     def get_absolute_url(self):
         return reverse("core:product", kwargs={"id": self.id})
@@ -116,13 +115,13 @@ class Auteur(models.Model):
 
 class ImageLivre(models.Model):
     image = models.FileField(
-        blank=True, null=True, help_text="(optional) room image field"
+        blank=True, null=True, help_text="(optional) book image field"
     )
     livre = models.ForeignKey(
         "Livre",
         on_delete=models.CASCADE,
         related_name="livre_name",
-        help_text="(automatic) room model linkage",
+        help_text="(automatic) book model linkage",
     )
     created = models.DateTimeField(
         auto_now_add=True, help_text="(automatic) created date"
