@@ -9,7 +9,6 @@ class BookUpdate extends React.Component {
   state = { updatedBook: { picture: null }, success: false, url: "" };
 
   componentDidMount() {
-    console.log(this.props.isAuthenticated);
     this.setState({
       updatedBook: this.props.book,
     });
