@@ -51,15 +51,6 @@ class BookDetail extends React.Component {
                   <div className="col-lg-12">
                     <div className="row">
                       <div className="col-lg-6">
-                        {user_name && user_staff && (
-                          <p>
-                            Hello {user_name},{" "}
-                            <button onClick={() => this.visitEditPage(book.id)}>
-                              {this.props.t("Edit")}
-                            </button>{" "}
-                          </p>
-                        )}
-
                         <div className="product-pic-zoom">
                           <img
                             className="product-big-img"
@@ -135,6 +126,17 @@ class BookDetail extends React.Component {
                             isbn={book.isbn}
                             placeholder={this.props.t("Would buy")}
                           />
+                          {user_name && user_staff && (
+                            <React.Fragment>
+                              <h1>Olá {user_name},</h1>
+                              <button
+                                className="primary-btn red"
+                                onClick={() => this.visitEditPage(book.id)}
+                              >
+                                {this.props.t("Edit")}
+                              </button>
+                            </React.Fragment>
+                          )}
                           <ul className="pd-tags">
                             <li>
                               <span>{this.props.t("CATEGORY")}</span>:{" "}
