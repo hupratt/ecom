@@ -109,15 +109,13 @@ class Livre(models.Model):
         return f"Book {self.isbn}"
 
     def picture(self):
-        fil_list = self.livre_name.filter(
-            alt=f"Book import image for isbn: {self.isbn}"
-        )
-        if len(fil_list) > 0:
+        image = self.livre_name.get_queryset().order_by("-updated").first()
+        if image is not None:
             # Fix me: image.url is wrong for some reason, appends https twice
-            image_name = fil_list[0].image.name
+            image_name = image.image.name
             path = f"{settings.AWS_S3_CUSTOM_DOMAIN}/{image_name}"
             return path
-        return f"{settings.AWS_S3_CUSTOM_DOMAIN}/resources/noresults.png"
+        return f"{settings.AWS_S3_CUSTOM_DOMAIN}/resources/no-image-icon.png"
 
 
 class Auteur(models.Model):
@@ -152,22 +150,28 @@ class ImageLivre(models.Model):
         return f"{self.image}"
 
     def get_isbn(self):
-        return self.livre
+        if self.livre:
+            return f"{self.livre}"
 
     def auteur(self):
-        return self.livre.auteur_nom
+        if self.livre:
+            return f"{self.livre.auteur_nom}"
 
     def genre_nom(self):
-        return self.livre.genre_nom
+        if self.livre:
+            return f"{self.livre.genre_nom}"
 
     def titre(self):
-        return self.livre.titre
+        if self.livre:
+            return f"{self.livre.titre}"
 
     def langue_nom(self):
-        return self.livre.langue_nom
+        if self.livre:
+            return f"{self.livre.langue_nom}"
 
     def get_image(self):
-        return self.image.url[8:]
+        if self.image:
+            return f"{self.image.url[8:]}"
 
 
 class Item(models.Model):

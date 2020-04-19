@@ -122,7 +122,7 @@ class ImageLivreInLineAdmin(admin.ModelAdmin):
         "updated",
         "get_isbn",
     ]
-    search_fields = ["livre__isbn", "livre__auteur_nom", "livre__titre", "image"]
+    search_fields = ["livre__isbn", "livre__auteur_nom", "livre__titre"]
 
 
 class LivreItemInLineAdmin(admin.ModelAdmin):
