@@ -57,7 +57,7 @@ class BookUpdate extends React.Component {
                   <div className="col-lg-6">
                     <img
                       className="product-big-img"
-                      src={s3_base_url + this.props.book.isbn + ".jpg"}
+                      src={this.props.book.picture}
                       alt=""
                     />
                     <FileForm book={this.state.updatedBook} />

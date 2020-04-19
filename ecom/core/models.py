@@ -3,6 +3,7 @@ from django.conf import settings
 from django.db import models
 from django.db.models import Sum
 from django.shortcuts import reverse
+from django.shortcuts import get_object_or_404
 from django_countries.fields import CountryField
 from datetime import datetime
 
@@ -107,6 +108,16 @@ class Livre(models.Model):
     def __unicode__(self):
         return f"Book {self.isbn}"
 
+    def picture(self):
+        fil_list = self.livre_name.filter(
+            alt=f"Book import image for isbn: {self.isbn}"
+        )
+        if len(fil_list) > 0:
+            image_name = fil_list[0].image.name
+            path = f"{settings.AWS_S3_CUSTOM_DOMAIN}/{image_name}"
+            return path
+        return f"{settings.AWS_S3_CUSTOM_DOMAIN}/resources/noresults.png"
+
 
 class Auteur(models.Model):
     nom = models.CharField(max_length=50)
@@ -134,10 +145,10 @@ class ImageLivre(models.Model):
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 
     def __str__(self):
-        return self.alt
+        return f"{self.image}"
 
     def __unicode__(self):
-        return self.alt
+        return f"{self.image}"
 
     def get_isbn(self):
         return self.livre

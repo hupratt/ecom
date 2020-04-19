@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { s3_base_url } from "../../../constants";
 import EmailForm from "./EmailForm";
 import { shortDescr } from "../../utility";
 import { withTranslation } from "react-i18next";
@@ -43,7 +42,7 @@ class BookDetail extends React.Component {
                         <div className="product-pic-zoom">
                           <img
                             className="product-big-img"
-                            src={s3_base_url + book.isbn + ".jpg"}
+                            src={book.picture}
                             alt=""
                           />
                         </div>
