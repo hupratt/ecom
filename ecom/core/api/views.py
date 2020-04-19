@@ -24,6 +24,7 @@ from .serializers import (
     AddressSerializer,
     PaymentSerializer,
     BookSerializer,
+    BookImageSerializer,
 )
 from core.models import (
     Item,
@@ -37,6 +38,7 @@ from core.models import (
     Variation,
     ItemVariation,
     Livre,
+    ImageLivre,
 )
 
 import os, boto3
@@ -429,9 +431,16 @@ class BookUpdateView(UpdateAPIView):
             return self.update(request, *args, **kwargs)
         return HttpResponse("<h1>You are not authorized to perform this action</h1>")
 
-    # def put(self, request, pk, *args, **kwargs):
-    #     book = get_object_or_404(Livre, id=pk)
-    #     return self.update(request, *args, **kwargs)
+
+class BookImageUpdateView(UpdateAPIView):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = BookImageSerializer
+    queryset = ImageLivre.objects.all()
+
+    def put(self, request, *args, **kwargs):
+        if self.request.user.is_staff:
+            return self.update(request, *args, **kwargs)
+        return HttpResponse("<h1>You are not authorized to perform this action</h1>")
 
 
 class AddressDeleteView(DestroyAPIView):

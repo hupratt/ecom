@@ -18,12 +18,18 @@ from .views import (
     BookListView,
     BookDetailView,
     BookUpdateView,
+    BookImageUpdateView,
 )
 
 urlpatterns = [
     path("books/", BookListView.as_view(), name="book-list"),
     path("books/<pk>/", BookDetailView.as_view(), name="book-detail"),
     path("books/<pk>/update/", BookUpdateView.as_view(), name="book-update"),
+    path(
+        "bookimages/<pk>/update/",
+        BookImageUpdateView.as_view(),
+        name="bookimage-update",
+    ),
     path("user-id/", UserIDView.as_view(), name="user-id"),
     path("countries/", CountryListView.as_view(), name="country-list"),
     path("addresses/", AddressListView.as_view(), name="address-list"),

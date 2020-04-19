@@ -10,6 +10,7 @@ from core.models import (
     ItemVariation,
     Payment,
     Livre,
+    ImageLivre,
 )
 
 
@@ -22,6 +23,12 @@ class CouponSerializer(serializers.ModelSerializer):
     class Meta:
         model = Coupon
         fields = ("id", "code", "amount")
+
+
+class BookImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ImageLivre
+        fields = ("image", "alt")
 
 
 class BookSerializer(serializers.ModelSerializer):
@@ -40,7 +47,6 @@ class BookSerializer(serializers.ModelSerializer):
             "get_quantity",
             "prix_barre",
             "description",
-            "picture",
         )
 
 
