@@ -8,6 +8,7 @@ import { bookListURL } from "../../../constants";
 import { Link, withRouter } from "react-router-dom";
 import { fetchCart } from "../../../actions/cart";
 import { Trans } from "react-i18next";
+import { fetchBooks } from "../../../actions/books";
 
 const propTypes = {
   data: PropTypes.array.isRequired,
@@ -19,6 +20,9 @@ class BookList extends React.Component {
   componentDidMount() {
     window.scrollTo(0, 0);
     document.addEventListener("scroll", this.trackScrolling);
+    if (this.props.dataLength == 0) {
+      this.props.fetchBooks(bookListURL());
+    }
     if (
       (this.props.language.length > 0) |
       (this.props.authors.size > 0) |
@@ -160,6 +164,7 @@ const mapDispatchToProps = (dispatch) => {
     loadMoar: (url_endpoint, bookPerPage, offset) =>
       dispatch(loadmoar(url_endpoint, bookPerPage, offset)),
     refreshCart: () => dispatch(fetchCart()),
+    fetchBooks: (url_endpoint) => dispatch(fetchBooks(url_endpoint)),
   };
 };
 
@@ -176,6 +181,7 @@ const mapStateToProps = (state) => {
     searchTerm: state.navigation.searchTerm,
     error: state.book.error,
     errorCart: state.cart.error,
+    dataLength: state.books.data.length,
   };
 };
 

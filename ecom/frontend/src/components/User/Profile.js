@@ -447,7 +447,7 @@ class Profile extends React.Component {
   render() {
     const { activeItem, error, loading } = this.state;
     const { isAuthenticated, logout } = this.props;
-    if (!isAuthenticated) {
+    if (localStorage.getItem("token") == null) {
       return <Redirect to="/login" />;
     }
     return (

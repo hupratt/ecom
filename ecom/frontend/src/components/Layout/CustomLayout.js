@@ -61,11 +61,11 @@ class CustomLayout extends React.Component {
     document.addEventListener("scroll", this.trackScrolling);
     const q = queryString.parse(this.props.location.search);
     console.log("this.props.dataLength", this.props.dataLength == 0);
-    console.log("this.props.dataLength", this.props.location.pathname == "/");
-    if (
-      (this.props.dataLength == 0 && this.props.location.pathname == "/") ||
-      (Object.keys(q).length == 0 && this.props.location.pathname == "/")
-    ) {
+    console.log(
+      "this.props.location.pathname == /",
+      this.props.location.pathname == "/"
+    );
+    if (Object.keys(q).length == 0 && this.props.location.pathname == "/") {
       // vanilla search, no string parameters
       // e.g. visit '/'
       this.props.fetchBooks(bookListURL());
