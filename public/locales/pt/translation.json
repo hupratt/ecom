@@ -3,7 +3,7 @@
   "Portuguese": "Português",
   "French": "Francês",
   "English": "Inglês",
-  "All": "Todas as idiomas",
+  "All": "Todos os idiomas",
   "Copyright": "Direitos de autor © Todos os direitos reservados | Feito com",
   "Would buy": "Gostaria de comprar este livro?",
   "Made By": "por um contemporâneo",
@@ -44,5 +44,7 @@
   "Enter Your Mail": "Introduza o email",
   "Gastronomia": "Gastronomia",
   "Arte": "Arte",
-  "Literatura": "Literatura"
+  "Literatura": "Literatura",
+  "Add To Cart": "Comprar",
+  "Edit": "Atualizar"
 }

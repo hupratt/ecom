@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import EmailForm from "./EmailForm";
 import { shortDescr } from "../../utility";
 import { withTranslation } from "react-i18next";
-
+import { endpoint } from "../../../constants";
+import axios from "axios";
 const propTypes = {
   handleAddToCart: PropTypes.func.isRequired,
   book: PropTypes.object.isRequired,
@@ -13,7 +14,22 @@ const propTypes = {
 class BookDetail extends React.Component {
   state = {
     bookDetailClicked: false,
+    user_name: undefined,
+    user_staff: false,
   };
+
+  componentDidMount() {
+    if (this.props.isAuthenticated) {
+      axios
+        .get(`${endpoint}/user-staff/`)
+        .then((res) => {
+          const { user_name, user_staff } = res.data;
+          this.setState({ user_name, user_staff });
+        })
+        .catch((err) => console.log(err));
+    }
+  }
+
   showFullDescription = () => {
     this.setState({ bookDetailClicked: true });
   };
@@ -22,6 +38,7 @@ class BookDetail extends React.Component {
   };
   render() {
     const { handleAddToCart, book, isAuthenticated } = this.props;
+    const { user_name, user_staff } = this.state;
     const stars_number_inverse = 5 - book.note;
     return (
       <div>
@@ -34,11 +51,15 @@ class BookDetail extends React.Component {
                   <div className="col-lg-12">
                     <div className="row">
                       <div className="col-lg-6">
-                        {isAuthenticated && (
-                          <button onClick={() => this.visitEditPage(book.id)}>
-                            Edit
-                          </button>
+                        {user_name && user_staff && (
+                          <p>
+                            Hello {user_name},{" "}
+                            <button onClick={() => this.visitEditPage(book.id)}>
+                              {this.props.t("Edit")}
+                            </button>{" "}
+                          </p>
                         )}
+
                         <div className="product-pic-zoom">
                           <img
                             className="product-big-img"
@@ -99,7 +120,17 @@ class BookDetail extends React.Component {
                           ).forEach((el) => (
                             <a>{el}</a>
                           ))}
-
+                          <div className="addcart">
+                            <a
+                              href="#"
+                              className="primary-btn pd-cart"
+                              onClick={() =>
+                                handleAddToCart(book.id, isAuthenticated)
+                              }
+                            >
+                              {this.props.t("Add To Cart")}
+                            </a>
+                          </div>
                           <EmailForm
                             isbn={book.isbn}
                             placeholder={this.props.t("Would buy")}
@@ -115,19 +146,7 @@ class BookDetail extends React.Component {
                             </li>
                           </ul>
                           <div className="pd-desc">
-                            {this.state.bookDetailClicked ? (
-                              <p>{book.description}</p>
-                            ) : (
-                              <React.Fragment>
-                                <p>{shortDescr(book.description)}</p>
-                                <a
-                                  style={{ fontStyle: "italic" }}
-                                  onClick={() => this.showFullDescription()}
-                                >
-                                  {this.props.t("Read More")}
-                                </a>
-                              </React.Fragment>
-                            )}
+                            <p>{book.description}</p>
                           </div>
                         </div>
                       </div>

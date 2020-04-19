@@ -3,7 +3,7 @@ import {
   CardElement,
   injectStripe,
   Elements,
-  StripeProvider
+  StripeProvider,
 } from "react-stripe-elements";
 import {
   Button,
@@ -16,7 +16,7 @@ import {
   Loader,
   Message,
   Segment,
-  Select
+  Select,
 } from "semantic-ui-react";
 import { Link, withRouter } from "react-router-dom";
 import { s3_base_url, checkoutURL } from "../../constants";
@@ -25,7 +25,7 @@ import {
   handleFetchOrder,
   handleFetchBillingAddresses,
   handleFetchShippingAddresses,
-  handleSelectChange
+  handleSelectChange,
 } from "../../actions/checkout";
 import axios from "axios";
 import { fetchCart } from "../../actions/cart";
@@ -86,35 +86,36 @@ class CheckoutForm extends Component {
   state = {
     loading: false,
     error: null,
-    success: false
+    success: false,
   };
-  submit = e => {
+  submit = (e) => {
     e.preventDefault();
     this.setState({ loading: true });
     if (this.props.stripe) {
-      this.props.stripe.createToken().then(result => {
+      this.props.stripe.createToken().then((result) => {
         if (result.error) {
           this.setState({ error: result.error.message, loading: false });
         } else {
           this.setState({ error: null });
           const {
             selectedBillingAddress,
-            selectedShippingAddress
+            selectedShippingAddress,
           } = this.state;
           axios
             .post(checkoutURL, {
               stripeToken: result.token.id,
               selectedBillingAddress,
-              selectedShippingAddress
+              selectedShippingAddress,
             })
-            .then(res => {
-              this.setState({ loading: false, success: true }, () => {
-                this.props.refreshCart();
+            .then((res) => {
+              this.setState(
+                { loading: false, success: true },
+                this.props.refreshCart()
                 // fix me, refresh not working as we are not dispatching the purge
                 // we are handling the state locally only
-              });
+              );
             })
-            .catch(err => {
+            .catch((err) => {
               this.setState({ loading: false, error: err });
             });
         }
@@ -131,7 +132,7 @@ class CheckoutForm extends Component {
       shippingAddresses,
       selectedBillingAddress,
       selectedShippingAddress,
-      handleSelectChange
+      handleSelectChange,
     } = this.props;
     const { error, loading, success } = this.state;
     return (
@@ -152,27 +153,33 @@ class CheckoutForm extends Component {
         )}
         <OrderPreview data={data} />
         <Divider />
-        <Header>Shipping</Header>
+
         {shippingAddresses.length > 0 && (
-          <Select
-            name="selectedShippingAddress"
-            value={selectedShippingAddress}
-            clearable
-            options={shippingAddresses}
-            selection
-            onChange={handleSelectChange}
-          />
+          <React.Fragment>
+            <Header>Shipping</Header>
+            <Select
+              name="selectedShippingAddress"
+              value={selectedShippingAddress}
+              clearable
+              options={shippingAddresses}
+              selection
+              onChange={handleSelectChange}
+            />
+          </React.Fragment>
         )}
-        <Header>Billing</Header>
+
         {shippingAddresses.length == 1 && billingAddresses.length > 0 ? (
-          <Select
-            name="selectedBillingAddress"
-            value={selectedBillingAddress}
-            clearable
-            options={billingAddresses}
-            selection
-            onChange={handleSelectChange}
-          />
+          <React.Fragment>
+            <Header>Billing</Header>
+            <Select
+              name="selectedBillingAddress"
+              value={selectedBillingAddress}
+              clearable
+              options={billingAddresses}
+              selection
+              onChange={handleSelectChange}
+            />
+          </React.Fragment>
         ) : (
           shippingAddresses.length == 1 && (
             <p>
@@ -216,24 +223,24 @@ class CheckoutForm extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     handleSelectChange: (e, { name, value }) =>
       dispatch(handleSelectChange(name, value)),
-    fetchOrder: history => dispatch(handleFetchOrder(history)),
+    fetchOrder: (history) => dispatch(handleFetchOrder(history)),
     fetchBillingAddresses: () => dispatch(handleFetchBillingAddresses()),
     fetchShippingAddresses: () => dispatch(handleFetchShippingAddresses()),
-    refreshCart: () => dispatch(fetchCart())
+    refreshCart: () => dispatch(fetchCart()),
   };
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     data: state.checkout.data,
     shippingAddresses: state.checkout.shippingAddresses,
     billingAddresses: state.checkout.billingAddresses,
     selectedBillingAddress: state.checkout.selectedBillingAddress,
-    selectedShippingAddress: state.checkout.selectedShippingAddress
+    selectedShippingAddress: state.checkout.selectedShippingAddress,
   };
 };
 

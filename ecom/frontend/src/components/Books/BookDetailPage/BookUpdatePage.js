@@ -42,13 +42,6 @@ class BookUpdate extends React.Component {
 
     return (
       <div>
-        {this.state.success ? (
-          <div style={{ padding: 50 }}>
-            <h3 style={{ color: "green" }}>SUCCESSFUL UPLOAD</h3>
-            <a href={this.state.url}>Access the file here</a>
-            <br />
-          </div>
-        ) : null}
         <section className="product-shop spad page-details">
           <div className="container">
             <div className="row">
@@ -60,7 +53,10 @@ class BookUpdate extends React.Component {
                       src={this.props.book.picture}
                       alt=""
                     />
-                    <FileForm book={this.state.updatedBook} />
+                    <FileForm
+                      book={this.state.updatedBook}
+                      history={this.props.history}
+                    />
                   </div>
 
                   <div className="col-lg-6">

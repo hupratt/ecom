@@ -12,6 +12,7 @@ from core.models import (
     Livre,
     ImageLivre,
 )
+from django.contrib.auth.models import User
 
 
 class StringSerializer(serializers.StringRelatedField):
@@ -23,6 +24,12 @@ class CouponSerializer(serializers.ModelSerializer):
     class Meta:
         model = Coupon
         fields = ("id", "code", "amount")
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ("id", "is_staff")
 
 
 class BookImageSerializer(serializers.ModelSerializer):

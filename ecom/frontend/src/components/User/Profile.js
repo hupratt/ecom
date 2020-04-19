@@ -20,7 +20,7 @@ import {
   Message,
   Segment,
   Select,
-  Table
+  Table,
 } from "semantic-ui-react";
 import {
   countryListURL,
@@ -29,7 +29,7 @@ import {
   addressUpdateURL,
   addressDeleteURL,
   userIDURL,
-  paymentListURL
+  paymentListURL,
 } from "../../constants";
 
 const UPDATE_FORM = "UPDATE_FORM";
@@ -37,7 +37,7 @@ const CREATE_FORM = "CREATE_FORM";
 
 class PaymentHistory extends React.Component {
   state = {
-    payments: []
+    payments: [],
   };
 
   componentDidMount() {
@@ -48,13 +48,13 @@ class PaymentHistory extends React.Component {
     this.setState({ loading: true });
     axios
       .get(paymentListURL)
-      .then(res => {
+      .then((res) => {
         this.setState({
           loading: false,
-          payments: res.data
+          payments: res.data,
         });
       })
-      .catch(err => {
+      .catch((err) => {
         this.setState({ error: err, loading: false });
       });
   };
@@ -71,7 +71,7 @@ class PaymentHistory extends React.Component {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {payments.map(p => {
+          {payments.map((p) => {
             return (
               <Table.Row key={p.id}>
                 <Table.Cell>{p.id}</Table.Cell>
@@ -98,10 +98,10 @@ class AddressForm extends React.Component {
       id: "",
       street_address: "",
       user: 1,
-      zip: ""
+      zip: "",
     },
     saving: false,
-    success: false
+    success: false,
   };
 
   componentDidMount() {
@@ -115,10 +115,10 @@ class AddressForm extends React.Component {
     const { formData } = this.state;
     const updatedFormdata = {
       ...formData,
-      default: !formData.default
+      default: !formData.default,
     };
     this.setState({
-      formData: updatedFormdata
+      formData: updatedFormdata,
     });
   };
 
@@ -134,19 +134,19 @@ class AddressForm extends React.Component {
         id: "",
         street_address: "",
         user: 1,
-        zip: ""
-      }
+        zip: "",
+      },
     });
   };
 
-  handleChange = e => {
+  handleChange = (e) => {
     const { formData } = this.state;
     const updatedFormdata = {
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     };
     this.setState({
-      formData: updatedFormdata
+      formData: updatedFormdata,
     });
   };
 
@@ -154,14 +154,14 @@ class AddressForm extends React.Component {
     const { formData } = this.state;
     const updatedFormdata = {
       ...formData,
-      [name]: value
+      [name]: value,
     };
     this.setState({
-      formData: updatedFormdata
+      formData: updatedFormdata,
     });
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     this.setState({ saving: true });
     e.preventDefault();
     const { formType } = this.props;
@@ -180,17 +180,17 @@ class AddressForm extends React.Component {
       .post(addressCreateURL, {
         ...formData,
         user: userID,
-        address_type: activeItem === "billingAddress" ? "B" : "S"
+        address_type: activeItem === "billingAddress" ? "B" : "S",
       })
-      .then(res => {
+      .then((res) => {
         this.setState({
           saving: false,
           success: true,
-          formData: { default: false }
+          formData: { default: false },
         });
         this.props.callback();
       })
-      .catch(err => {
+      .catch((err) => {
         this.setState({ error: err });
       });
   };
@@ -202,17 +202,17 @@ class AddressForm extends React.Component {
       .put(addressUpdateURL(formData.id), {
         ...formData,
         user: userID,
-        address_type: activeItem === "billingAddress" ? "B" : "S"
+        address_type: activeItem === "billingAddress" ? "B" : "S",
       })
-      .then(res => {
+      .then((res) => {
         this.setState({
           saving: false,
           success: true,
-          formData: { default: false }
+          formData: { default: false },
         });
         this.props.callback();
       })
-      .catch(err => {
+      .catch((err) => {
         this.setState({ error: err });
       });
   };
@@ -279,11 +279,11 @@ class AddressForm extends React.Component {
 
 class Profile extends React.Component {
   state = {
-    activeItem: "billingAddress",
+    activeItem: "shippingAddress",
     addresses: [],
     countries: [],
     userID: null,
-    selectedAddress: null
+    selectedAddress: null,
   };
 
   componentDidMount() {
@@ -292,7 +292,7 @@ class Profile extends React.Component {
     this.handleFetchUserID();
   }
 
-  handleItemClick = name => {
+  handleItemClick = (name) => {
     this.setState({ activeItem: name }, () => {
       this.handleFetchAddresses();
     });
@@ -300,47 +300,47 @@ class Profile extends React.Component {
 
   handleGetActiveItem = () => {
     const { activeItem } = this.state;
-    if (activeItem === "billingAddress") {
-      return "Billing Address";
-    } else if (activeItem === "shippingAddress") {
+    if (activeItem === "shippingAddress") {
       return "Shipping Address";
+    } else if (activeItem === "billingAddress") {
+      return "Billing Address";
     }
     return "Payment History";
   };
 
-  handleFormatCountries = countries => {
+  handleFormatCountries = (countries) => {
     const keys = Object.keys(countries);
-    return keys.map(k => {
+    return keys.map((k) => {
       return {
         key: k,
         text: countries[k],
-        value: k
+        value: k,
       };
     });
   };
 
-  handleDeleteAddress = addressID => {
+  handleDeleteAddress = (addressID) => {
     axios
       .delete(addressDeleteURL(addressID))
-      .then(res => {
+      .then((res) => {
         this.handleCallback();
       })
-      .catch(err => {
+      .catch((err) => {
         this.setState({ error: err });
       });
   };
 
-  handleSelectAddress = address => {
+  handleSelectAddress = (address) => {
     this.setState({ selectedAddress: address });
   };
 
   handleFetchUserID = () => {
     axios
       .get(userIDURL)
-      .then(res => {
+      .then((res) => {
         this.setState({ userID: res.data.userID });
       })
-      .catch(err => {
+      .catch((err) => {
         this.setState({ error: err });
       });
   };
@@ -348,10 +348,10 @@ class Profile extends React.Component {
   handleFetchCountries = () => {
     axios
       .get(countryListURL)
-      .then(res => {
+      .then((res) => {
         this.setState({ countries: this.handleFormatCountries(res.data) });
       })
-      .catch(err => {
+      .catch((err) => {
         this.setState({ error: err });
       });
   };
@@ -360,11 +360,13 @@ class Profile extends React.Component {
     this.setState({ loading: true });
     const { activeItem } = this.state;
     axios
-      .get(addressListURL(activeItem === "billingAddress" ? "B" : "S"))
-      .then(res => {
+      .get(addressListURL(activeItem === "shippingAddress" ? "S" : "B"), {
+        headers: { Authorization: `Token ${localStorage.getItem("token")}` },
+      })
+      .then((res) => {
         this.setState({ addresses: res.data, loading: false });
       })
-      .catch(err => {
+      .catch((err) => {
         this.setState({ error: err });
       });
   };
@@ -380,12 +382,12 @@ class Profile extends React.Component {
       addresses,
       countries,
       selectedAddress,
-      userID
+      userID,
     } = this.state;
     return (
       <React.Fragment>
         <Card.Group>
-          {addresses.map(a => {
+          {addresses.map((a) => {
             return (
               <Card key={a.id}>
                 <Card.Content>
@@ -472,14 +474,14 @@ class Profile extends React.Component {
           <Grid.Column width={6}>
             <Menu pointing vertical fluid>
               <Menu.Item
-                name="Shipping Address"
-                active={activeItem === "shippingAddress"}
-                onClick={() => this.handleItemClick("shippingAddress")}
-              />
-              <Menu.Item
                 name="Billing Address"
                 active={activeItem === "billingAddress"}
                 onClick={() => this.handleItemClick("billingAddress")}
+              />
+              <Menu.Item
+                name="Shipping Address"
+                active={activeItem === "shippingAddress"}
+                onClick={() => this.handleItemClick("shippingAddress")}
               />
               <Menu.Item
                 name="Payment history"
@@ -504,15 +506,15 @@ class Profile extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    isAuthenticated: state.auth.token !== null
+    isAuthenticated: state.auth.token !== null,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    logout: () => dispatch(logout())
+    logout: () => dispatch(logout()),
   };
 };
 

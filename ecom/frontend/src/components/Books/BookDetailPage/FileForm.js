@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import axios from "axios";
 import { endpoint, s3_base_url } from "../../../constants";
 
-const FileForm = ({ book }) => {
+const FileForm = ({ book, history }) => {
   const [file, setFile] = useState("");
   const [filename, setFilename] = useState("Choose File");
   const [message, setMessage] = useState("");
@@ -17,9 +17,26 @@ const FileForm = ({ book }) => {
     e.preventDefault();
     const formData = new FormData();
     const formData2 = new FormData();
-    if (file !== undefined) {
+    console.log("file", file);
+    if (file !== "" && file !== undefined) {
       formData2.append("image", file);
       formData2.append("alt", "blank");
+      axios
+        .put(`${endpoint}/bookimages/${book.pictureid}/update/`, formData2, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: "Token " + localStorage.getItem("token"),
+          },
+          onUploadProgress: (progressEvent) => {
+            setUploadPercentage(
+              parseInt(
+                Math.round((progressEvent.loaded * 100) / progressEvent.total)
+              )
+            );
+          },
+        })
+        .then(history.push(`/books/${book.id}/`))
+        .catch((err) => console.log(err));
     }
     for (var key in book) {
       if (
@@ -44,21 +61,7 @@ const FileForm = ({ book }) => {
           );
         },
       })
-      .catch((err) => console.log(err));
-    axios
-      .put(`${endpoint}/bookimages/${book.pictureid}/update/`, formData2, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: "Token " + localStorage.getItem("token"),
-        },
-        onUploadProgress: (progressEvent) => {
-          setUploadPercentage(
-            parseInt(
-              Math.round((progressEvent.loaded * 100) / progressEvent.total)
-            )
-          );
-        },
-      })
+      .then(history.push(`/books/${book.id}/`))
       .catch((err) => console.log(err));
   };
 

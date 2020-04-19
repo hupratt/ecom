@@ -2,9 +2,10 @@ from django_countries import countries
 from django.db.models import Q
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import Http404, HttpResponse
+from django.http import Http404, HttpResponse, JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
+from rest_framework import viewsets
 from rest_framework.generics import (
     ListAPIView,
     RetrieveAPIView,
@@ -12,7 +13,12 @@ from rest_framework.generics import (
     UpdateAPIView,
     DestroyAPIView,
 )
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from django.contrib.auth.models import User
+import os
+from django.contrib.postgres.search import SearchVector
+from django.db.models import Q
+import stripe
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
@@ -25,6 +31,7 @@ from .serializers import (
     PaymentSerializer,
     BookSerializer,
     BookImageSerializer,
+    UserSerializer,
 )
 from core.models import (
     Item,
@@ -40,28 +47,25 @@ from core.models import (
     Livre,
     ImageLivre,
 )
-
-import os, boto3
-from botocore.client import Config
-
-from django.conf import settings
-
-from rest_framework import parsers
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.views import APIView
-from rest_framework.response import Response
 from rest_framework.renderers import JSONRenderer
-
-from django.contrib.postgres.search import SearchVector
-from django.db.models import Q
-import stripe
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 class UserIDView(APIView):
     def get(self, request, *args, **kwargs):
-        return Response({"userID": request.user.id}, status=HTTP_200_OK)
+        return Response(
+            {
+                "userID": request.user.id,
+                "user_staff": request.user.is_staff,
+                "user_name": request.user.username,
+            },
+            status=HTTP_200_OK,
+        )
+
+
+def user_test(request):
+    return JsonResponse(request.user.is_staff, safe=False)
 
 
 class ItemListView(ListAPIView):
@@ -422,7 +426,7 @@ class AddressUpdateView(UpdateAPIView):
 
 
 class BookUpdateView(UpdateAPIView):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAdminUser,)
     serializer_class = BookSerializer
     queryset = Livre.objects.all()
 
@@ -433,7 +437,7 @@ class BookUpdateView(UpdateAPIView):
 
 
 class BookImageUpdateView(UpdateAPIView):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAdminUser,)
     serializer_class = BookImageSerializer
     queryset = ImageLivre.objects.all()
 

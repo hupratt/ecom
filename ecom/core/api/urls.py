@@ -19,9 +19,11 @@ from .views import (
     BookDetailView,
     BookUpdateView,
     BookImageUpdateView,
+    UserIDView,
 )
 
 urlpatterns = [
+    path("user-staff/", UserIDView.as_view(), name="user-staff-check"),
     path("books/", BookListView.as_view(), name="book-list"),
     path("books/<pk>/", BookDetailView.as_view(), name="book-detail"),
     path("books/<pk>/update/", BookUpdateView.as_view(), name="book-update"),
