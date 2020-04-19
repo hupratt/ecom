@@ -96,6 +96,7 @@ USE_L10N = True
 USE_TZ = True
 
 
+SITE_ID = 2
 USE_S3 = os.getenv("USE_S3") == "TRUE"
 
 if USE_S3:

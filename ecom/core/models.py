@@ -76,7 +76,7 @@ class Livre(models.Model):
     langue_nom = models.CharField(max_length=50, default="unknown", null=True)
     genre_nom = models.CharField(max_length=50, default="unknown", null=True)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
-    isbn = models.CharField(max_length=50, default="unknown", null=True)
+    isbn = models.CharField(max_length=50, unique=True, default="unknown")
     date_publication = models.DateTimeField(blank=True, null=True)
     prix = models.FloatField(blank=True, null=True)
     prix_barre = models.FloatField(blank=True, null=True)
@@ -103,10 +103,10 @@ class Livre(models.Model):
             return True
 
     def __str__(self):
-        return self.isbn
+        return f"Book {self.isbn}"
 
     def __unicode__(self):
-        return self.isbn
+        return f"Book {self.isbn}"
 
 
 class Auteur(models.Model):
