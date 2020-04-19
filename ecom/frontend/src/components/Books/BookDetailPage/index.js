@@ -40,7 +40,6 @@ class BookDetailPage extends React.Component {
       errorCart,
       history,
     } = this.props;
-    console.log(this.props);
     return (
       <React.Fragment>
         {/* Breadcrumb Section Begin */}

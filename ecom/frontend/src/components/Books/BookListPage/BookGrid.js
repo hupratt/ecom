@@ -60,7 +60,6 @@ const BookGrid = ({
         <ul id="bk-list" className="bk-list clearfix">
           {paginatedData ? (
             paginatedData.map((item) => {
-              console.log(item);
               const theme = {
                 url: `${item.picture}`,
               };

@@ -17,7 +17,6 @@ const FileForm = ({ book }) => {
     e.preventDefault();
     const formData = new FormData();
     const formData2 = new FormData();
-    console.log(file);
     if (file !== undefined) {
       formData2.append("image", file);
       formData2.append("alt", "blank");
@@ -58,7 +57,6 @@ const FileForm = ({ book }) => {
           );
         },
       })
-      .then(console.log(`${s3_base_url}${file.name}`))
       .catch((err) => console.log(err));
   };
 
