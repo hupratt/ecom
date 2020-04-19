@@ -53,3 +53,7 @@ unset PYTHONIOENCODING
 
 - Any changes to the requirements file?
 - Any changes to the .env file?
+
+## useful git commands
+
+git rm -r --cached .
