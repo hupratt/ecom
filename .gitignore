@@ -21,3 +21,5 @@ share
 /ecom/frontend/static/frontend/main.js
 .~lock*
 creditcard
+static
+media

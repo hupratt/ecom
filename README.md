@@ -48,3 +48,8 @@ pip freeze > requirements.txt
 
 export LANG=en_US.UTF-8
 unset PYTHONIOENCODING
+
+## Deployment checklist
+
+- Any changes to the requirements file?
+- Any changes to the .env file?
