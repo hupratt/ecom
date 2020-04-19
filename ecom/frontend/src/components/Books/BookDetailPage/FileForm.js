@@ -34,6 +34,7 @@ const FileForm = ({ book }) => {
       .put(`${endpoint}/books/${book.id}/update/`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: "Token " + localStorage.getItem("token"),
         },
         onUploadProgress: (progressEvent) => {
           setUploadPercentage(
@@ -48,6 +49,7 @@ const FileForm = ({ book }) => {
       .put(`${endpoint}/bookimages/${book.pictureid}/update/`, formData2, {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: "Token " + localStorage.getItem("token"),
         },
         onUploadProgress: (progressEvent) => {
           setUploadPercentage(

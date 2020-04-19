@@ -422,13 +422,25 @@ class AddressUpdateView(UpdateAPIView):
 
 
 class BookUpdateView(UpdateAPIView):
+    permission_classes = (IsAuthenticated,)
     serializer_class = BookSerializer
     queryset = Livre.objects.all()
 
+    def put(self, request, *args, **kwargs):
+        if self.request.user.is_staff:
+            return self.update(request, *args, **kwargs)
+        return HttpResponse("<h1>You are not authorized to perform this action</h1>")
+
 
 class BookImageUpdateView(UpdateAPIView):
+    permission_classes = (IsAuthenticated,)
     serializer_class = BookImageSerializer
     queryset = ImageLivre.objects.all()
+
+    def put(self, request, *args, **kwargs):
+        if self.request.user.is_staff:
+            return self.update(request, *args, **kwargs)
+        return HttpResponse("<h1>You are not authorized to perform this action</h1>")
 
 
 class AddressDeleteView(DestroyAPIView):
