@@ -65,7 +65,7 @@ class CustomLayout extends React.Component {
       // e.g. visit '?limit=12&offset=0&language=&authors=blabla'
       this.mapUrlToState(q);
     }
-    if (this.props.isAuthenticated == true) {
+    if (this.props.isAuthenticated == true && this.props.shoppingCart) {
       this.props.refreshCart();
     }
   }
@@ -280,6 +280,7 @@ const mapStateToProps = (state) => {
     errorCart: state.cart.error,
     loading: state.books.loading,
     dataLength: state.books.data.length,
+    shoppingCart: state.cart.shoppingCart,
   };
 };
 

@@ -7,14 +7,14 @@ import {
   Table,
   Button,
   Message,
-  Segment
+  Segment,
 } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { Link, Redirect, withRouter } from "react-router-dom";
 import {
   orderSummaryURL,
   orderItemDeleteURL,
-  orderItemUpdateQuantityURL
+  orderItemUpdateQuantityURL,
 } from "../../constants";
 import axios from "axios";
 import { fetchCart } from "../../actions/cart";
@@ -23,7 +23,7 @@ class OrderSummary extends React.Component {
   state = {
     data: null,
     error: null,
-    loading: false
+    loading: false,
   };
 
   componentDidMount() {
@@ -34,14 +34,14 @@ class OrderSummary extends React.Component {
     this.setState({ loading: true });
     axios
       .get(orderSummaryURL)
-      .then(res => {
+      .then((res) => {
         this.setState({ data: res.data, loading: false });
       })
-      .catch(err => {
+      .catch((err) => {
         if (err.response.status === 404) {
           this.setState({
             error: "You currently do not have an order",
-            loading: false
+            loading: false,
           });
         } else {
           this.setState({ error: err, loading: false });
@@ -49,40 +49,40 @@ class OrderSummary extends React.Component {
       });
   };
 
-  handleAddQuantityToCart = id => {
+  handleAddQuantityToCart = (id) => {
     this.setState({ loading: true });
     // const variations = this.handleFormatData(itemVariations);
     axios
       .post(orderItemUpdateQuantityURL, { id: id, type: "add" })
-      .then(res => {
+      .then((res) => {
         this.handleFetchOrder();
         this.setState({ loading: false });
       })
-      .catch(err => {
+      .catch((err) => {
         this.setState({ error: err, loading: false });
       });
   };
 
-  handleRemoveQuantityFromCart = id => {
+  handleRemoveQuantityFromCart = (id) => {
     this.setState({ loading: true });
     axios
       .post(orderItemUpdateQuantityURL, { id: id, type: "remove" })
-      .then(res => {
+      .then((res) => {
         this.handleFetchOrder();
         this.setState({ loading: false });
       })
-      .catch(err => {
+      .catch((err) => {
         this.setState({ error: err, loading: false });
       });
   };
 
-  handleCancelOrder = itemID => {
+  handleCancelOrder = (itemID) => {
     axios
       .delete(orderItemDeleteURL(itemID))
-      .then(res => {
+      .then((res) => {
         this.handleFetchOrder();
       })
-      .catch(err => {
+      .catch((err) => {
         this.setState({ error: err });
       });
   };
@@ -154,7 +154,7 @@ class OrderSummary extends React.Component {
                         style={{
                           float: "right",
                           cursor: "pointer",
-                          color: "red"
+                          color: "red",
                         }}
                         onClick={() => {
                           this.handleCancelOrder(orderItem.id);
@@ -192,18 +192,16 @@ class OrderSummary extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    isAuthenticated: state.auth.token !== null
+    isAuthenticated: state.auth.token !== null,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    refreshCart: () => dispatch(fetchCart())
+    refreshCart: () => dispatch(fetchCart()),
   };
 };
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(OrderSummary)
-);
+export default withRouter(connect(mapStateToProps)(OrderSummary));

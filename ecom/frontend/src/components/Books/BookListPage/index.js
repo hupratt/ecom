@@ -164,7 +164,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     loadMoar: (url_endpoint, bookPerPage, offset) =>
       dispatch(loadmoar(url_endpoint, bookPerPage, offset)),
-    refreshCart: () => dispatch(fetchCart()),
     fetchBooks: (url_endpoint) => dispatch(fetchBooks(url_endpoint)),
   };
 };

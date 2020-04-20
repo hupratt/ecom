@@ -25,9 +25,6 @@ class BookDetailPage extends React.Component {
       this.props.match.params.bookID,
       this.props.dataIsCached
     );
-    if (this.props.isAuthenticated == true) {
-      this.props.refreshCart();
-    }
   }
 
   render() {
@@ -85,7 +82,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchBooks: (url_endpoint) => dispatch(fetchBooks(url_endpoint)),
 
-    refreshCart: () => dispatch(fetchCart()),
     fetchBook: (id, dataIsCached) => dispatch(fetchBook(id, dataIsCached)),
     handleAddToCart: (id, isAuthenticated) =>
       dispatch(handleAddToCart(id, isAuthenticated)),
