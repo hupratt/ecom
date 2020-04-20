@@ -37,7 +37,7 @@ export const withError = (WrappedComponent) => {
           </React.Fragment>
         );
       }
-      if (errorCart !== null && errorCart.request.status !== 404) {
+      if (errorCart !== null) {
         return (
           <React.Fragment>
             <Message

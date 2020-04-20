@@ -4,59 +4,67 @@ import axios from "axios";
 
 export const cartStart = () => {
   return {
-    type: actionTypes.CART_START
+    type: actionTypes.CART_START,
   };
 };
 
-export const cartSuccess = data => {
+export const cartSuccess = (data) => {
   return {
     type: actionTypes.CART_SUCCESS,
-    data
+    data,
   };
 };
 
-export const cartFail = error => {
+export const cartFail = (error) => {
   return {
     type: actionTypes.CART_FAIL,
-    error: error
+    error: error,
   };
 };
 
 export const fetchCart = () => {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(cartStart());
     axios
       .get(orderSummaryURL)
-      .then(res => {
+      .then((res) => {
         dispatch(cartSuccess(res.data));
       })
-      .catch(err => {
-        dispatch(cartFail(err));
+      .catch((err) => {
+        dispatch(
+          cartFail({
+            request: { status: 404, statusText: err },
+          })
+        );
       });
   };
 };
 
 export const handleAddToCart = (id, isAuthenticated) => {
-  return dispatch => {
+  return (dispatch) => {
     if (isAuthenticated) {
       axios
         .post(addToCartURL, { id })
-        .then(res => {
+        .then((res) => {
           dispatch(cartStart());
           axios
             .get(orderSummaryURL)
-            .then(res => {
+            .then((res) => {
               dispatch(cartSuccess(res.data));
             })
-            .catch(err => {
+            .catch((err) => {
               dispatch(cartFail(err));
             });
         })
-        .catch(err => {
+        .catch((err) => {
           dispatch(cartFail(err));
         });
     } else {
-      dispatch(cartFail("Login in order to proceed"));
+      dispatch(
+        cartFail({
+          request: { status: 400, statusText: "Login in order to proceed" },
+        })
+      );
     }
   };
 };
