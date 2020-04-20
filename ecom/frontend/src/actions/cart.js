@@ -1,5 +1,5 @@
 import * as actionTypes from "../actions/actionTypes";
-import { orderSummaryURL, addToCartURL } from "../constants";
+import { orderSummaryURL, addToCartURL, base } from "../constants";
 import axios from "axios";
 
 export const cartStart = () => {
@@ -32,6 +32,19 @@ export const fetchCart = () => {
     });
     return request.then(
       (res) => dispatch(cartSuccess(res.data)),
+      (err) => dispatch(cartFail(err))
+    );
+  };
+};
+
+export const resetCart = () => {
+  return (dispatch) => {
+    const request = axios({
+      method: "GET",
+      url: base,
+    });
+    return request.then(
+      (_) => dispatch(cartSuccess(null)),
       (err) => dispatch(cartFail(err))
     );
   };

@@ -7,7 +7,7 @@ const shippingSuccess = (shippingAddresses, selectedShippingAddress) => {
     type: actionTypes.FETCH_SHIPPING_ADD,
     shippingAddresses: shippingAddresses,
     selectedShippingAddress: selectedShippingAddress,
-    loading: false
+    loading: false,
   };
 };
 
@@ -16,7 +16,7 @@ const billingSuccess = (billingAddresses, selectedBillingAddress) => {
     type: actionTypes.FETCH_BILLING_ADD,
     billingAddresses: billingAddresses,
     selectedBillingAddress: selectedBillingAddress,
-    loading: false
+    loading: false,
   };
 };
 
@@ -24,25 +24,25 @@ const paymentSuccess = () => {
   return {
     type: actionTypes.PAYMENT_SUCCESS,
     success: true,
-    loading: false
+    loading: false,
   };
 };
 
 const start = () => {
   return {
-    type: actionTypes.START
+    type: actionTypes.START,
   };
 };
 
-const error = err => {
+const error = (err) => {
   return {
     type: actionTypes.ERROR,
-    error: err
+    error: err,
   };
 };
 
-const handleGetDefaultAddress = addresses => {
-  const filteredAddresses = addresses.filter(el => el.default === true);
+const handleGetDefaultAddress = (addresses) => {
+  const filteredAddresses = addresses.filter((el) => el.default === true);
   if (filteredAddresses.length > 0) {
     return filteredAddresses[0].id;
   }
@@ -50,62 +50,62 @@ const handleGetDefaultAddress = addresses => {
 };
 
 export const handleFetchBillingAddresses = () => {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(start());
     axios
       .get(addressListURL("B"))
-      .then(res => {
-        const billingAddresses = res.data.map(a => {
+      .then((res) => {
+        const billingAddresses = res.data.map((a) => {
           return {
             key: a.id,
             text: `${a.street_address}, ${a.apartment_address}, ${a.country}`,
-            value: a.id
+            value: a.id,
           };
         });
         const selectedBillingAddress = handleGetDefaultAddress(res.data);
         dispatch(billingSuccess(billingAddresses, selectedBillingAddress));
       })
-      .catch(err => {
+      .catch((err) => {
         dispatch(error(err));
       });
   };
 };
 
 export const handleFetchShippingAddresses = () => {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(start());
     axios
       .get(addressListURL("S"))
-      .then(res => {
-        const shippingAddresses = res.data.map(a => {
+      .then((res) => {
+        const shippingAddresses = res.data.map((a) => {
           return {
             key: a.id,
             text: `${a.street_address}, ${a.apartment_address}, ${a.country}`,
-            value: a.id
+            value: a.id,
           };
         });
         const selectedShippingAddress = handleGetDefaultAddress(res.data);
         dispatch(shippingSuccess(shippingAddresses, selectedShippingAddress));
       })
-      .catch(err => {
+      .catch((err) => {
         dispatch(error(err));
       });
   };
 };
 
-export const handleFetchOrder = history => {
-  return dispatch => {
+export const handleFetchOrder = (history) => {
+  return (dispatch) => {
     dispatch(start());
     axios
       .get(orderSummaryURL)
-      .then(res => {
+      .then((res) => {
         dispatch({
           type: actionTypes.FETCH_ORDER,
           data: res.data,
-          loading: false
+          loading: false,
         });
       })
-      .catch(err => {
+      .catch((err) => {
         if (err.response.status === 404) {
           history.push("/products");
         } else {
@@ -116,7 +116,7 @@ export const handleFetchOrder = history => {
 };
 
 export const handleSelectChange = (name, value) => {
-  return dispatch => {
+  return (dispatch) => {
     dispatch({ type: actionTypes.SELECT_CHANGE, name: name, value: value });
   };
 };
@@ -127,11 +127,11 @@ export const submit = (
   selectedBillingAddress,
   selectedShippingAddress
 ) => {
-  return dispatch => {
+  return (dispatch) => {
     e.preventDefault();
     dispatch(start());
     if (stripe) {
-      stripe.createToken().then(result => {
+      stripe.createToken().then((result) => {
         if (result.error) {
           dispatch(error(result.error.message));
         } else {
@@ -139,12 +139,12 @@ export const submit = (
             .post(checkoutURL, {
               stripeToken: result.token.id,
               selectedBillingAddress: selectedBillingAddress,
-              selectedShippingAddress: selectedShippingAddress
+              selectedShippingAddress: selectedShippingAddress,
             })
-            .then(res => {
+            .then((res) => {
               dispatch(paymentSuccess());
             })
-            .catch(err => {
+            .catch((err) => {
               dispatch(error(err));
             });
         }

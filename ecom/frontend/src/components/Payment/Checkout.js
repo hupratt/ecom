@@ -28,7 +28,7 @@ import {
   handleSelectChange,
 } from "../../actions/checkout";
 import axios from "axios";
-import { fetchCart } from "../../actions/cart";
+import { resetCart } from "../../actions/cart";
 
 const OrderPreview = ({ data }) => {
   return (
@@ -108,13 +108,9 @@ class CheckoutForm extends Component {
               selectedShippingAddress,
             })
             .then((res) => {
-              this.setState(
-                { loading: false, success: true },
-                this.props.refreshCart()
-                // fix me, refresh not working as we are not dispatching the purge
-                // we are handling the state locally only
-              );
+              this.setState({ loading: false, success: true });
             })
+            .then(this.props.resetCart())
             .catch((err) => {
               this.setState({ loading: false, error: err });
             });
@@ -230,7 +226,7 @@ const mapDispatchToProps = (dispatch) => {
     fetchOrder: (history) => dispatch(handleFetchOrder(history)),
     fetchBillingAddresses: () => dispatch(handleFetchBillingAddresses()),
     fetchShippingAddresses: () => dispatch(handleFetchShippingAddresses()),
-    refreshCart: () => dispatch(fetchCart()),
+    resetCart: () => dispatch(resetCart()),
   };
 };
 
