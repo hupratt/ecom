@@ -9,6 +9,7 @@ import { Link, withRouter } from "react-router-dom";
 import { fetchCart } from "../../../actions/cart";
 import { Trans } from "react-i18next";
 import { fetchBooks } from "../../../actions/books";
+import queryString from "query-string";
 
 const propTypes = {
   data: PropTypes.array.isRequired,
@@ -20,10 +21,10 @@ class BookList extends React.Component {
   componentDidMount() {
     window.scrollTo(0, 0);
     document.addEventListener("scroll", this.trackScrolling);
-    if (this.props.dataLength == 0) {
+    const q = queryString.parse(this.props.location.search);
+    if (Object.keys(q).length == 0 && this.props.dataLength == 0) {
       this.props.fetchBooks(bookListURL());
-    }
-    if (
+    } else if (
       (this.props.language.length > 0) |
       (this.props.authors.size > 0) |
       (this.props.category.length > 0) |

@@ -40,18 +40,16 @@ export const fetchCart = () => {
 export const handleAddToCart = (id, isAuthenticated) => {
   return (dispatch) => {
     if (isAuthenticated) {
-      axios
-        .post(addToCartURL, { id })
+      dispatch(cartStart());
+      const request = axios({
+        method: "POST",
+        data: { id },
+        url: addToCartURL,
+        headers: { Authorization: "Token " + localStorage.getItem("token") },
+      });
+      return request
         .then((res) => {
-          dispatch(cartStart());
-          axios
-            .get(orderSummaryURL)
-            .then((res) => {
-              dispatch(cartSuccess(res.data));
-            })
-            .catch((err) => {
-              dispatch(cartFail(err));
-            });
+          dispatch(cartSuccess(res.data));
         })
         .catch((err) => {
           dispatch(cartFail(err));
