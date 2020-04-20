@@ -25,18 +25,15 @@ export const cartFail = (error) => {
 export const fetchCart = () => {
   return (dispatch) => {
     dispatch(cartStart());
-    axios
-      .get(orderSummaryURL)
-      .then((res) => {
-        dispatch(cartSuccess(res.data));
-      })
-      .catch((err) => {
-        dispatch(
-          cartFail({
-            request: { status: 404, statusText: err },
-          })
-        );
-      });
+    const request = axios({
+      method: "GET",
+      url: orderSummaryURL,
+      headers: { Authorization: "Token " + localStorage.getItem("token") },
+    });
+    return request.then(
+      (res) => dispatch(cartSuccess(res.data)),
+      (err) => dispatch(cartFail(err))
+    );
   };
 };
 
@@ -60,11 +57,7 @@ export const handleAddToCart = (id, isAuthenticated) => {
           dispatch(cartFail(err));
         });
     } else {
-      dispatch(
-        cartFail({
-          request: { status: 400, statusText: "Login in order to proceed" },
-        })
-      );
+      dispatch(cartFail("Login in order to proceed"));
     }
   };
 };

@@ -67,7 +67,7 @@ const FileForm = ({ book, history }) => {
   return (
     <Fragment>
       {message ? <Message msg={message} /> : null}
-      <form onSubmit={onSubmit} enctype="multipart/form-data">
+      <form onSubmit={onSubmit} encType="multipart/form-data">
         <div className="custom-file mb-4">
           <input
             type="file"
