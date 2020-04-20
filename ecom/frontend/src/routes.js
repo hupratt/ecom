@@ -24,6 +24,7 @@ const BaseRouter = (props) => {
         path="/books/:bookID/edit"
         render={() => <BookUpdate {...props} />}
       />
+      <Route exact path="/books/add" render={() => <BookUpdate {...props} />} />
       <Route exact path="/login" render={() => <Login {...props} />} />
       <Route exact path="/signup" render={() => <Signup {...props} />} />
       <Route
