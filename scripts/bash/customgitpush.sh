@@ -38,4 +38,3 @@ aws ec2 start-instances --instance-ids i-0dd6cb48c6232ede8
 sleep 30
 
 echo "Build: done visit https://shop.lapetiteportugaise.eu/"
-
