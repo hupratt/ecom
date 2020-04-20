@@ -198,10 +198,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    refreshCart: () => dispatch(fetchCart()),
-  };
-};
-
 export default withRouter(connect(mapStateToProps)(OrderSummary));
