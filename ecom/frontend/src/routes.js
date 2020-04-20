@@ -9,7 +9,7 @@ import Checkout from "./components/Payment/Checkout";
 import Profile from "./components/User/Profile";
 import BookDetail from "./components/Books/BookDetailPage";
 import BookListPage from "./components/Books/BookListPage";
-import BookUpdate from "./components/Books/BookDetailPage/BookUpdatePage";
+import BookUpdate from "./components/Books/BookUpdatePage/";
 
 const BaseRouter = (props) => {
   return (

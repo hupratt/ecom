@@ -17,7 +17,6 @@ const FileForm = ({ book, history }) => {
     e.preventDefault();
     const formData = new FormData();
     const formData2 = new FormData();
-    console.log("file", file);
     if (file !== "" && file !== undefined) {
       formData2.append("image", file);
       formData2.append("alt", "blank");
