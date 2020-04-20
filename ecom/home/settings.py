@@ -66,28 +66,16 @@ TEMPLATES = [
 # for the debug toolbar middleware
 INTERNAL_IPS = ["127.0.0.1", "localhost"]
 
-if os.environ.get("DJANGO_DEVELOPMENT") is not None:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql_psycopg2",
-            "NAME": "ecom",
-            "USER": os.environ.get("dbuser"),
-            "PASSWORD": os.environ.get("dbpassword"),
-            "HOST": os.environ.get("hostipdev"),
-            "PORT": os.environ.get("pnumber"),
-        }
+DATABASES = {
+    "default": {
+        "ENGINE": os.environ.get("engine"),
+        "NAME": os.environ.get("dbname"),
+        "USER": os.environ.get("dbuser"),
+        "PASSWORD": os.environ.get("dbpassword"),
+        "HOST": os.environ.get("hostip"),
+        "PORT": os.environ.get("pnumber"),
     }
-else:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql_psycopg2",
-            "NAME": "ecom",
-            "USER": os.environ.get("dbuser"),
-            "PASSWORD": os.environ.get("dbpassword"),
-            "HOST": os.environ.get("hostip"),
-            "PORT": os.environ.get("pnumber"),
-        }
-    }
+}
 
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
@@ -166,7 +154,6 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
-AWS_BUCKET_NAME = os.environ.get("AWS_BUCKET_NAME")
 
 if os.environ.get("DJANGO_DEVELOPMENT") is None:
     # Sentry
