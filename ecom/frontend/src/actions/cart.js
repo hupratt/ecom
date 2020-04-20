@@ -40,22 +40,17 @@ export const fetchCart = () => {
 export const handleAddToCart = (id, isAuthenticated) => {
   return (dispatch) => {
     if (isAuthenticated) {
-      axios
-        .post(addToCartURL, { id })
-        .then((res) => {
-          dispatch(cartStart());
-          axios
-            .get(orderSummaryURL)
-            .then((res) => {
-              dispatch(cartSuccess(res.data));
-            })
-            .catch((err) => {
-              dispatch(cartFail(err));
-            });
-        })
-        .catch((err) => {
-          dispatch(cartFail(err));
-        });
+      dispatch(cartStart());
+      const request = axios({
+        method: "POST",
+        url: addToCartURL,
+        data: { id },
+        headers: { Authorization: "Token " + localStorage.getItem("token") },
+      });
+      return request.then(
+        (_) => dispatch(fetchCart()),
+        (err) => dispatch(cartFail(err))
+      );
     } else {
       dispatch(cartFail("Login in order to proceed"));
     }
