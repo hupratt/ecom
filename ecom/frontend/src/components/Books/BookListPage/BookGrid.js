@@ -95,11 +95,6 @@ const BookGrid = ({
                     </div>
 
                     <div className="bk-info">
-                      {/* <FlipButton isbn={item.isbn} />
-                      <ViewInsideButton isbn={item.isbn} />
-                      <button onClick={() => handleClickOnBook(item.id)}>
-                        {t("Buy")}
-                      </button> */}
                       <h3>
                         <span>{item.auteur_nom}</span>
                         <span>{item.titre}</span>
