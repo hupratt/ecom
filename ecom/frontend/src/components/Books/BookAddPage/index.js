@@ -5,7 +5,7 @@ import { fetchBook } from "../../../actions/book";
 import FileForm from "./FileForm";
 import { s3_base_url } from "../../../constants";
 
-class BookAdd extends React.Component {
+class BookUpdate extends React.Component {
   state = { updatedBook: { picture: null }, success: false, url: "" };
 
   componentDidMount() {
@@ -186,5 +186,5 @@ const mapStateToProps = (state) => {
 };
 
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(BookAdd)
+  connect(mapStateToProps, mapDispatchToProps)(BookUpdate)
 );
