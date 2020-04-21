@@ -78,11 +78,11 @@ DATABASES = {
 }
 
 LANGUAGE_CODE = "en-us"
-TIME_ZONE = "UTC"
+TIME_ZONE = "Europe/Luxembourg"
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
-
+print(os.environ.get("hostip"))
 
 SITE_ID = 2
 USE_S3 = os.getenv("USE_S3") == "TRUE"

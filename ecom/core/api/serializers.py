@@ -45,7 +45,6 @@ class BookSerializer(serializers.ModelSerializer):
             "id",
             "titre",
             "isbn",
-            "date_publication",
             "prix",
             "note",
             "auteur_nom",

@@ -21,7 +21,6 @@ def make_refund_accepted(modeladmin, request, queryset):
     queryset.update(refund_requested=False, refund_granted=True)
 
 
-
 class OrderAdmin(admin.ModelAdmin):
     list_display = [
         "user",
@@ -119,6 +118,7 @@ class ImageLivreInLineAdmin(admin.ModelAdmin):
         "get_image",
         "updated",
         "get_isbn",
+        "id",
     ]
     search_fields = ["livre__isbn", "livre__auteur_nom", "livre__titre"]
 

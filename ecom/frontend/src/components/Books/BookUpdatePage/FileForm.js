@@ -19,7 +19,10 @@ const FileForm = ({ book, history }) => {
     const formData2 = new FormData();
     if (file !== "" && file !== undefined) {
       formData2.append("image", file);
-      formData2.append("alt", "blank");
+      formData2.append(
+        "alt",
+        `Book cover of ${book.titre} from ${book.auteur_nom}`
+      );
       axios
         .put(`${endpoint}/bookimages/${book.pictureid}/update/`, formData2, {
           headers: {

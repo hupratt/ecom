@@ -413,6 +413,12 @@ class AddressListView(ListAPIView):
         return qs.filter(user=self.request.user, address_type=address_type)
 
 
+class BookCreateView(CreateAPIView):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = BookSerializer
+    queryset = Livre.objects.all()
+
+
 class AddressCreateView(CreateAPIView):
     permission_classes = (IsAuthenticated,)
     serializer_class = AddressSerializer

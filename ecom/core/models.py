@@ -6,6 +6,7 @@ from django.shortcuts import reverse
 from django.shortcuts import get_object_or_404
 from django_countries.fields import CountryField
 from datetime import datetime
+from django.db.models.signals import post_save
 
 CATEGORY_CHOICES = (("S", "Shirt"), ("SW", "Sport wear"), ("OW", "Outwear"))
 
@@ -178,6 +179,19 @@ class ImageLivre(models.Model):
     def get_image(self):
         if self.image:
             return f"{self.image.url[8:]}"
+
+
+def create_image(sender, **kwargs):
+    if kwargs["created"]:
+        book = kwargs["instance"]
+        image_instance = ImageLivre.objects.create(
+            livre=book, alt=f"Book import image for isbn: {book.isbn}"
+        )
+        print(dir(image_instance))
+        print(f"{book.id} just created {image_instance.id}")
+
+
+post_save.connect(create_image, sender=Livre)
 
 
 class Item(models.Model):
