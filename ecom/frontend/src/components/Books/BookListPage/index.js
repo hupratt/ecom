@@ -132,7 +132,9 @@ class BookList extends React.Component {
                     <Trans i18nKey="Detail" />
                   </span>
 
-                  <button onClick="/login">Log in</button>
+                  <button onClick={() => this.props.history.push(`/login`)}>
+                    Log in
+                  </button>
                 </div>
               </div>
             </div>

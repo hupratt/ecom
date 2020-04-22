@@ -39,6 +39,19 @@ class BookImageSerializer(serializers.ModelSerializer):
 
 
 class BookSerializer(serializers.ModelSerializer):
+    titre = serializers.CharField(required=False)
+    isbn = serializers.CharField(required=True)
+    prix = serializers.IntegerField(required=False)
+    note = serializers.IntegerField(required=False)
+    auteur_nom = serializers.CharField(required=False)
+    langue_nom = serializers.CharField(required=False)
+    genre_nom = serializers.CharField(required=False)
+    get_quantity = serializers.IntegerField(required=False)
+    prix_barre = serializers.IntegerField(required=False)
+    description = serializers.CharField(required=False)
+    picture = serializers.CharField(required=False)
+    pictureid = serializers.IntegerField(required=False)
+
     class Meta:
         model = Livre
         fields = (
