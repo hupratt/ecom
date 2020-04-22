@@ -111,7 +111,7 @@ class BookDetail extends React.Component {
                           ).forEach((el) => (
                             <a>{el}</a>
                           ))}
-                          <div className="addcart">
+                          {/* <div className="addcart">
                             <a
                               href="#"
                               className="primary-btn pd-cart"
@@ -121,7 +121,7 @@ class BookDetail extends React.Component {
                             >
                               {this.props.t("Add To Cart")}
                             </a>
-                          </div>
+                          </div> */}
                           <EmailForm
                             isbn={book.isbn}
                             placeholder={this.props.t("Would buy")}

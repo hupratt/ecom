@@ -3,6 +3,7 @@
   "Portuguese": "Portuguese",
   "French": "French",
   "English": "English",
+  "German": "German",
   "All": "All",
   "Copyright": "Copyright © All rights reserved | Made with",
   "Would buy": "Would you like to buy this book?",
@@ -45,5 +46,6 @@
   "Literatura": "Literature",
   "Arte": "Art",
   "Gastronomia": "Gastronomy",
-  "German": "German"
+  "Add To Cart": "Add To Cart",
+  "Edit": "Edit"
 }
