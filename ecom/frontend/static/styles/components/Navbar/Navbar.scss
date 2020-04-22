@@ -148,3 +148,27 @@
   margin-top: 3px;
   color: #b2b2b2 !important;
 }
+
+.flag-select__option__label {
+  top: 7px;
+  color: #ffffff;
+}
+
+.flag-select__btn[aria-expanded="true"]:after {
+  border-top: 5px solid #4d4d4d;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 0;
+}
+
+.flag-select__option.has-label:hover {
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.flag-select__options {
+  overflow: unset;
+  min-width: 180px;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.57);
+  border-color: rgba(255, 255, 255, 0);
+}

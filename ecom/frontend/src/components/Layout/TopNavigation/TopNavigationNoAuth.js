@@ -2,12 +2,17 @@ import React from "react";
 import SearchNav from "./SearchNav";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import ReactFlagsSelect from "react-flags-select";
+import "react-flags-select/css/react-flags-select.css";
 
 const TopNavigationNoAuth = ({ onSearchChange }) => {
-  // const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
 
-  // const changeLanguage = (lng) => i18n.changeLanguage(lng);
-
+  const changeLanguage = (lng) => i18n.changeLanguage(lng);
+  const pt = t("Portuguese");
+  const fr = t("French");
+  const de = t("German");
+  const en = t("English");
   return (
     <React.Fragment>
       <SearchNav onSearchChange={onSearchChange} />
@@ -21,9 +26,17 @@ const TopNavigationNoAuth = ({ onSearchChange }) => {
       </div> */}
       <div className="col-lg-3 text-right col-md-3">
         <ul className="nav-right">
-          <Link to="/login" className="hoverbtn">
-            Log in
-          </Link>
+          <ReactFlagsSelect
+            countries={["PT", "EN", "FR", "DE"]}
+            customLabels={{
+              PT: pt,
+              GB: en,
+              FR: fr,
+              DE: de,
+            }}
+            placeholder="Select Language"
+            showSelectedLabel={false}
+          />
         </ul>
       </div>
     </React.Fragment>
