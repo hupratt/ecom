@@ -4917,6 +4917,12 @@ i.icon.lock::before {
   margin-top: 10vh;
 }
 
+.breadcrumb-text button {
+  float: right;
+  background: #f0f8ff00;
+  border-color: #f0f8ff00;
+}
+
 /* Funky hoverbtn Button Start */
 .hoverbtn {
   position: absolute;
@@ -5010,7 +5016,7 @@ i.icon.lock::before {
 
 .flag-select__options {
   overflow: unset;
-  min-width: 180px;
+  min-width: 200px;
   right: 0;
   background-color: rgba(0, 0, 0, 0.57);
   border-color: rgba(255, 255, 255, 0);

@@ -131,6 +131,8 @@ class BookList extends React.Component {
                   <span>
                     <Trans i18nKey="Detail" />
                   </span>
+
+                  <button onClick="/login">Log in</button>
                 </div>
               </div>
             </div>

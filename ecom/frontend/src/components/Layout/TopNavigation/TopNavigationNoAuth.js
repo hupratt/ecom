@@ -1,7 +1,6 @@
 import React from "react";
 import SearchNav from "./SearchNav";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import ReactFlagsSelect from "react-flags-select";
 import "react-flags-select/css/react-flags-select.css";
 import { withTranslation } from "react-i18next";
