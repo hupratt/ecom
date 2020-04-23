@@ -61,6 +61,12 @@ class LivreItem(models.Model):
     livre = models.ForeignKey(
         "Livre", on_delete=models.CASCADE, related_name="book_quantity", default=0
     )
+    created = models.DateTimeField(
+        auto_now_add=True, help_text="(automatic) created date"
+    )
+
+    class Meta:
+        ordering = ("-created",)
 
     def get_isbn(self):
         return self.livre.isbn
@@ -86,6 +92,12 @@ class Livre(models.Model):
     nb_pages = models.IntegerField(blank=True, null=True)
     date_maj = models.DateTimeField(auto_now_add=True)
     description = models.TextField(default="", null=True, blank=True)
+    created = models.DateTimeField(
+        auto_now_add=True, help_text="(automatic) created date"
+    )
+
+    class Meta:
+        ordering = ("-created",)
 
     def get_absolute_url(self):
         return reverse("core:product", kwargs={"id": self.id})

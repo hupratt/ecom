@@ -4,7 +4,7 @@ import { loadmoar } from "../../../actions/books";
 import BooksPlusPaginationAndFilters from "./BooksPlusPaginationAndFilters";
 import { withLoading, withError } from "../../../hoc/hoc";
 import PropTypes from "prop-types";
-import { bookListURL } from "../../../constants";
+import { bookListURL, endpoint } from "../../../constants";
 import { Link, withRouter } from "react-router-dom";
 import { fetchCart } from "../../../actions/cart";
 import { Trans } from "react-i18next";
@@ -115,8 +115,9 @@ class BookList extends React.Component {
       error,
       errorCart,
       loading,
+      user_staff,
     } = this.props;
-
+    console.log("user_staff", user_staff);
     return (
       <React.Fragment>
         {/* Breadcrumb Section Begin */}
@@ -131,7 +132,13 @@ class BookList extends React.Component {
                   <span>
                     <Trans i18nKey="Detail" />
                   </span>
-
+                  {user_staff && (
+                    <button
+                      onClick={() => this.props.history.push(`/book/add`)}
+                    >
+                      + Add a book
+                    </button>
+                  )}
                   <button onClick={() => this.props.history.push(`/login`)}>
                     Log in
                   </button>
@@ -186,6 +193,7 @@ const mapStateToProps = (state) => {
     error: state.book.error,
     errorCart: state.cart.error,
     dataLength: state.books.data.length,
+    isAuthenticated: state.auth.token !== null,
   };
 };
 

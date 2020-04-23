@@ -148,7 +148,6 @@ class BookListView(ListAPIView):
 
         if authors != "" and len(search_for_authors) > 0:
             queryset = queryset.filter(auteur_nom__in=search_for_authors)
-
         return queryset
 
 
