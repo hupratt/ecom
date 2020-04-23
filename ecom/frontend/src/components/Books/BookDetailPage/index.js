@@ -9,6 +9,8 @@ import { withError, withLoading } from "../../../hoc/hoc";
 import BookDetail from "./BookDetail";
 import { fetchBooks } from "../../../actions/books";
 import { Trans } from "react-i18next";
+import { endpoint } from "../../../constants";
+import axios from "axios";
 
 const propTypes = {
   book: PropTypes.object.isRequired,
@@ -19,12 +21,23 @@ const propTypes = {
 };
 
 class BookDetailPage extends React.Component {
+  state = { user_staff: null, user_staff: null };
+
   componentDidMount() {
     window.scrollTo(0, 0);
     this.props.fetchBook(
       this.props.match.params.bookID,
       this.props.dataIsCached
     );
+    if (this.props.isAuthenticated == true) {
+      axios
+        .get(`${endpoint}/user-staff/`)
+        .then((res) => {
+          const { user_name, user_staff } = res.data;
+          this.setState({ user_name, user_staff });
+        })
+        .catch((err) => console.log(err));
+    }
   }
 
   render() {
@@ -36,6 +49,8 @@ class BookDetailPage extends React.Component {
       errorCart,
       history,
     } = this.props;
+    const { user_name, user_staff } = this.state;
+
     return (
       <React.Fragment>
         {/* Breadcrumb Section Begin */}
@@ -54,6 +69,27 @@ class BookDetailPage extends React.Component {
                   >
                     <Trans i18nKey="Detail" />
                   </span>
+                  {user_staff && user_name && (
+                    <React.Fragment>
+                      <p>
+                        Olá {user_name},
+                        <button
+                          onClick={() =>
+                            this.props.history.push(`/books/${book.id}/edit`)
+                          }
+                        >
+                          Edit this book
+                        </button>
+                      </p>
+                    </React.Fragment>
+                  )}
+                  {isAuthenticated == false ? (
+                    <button onClick={() => this.props.history.push(`/login`)}>
+                      Log in
+                    </button>
+                  ) : (
+                    <React.Fragment />
+                  )}
                 </div>
               </div>
             </div>

@@ -23,8 +23,6 @@ class CustomLayout extends React.Component {
     category: "",
     sliderValues: [0, 100],
     search: "",
-    user_name: null,
-    user_staff: null,
   };
   constructor(props) {
     super(props);
@@ -69,16 +67,6 @@ class CustomLayout extends React.Component {
     }
     if (this.props.isAuthenticated == true && this.props.shoppingCart) {
       this.props.refreshCart();
-    }
-    if (this.props.isAuthenticated == true) {
-      axios
-        .get(`${endpoint}/user-staff/`)
-        .then((res) => {
-          const { user_name, user_staff } = res.data;
-          this.setState({ user_name, user_staff });
-          console.log("setstate", user_staff);
-        })
-        .catch((err) => console.log(err));
     }
   }
 
@@ -219,15 +207,7 @@ class CustomLayout extends React.Component {
 
   render() {
     const { authenticated, cart, error, errorCart, loading } = this.props;
-    const {
-      language,
-      sliderValues,
-      authors,
-      category,
-      user_name,
-      user_staff,
-    } = this.state;
-    console.log("user_staff cus layout", user_staff);
+    const { language, sliderValues, authors, category } = this.state;
     return (
       <React.Fragment>
         {/* Header Section Begin */}
@@ -273,7 +253,6 @@ class CustomLayout extends React.Component {
           category={category}
           error={error}
           errorCart={errorCart}
-          user_staff={user_staff}
         />
         <BottomNavigation />
 

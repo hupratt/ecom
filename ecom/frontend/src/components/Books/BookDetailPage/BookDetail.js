@@ -126,17 +126,7 @@ class BookDetail extends React.Component {
                             isbn={book.isbn}
                             placeholder={this.props.t("Would buy")}
                           />
-                          {user_name && user_staff && (
-                            <React.Fragment>
-                              <h1>Olá {user_name},</h1>
-                              <button
-                                className="primary-btn red"
-                                onClick={() => this.visitEditPage(book.id)}
-                              >
-                                {this.props.t("Edit")}
-                              </button>
-                            </React.Fragment>
-                          )}
+
                           <ul className="pd-tags">
                             <li>
                               <span>{this.props.t("CATEGORY")}</span>:{" "}
@@ -146,6 +136,12 @@ class BookDetail extends React.Component {
                               <span>{this.props.t("LANGUAGES")}</span>:{" "}
                               {book.langue_nom}
                             </li>
+                            {user_name && user_staff && (
+                              <li>
+                                <span>{this.props.t("QUANTITY")}</span>:{" "}
+                                {book.get_quantity}
+                              </li>
+                            )}
                           </ul>
                           <div className="pd-desc">
                             <p>{book.description}</p>

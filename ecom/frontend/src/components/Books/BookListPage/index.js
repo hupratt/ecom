@@ -10,6 +10,7 @@ import { fetchCart } from "../../../actions/cart";
 import { Trans } from "react-i18next";
 import { fetchBooks } from "../../../actions/books";
 import queryString from "query-string";
+import axios from "axios";
 
 const propTypes = {
   data: PropTypes.array.isRequired,
@@ -18,6 +19,7 @@ const propTypes = {
   bookPerPage: PropTypes.number.isRequired,
 };
 class BookList extends React.Component {
+  state = { user_staff: null, user_staff: null };
   componentDidMount() {
     window.scrollTo(0, 0);
     document.addEventListener("scroll", this.trackScrolling);
@@ -33,6 +35,15 @@ class BookList extends React.Component {
       (this.props.searchTerm.length > 0)
     ) {
       this.mapStateToUrl();
+    }
+    if (this.props.isAuthenticated == true) {
+      axios
+        .get(`${endpoint}/user-staff/`)
+        .then((res) => {
+          const { user_name, user_staff } = res.data;
+          this.setState({ user_name, user_staff });
+        })
+        .catch((err) => console.log(err));
     }
   }
   componentWillUnmount = () => {
@@ -114,10 +125,10 @@ class BookList extends React.Component {
       onSliderChange,
       error,
       errorCart,
-      loading,
-      user_staff,
+      isAuthenticated,
     } = this.props;
-    console.log("user_staff", user_staff);
+    const { user_name, user_staff } = this.state;
+
     return (
       <React.Fragment>
         {/* Breadcrumb Section Begin */}
@@ -132,16 +143,25 @@ class BookList extends React.Component {
                   <span>
                     <Trans i18nKey="Detail" />
                   </span>
-                  {user_staff && (
-                    <button
-                      onClick={() => this.props.history.push(`/book/add`)}
-                    >
-                      + Add a book
-                    </button>
+                  {user_staff && user_name && (
+                    <React.Fragment>
+                      <p>
+                        Olá {user_name},
+                        <button
+                          onClick={() => this.props.history.push(`/book/add`)}
+                        >
+                          + Add a book
+                        </button>
+                      </p>
+                    </React.Fragment>
                   )}
-                  <button onClick={() => this.props.history.push(`/login`)}>
-                    Log in
-                  </button>
+                  {isAuthenticated == false ? (
+                    <button onClick={() => this.props.history.push(`/login`)}>
+                      Log in
+                    </button>
+                  ) : (
+                    <React.Fragment />
+                  )}
                 </div>
               </div>
             </div>

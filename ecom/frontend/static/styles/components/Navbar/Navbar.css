@@ -90,7 +90,8 @@
   margin-top: 10vh;
 }
 
-.breadcrumb-text button {
+.breadcrumb-text button,
+.breadcrumb-text p {
   float: right;
   background: #f0f8ff00;
   border-color: #f0f8ff00;

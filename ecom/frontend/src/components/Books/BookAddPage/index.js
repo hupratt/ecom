@@ -6,11 +6,11 @@ import FileForm from "./FileForm";
 import { s3_base_url } from "../../../constants";
 
 class BookUpdate extends React.Component {
-  state = { updatedBook: { picture: null }, success: false, url: "" };
+  state = { newBook: { picture: null }, success: false, url: "" };
 
   componentDidMount() {
     this.setState({
-      updatedBook: this.props.book,
+      newBook: {},
     });
   }
 
@@ -19,8 +19,8 @@ class BookUpdate extends React.Component {
     const name = e.target.name;
     this.setState((prevState) => {
       return {
-        updatedBook: {
-          ...prevState.updatedBook,
+        newBook: {
+          ...prevState.newBook,
           [name]: value,
         },
       };
@@ -37,7 +37,7 @@ class BookUpdate extends React.Component {
       langue_nom,
       genre_nom,
       description,
-    } = this.state.updatedBook;
+    } = this.state.newBook;
 
     return (
       <div>
@@ -113,7 +113,7 @@ class BookUpdate extends React.Component {
                     cols={1}
                   />
                   <FileForm
-                    book={this.state.updatedBook}
+                    book={this.state.newBook}
                     history={this.props.history}
                   />
                 </div>
