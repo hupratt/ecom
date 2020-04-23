@@ -108,6 +108,11 @@ class Livre(models.Model):
     def get_remove_from_cart_url(self):
         return reverse("core:remove-from-cart", kwargs={"id": self.id})
 
+    def get_item_id_list(self):
+        queryset = self.book_quantity.get_queryset().all()
+        list_of_ids = [bookitem.id for bookitem in queryset]
+        return list_of_ids
+
     def get_quantity(self):
         return self.book_quantity.count()
 

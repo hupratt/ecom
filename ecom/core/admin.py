@@ -134,6 +134,7 @@ class LivreItemInLineAdmin(admin.ModelAdmin):
         "date_lecture",
         "date_entree",
         "updated",
+        "id",
     ]
     search_fields = ["livre__isbn", "livre__auteur_nom", "livre__titre"]
 
