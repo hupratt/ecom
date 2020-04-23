@@ -90,8 +90,6 @@ const BookGrid = ({
                           <span>{item.titre}</span>
                         </h2>
                       </div>
-                      <div className="bk-top"></div>
-                      <div className="bk-bottom"></div>
                     </div>
 
                     <div className="bk-info">
