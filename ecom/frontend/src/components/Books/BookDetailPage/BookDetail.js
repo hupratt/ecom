@@ -18,18 +18,6 @@ class BookDetail extends React.Component {
     user_staff: false,
   };
 
-  componentDidMount() {
-    if (this.props.isAuthenticated) {
-      axios
-        .get(`${endpoint}/user-staff/`)
-        .then((res) => {
-          const { user_name, user_staff } = res.data;
-          this.setState({ user_name, user_staff });
-        })
-        .catch((err) => console.log(err));
-    }
-  }
-
   showFullDescription = () => {
     this.setState({ bookDetailClicked: true });
   };
@@ -37,10 +25,14 @@ class BookDetail extends React.Component {
     this.props.history.push(`/books/${id}/edit`);
   };
   render() {
-    const { handleAddToCart, book, isAuthenticated } = this.props;
-    const { user_name, user_staff } = this.state;
+    const {
+      handleAddToCart,
+      book,
+      isAuthenticated,
+      user_name,
+      user_staff,
+    } = this.props;
     const stars_number_inverse = 5 - book.note;
-    console.log(book);
     return (
       <div>
         {/* Product Shop Section Begin */}
@@ -112,7 +104,7 @@ class BookDetail extends React.Component {
                           ).forEach((el) => (
                             <a>{el}</a>
                           ))}
-                          {/* <div className="addcart">
+                          <div className="addcart">
                             <a
                               href="#"
                               className="primary-btn pd-cart"
@@ -122,7 +114,7 @@ class BookDetail extends React.Component {
                             >
                               {this.props.t("Add To Cart")}
                             </a>
-                          </div> */}
+                          </div>
                           <EmailForm
                             isbn={book.isbn}
                             placeholder={this.props.t("Would buy")}

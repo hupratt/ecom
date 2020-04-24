@@ -13,6 +13,7 @@ import { bookListURL } from "../../constants";
 
 import { fetchBooks, loadmoar } from "../../actions/books";
 import { fetchCart } from "../../actions/cart";
+import { userIsStaff } from "../../actions/auth";
 import queryString from "query-string";
 import { CSSTransition } from "react-transition-group";
 
@@ -64,9 +65,6 @@ class CustomLayout extends React.Component {
       // parameter search, handle string parameters
       // e.g. visit '?limit=12&offset=0&language=&authors=blabla'
       this.mapUrlToState(q);
-    }
-    if (this.props.isAuthenticated == true && this.props.shoppingCart) {
-      this.props.refreshCart();
     }
   }
 
@@ -291,6 +289,7 @@ const mapDispatchToProps = (dispatch) => {
     fetchBooks: (url_endpoint) => dispatch(fetchBooks(url_endpoint)),
     refreshCart: () => dispatch(fetchCart()),
     searchThis: (e, callback) => dispatch(searchThis(e, callback)),
+    userIsStaff: (e) => dispatch(userIsStaff(e)),
   };
 };
 

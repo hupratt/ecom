@@ -30,8 +30,10 @@ class BookAdd extends React.Component {
   addBookItem = (e) => {
     e.preventDefault();
     const { id } = this.state.updatedBook;
+    const formData = new FormData();
+    formData.append("id", id);
     axios
-      .post(`${endpoint}/bookitem/${id}/add/`, {
+      .post(`${endpoint}/bookitem/${id}/add/`, formData, {
         headers: {
           Authorization: "Token " + localStorage.getItem("token"),
         },

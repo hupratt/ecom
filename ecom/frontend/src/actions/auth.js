@@ -1,6 +1,6 @@
 import axios from "axios";
 import * as actionTypes from "./actionTypes";
-import { base } from "../constants";
+import { base, endpoint } from "../constants";
 
 export const authStart = () => {
   return {
@@ -38,6 +38,21 @@ export const checkAuthTimeout = (expirationTime) => {
   };
 };
 
+export const userIsStaff = () => {
+  return (dispatch) => {
+    axios
+      .get(`${endpoint}/user-staff/`)
+      .then((res) => {
+        const { user_name, user_staff } = res.data;
+        const data = { user_name, user_staff };
+        dispatch({ type: actionTypes.USER_STAFF, data });
+      })
+      .catch((err) => {
+        dispatch(authFail(err));
+      });
+  };
+};
+
 export const authLogin = (username, password) => {
   return (dispatch) => {
     dispatch(authStart());
@@ -53,11 +68,12 @@ export const authLogin = (username, password) => {
         localStorage.setItem("expirationDate", expirationDate);
         axios.defaults.headers.common["Authorization"] = "Token " + token;
         dispatch(authSuccess(token));
-        dispatch(checkAuthTimeout(3600));
+        dispatch(checkAuthTimeout(36000));
       })
       .catch((err) => {
         dispatch(authFail(err));
       });
+    dispatch(userIsStaff());
   };
 };
 

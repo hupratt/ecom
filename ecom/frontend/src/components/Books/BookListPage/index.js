@@ -10,7 +10,7 @@ import { fetchCart } from "../../../actions/cart";
 import { Trans } from "react-i18next";
 import { fetchBooks } from "../../../actions/books";
 import queryString from "query-string";
-import axios from "axios";
+import { userIsStaff } from "../../../actions/auth";
 
 const propTypes = {
   data: PropTypes.array.isRequired,
@@ -36,14 +36,13 @@ class BookList extends React.Component {
     ) {
       this.mapStateToUrl();
     }
+    console.log("shoppingCart", this.props.shoppingCart == null);
+    if (this.props.isAuthenticated == true && this.props.shoppingCart == null) {
+      this.props.refreshCart();
+      console.log("refreshing cart");
+    }
     if (this.props.isAuthenticated == true) {
-      axios
-        .get(`${endpoint}/user-staff/`)
-        .then((res) => {
-          const { user_name, user_staff } = res.data;
-          this.setState({ user_name, user_staff });
-        })
-        .catch((err) => console.log(err));
+      this.props.userIsStaff();
     }
   }
   componentWillUnmount = () => {
@@ -126,9 +125,9 @@ class BookList extends React.Component {
       error,
       errorCart,
       isAuthenticated,
+      user_name,
+      user_staff,
     } = this.props;
-    const { user_name, user_staff } = this.state;
-
     return (
       <React.Fragment>
         {/* Breadcrumb Section Begin */}
@@ -196,6 +195,8 @@ const mapDispatchToProps = (dispatch) => {
     loadMoar: (url_endpoint, bookPerPage, offset) =>
       dispatch(loadmoar(url_endpoint, bookPerPage, offset)),
     fetchBooks: (url_endpoint) => dispatch(fetchBooks(url_endpoint)),
+    userIsStaff: () => dispatch(userIsStaff()),
+    refreshCart: () => dispatch(fetchCart()),
   };
 };
 
@@ -214,6 +215,9 @@ const mapStateToProps = (state) => {
     errorCart: state.cart.error,
     dataLength: state.books.data.length,
     isAuthenticated: state.auth.token !== null,
+    user_name: state.auth.user_name,
+    user_staff: state.auth.user_staff,
+    shoppingCart: state.cart.shoppingCart,
   };
 };
 
