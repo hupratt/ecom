@@ -147,8 +147,6 @@ const BookGrid = ({
                   </div>
 
                   <div className="bk-info">
-                    <FlipButton />
-                    <ViewInsideButton />
                     <h3>
                       <span>Lorem, ipsum.</span>
                       <span>Lorem, ipsum.</span>

@@ -40,6 +40,7 @@ class BookDetail extends React.Component {
     const { handleAddToCart, book, isAuthenticated } = this.props;
     const { user_name, user_staff } = this.state;
     const stars_number_inverse = 5 - book.note;
+    console.log(book);
     return (
       <div>
         {/* Product Shop Section Begin */}

@@ -11,6 +11,7 @@ from core.models import (
     Payment,
     Livre,
     ImageLivre,
+    LivreItem,
 )
 from django.contrib.auth.models import User
 
@@ -38,6 +39,15 @@ class BookImageSerializer(serializers.ModelSerializer):
         fields = ("image", "alt")
 
 
+class BookItemSerializer(serializers.ModelSerializer):
+    date_achat = serializers.DateField(required=False)
+    date_lecture = serializers.DateField(required=False)
+
+    class Meta:
+        model = LivreItem
+        fields = ("id", "date_achat", "date_lecture")
+
+
 class BookSerializer(serializers.ModelSerializer):
     titre = serializers.CharField(required=False)
     isbn = serializers.CharField(required=True)
@@ -52,6 +62,7 @@ class BookSerializer(serializers.ModelSerializer):
     picture = serializers.CharField(required=False)
     pictureid = serializers.IntegerField(required=False)
     get_item_id_list = serializers.ListField(required=False)
+    book_quantity = BookItemSerializer(many=True)
 
     class Meta:
         model = Livre
@@ -70,6 +81,7 @@ class BookSerializer(serializers.ModelSerializer):
             "picture",
             "pictureid",
             "get_item_id_list",
+            "book_quantity",
         )
 
 

@@ -77,6 +77,12 @@ class LivreItem(models.Model):
     def get_auteur_nom(self):
         return self.livre.auteur_nom
 
+    def __str__(self):
+        return f"Book {self.id}"
+
+    def __unicode__(self):
+        return f"Book {self.id}"
+
 
 class Livre(models.Model):
     titre = models.CharField(max_length=100)
@@ -204,8 +210,6 @@ def create_image(sender, **kwargs):
         image_instance = ImageLivre.objects.create(
             livre=book, alt=f"Book import image for isbn: {book.isbn}"
         )
-        print(dir(image_instance))
-        print(f"{book.id} just created {image_instance.id}")
 
 
 post_save.connect(create_image, sender=Livre)

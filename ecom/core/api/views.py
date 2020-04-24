@@ -32,6 +32,7 @@ from .serializers import (
     BookSerializer,
     BookImageSerializer,
     UserSerializer,
+    BookItemSerializer,
 )
 from core.models import (
     Item,
@@ -46,6 +47,7 @@ from core.models import (
     ItemVariation,
     Livre,
     ImageLivre,
+    LivreItem,
 )
 from rest_framework.renderers import JSONRenderer
 
@@ -203,6 +205,16 @@ class OrderQuantityUpdateView(APIView):
 class OrderItemDeleteView(DestroyAPIView):
     permission_classes = (IsAuthenticated,)
     queryset = OrderItem.objects.all()
+
+
+class BookItemDeleteView(DestroyAPIView):
+    permission_classes = (IsAuthenticated,)
+    queryset = LivreItem.objects.all()
+
+
+class BookItemCreateView(CreateAPIView):
+    serializer_class = BookItemSerializer
+    queryset = LivreItem.objects.all()
 
 
 class AddToCartView(APIView):
