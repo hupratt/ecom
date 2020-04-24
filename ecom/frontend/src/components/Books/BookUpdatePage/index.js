@@ -3,7 +3,8 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchBook } from "../../../actions/book";
 import FileForm from "./FileForm";
-import { s3_base_url } from "../../../constants";
+import { endpoint, s3_base_url } from "../../../constants";
+import axios from "axios";
 
 class BookAdd extends React.Component {
   state = { updatedBook: { picture: null }, success: false, url: "" };
@@ -26,6 +27,33 @@ class BookAdd extends React.Component {
       };
     });
   };
+  addBookItem = (e) => {
+    e.preventDefault();
+    const { id } = this.state.updatedBook;
+    axios
+      .post(`${endpoint}/bookitem/${id}/add/`, {
+        headers: {
+          Authorization: "Token " + localStorage.getItem("token"),
+        },
+      })
+      .then(this.props.history.push(`/books/${id}/`))
+      .catch((err) => console.log(err));
+  };
+  deleteBookItem = (e) => {
+    e.preventDefault();
+    const { book_quantity, id } = this.state.updatedBook;
+    if (book_quantity.length > 0) {
+      const randBookid = book_quantity[0].id;
+      axios
+        .delete(`${endpoint}/bookitem/${randBookid}/delete/`, {
+          headers: {
+            Authorization: "Token " + localStorage.getItem("token"),
+          },
+        })
+        .then(this.props.history.push(`/books/${id}/`))
+        .catch((err) => console.log(err));
+    }
+  };
 
   render() {
     const {
@@ -37,6 +65,7 @@ class BookAdd extends React.Component {
       langue_nom,
       genre_nom,
       description,
+      get_quantity,
     } = this.state.updatedBook;
 
     return (
@@ -60,6 +89,9 @@ class BookAdd extends React.Component {
 
                   <div className="col-lg-6">
                     <div className="product-update">
+                      <span>In stock: {get_quantity}</span>
+                      <button onClick={this.addBookItem}>+</button>
+                      <button onClick={this.deleteBookItem}>-</button>
                       <Input
                         name={"auteur_nom"}
                         title={"Author"}

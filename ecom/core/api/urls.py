@@ -28,7 +28,7 @@ from .views import (
 urlpatterns = [
     path("user-staff/", UserIDView.as_view(), name="user-staff-check"),
     path("book/add/", BookCreateView.as_view(), name="book-add"),
-    path("bookitem/add/", BookItemCreateView.as_view(), name="bookitem-add"),
+    path("bookitem/<pk>/add/", BookItemCreateView.as_view(), name="bookitem-add"),
     path("bookitem/<pk>/delete/", BookItemDeleteView.as_view(), name="bookitem-delete"),
     path("books/", BookListView.as_view(), name="book-list"),
     path("books/<pk>/", BookDetailView.as_view(), name="book-detail"),

@@ -1,4 +1,5 @@
 from django_countries.serializer_fields import CountryField
+from django.utils import timezone
 from rest_framework import serializers
 from core.models import (
     Address,
@@ -42,10 +43,20 @@ class BookImageSerializer(serializers.ModelSerializer):
 class BookItemSerializer(serializers.ModelSerializer):
     date_achat = serializers.DateField(required=False)
     date_lecture = serializers.DateField(required=False)
+    id = serializers.IntegerField(required=True)
 
     class Meta:
         model = LivreItem
         fields = ("id", "date_achat", "date_lecture")
+
+    def create(self, validated_data):
+        l = Livre.objects.get(id=validated_data.get("id"))
+        if l.date_publication is None:
+            l.date_publication = timezone.now()
+            l.save()
+        item = LivreItem(livre=l, date_entree=timezone.now())
+        item.save()
+        return validated_data
 
 
 class BookSerializer(serializers.ModelSerializer):
@@ -66,6 +77,7 @@ class BookSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Livre
+        depth = 1
         fields = (
             "id",
             "titre",
