@@ -11,7 +11,7 @@
   "Category": "Kategorie",
   "Romance": "Romantik",
   "História": "Geschichte",
-  "Poesia": "Poetry",
+  "Poesia": "Poesie",
   "Contos": "Fabeln",
   "Crónicas": "Chroniken",
   "Author": "Autor",
@@ -48,5 +48,6 @@
   "Gastronomia": "Gastronomie",
   "Add To Cart": "Kaufen",
   "Edit": "Bearbeiten",
-  "Banda Desenhada": "Comic"
+  "Banda Desenhada": "Comic",
+  "Turismo": "Tourismus"
 }

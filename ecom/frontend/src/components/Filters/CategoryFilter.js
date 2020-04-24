@@ -26,6 +26,9 @@ const CategoryFilter = ({ handleSetActiveCategory }) => {
           <a href="#" onClick={handleSetActiveCategory} val="BD">
             {t("Banda Desenhada")}
           </a>
+          <a href="#" onClick={handleSetActiveCategory} val="Turismo">
+            {t("Turismo")}
+          </a>
         </div>
       </div>
     </React.Fragment>
