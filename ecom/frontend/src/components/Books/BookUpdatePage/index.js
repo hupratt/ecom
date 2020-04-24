@@ -82,6 +82,7 @@ class BookAdd extends React.Component {
       genre_nom,
       description,
       get_quantity,
+      prix_barre,
     } = this.state.updatedBook;
 
     return (

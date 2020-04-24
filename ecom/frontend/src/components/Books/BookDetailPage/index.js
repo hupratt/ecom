@@ -29,7 +29,7 @@ class BookDetailPage extends React.Component {
     if (this.props.isAuthenticated == true && this.props.shoppingCart == null) {
       this.props.refreshCart();
     }
-    if (this.props.isAuthenticated == true) {
+    if (this.props.isAuthenticated == true && this.props.user_staff == null) {
       this.props.userIsStaff();
     }
   }
