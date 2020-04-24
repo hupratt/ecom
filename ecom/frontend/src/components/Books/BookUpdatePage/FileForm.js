@@ -41,11 +41,7 @@ const FileForm = ({ book, history }) => {
         .catch((err) => console.log(err));
     }
     for (var key in book) {
-      if (
-        book[key] !== undefined &&
-        key !== "picture" &&
-        key !== "prix_barre"
-      ) {
+      if (book[key] !== undefined && book[key] !== null && key !== "picture") {
         formData.append(key, book[key]);
       }
     }

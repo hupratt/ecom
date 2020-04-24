@@ -73,7 +73,7 @@ class BookSerializer(serializers.ModelSerializer):
     picture = serializers.CharField(required=False)
     pictureid = serializers.IntegerField(required=False)
     get_item_id_list = serializers.ListField(required=False)
-    book_quantity = BookItemSerializer(many=True)
+    book_quantity = BookItemSerializer(many=True, required=False)
 
     class Meta:
         model = Livre

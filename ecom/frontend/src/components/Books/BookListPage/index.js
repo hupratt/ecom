@@ -36,10 +36,8 @@ class BookList extends React.Component {
     ) {
       this.mapStateToUrl();
     }
-    console.log("shoppingCart", this.props.shoppingCart == null);
     if (this.props.isAuthenticated == true && this.props.shoppingCart == null) {
       this.props.refreshCart();
-      console.log("refreshing cart");
     }
     if (this.props.isAuthenticated == true) {
       this.props.userIsStaff();

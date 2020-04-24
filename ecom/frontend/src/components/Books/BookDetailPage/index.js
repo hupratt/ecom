@@ -9,6 +9,7 @@ import { withError, withLoading } from "../../../hoc/hoc";
 import BookDetail from "./BookDetail";
 import { fetchBooks } from "../../../actions/books";
 import { Trans } from "react-i18next";
+import { userIsStaff } from "../../../actions/auth";
 
 const propTypes = {
   book: PropTypes.object.isRequired,
@@ -25,6 +26,12 @@ class BookDetailPage extends React.Component {
       this.props.match.params.bookID,
       this.props.dataIsCached
     );
+    if (this.props.isAuthenticated == true && this.props.shoppingCart == null) {
+      this.props.refreshCart();
+    }
+    if (this.props.isAuthenticated == true) {
+      this.props.userIsStaff();
+    }
   }
 
   render() {
@@ -81,21 +88,23 @@ class BookDetailPage extends React.Component {
                 </div>
               </div>
             </div>
+            {/* Breadcrumb Section End */}
           </div>
         </div>
-        {/* Breadcrumb Section End */}
-        <Container>
-          <BookDetailWithLoadingAndErrorHandling
-            handleAddToCart={handleAddToCart}
-            book={book}
-            isAuthenticated={isAuthenticated}
-            error={error}
-            errorCart={errorCart}
-            history={history}
-            user_name={user_name}
-            user_staff={user_staff}
-          />
-        </Container>
+        {book && (
+          <Container>
+            <BookDetailWithLoadingAndErrorHandling
+              handleAddToCart={handleAddToCart}
+              book={book}
+              isAuthenticated={isAuthenticated}
+              error={error}
+              errorCart={errorCart}
+              history={history}
+              user_name={user_name}
+              user_staff={user_staff}
+            />
+          </Container>
+        )}
       </React.Fragment>
     );
   }
@@ -111,6 +120,8 @@ const mapDispatchToProps = (dispatch) => {
     fetchBook: (id, dataIsCached) => dispatch(fetchBook(id, dataIsCached)),
     handleAddToCart: (id, isAuthenticated) =>
       dispatch(handleAddToCart(id, isAuthenticated)),
+    userIsStaff: () => dispatch(userIsStaff()),
+    refreshCart: () => dispatch(fetchCart()),
   };
 };
 

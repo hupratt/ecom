@@ -6,7 +6,21 @@ import FileForm from "./FileForm";
 import { s3_base_url } from "../../../constants";
 
 class BookUpdate extends React.Component {
-  state = { newBook: { picture: null }, success: false, url: "" };
+  state = {
+    newBook: {
+      picture: null,
+      auteur_nom: null,
+      isbn: null,
+      note: null,
+      titre: null,
+      prix: null,
+      langue_nom: null,
+      genre_nom: null,
+      description: null,
+    },
+    success: false,
+    url: "",
+  };
 
   componentDidMount() {
     this.setState({
