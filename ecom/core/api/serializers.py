@@ -60,7 +60,7 @@ class BookItemSerializer(serializers.ModelSerializer):
 
 
 class BookSerializer(serializers.ModelSerializer):
-    titre = serializers.CharField(required=False)
+    titre = serializers.CharField(required=True)
     isbn = serializers.CharField(required=True)
     prix = serializers.IntegerField(required=False)
     note = serializers.IntegerField(required=False)

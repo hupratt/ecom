@@ -93,16 +93,16 @@ const BookDetail = ({
                           )
                         )}
                         {/* <div className="addcart">
-                            <a
-                              href="#"
-                              className="primary-btn pd-cart"
-                              onClick={() =>
-                                handleAddToCart(book.id, isAuthenticated)
-                              }
-                            >
-                              {t("Add To Cart")}
-                            </a>
-                          </div> */}
+                          <a
+                            href="#"
+                            className="primary-btn pd-cart"
+                            onClick={() =>
+                              handleAddToCart(book.id, isAuthenticated)
+                            }
+                          >
+                            {t("Add To Cart")}
+                          </a>
+                        </div> */}
                         <EmailForm
                           isbn={book.isbn}
                           placeholder={t("Would buy")}
