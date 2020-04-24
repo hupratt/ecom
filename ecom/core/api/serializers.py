@@ -173,15 +173,18 @@ class OrderSerializer(serializers.ModelSerializer):
         fields = ("id", "order_items", "total", "coupon")
 
     def get_order_items(self, obj):
-        return OrderItemSerializer(obj.items.all(), many=True).data
+        if isinstance(obj, Order):
+            return OrderItemSerializer(obj.items.all(), many=True).data
 
     def get_total(self, obj):
-        return obj.get_total()
+        if isinstance(obj, Order):
+            return obj.get_total()
 
     def get_coupon(self, obj):
-        if obj.coupon is not None:
-            return CouponSerializer(obj.coupon).data
-        return None
+        if isinstance(obj, Order):
+            if obj.coupon is not None:
+                return CouponSerializer(obj.coupon).data
+            return None
 
 
 class ItemVariationSerializer(serializers.ModelSerializer):

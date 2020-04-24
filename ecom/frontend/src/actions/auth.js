@@ -40,6 +40,7 @@ export const checkAuthTimeout = (expirationTime) => {
 
 export const userIsStaff = () => {
   return (dispatch) => {
+    console.log("dispatching action");
     axios
       .get(`${endpoint}/user-staff/`)
       .then((res) => {

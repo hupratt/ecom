@@ -23,9 +23,11 @@ const TopNavigationWithAuth = ({ cart, onSearchChange }) => {
           <li className="cart-icon">
             <a href="#">
               <i className="fa fa-shopping-bag" />
-              {cart && <span>{cart.order_items.length}</span>}
+              {cart && cart.order_items && (
+                <span>{cart.order_items.length}</span>
+              )}
             </a>
-            {cart && (
+            {cart && cart.order_items && (
               <div className="cart-hover">
                 <div className="select-items">
                   <table>
