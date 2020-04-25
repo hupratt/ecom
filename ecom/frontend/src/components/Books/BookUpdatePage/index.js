@@ -1,26 +1,24 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { fetchBook } from "../../../actions/book";
+import { addBookItem, deleteBookItem } from "../../../actions/book";
 import FileForm from "./FileForm";
-import { endpoint, s3_base_url } from "../../../constants";
-import axios from "axios";
+import { fetchBook } from "../../../actions/book";
 
-class BookAdd extends React.Component {
+class BookUpdatePage extends React.Component {
   state = {
     updatedBook: {
-      picture: null,
-      auteur_nom: null,
-      isbn: null,
+      auteur_nom: "",
+      isbn: "",
       note: null,
-      titre: null,
+      titre: "",
       prix: null,
-      langue_nom: null,
-      genre_nom: null,
-      description: null,
+      langue_nom: "",
+      genre_nom: "",
+      description: "",
+      get_quantity: "",
+      prix_barre: null,
     },
-    success: false,
-    url: "",
   };
 
   componentDidMount() {
@@ -43,32 +41,11 @@ class BookAdd extends React.Component {
   };
   addBookItem = (e) => {
     e.preventDefault();
-    const { id } = this.state.updatedBook;
-    const formData = new FormData();
-    formData.append("id", id);
-    axios
-      .post(`${endpoint}/bookitem/${id}/add/`, formData, {
-        headers: {
-          Authorization: "Token " + localStorage.getItem("token"),
-        },
-      })
-      .then(this.props.history.push(`/books/${id}/`))
-      .catch((err) => console.log(err));
+    this.props.addBookItem(this.state.updatedBook, this.props.history);
   };
   deleteBookItem = (e) => {
     e.preventDefault();
-    const { book_quantity, id } = this.state.updatedBook;
-    if (book_quantity.length > 0) {
-      const randBookid = book_quantity[0].id;
-      axios
-        .delete(`${endpoint}/bookitem/${randBookid}/delete/`, {
-          headers: {
-            Authorization: "Token " + localStorage.getItem("token"),
-          },
-        })
-        .then(this.props.history.push(`/books/${id}/`))
-        .catch((err) => console.log(err));
-    }
+    this.props.deleteBookItem(this.state.updatedBook, this.props.history);
   };
 
   render() {
@@ -202,17 +179,17 @@ class BookAdd extends React.Component {
 
 const Input = (props) => (
   <div className="form-group">
-    <label htmlFor={props.name} className="form-label">
-      {props.title}
+    <label htmlFor={props.name || ""} className="form-label">
+      {props.title || ""}
     </label>
     <input
       className="form-input"
-      id={props.name}
-      name={props.name}
-      type={props.type}
-      value={props.value}
+      id={props.name || ""}
+      name={props.name || ""}
+      type={props.type || ""}
+      value={props.value || ""}
       onChange={props.handleChange}
-      placeholder={props.placeholder}
+      placeholder={props.placeholder || ""}
       ref={props.ref}
     />
   </div>
@@ -235,6 +212,10 @@ const TextArea = (props) => (
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    addBookItem: (updatedBook, history) =>
+      dispatch(addBookItem(updatedBook, history)),
+    deleteBookItem: (updatedBook, history) =>
+      dispatch(deleteBookItem(updatedBook, history)),
     fetchBook: (id, dataIsCached) => dispatch(fetchBook(id, dataIsCached)),
   };
 };
@@ -247,5 +228,5 @@ const mapStateToProps = (state) => {
 };
 
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(BookAdd)
+  connect(mapStateToProps, mapDispatchToProps)(BookUpdatePage)
 );

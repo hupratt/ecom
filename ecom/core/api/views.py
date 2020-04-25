@@ -211,10 +211,19 @@ class BookItemDeleteView(DestroyAPIView):
     permission_classes = (IsAuthenticated,)
     queryset = LivreItem.objects.all()
 
+    def delete(self, request, *args, **kwargs):
+        raise Http404("You do not have an active order")
+
+        # return self.destroy(request, *args, **kwargs)
+
 
 class BookItemCreateView(CreateAPIView):
     serializer_class = BookItemSerializer
     queryset = LivreItem.objects.all()
+
+    def post(self, request, *args, **kwargs):
+        raise Http404("You do not have an active order")
+        # return self.create(request, *args, **kwargs)
 
 
 class AddToCartView(APIView):

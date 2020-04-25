@@ -54,3 +54,36 @@ export const handleAddBook = (book, history, setUploadPercentage) => {
       .catch((err) => dispatch(addBookFail(err.response.data)));
   };
 };
+
+export const addBookItem = (updatedBook, history) => {
+  return (dispatch) => {
+    const { id } = updatedBook;
+    const formData = new FormData();
+    formData.append("id", id);
+    axios
+      .post(`${endpoint}/bookitem/${id}/add/`, formData, {
+        headers: {
+          Authorization: "Token " + localStorage.getItem("token"),
+        },
+      })
+      // .then(history.push(`/books/${id}/`))
+      .catch((err) => dispatch(addBookFail(err.response.data)));
+  };
+};
+
+export const deleteBookItem = (updatedBook, history) => {
+  return (dispatch) => {
+    const { book_quantity, id } = updatedBook;
+    if (book_quantity.length > 0) {
+      const randBookid = book_quantity[0].id;
+      axios
+        .delete(`${endpoint}/bookitem/${randBookid}/delete/`, {
+          headers: {
+            Authorization: "Token " + localStorage.getItem("token"),
+          },
+        })
+        // .then(history.push(`/books/${id}/`))
+        .catch((err) => dispatch(addBookFail(err.response.data)));
+    }
+  };
+};
