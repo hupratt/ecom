@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.sessions.models import Session
 
 from .models import (
     Item,
@@ -19,6 +20,13 @@ from .models import (
 
 def make_refund_accepted(modeladmin, request, queryset):
     queryset.update(refund_requested=False, refund_granted=True)
+
+
+class SessionAdmin(admin.ModelAdmin):
+    def _session_data(self, obj):
+        return obj.get_decoded()
+
+    list_display = ["session_key", "_session_data", "expire_date"]
 
 
 class OrderAdmin(admin.ModelAdmin):
@@ -159,3 +167,4 @@ admin.site.register(Coupon)
 admin.site.register(Refund)
 admin.site.register(Address, AddressAdmin)
 admin.site.register(UserProfile)
+admin.site.register(Session, SessionAdmin)
