@@ -7,7 +7,10 @@ import { withTranslation } from "react-i18next";
 
 class TopNavigationNoAuth extends React.Component {
   componentDidMount() {
-    var language = window.navigator.userLanguage || window.navigator.language;
+    var language =
+      window.localStorage.i18nextLng ||
+      window.navigator.userLanguage ||
+      window.navigator.language;
     switch (true) {
       case language.toLowerCase().includes("pt"):
         this.refs.flag.updateSelected("PT");
