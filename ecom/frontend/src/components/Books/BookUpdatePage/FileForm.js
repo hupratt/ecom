@@ -1,11 +1,9 @@
 import React, { Fragment, useState } from "react";
-import axios from "axios";
-import { endpoint, s3_base_url } from "../../../constants";
+import { endpoint } from "../../../constants";
 
-const FileForm = ({ book, history }) => {
+const FileForm = ({ book, updateBook }) => {
   const [file, setFile] = useState("");
   const [filename, setFilename] = useState("Choose File");
-  const [message, setMessage] = useState("");
   const [uploadPercentage, setUploadPercentage] = useState(0);
 
   const onChange = (e) => {
@@ -15,57 +13,39 @@ const FileForm = ({ book, history }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    const formData2 = new FormData();
     if (file !== "" && file !== undefined) {
-      formData2.append("image", file);
-      formData2.append(
+      const formData = new FormData();
+      formData.append("image", file);
+      formData.append(
         "alt",
         `Book cover of ${book.titre} from ${book.auteur_nom}`
       );
-      axios
-        .put(`${endpoint}/bookimages/${book.pictureid}/update/`, formData2, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: "Token " + localStorage.getItem("token"),
-          },
-          onUploadProgress: (progressEvent) => {
-            setUploadPercentage(
-              parseInt(
-                Math.round((progressEvent.loaded * 100) / progressEvent.total)
-              )
-            );
-          },
-        })
-        .then(history.push(`/books/${book.id}/`))
-        .catch((err) => console.log(err));
-    }
-    for (var key in book) {
-      if (book[key] !== undefined && book[key] !== null && key !== "picture") {
-        formData.append(key, book[key]);
+      updateBook(
+        formData,
+        setUploadPercentage,
+        `${endpoint}/bookimages/${book.pictureid}/update/`
+      );
+    } else {
+      const formData = new FormData();
+      for (var key in book) {
+        if (
+          book[key] !== undefined &&
+          book[key] !== null &&
+          key !== "picture"
+        ) {
+          formData.append(key, book[key]);
+        }
       }
+      updateBook(
+        formData,
+        setUploadPercentage,
+        `${endpoint}/books/${book.id}/update/`
+      );
     }
-    axios
-      .put(`${endpoint}/books/${book.id}/update/`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: "Token " + localStorage.getItem("token"),
-        },
-        onUploadProgress: (progressEvent) => {
-          setUploadPercentage(
-            parseInt(
-              Math.round((progressEvent.loaded * 100) / progressEvent.total)
-            )
-          );
-        },
-      })
-      .then(history.push(`/books/${book.id}/`))
-      .catch((err) => console.log(err));
   };
 
   return (
     <Fragment>
-      {message ? <Message msg={message} /> : null}
       <form onSubmit={onSubmit} encType="multipart/form-data">
         <div className="custom-file mb-4">
           <input
@@ -88,22 +68,6 @@ const FileForm = ({ book, history }) => {
         />
       </form>
     </Fragment>
-  );
-};
-
-const Message = ({ msg }) => {
-  return (
-    <div className="alert alert-info alert-dismissible fade show" role="alert">
-      {msg}
-      <button
-        type="button"
-        className="close"
-        data-dismiss="alert"
-        aria-label="Close"
-      >
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
   );
 };
 

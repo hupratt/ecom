@@ -87,3 +87,23 @@ export const deleteBookItem = (updatedBook, history) => {
     }
   };
 };
+
+export const updateBook = (formData, setUploadPercentage, urlendpoint) => {
+  return (dispatch) => {
+    axios
+      .put(urlendpoint, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: "Token " + localStorage.getItem("token"),
+        },
+        onUploadProgress: (progressEvent) => {
+          setUploadPercentage(
+            parseInt(
+              Math.round((progressEvent.loaded * 100) / progressEvent.total)
+            )
+          );
+        },
+      })
+      .catch((err) => dispatch(addBookFail(err.response.data)));
+  };
+};

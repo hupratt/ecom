@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { addBookItem, deleteBookItem } from "../../../actions/book";
+import { addBookItem, deleteBookItem, updateBook } from "../../../actions/book";
 import FileForm from "./FileForm";
 import { fetchBook } from "../../../actions/book";
 
@@ -79,7 +79,7 @@ class BookUpdatePage extends React.Component {
                         />
                         <FileForm
                           book={this.state.updatedBook}
-                          history={this.props.history}
+                          updateBook={this.props.updateBook}
                         />
                       </div>
 
@@ -217,6 +217,8 @@ const mapDispatchToProps = (dispatch) => {
     deleteBookItem: (updatedBook, history) =>
       dispatch(deleteBookItem(updatedBook, history)),
     fetchBook: (id, dataIsCached) => dispatch(fetchBook(id, dataIsCached)),
+    updateBook: (formData, setUploadPercentage, urlendpoint) =>
+      dispatch(updateBook(formData, setUploadPercentage, urlendpoint)),
   };
 };
 
