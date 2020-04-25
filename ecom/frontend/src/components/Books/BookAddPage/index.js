@@ -3,9 +3,8 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchBook } from "../../../actions/book";
 import FileForm from "./FileForm";
-import { endpoint, s3_base_url } from "../../../constants";
 import { handleAddBook } from "../../../actions/book";
-class BookUpdate extends React.Component {
+class BookAddPage extends React.Component {
   state = {
     newBook: {
       picture: "",
@@ -21,12 +20,6 @@ class BookUpdate extends React.Component {
     success: false,
     url: "",
   };
-
-  componentDidMount() {
-    this.setState({
-      newBook: {},
-    });
-  }
 
   handleInput = (e) => {
     const value = e.target.value;
@@ -178,7 +171,8 @@ const TextArea = (props) => (
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchBook: (id, dataIsCached) => dispatch(fetchBook(id, dataIsCached)),
-    handleAddBook: (book, history) => dispatch(handleAddBook(book, history)),
+    handleAddBook: (book, history, setUploadPercentage) =>
+      dispatch(handleAddBook(book, history, setUploadPercentage)),
   };
 };
 
@@ -190,5 +184,5 @@ const mapStateToProps = (state) => {
 };
 
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(BookUpdate)
+  connect(mapStateToProps, mapDispatchToProps)(BookAddPage)
 );

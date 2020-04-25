@@ -5,7 +5,7 @@ const FileForm = ({ book, history, handleAddBook }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    handleAddBook(book, history);
+    handleAddBook(book, history, setUploadPercentage);
   };
 
   return (

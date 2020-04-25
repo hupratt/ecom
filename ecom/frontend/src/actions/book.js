@@ -25,7 +25,7 @@ export const addBookFail = (error) => {
   };
 };
 
-export const handleAddBook = (book, history) => {
+export const handleAddBook = (book, history, setUploadPercentage) => {
   return (dispatch) => {
     const formData = new FormData();
 
@@ -39,6 +39,13 @@ export const handleAddBook = (book, history) => {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: "Token " + localStorage.getItem("token"),
+        },
+        onUploadProgress: (progressEvent) => {
+          setUploadPercentage(
+            parseInt(
+              Math.round((progressEvent.loaded * 100) / progressEvent.total)
+            )
+          );
         },
       })
       .then((res) => {
