@@ -93,7 +93,7 @@ class BookDetailPage extends React.Component {
         </div>
         {book && (
           <Container>
-            <BookDetailWithLoadingAndErrorHandling
+            <BookDetailWithLoading
               handleAddToCart={handleAddToCart}
               book={book}
               isAuthenticated={isAuthenticated}
@@ -111,7 +111,6 @@ class BookDetailPage extends React.Component {
 }
 
 const BookDetailWithLoading = withLoading(BookDetail);
-const BookDetailWithLoadingAndErrorHandling = withError(BookDetailWithLoading);
 
 const mapDispatchToProps = (dispatch) => {
   return {

@@ -1,5 +1,6 @@
 import React from "react";
 import { Dimmer, Loader, Segment, Message } from "semantic-ui-react";
+import Toast from "../components/Buttons/Toast";
 
 export const Hoc = (props) => props.children;
 
@@ -28,7 +29,7 @@ export const withError = (WrappedComponent) => {
       if (error !== null) {
         return (
           <React.Fragment>
-            <Message
+            <Toast
               error
               header="There was some errors with your submission"
               content={JSON.stringify(error.request.statusText)}
@@ -40,7 +41,7 @@ export const withError = (WrappedComponent) => {
       if (errorCart !== null) {
         return (
           <React.Fragment>
-            <Message
+            <Toast
               error
               header="There was some errors with your submission"
               content={JSON.stringify(errorCart.request.statusText)}

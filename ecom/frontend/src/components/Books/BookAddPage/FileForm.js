@@ -18,11 +18,7 @@ const FileForm = ({ book, history }) => {
     const formData = new FormData();
 
     for (var key in book) {
-      if (
-        book[key] !== undefined &&
-        key !== "picture" &&
-        key !== "prix_barre"
-      ) {
+      if (book[key] !== undefined && key !== "picture") {
         formData.append(key, book[key]);
       }
     }

@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
-import { withAuthentication } from "../../hoc/hoc";
+import { withAuthentication, withError } from "../../hoc/hoc";
 import TopNavigationNoAuth from "./TopNavigation/TopNavigationNoAuth";
 import TopNavigationWithAuth from "./TopNavigation/TopNavigationWithAuth";
 import BottomNavigation from "../Layout/BottomNavigation/BottomNavigation";
@@ -230,10 +230,12 @@ class CustomLayout extends React.Component {
                       />
                     </Link>
                   </div>
-                  <TopNavigationWithAuthenticationHandling
+                  <TopNavigationWithAuthenticationHandlingAndErrorHandling
                     authenticated={authenticated}
                     cart={cart}
                     onSearchChange={this.onSearchChange}
+                    error={error}
+                    errorCart={errorCart}
                   />
                 </div>
               </div>
@@ -263,6 +265,10 @@ class CustomLayout extends React.Component {
 const TopNavigationWithAuthenticationHandling = withAuthentication(
   TopNavigationWithAuth,
   TopNavigationNoAuth
+);
+
+const TopNavigationWithAuthenticationHandlingAndErrorHandling = withError(
+  TopNavigationWithAuthenticationHandling
 );
 
 // CustomLayout.propTypes = propTypes;

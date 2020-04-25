@@ -77,6 +77,26 @@ ol {
   margin: 0;
 }
 
+i::before {
+  font-weight: 900;
+}
+
+i.icon.lock::before {
+  content: "\f023" !important;
+}
+
+.ui.error.message {
+  width: 100vw;
+  position: absolute;
+  z-index: 100;
+  top: 0px;
+  left: 0px;
+}
+
+.ui.error.message .close.icon {
+  right: 2em;
+}
+
 /*
 * Typography: End
 */

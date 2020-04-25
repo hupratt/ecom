@@ -166,7 +166,7 @@ class BookList extends React.Component {
         </div>
         {/* Breadcrumb Section Begin */}
 
-        <BookPageWithLoadingAndErrorHandling
+        <BookPageWithLoading
           bookPerPage={bookPerPage}
           length={_length}
           onSelectRadio={onSelectRadio}
@@ -199,7 +199,6 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 const BookPageWithLoading = withLoading(BooksPlusPaginationAndFilters);
-const BookPageWithLoadingAndErrorHandling = withError(BookPageWithLoading);
 
 const mapStateToProps = (state) => {
   return {
