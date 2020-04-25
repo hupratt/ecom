@@ -37,6 +37,7 @@
     "react-compound-slider": "^2.5.0",
     "react-dom": "^16.13.0",
     "react-flags-select": "^1.1.12",
+    "react-ga": "^2.7.0",
     "react-i18next": "^11.3.4",
     "react-redux": "^6.0.0",
     "react-router-dom": "^5.1.2",

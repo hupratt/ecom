@@ -4,6 +4,7 @@ import App from "./App";
 import registerServiceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
 import { store } from "./reducers";
+import ReactGA from "react-ga";
 import "./i18n";
 
 const app = (
@@ -13,6 +14,11 @@ const app = (
 );
 
 ReactDOM.render(app, document.getElementById("root"));
+
+if (process.env.GOOGLE_ANALYTICS) {
+  ReactGA.initialize(process.env.GOOGLE_ANALYTICS);
+  ReactGA.pageview("/");
+}
 
 /* Allows caching, push notifications and queues offline actions
 This action fires a seperate thread to install on
