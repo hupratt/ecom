@@ -25,23 +25,18 @@ const FileForm = ({ book, updateBook }) => {
         setUploadPercentage,
         `${endpoint}/bookimages/${book.pictureid}/update/`
       );
-    } else {
-      const formData = new FormData();
-      for (var key in book) {
-        if (
-          book[key] !== undefined &&
-          book[key] !== null &&
-          key !== "picture"
-        ) {
-          formData.append(key, book[key]);
-        }
-      }
-      updateBook(
-        formData,
-        setUploadPercentage,
-        `${endpoint}/books/${book.id}/update/`
-      );
     }
+    const formData = new FormData();
+    for (var key in book) {
+      if (book[key] !== undefined && book[key] !== null && key !== "picture") {
+        formData.append(key, book[key]);
+      }
+    }
+    updateBook(
+      formData,
+      setUploadPercentage,
+      `${endpoint}/books/${book.id}/update/`
+    );
   };
 
   return (
