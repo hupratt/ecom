@@ -25,7 +25,8 @@ export const withLoading = (WrappedComponent) => {
 export const withError = (WrappedComponent) => {
   class HOC extends React.Component {
     render() {
-      const { error, errorCart } = this.props;
+      const { error, errorCart, success } = this.props;
+      console.log(success);
       if (error !== null) {
         return (
           <React.Fragment>
@@ -45,6 +46,18 @@ export const withError = (WrappedComponent) => {
               error
               header="There was some errors with your submission"
               content={JSON.stringify(errorCart)}
+            />
+            <WrappedComponent {...this.props} />
+          </React.Fragment>
+        );
+      }
+      if (success == true) {
+        return (
+          <React.Fragment>
+            <Toast
+              positive
+              header="All good"
+              content={JSON.stringify(success)}
             />
             <WrappedComponent {...this.props} />
           </React.Fragment>

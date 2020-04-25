@@ -18,9 +18,9 @@ export const fetchBook = (id, dataIsCached = false) => {
   };
 };
 
-export const addBookFail = (error) => {
+const updateBookFail = (error) => {
   return {
-    type: actionTypes.ADDBOOK_FAIL,
+    type: actionTypes.UPDATEBOOK_FAIL,
     error: error,
   };
 };
@@ -48,14 +48,30 @@ export const handleAddBook = (book, history, setUploadPercentage) => {
           );
         },
       })
+      .then(
+        dispatch({
+          type: actionTypes.UPDATEBOOK_SUCCESS,
+          success: true,
+        })
+      )
+      .then(
+        setTimeout(
+          () =>
+            dispatch({
+              type: actionTypes.UPDATEBOOK_SUCCESS,
+              success: false,
+            }),
+          2000
+        )
+      )
       .then((res) => {
         history.push(`/books/${res.data.id}/`);
       })
-      .catch((err) => dispatch(addBookFail(err.response.data)));
+      .catch((err) => dispatch(updateBookFail(err.response.data)));
   };
 };
 
-export const addBookItem = (updatedBook, history) => {
+export const addBookItem = (updatedBook) => {
   return (dispatch) => {
     const { id } = updatedBook;
     const formData = new FormData();
@@ -66,12 +82,27 @@ export const addBookItem = (updatedBook, history) => {
           Authorization: "Token " + localStorage.getItem("token"),
         },
       })
-      // .then(history.push(`/books/${id}/`))
-      .catch((err) => dispatch(addBookFail(err.response.data)));
+      .then(
+        dispatch({
+          type: actionTypes.UPDATEBOOK_SUCCESS,
+          success: true,
+        })
+      )
+      .then(
+        setTimeout(
+          () =>
+            dispatch({
+              type: actionTypes.UPDATEBOOK_SUCCESS,
+              success: false,
+            }),
+          2000
+        )
+      )
+      .catch((err) => dispatch(updateBookFail(err.response.data)));
   };
 };
 
-export const deleteBookItem = (updatedBook, history) => {
+export const deleteBookItem = (updatedBook) => {
   return (dispatch) => {
     const { book_quantity, id } = updatedBook;
     if (book_quantity.length > 0) {
@@ -82,8 +113,23 @@ export const deleteBookItem = (updatedBook, history) => {
             Authorization: "Token " + localStorage.getItem("token"),
           },
         })
-        // .then(history.push(`/books/${id}/`))
-        .catch((err) => dispatch(addBookFail(err.response.data)));
+        .then(
+          dispatch({
+            type: actionTypes.UPDATEBOOK_SUCCESS,
+            success: true,
+          })
+        )
+        .then(
+          setTimeout(
+            () =>
+              dispatch({
+                type: actionTypes.UPDATEBOOK_SUCCESS,
+                success: false,
+              }),
+            2000
+          )
+        )
+        .catch((err) => dispatch(updateBookFail(err.response.data)));
     }
   };
 };
@@ -104,6 +150,22 @@ export const updateBook = (formData, setUploadPercentage, urlendpoint) => {
           );
         },
       })
-      .catch((err) => dispatch(addBookFail(err.response.data)));
+      .then(
+        dispatch({
+          type: actionTypes.UPDATEBOOK_SUCCESS,
+          success: true,
+        })
+      )
+      .then(
+        setTimeout(
+          () =>
+            dispatch({
+              type: actionTypes.UPDATEBOOK_SUCCESS,
+              success: false,
+            }),
+          2000
+        )
+      )
+      .catch((err) => dispatch(updateBookFail(err.response.data)));
   };
 };

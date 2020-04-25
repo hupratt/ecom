@@ -7,6 +7,7 @@ const initState = {
   book: {},
   data: [],
   dataIsCached: false,
+  success: false,
 };
 
 const fetchItemsSuccess = (state, action) => {
@@ -46,13 +47,18 @@ const fetchItemsFail = (state, action) => {
   });
 };
 
-const addBookFail = (state, action) => {
+const updateBookFail = (state, action) => {
   return updateObject(state, {
     error: action.error,
     loading: false,
   });
 };
 
+const updateSuccess = (state, action) => {
+  return updateObject(state, {
+    success: action.success,
+  });
+};
 const reducer = (state = initState, action) => {
   switch (action.type) {
     case actionTypes.LOADING:
@@ -65,8 +71,10 @@ const reducer = (state = initState, action) => {
       return fetchBookLocally(state, action);
     case actionTypes.FETCH_BOOK:
       return fetchBook(state, action);
-    case actionTypes.ADDBOOK_FAIL:
-      return addBookFail(state, action);
+    case actionTypes.UPDATEBOOK_FAIL:
+      return updateBookFail(state, action);
+    case actionTypes.UPDATEBOOK_SUCCESS:
+      return updateSuccess(state, action);
 
     default:
       return state;

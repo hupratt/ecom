@@ -41,11 +41,11 @@ class BookUpdatePage extends React.Component {
   };
   addBookItem = (e) => {
     e.preventDefault();
-    this.props.addBookItem(this.state.updatedBook, this.props.history);
+    this.props.addBookItem(this.state.updatedBook);
   };
   deleteBookItem = (e) => {
     e.preventDefault();
-    this.props.deleteBookItem(this.state.updatedBook, this.props.history);
+    this.props.deleteBookItem(this.state.updatedBook);
   };
 
   render() {
@@ -212,10 +212,8 @@ const TextArea = (props) => (
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addBookItem: (updatedBook, history) =>
-      dispatch(addBookItem(updatedBook, history)),
-    deleteBookItem: (updatedBook, history) =>
-      dispatch(deleteBookItem(updatedBook, history)),
+    addBookItem: (updatedBook) => dispatch(addBookItem(updatedBook)),
+    deleteBookItem: (updatedBook) => dispatch(deleteBookItem(updatedBook)),
     fetchBook: (id, dataIsCached) => dispatch(fetchBook(id, dataIsCached)),
     updateBook: (formData, setUploadPercentage, urlendpoint) =>
       dispatch(updateBook(formData, setUploadPercentage, urlendpoint)),

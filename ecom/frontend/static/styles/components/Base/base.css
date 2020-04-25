@@ -85,7 +85,7 @@ i.icon.lock::before {
   content: "\f023" !important;
 }
 
-.ui.error.message {
+.ui.message {
   width: 100vw;
   position: absolute;
   z-index: 100;
@@ -93,7 +93,7 @@ i.icon.lock::before {
   left: 0px;
 }
 
-.ui.error.message .close.icon {
+.ui.message .close.icon {
   right: 2em;
 }
 

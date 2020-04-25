@@ -26,4 +26,5 @@ export const PAYMENT_SUCCESS = "PAYMENT_SUCCESS";
 export const SEARCH = "SEARCH";
 
 export const USER_STAFF = "USER_STAFF";
-export const ADDBOOK_FAIL = "ADDBOOK_FAIL";
+export const UPDATEBOOK_FAIL = "UPDATEBOOK_FAIL";
+export const UPDATEBOOK_SUCCESS = "UPDATEBOOK_SUCCESS";

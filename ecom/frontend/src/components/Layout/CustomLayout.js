@@ -204,7 +204,7 @@ class CustomLayout extends React.Component {
   };
 
   render() {
-    const { authenticated, cart, error, errorCart, loading } = this.props;
+    const { authenticated, cart, error, errorCart, success } = this.props;
     const { language, sliderValues, authors, category } = this.state;
     return (
       <React.Fragment>
@@ -236,6 +236,7 @@ class CustomLayout extends React.Component {
                     onSearchChange={this.onSearchChange}
                     error={error}
                     errorCart={errorCart}
+                    success={success}
                   />
                 </div>
               </div>
@@ -281,7 +282,7 @@ const mapStateToProps = (state) => {
     offset: state.books.offset,
     error: state.book.error,
     errorCart: state.cart.error,
-    loading: state.books.loading,
+    success: state.book.success,
     dataLength: state.books.data.length,
     shoppingCart: state.cart.shoppingCart,
   };

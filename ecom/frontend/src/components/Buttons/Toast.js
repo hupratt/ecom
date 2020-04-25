@@ -17,6 +17,7 @@ class Toast extends Component {
             onDismiss={this.handleDismiss}
             header={this.props.header}
             content={this.props.content}
+            positive={this.props.positive}
           />
         )}
       </React.Fragment>
