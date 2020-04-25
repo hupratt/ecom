@@ -26,3 +26,4 @@ export const PAYMENT_SUCCESS = "PAYMENT_SUCCESS";
 export const SEARCH = "SEARCH";
 
 export const USER_STAFF = "USER_STAFF";
+export const ADDBOOK_FAIL = "ADDBOOK_FAIL";

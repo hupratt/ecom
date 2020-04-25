@@ -3,20 +3,20 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchBook } from "../../../actions/book";
 import FileForm from "./FileForm";
-import { s3_base_url } from "../../../constants";
-
+import { endpoint, s3_base_url } from "../../../constants";
+import { handleAddBook } from "../../../actions/book";
 class BookUpdate extends React.Component {
   state = {
     newBook: {
-      picture: null,
-      auteur_nom: null,
-      isbn: null,
-      note: null,
-      titre: null,
-      prix: null,
-      langue_nom: null,
-      genre_nom: null,
-      description: null,
+      picture: "",
+      auteur_nom: "",
+      isbn: "",
+      note: "",
+      titre: "",
+      prix: "",
+      langue_nom: "",
+      genre_nom: "",
+      description: "",
     },
     success: false,
     url: "",
@@ -129,6 +129,7 @@ class BookUpdate extends React.Component {
                   <FileForm
                     book={this.state.newBook}
                     history={this.props.history}
+                    handleAddBook={this.props.handleAddBook}
                   />
                 </div>
               </div>
@@ -177,6 +178,7 @@ const TextArea = (props) => (
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchBook: (id, dataIsCached) => dispatch(fetchBook(id, dataIsCached)),
+    handleAddBook: (book, history) => dispatch(handleAddBook(book, history)),
   };
 };
 

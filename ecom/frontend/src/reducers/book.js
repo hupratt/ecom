@@ -6,22 +6,22 @@ const initState = {
   error: null,
   book: {},
   data: [],
-  dataIsCached: false
+  dataIsCached: false,
 };
 
 const fetchItemsSuccess = (state, action) => {
   return updateObject(state, {
     data: action.data,
     error: null,
-    loading: false
+    loading: false,
   });
 };
 
 const fetchBookLocally = (state, action) => {
   return updateObject(state, {
-    book: state.data.find(post => post.id == action.bookID),
+    book: state.data.find((post) => post.id == action.bookID),
     loading: false,
-    dataIsCached: true
+    dataIsCached: true,
   });
 };
 const fetchBook = (state, action) => {
@@ -29,20 +29,27 @@ const fetchBook = (state, action) => {
     book: action.data,
     error: null,
     loading: false,
-    dataIsCached: true
+    dataIsCached: true,
   });
 };
 
 const loading = (state, action) => {
   return updateObject(state, {
-    loading: true
+    loading: true,
   });
 };
 
 const fetchItemsFail = (state, action) => {
   return updateObject(state, {
     error: action.error,
-    loading: false
+    loading: false,
+  });
+};
+
+const addBookFail = (state, action) => {
+  return updateObject(state, {
+    error: action.error,
+    loading: false,
   });
 };
 
@@ -58,6 +65,8 @@ const reducer = (state = initState, action) => {
       return fetchBookLocally(state, action);
     case actionTypes.FETCH_BOOK:
       return fetchBook(state, action);
+    case actionTypes.ADDBOOK_FAIL:
+      return addBookFail(state, action);
 
     default:
       return state;

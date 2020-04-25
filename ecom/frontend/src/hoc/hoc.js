@@ -32,7 +32,7 @@ export const withError = (WrappedComponent) => {
             <Toast
               error
               header="There was some errors with your submission"
-              content={JSON.stringify(error.request.statusText)}
+              content={JSON.stringify(error)}
             />
             <WrappedComponent {...this.props} />
           </React.Fragment>
@@ -44,7 +44,7 @@ export const withError = (WrappedComponent) => {
             <Toast
               error
               header="There was some errors with your submission"
-              content={JSON.stringify(errorCart.request.statusText)}
+              content={JSON.stringify(errorCart)}
             />
             <WrappedComponent {...this.props} />
           </React.Fragment>
