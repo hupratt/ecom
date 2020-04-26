@@ -46,6 +46,10 @@
   color: black;
 }
 
+.container-forms {
+  min-width: 300px;
+}
+
 .container-forms .form:not(:first-child) {
   margin-top: 20px;
 }

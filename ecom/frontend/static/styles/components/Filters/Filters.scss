@@ -38,6 +38,7 @@
 }
 
 .container-forms {
+  min-width: 300px;
   .form:not(:first-child) {
     margin-top: 20px;
   }

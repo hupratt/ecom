@@ -47,6 +47,10 @@
   color: black;
 }
 
+.container-forms {
+  min-width: 300px;
+}
+
 .container-forms .form:not(:first-child) {
   margin-top: 20px;
 }
@@ -4476,8 +4480,6 @@ label
 
 .bk-info {
   position: relative;
-  margin-top: 460px;
-  margin-bottom: 20px;
 }
 
 .bk-info h3 {
@@ -4529,7 +4531,7 @@ label
 }
 
 .bk-list li .bk-book {
-  position: absolute;
+  position: relative;
   width: 100%;
   height: 430px;
   -webkit-transform-style: preserve-3d;
@@ -4777,6 +4779,7 @@ label
 
 .bk-cover {
   background-repeat: no-repeat;
+  background-position-x: center;
 }
 
 .bk-cover h2 {
@@ -4833,6 +4836,60 @@ label
 }
 
 /* End Individual style & artwork */
+@media screen and (max-width: 1482px) {
+  .bk-list li {
+    margin-left: 0.8rem;
+    margin-right: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 885px) {
+  .ui.divided.grid {
+    margin-left: 40vw;
+  }
+}
+
+@media screen and (max-width: 775px) {
+  .bk-list {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .ui.divided.grid {
+    margin-left: 0vw;
+  }
+  .container-forms {
+    display: none;
+  }
+  .bk-list li {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+}
+
+@media screen and (max-width: 1590px) {
+  .bk-list li {
+    width: 200px;
+  }
+  .bk-list li .bk-book,
+  .bk-list li .bk-book .bk-page,
+  .bk-list li .bk-book .bk-back,
+  .bk-list li .bk-book .bk-back div,
+  .bk-list li .bk-book .bk-front div,
+  .bk-list li .bk-book .bk-front {
+    width: 200px;
+    height: 350px;
+  }
+  .bk-list li .bk-book .bk-right,
+  .bk-list li .bk-book .bk-left {
+    height: 350px;
+  }
+  .bk-list li .bk-book .bk-right h2,
+  .bk-list li .bk-book .bk-left h2 {
+    width: 350px;
+  }
+}
+
 .dropdown.icon {
   content: "\f107" !important;
   font-family: "Font Awesome 5 Free" !important;
