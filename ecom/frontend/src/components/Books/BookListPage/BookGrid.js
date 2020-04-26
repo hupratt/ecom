@@ -1,27 +1,11 @@
 import React from "react";
 import { Grid, Dimmer, Loader, Segment } from "semantic-ui-react";
-import { s3_base_url, mediaEndpoint } from "../../../constants";
-import styled, { ThemeProvider } from "styled-components";
+import { s3_base_url } from "../../../constants";
 import FlipButton from "../../Buttons/FlipButton";
 import ViewInsideButton from "../../Buttons/ViewInsideButton";
 import PropTypes from "prop-types";
 import { shortDescr } from "../../utility";
 import { useTranslation } from "react-i18next";
-
-// Define our button, but with the use of props.theme this time
-const TiltBook = styled.img`
-  background-image: url(${(props) => props.theme.url});
-  height: 100%;
-  width: 100%;
-  background-size: cover;
-`;
-
-// We are passing a default theme for Buttons that arent wrapped in the ThemeProvider
-TiltBook.defaultProps = {
-  theme: {
-    url: "http://www.images/1.png",
-  },
-};
 
 const propTypes = {
   paginatedData: PropTypes.array.isRequired,
@@ -54,64 +38,66 @@ const BookGrid = ({
   length,
 }) => {
   const { t } = useTranslation();
+  const divStyle = (src) => ({
+    backgroundImage: "url(" + src + ")",
+    height: "100%",
+    width: "100%",
+    backgroundSize: "cover",
+  });
   return (
     <React.Fragment>
       <Grid divided>
         <ul id="bk-list" className="bk-list clearfix">
           {paginatedData ? (
             paginatedData.map((item) => {
-              const theme = {
-                url: `${item.picture}`,
-              };
               return (
                 <li key={item.id}>
-                  <ThemeProvider theme={theme}>
-                    <div className="bk-book bk-bookdefault" id={item.isbn}>
-                      <div className="bk-front">
-                        <div className="bk-cover-back"></div>
-                        <TiltBook
-                          className="bk-cover"
-                          onClick={() => handleClickOnBook(item.id)}
-                        ></TiltBook>
-                      </div>
-                      <div className="bk-page">
-                        <div className="bk-content bk-content-current">
-                          {/* <p>{shortDescr(item.description)}</p> */}
-                        </div>
-                      </div>
-                      <div className="bk-back">
+                  <div className="bk-book bk-bookdefault" id={item.isbn}>
+                    <div className="bk-front">
+                      <div className="bk-cover-back"></div>
+                      <img
+                        style={divStyle(`${item.picture}`)}
+                        className="bk-cover"
+                        onClick={() => handleClickOnBook(item.id)}
+                      ></img>
+                    </div>
+                    <div className="bk-page">
+                      <div className="bk-content bk-content-current">
                         {/* <p>{shortDescr(item.description)}</p> */}
                       </div>
-                      <div className="bk-right"></div>
-
-                      <div className="bk-left">
-                        <h2>
-                          <span>{item.auteur_nom}</span>
-                          <span>{item.titre}</span>
-                        </h2>
-                      </div>
                     </div>
+                    <div className="bk-back">
+                      {/* <p>{shortDescr(item.description)}</p> */}
+                    </div>
+                    <div className="bk-right"></div>
 
-                    <div className="bk-info">
-                      <h3>
+                    <div className="bk-left">
+                      <h2>
                         <span>{item.auteur_nom}</span>
                         <span>{item.titre}</span>
-                      </h3>
-                      <span>ISBN: {item.isbn}</span>
-
-                      <p>
-                        {shortDescr(item.description)}
-                        {item.description && item.description.length > 1 && (
-                          <a
-                            style={{ fontStyle: "italic" }}
-                            onClick={() => handleClickOnBook(item.id)}
-                          >
-                            . {t("Read More")}
-                          </a>
-                        )}
-                      </p>
+                      </h2>
                     </div>
-                  </ThemeProvider>
+                  </div>
+
+                  <div className="bk-info">
+                    <h3>
+                      <span>{item.auteur_nom}</span>
+                      <span>{item.titre}</span>
+                    </h3>
+                    <span>ISBN: {item.isbn}</span>
+
+                    <p>
+                      {shortDescr(item.description)}
+                      {item.description && item.description.length > 1 && (
+                        <a
+                          style={{ fontStyle: "italic" }}
+                          onClick={() => handleClickOnBook(item.id)}
+                        >
+                          . {t("Read More")}
+                        </a>
+                      )}
+                    </p>
+                  </div>
                 </li>
               );
             })
