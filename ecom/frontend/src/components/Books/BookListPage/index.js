@@ -21,7 +21,6 @@ const propTypes = {
 class BookList extends React.Component {
   state = { user_staff: null, user_staff: null };
   componentDidMount() {
-    window.scrollTo(0, 0);
     document.addEventListener("scroll", this.trackScrolling);
     const q = queryString.parse(this.props.location.search);
     if (Object.keys(q).length == 0 && this.props.dataLength == 0) {
