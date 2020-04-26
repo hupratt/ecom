@@ -24,7 +24,8 @@ const FileForm = ({ book, updateBook, history }) => {
         formData,
         setUploadPercentage,
         `${endpoint}/bookimages/${book.pictureid}/update/`,
-        history
+        history,
+        book
       );
     }
     const formData = new FormData();
@@ -37,7 +38,8 @@ const FileForm = ({ book, updateBook, history }) => {
       formData,
       setUploadPercentage,
       `${endpoint}/books/${book.id}/update/`,
-      history
+      history,
+      book
     );
   };
 

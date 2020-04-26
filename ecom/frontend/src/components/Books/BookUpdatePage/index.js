@@ -218,8 +218,10 @@ const mapDispatchToProps = (dispatch) => {
     deleteBookItem: (updatedBook, history) =>
       dispatch(deleteBookItem(updatedBook, history)),
     fetchBook: (id, dataIsCached) => dispatch(fetchBook(id, dataIsCached)),
-    updateBook: (formData, setUploadPercentage, urlendpoint, history) =>
-      dispatch(updateBook(formData, setUploadPercentage, urlendpoint, history)),
+    updateBook: (formData, setUploadPercentage, urlendpoint, history, book) =>
+      dispatch(
+        updateBook(formData, setUploadPercentage, urlendpoint, history, book)
+      ),
   };
 };
 

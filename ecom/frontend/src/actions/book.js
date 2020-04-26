@@ -144,7 +144,8 @@ export const updateBook = (
   formData,
   setUploadPercentage,
   urlendpoint,
-  history
+  history,
+  book
 ) => {
   return (dispatch) => {
     axios
@@ -174,11 +175,11 @@ export const updateBook = (
               type: actionTypes.UPDATEBOOK_SUCCESS,
               success: false,
             }),
-          1000
+          100000
         )
       )
-      .then((res) => {
-        history.push(`/books/${res.data.id}/`);
+      .then((_) => {
+        history.push(`/books/${book.id}/`);
       })
       .catch((err) => dispatch(updateBookFail(err.response.data)));
   };
