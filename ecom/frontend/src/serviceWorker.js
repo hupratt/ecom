@@ -102,10 +102,9 @@ export default function register() {
     }
 
     window.addEventListener("load", () => {
-      const swUrl = `${process.env.REACT_APP_BASE}/sw.js`;
+      const swUrl = `${process.env.REACT_APP_BASE}/static/pwa/sw.js`;
 
       if (isLocalhost) {
-        console.log("is localhost", swUrl);
         // This is running on localhost. Lets check if a service worker still exists or not.
         checkValidServiceWorker(swUrl);
 
@@ -129,6 +128,7 @@ function registerValidSW(swUrl) {
   navigator.serviceWorker
     .register(swUrl)
     .then((registration) => {
+      console.log(registration);
       registration.onupdatefound = () => {
         const installingWorker = registration.installing;
         installingWorker.onstatechange = () => {
