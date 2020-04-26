@@ -71,7 +71,7 @@ export const handleAddBook = (book, history, setUploadPercentage) => {
   };
 };
 
-export const addBookItem = (updatedBook) => {
+export const addBookItem = (updatedBook, history) => {
   return (dispatch) => {
     const { id } = updatedBook;
     const formData = new FormData();
@@ -98,11 +98,14 @@ export const addBookItem = (updatedBook) => {
           2000
         )
       )
+      .then((_) => {
+        history.push(`/books/${id}/`);
+      })
       .catch((err) => dispatch(updateBookFail(err.response.data)));
   };
 };
 
-export const deleteBookItem = (updatedBook) => {
+export const deleteBookItem = (updatedBook, history) => {
   return (dispatch) => {
     const { book_quantity, id } = updatedBook;
     if (book_quantity.length > 0) {
@@ -126,15 +129,23 @@ export const deleteBookItem = (updatedBook) => {
                 type: actionTypes.UPDATEBOOK_SUCCESS,
                 success: false,
               }),
-            2000
+            1000
           )
         )
+        .then((_) => {
+          history.push(`/books/${id}/`);
+        })
         .catch((err) => dispatch(updateBookFail(err.response.data)));
     }
   };
 };
 
-export const updateBook = (formData, setUploadPercentage, urlendpoint) => {
+export const updateBook = (
+  formData,
+  setUploadPercentage,
+  urlendpoint,
+  history
+) => {
   return (dispatch) => {
     axios
       .put(urlendpoint, formData, {
@@ -163,9 +174,12 @@ export const updateBook = (formData, setUploadPercentage, urlendpoint) => {
               type: actionTypes.UPDATEBOOK_SUCCESS,
               success: false,
             }),
-          2000
+          1000
         )
       )
+      .then((res) => {
+        history.push(`/books/${res.data.id}/`);
+      })
       .catch((err) => dispatch(updateBookFail(err.response.data)));
   };
 };

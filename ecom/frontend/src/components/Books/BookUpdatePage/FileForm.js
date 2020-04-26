@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { endpoint } from "../../../constants";
 
-const FileForm = ({ book, updateBook }) => {
+const FileForm = ({ book, updateBook, history }) => {
   const [file, setFile] = useState("");
   const [filename, setFilename] = useState("Choose File");
   const [uploadPercentage, setUploadPercentage] = useState(0);
@@ -23,7 +23,8 @@ const FileForm = ({ book, updateBook }) => {
       updateBook(
         formData,
         setUploadPercentage,
-        `${endpoint}/bookimages/${book.pictureid}/update/`
+        `${endpoint}/bookimages/${book.pictureid}/update/`,
+        history
       );
     }
     const formData = new FormData();
@@ -35,7 +36,8 @@ const FileForm = ({ book, updateBook }) => {
     updateBook(
       formData,
       setUploadPercentage,
-      `${endpoint}/books/${book.id}/update/`
+      `${endpoint}/books/${book.id}/update/`,
+      history
     );
   };
 
