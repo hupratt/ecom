@@ -215,20 +215,13 @@ class CustomLayout extends React.Component {
               <div className="inner-header">
                 <div className="row">
                   <div className="col-lg-2 col-md-2">
-                    <Link
-                      to="/"
-                      onClick={() => {
-                        new Promise((resolve) =>
-                          resolve(this.props.history.push("/"))
-                        ); //.then(window.location.reload());
-                      }}
-                    >
+                    <a href="https://www.lapetiteportugaise.eu/">
                       <img
                         className="logo"
                         src="https://bookshop-images-f1492f08-f236-4a55-afb7-70ded209cb24.s3.eu-west-2.amazonaws.com/resources/logo-petite-portugaise-300.png"
                         alt="la petite portugaise's logo"
                       />
-                    </Link>
+                    </a>
                   </div>
                   <TopNavigationWithAuthenticationHandlingAndErrorHandling
                     authenticated={authenticated}

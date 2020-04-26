@@ -76,11 +76,11 @@ const BookGrid = ({
                       </div>
                       <div className="bk-page">
                         <div className="bk-content bk-content-current">
-                          <p>{shortDescr(item.description)}</p>
+                          {/* <p>{shortDescr(item.description)}</p> */}
                         </div>
                       </div>
                       <div className="bk-back">
-                        <p>{shortDescr(item.description)}</p>
+                        {/* <p>{shortDescr(item.description)}</p> */}
                       </div>
                       <div className="bk-right"></div>
 
