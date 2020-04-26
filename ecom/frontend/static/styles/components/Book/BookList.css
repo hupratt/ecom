@@ -429,6 +429,28 @@
   }
 }
 
+@media screen and (max-width: 759px) {
+  .inner-header .col-lg-2.col-md-2 {
+    width: 30%;
+  }
+  .inner-header .col-lg-7.col-md-7 {
+    width: 70%;
+    padding-top: 20px;
+  }
+  .inner-header .col-lg-3.text-right.col-md-3 {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .inner-header .advanced-search .input-group input {
+    padding-left: 10px;
+  }
+  .inner-header .col-lg-7.col-md-7 {
+    width: 60%;
+  }
+}
+
 @media screen and (max-width: 775px) {
   .bk-list {
     -webkit-box-pack: center;
