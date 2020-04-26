@@ -84,7 +84,9 @@ i::before {
 i.icon.lock::before {
   content: "\f023" !important;
 }
-.ui.message {
+
+.ui.error.message,
+.ui.positive.message {
   .close.icon {
     right: 2em;
   }
