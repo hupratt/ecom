@@ -435,7 +435,8 @@
   }
   .inner-header .col-lg-7.col-md-7 {
     width: 70%;
-    padding-top: 20px;
+    padding-top: 40px;
+    padding-bottom: 20px;
   }
   .inner-header .col-lg-3.text-right.col-md-3 {
     display: none;
@@ -448,6 +449,10 @@
   }
   .inner-header .col-lg-7.col-md-7 {
     width: 60%;
+  }
+  .breadcrumb-text {
+    padding-top: 50px;
+    padding-bottom: 10px;
   }
 }
 

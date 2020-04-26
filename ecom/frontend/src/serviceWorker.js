@@ -10,96 +10,102 @@
 
 const isLocalhost = Boolean(
   window.location.hostname === "localhost" ||
-  // 127.0.0.1/8 is considered localhost for IPv4.
-  window.location.hostname.match(
-    /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
-  )
+    // 127.0.0.1/8 is considered localhost for IPv4.
+    window.location.hostname.match(
+      /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
+    )
 );
 
-const staticCacheName = 'site-static'
-const dynamicCacheName = 'site-dynamic'
+const staticCacheName = "site-static";
+const dynamicCacheName = "site-dynamic";
 const assets = [
   "/",
   "https://bootswatch.com/4/cosmo/bootstrap.min.css",
   "https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700&display=swap",
   "https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&subset=latin",
   "https://code.jquery.com/jquery-3.3.1.slim.min.js",
-  "/fallback"
-]
+  "/fallback",
+];
 
 const limitCacheSize = (cacheName, size) => {
-  caches.open(cacheName).then(cache => {
-    cache.keys().then(keys => {
+  caches.open(cacheName).then((cache) => {
+    cache.keys().then((keys) => {
       if (keys.length > size) {
-        cache.delete(keys[0]).then(limitCacheSize(cacheName, size))
+        cache.delete(keys[0]).then(limitCacheSize(cacheName, size));
       }
-    })
-  })
-}
+    });
+  });
+};
 
-window.addEventListener("fetch", e => {
-  console.log("fetching" + e)
+window.addEventListener("fetch", (e) => {
+  console.log("fetching" + e);
   // pause the event and respond with our custom event
   // check if url is in the pre cache
-  e.respondWith(e.request).then(cacheRes => {
-    return cacheRes || fetch(e.request).then(fetchRes => {
-      return caches.open(dynamicCacheName).then(cache => {
-        cache.put(e.request.url, fetchRes.clone())
-        limitCacheSize(dynamicCacheName, 15)
-        return fetchRes
-      })
-    }).catch(() => {
-      // checks the position of the .html 
-      // in the request url if it doesnt find returns -1
-      if (e.request.url.indexOf(".html") > -1) {
-        return caches.match("/fallback")
-      }
-    })
-  })
+  e.respondWith(e.request).then((cacheRes) => {
+    return (
+      cacheRes ||
+      fetch(e.request)
+        .then((fetchRes) => {
+          return caches.open(dynamicCacheName).then((cache) => {
+            cache.put(e.request.url, fetchRes.clone());
+            limitCacheSize(dynamicCacheName, 15);
+            return fetchRes;
+          });
+        })
+        .catch(() => {
+          // checks the position of the .html
+          // in the request url if it doesnt find returns -1
+          if (e.request.url.indexOf(".html") > -1) {
+            return caches.match("/fallback");
+          }
+        })
+    );
+  });
 });
 
-
-window.addEventListener("install", e => {
-  console.log("caching" + e)
+window.addEventListener("install", (e) => {
+  console.log("caching" + e);
   e.waitUntil(
-    caches.open(staticCacheName).then(cache => {
-      cache.addAll(assets)
+    caches.open(staticCacheName).then((cache) => {
+      cache.addAll(assets);
     })
-  )
+  );
 });
 
 // fires when we activate a new service worker
-window.addEventListener("activate", e => {
-  console.log("delete cache on activate" + e)
+window.addEventListener("activate", (e) => {
+  console.log("delete cache on activate" + e);
   // waitUntil epects one promise back
   e.waitUntil(
-    caches.keys().then(keys => {
-      console.log(keys)
+    caches.keys().then((keys) => {
+      console.log(keys);
       // when all resolve return one promise
-      Promise.all(keys
-        .filter(key => key !== staticCacheName && key !== dynamicCacheName)
-        .map(key => caches.delete())
-      )
+      Promise.all(
+        keys
+          .filter((key) => key !== staticCacheName && key !== dynamicCacheName)
+          .map((key) => caches.delete())
+      );
     })
-  )
+  );
 });
 
-export default function register() {  
-  // checks the env variable and whether the browser supports service workers 
-  if (process.env.NODE_ENV === "production" && "serviceWorker" in navigator) {
+export default function register() {
+  // checks the env variable and whether the browser supports service workers
+  if ("serviceWorker" in navigator) {
     // The URL constructor is available in all browsers that support SW.
-    const publicUrl = new URL(process.env.PUBLIC_URL, window.location);
+    const publicUrl = new URL(process.env.REACT_APP_BASE, window.location);
     if (publicUrl.origin !== window.location.origin) {
-      // Our service worker won't work if PUBLIC_URL is on a different origin
+      // Our service worker won't work if REACT_APP_BASE is on a different origin
       // from what our page is served on. This might happen if a CDN is used to
       // serve assets; see https://github.com/facebookincubator/create-react-app/issues/2374
       return;
     }
 
     window.addEventListener("load", () => {
-      const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
+      const swUrl = `${process.env.REACT_APP_BASE}/sw.js`;
 
       if (isLocalhost) {
+        console.log("is localhost", swUrl);
         // This is running on localhost. Lets check if a service worker still exists or not.
         checkValidServiceWorker(swUrl);
 
@@ -122,7 +128,7 @@ export default function register() {
 function registerValidSW(swUrl) {
   navigator.serviceWorker
     .register(swUrl)
-    .then(registration => {
+    .then((registration) => {
       registration.onupdatefound = () => {
         const installingWorker = registration.installing;
         installingWorker.onstatechange = () => {
@@ -143,7 +149,7 @@ function registerValidSW(swUrl) {
         };
       };
     })
-    .catch(error => {
+    .catch((error) => {
       console.error("Error during service worker registration:", error);
     });
 }
@@ -151,21 +157,23 @@ function registerValidSW(swUrl) {
 function checkValidServiceWorker(swUrl) {
   // Check if the service worker can be found. If it can't reload the page.
   fetch(swUrl)
-    .then(response => {
+    .then((response) => {
       // Ensure service worker exists, and that we really are getting a JS file.
       if (
         response.status === 404 ||
         response.headers.get("content-type").indexOf("javascript") === -1
       ) {
         // No service worker found. Probably a different app. Reload the page.
-        navigator.serviceWorker.ready.then(registration => {
+        navigator.serviceWorker.ready.then((registration) => {
           registration.unregister().then(() => {
             window.location.reload();
           });
         });
+        console.log("Nok.");
       } else {
         // Service worker found. Proceed as normal.
         registerValidSW(swUrl);
+        console.log("Ok.");
       }
     })
     .catch(() => {
@@ -177,7 +185,7 @@ function checkValidServiceWorker(swUrl) {
 
 export function unregister() {
   if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.ready.then(registration => {
+    navigator.serviceWorker.ready.then((registration) => {
       registration.unregister();
     });
   }
