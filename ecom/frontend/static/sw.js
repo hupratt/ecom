@@ -1,14 +1,8 @@
 // fetch event
-self.addEventListener("fetch", (evt) => {
-  console.log("fetch event", evt);
-});
+self.addEventListener("fetch", (e) => {});
 
 // install service worker
-self.addEventListener("install", (event) => {
-  console.log("service worker has been installed", event);
-});
+self.addEventListener("install", (e) => {});
 
 // activate service worker
-self.addEventListener("activate", (event) => {
-  console.log("service worker has been activated", event);
-});
+self.addEventListener("activate", (e) => {});
