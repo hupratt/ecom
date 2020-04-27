@@ -76,6 +76,12 @@
 }
 
 .bk-info button {
+  background: #f0f8ff00;
+  border-color: #f0f8ff00;
+  padding: 0;
+}
+
+.bk-info button .btn {
   background: #7dcbd8;
   border: none;
   color: #fff;

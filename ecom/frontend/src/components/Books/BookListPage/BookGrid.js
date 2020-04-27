@@ -89,12 +89,12 @@ const BookGrid = ({
                     <p>
                       {shortDescr(item.description)}
                       {item.description && item.description.length > 1 && (
-                        <a
+                        <button
                           style={{ fontStyle: "italic" }}
                           onClick={() => handleClickOnBook(item.id)}
                         >
-                          . {t("Read More")}
-                        </a>
+                          {t("Read More")}
+                        </button>
                       )}
                     </p>
                   </div>

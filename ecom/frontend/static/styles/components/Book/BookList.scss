@@ -56,17 +56,22 @@
     min-height: 160px;
   }
   button {
-    background: #7dcbd8;
-    border: none;
-    color: #fff;
-    display: inline-block;
-    padding: 3px 15px;
-    font-weight: 700;
-    font-size: 14px;
-    text-transform: uppercase;
-    cursor: pointer;
-    margin-right: 4px;
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+    background: #f0f8ff00;
+    border-color: #f0f8ff00;
+    padding: 0;
+    .btn {
+      background: #7dcbd8;
+      border: none;
+      color: #fff;
+      display: inline-block;
+      padding: 3px 15px;
+      font-weight: 700;
+      font-size: 14px;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-right: 4px;
+      box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+    }
   }
 }
 
