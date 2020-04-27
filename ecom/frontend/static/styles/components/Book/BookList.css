@@ -449,7 +449,7 @@
   }
 }
 
-@media screen and (max-width: 380px) {
+@media screen and (max-width: 759px) {
   .inner-header .advanced-search .input-group input {
     padding-left: 10px;
   }
@@ -459,6 +459,12 @@
   .breadcrumb-text {
     padding-top: 50px;
     padding-bottom: 10px;
+  }
+}
+
+@media screen and (max-width: 410px) {
+  .inner-header .logo {
+    margin-left: 30px !important;
   }
 }
 
