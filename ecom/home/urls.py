@@ -5,10 +5,7 @@ from django.urls import path, include, re_path
 from django.views.generic import TemplateView
 from django.shortcuts import render
 import debug_toolbar
-
-
-def index(request):
-    return render(request, "frontend/index.html")
+from .views import index, ServiceWorkerView
 
 
 urlpatterns = [
@@ -17,10 +14,14 @@ urlpatterns = [
     path("rest-auth/registration/", include("rest_auth.registration.urls")),
     path("admin/", admin.site.urls),
     path("api/", include("core.api.urls")),
+    # The service worker cannot be in /static because its scope will be limited to /static.
+    # Since we want it to have a scope of the full application, we rely on this TemplateView
+    # trick to make it work.
+    path("sw.js", ServiceWorkerView.as_view(), name=ServiceWorkerView.name),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # make sure this is always last
-urlpatterns += [re_path(r"^.*", index)]
+urlpatterns += [re_path(r"^.*", index, name="home")]
 
 if settings.DEBUG:
     urlpatterns += [path("__debug__/", include(debug_toolbar.urls))]

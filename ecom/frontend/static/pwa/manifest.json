@@ -1,7 +1,7 @@
 {
   "name": "La Petite Portugaise: Bookshop",
   "short_name": "La Petite Portugaise",
-  "start_url": "https://shop.lapetiteportugaise.eu/static/",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "white",
   "theme_color": "blue",
