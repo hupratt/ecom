@@ -1,5 +1,5 @@
-const staticCacheName = "site-static";
-const dynamicCacheName = "site-dynamic";
+const staticCacheName = "site-static-v23";
+const dynamicCacheName = "site-dynamic-v23";
 const assets = [
   "/static/frontend/main.js",
   "/fallback/",
@@ -7,7 +7,7 @@ const assets = [
   "https://use.fontawesome.com/releases/v5.7.2/webfonts/fa-brands-400.woff2",
   "https://bookshop-images-f1492f08-f236-4a55-afb7-70ded209cb24.s3.eu-west-2.amazonaws.com/resources/noresults.png",
   "https://bootswatch.com/4/cosmo/bootstrap.min.css",
-  //   "https://js.stripe.com/v3/",
+  "https://bookshop-images-f1492f08-f236-4a55-afb7-70ded209cb24.s3.eu-west-2.amazonaws.com/resources/logo-petite-portugaise-300.png",
 ];
 
 self.addEventListener("install", (e) => {
@@ -28,43 +28,49 @@ const limitCacheSize = (cacheName, size) => {
   });
 };
 
-self.addEventListener("fetch", (e) => {
-  // pause the event and respond with our custom event
-  // check if url is in the pre cache
-  //   e.respondWith(caches.match(e.request)).then((cacheRes) => {
-  //     return (
-  //       cacheRes ||
-  //       fetch(e.request)
-  //         // .then((fetchRes) => {
-  //         //   return caches.open(dynamicCacheName).then((cache) => {
-  //         //     cache.put(e.request.url, fetchRes.clone());
-  //         //     limitCacheSize(dynamicCacheName, 15);
-  //         //     return fetchRes;
-  //         //   });
-  //         // })
-  //         .catch(() => {
-  //           // checks the position of the .html
-  //           // in the request url if it doesnt find returns -1
-  //           if (e.request.url.indexOf(".html") > -1) {
-  //             return caches.match("/fallback");
-  //           }
-  //         })
-  //     );
-  //   });
+addEventListener("fetch", (event) => {
+  // Prevent the default, and handle the request ourselves.
+  // Ignore non-GET requests
+  // if (req.method !== "GET") {
+  //   return;
+  // }
+  // // Ignore images
+  // if (req.headers.get("Accept").indexOf("image") === 0) {
+  //   return;
+  // }
+  // if (request.headers.get('Accept').indexOf('image') !== -1)
+  event.respondWith(
+    caches.match(event.request).then((response) => {
+      // Réponse du cache, ou undefined si elle n'est pas dans le cache
+      // Si la ressource de la requête est dans le cache, on la renvoie tout simplement,
+      // sinon, on lance manuellement une requête réseau, qui elle, peut foirer si on est en offline... d'où le catch
+      return (
+        response ||
+        fetch(event.request)
+          .then((responseFetch) => {
+            caches
+              .open(dynamicCacheName)
+              .then((cache) => cache.put(event.request, responseFetch));
+
+            return responseFetch.clone();
+            // return response;
+          })
+          .catch(() => caches.match("fallback/"))
+      );
+    })
+  );
 });
 
 // fires when we activate a new service worker
 self.addEventListener("activate", (e) => {
-  console.log("delete cache on activate" + e);
-  // waitUntil epects one promise back
+  // waitUntil expects one promise back
   e.waitUntil(
     caches.keys().then((keys) => {
-      console.log(keys);
       // when all resolve return one promise
       Promise.all(
         keys
           .filter((key) => key !== staticCacheName && key !== dynamicCacheName)
-          .map((key) => caches.delete())
+          .map((key) => caches.delete(key))
       );
     })
   );
