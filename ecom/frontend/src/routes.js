@@ -11,11 +11,13 @@ import BookDetail from "./components/Books/BookDetailPage";
 import BookListPage from "./components/Books/BookListPage";
 import BookUpdate from "./components/Books/BookUpdatePage/";
 import BookAdd from "./components/Books/BookAddPage/";
+import FallBack from "./components/FallBackPage";
 
 const BaseRouter = (props) => {
   return (
     <Hoc>
       <Route exact path="/book/add/" component={BookAdd} />
+      <Route exact path="/fallback/" component={FallBack} />
       <Route
         exact
         path="/books/:bookID"

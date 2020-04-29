@@ -16,79 +16,6 @@ const isLocalhost = Boolean(
     )
 );
 
-const staticCacheName = "site-static";
-const dynamicCacheName = "site-dynamic";
-const assets = [
-  "/",
-  "https://bootswatch.com/4/cosmo/bootstrap.min.css",
-  "https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700&display=swap",
-  "https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&subset=latin",
-  "https://code.jquery.com/jquery-3.3.1.slim.min.js",
-  "/fallback",
-];
-
-const limitCacheSize = (cacheName, size) => {
-  caches.open(cacheName).then((cache) => {
-    cache.keys().then((keys) => {
-      if (keys.length > size) {
-        cache.delete(keys[0]).then(limitCacheSize(cacheName, size));
-      }
-    });
-  });
-};
-
-window.addEventListener("fetch", (e) => {
-  console.log("fetching" + e);
-  // pause the event and respond with our custom event
-  // check if url is in the pre cache
-  e.respondWith(e.request).then((cacheRes) => {
-    return (
-      cacheRes ||
-      fetch(e.request)
-        .then((fetchRes) => {
-          return caches.open(dynamicCacheName).then((cache) => {
-            cache.put(e.request.url, fetchRes.clone());
-            limitCacheSize(dynamicCacheName, 15);
-            return fetchRes;
-          });
-        })
-        .catch(() => {
-          // checks the position of the .html
-          // in the request url if it doesnt find returns -1
-          if (e.request.url.indexOf(".html") > -1) {
-            return caches.match("/fallback");
-          }
-        })
-    );
-  });
-});
-
-window.addEventListener("install", (e) => {
-  console.log("caching" + e);
-  e.waitUntil(
-    caches.open(staticCacheName).then((cache) => {
-      cache.addAll(assets);
-    })
-  );
-});
-
-// fires when we activate a new service worker
-window.addEventListener("activate", (e) => {
-  console.log("delete cache on activate" + e);
-  // waitUntil epects one promise back
-  e.waitUntil(
-    caches.keys().then((keys) => {
-      console.log(keys);
-      // when all resolve return one promise
-      Promise.all(
-        keys
-          .filter((key) => key !== staticCacheName && key !== dynamicCacheName)
-          .map((key) => caches.delete())
-      );
-    })
-  );
-});
-
 export default function register() {
   // checks the env variable and whether the browser supports service workers
   if ("serviceWorker" in navigator) {
@@ -128,7 +55,6 @@ function registerValidSW(swUrl) {
   navigator.serviceWorker
     .register(swUrl)
     .then((registration) => {
-      console.log(registration);
       registration.onupdatefound = () => {
         const installingWorker = registration.installing;
         installingWorker.onstatechange = () => {
@@ -169,11 +95,9 @@ function checkValidServiceWorker(swUrl) {
             window.location.reload();
           });
         });
-        console.log("Nok.");
       } else {
         // Service worker found. Proceed as normal.
         registerValidSW(swUrl);
-        console.log("Ok.");
       }
     })
     .catch(() => {
