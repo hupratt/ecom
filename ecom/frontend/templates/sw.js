@@ -31,13 +31,13 @@ const limitCacheSize = (cacheName, size) => {
 addEventListener("fetch", (event) => {
   // Prevent the default, and handle the request ourselves.
   // Ignore non-GET requests
-  // if (req.method !== "GET") {
-  //   return;
-  // }
-  // // Ignore images
-  // if (req.headers.get("Accept").indexOf("image") === 0) {
-  //   return;
-  // }
+  if (event.request.method !== "GET") {
+    return;
+  }
+  // Ignore images
+  if (event.request.headers.get("Accept").indexOf("image") === 0) {
+    return;
+  }
   // if (request.headers.get('Accept').indexOf('image') !== -1)
   event.respondWith(
     caches.match(event.request).then((response) => {
@@ -50,12 +50,14 @@ addEventListener("fetch", (event) => {
           .then((responseFetch) => {
             caches
               .open(dynamicCacheName)
-              .then((cache) => cache.put(event.request, responseFetch));
+              .then((cache) => cache.put(event.request, responseFetch))
+              .catch(() =>
+                caches.match("/fallback/").then((response) => response)
+              );
 
             return responseFetch.clone();
-            // return response;
           })
-          .catch(() => caches.match("fallback/"))
+          .catch(() => caches.match("/fallback/").then((response) => response))
       );
     })
   );

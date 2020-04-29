@@ -116,6 +116,10 @@
   font-size: 0.95em !important;
 }
 
+.container-forms {
+  position: relative;
+}
+
 .container-forms label {
   font-size: 16px;
   color: #636363;
@@ -4434,7 +4438,6 @@ label
 }
 
 .ui.divided.grid {
-  margin-left: 20vw;
   position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4849,12 +4852,6 @@ label
   }
 }
 
-@media screen and (max-width: 885px) {
-  .ui.divided.grid {
-    margin-left: 40vw;
-  }
-}
-
 @media screen and (max-width: 759px) {
   .inner-header .col-lg-2.col-md-2 {
     width: 30%;
@@ -4894,9 +4891,6 @@ label
         -ms-flex-pack: center;
             justify-content: center;
   }
-  .ui.divided.grid {
-    margin-left: 0vw;
-  }
   .container-forms {
     display: none;
   }
@@ -4926,6 +4920,24 @@ label
   .bk-list li .bk-book .bk-right h2,
   .bk-list li .bk-book .bk-left h2 {
     width: 350px;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .ui.container.booklist {
+    width: 90vw;
+  }
+}
+
+@media screen and (max-width: 830px) {
+  .ui.container.booklist {
+    width: 95vw;
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .ui.container.booklist {
+    width: 100vw;
   }
 }
 
