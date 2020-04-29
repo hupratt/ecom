@@ -1,5 +1,5 @@
-const staticCacheName = "site-static-v23";
-const dynamicCacheName = "site-dynamic-v23";
+const staticCacheName = "site-static-v1";
+const dynamicCacheName = "site-dynamic-v1";
 const assets = [
   "/static/frontend/main.js",
   "/fallback/",
@@ -38,7 +38,6 @@ addEventListener("fetch", (event) => {
   if (event.request.headers.get("Accept").indexOf("image") === 0) {
     return;
   }
-  // if (request.headers.get('Accept').indexOf('image') !== -1)
   event.respondWith(
     caches.match(event.request).then((response) => {
       // Réponse du cache, ou undefined si elle n'est pas dans le cache
@@ -46,18 +45,18 @@ addEventListener("fetch", (event) => {
       // sinon, on lance manuellement une requête réseau, qui elle, peut foirer si on est en offline... d'où le catch
       return (
         response ||
-        fetch(event.request)
-          .then((responseFetch) => {
-            caches
-              .open(dynamicCacheName)
-              .then((cache) => cache.put(event.request, responseFetch))
-              .catch(() =>
-                caches.match("/fallback/").then((response) => response)
-              );
+        fetch(event.request).then((responseFetch) => {
+          caches.open(dynamicCacheName).then((cache) => {
+            cache.put(event.request, responseFetch);
+            limitCacheSize(dynamicCacheName, 1);
+          });
+          // .catch(() =>
+          //   caches.match("/fallback/").then((response) => response)
+          // );
 
-            return responseFetch.clone();
-          })
-          .catch(() => caches.match("/fallback/").then((response) => response))
+          return responseFetch.clone();
+        })
+        // .catch(() => caches.match("/fallback/").then((response) => response))
       );
     })
   );
