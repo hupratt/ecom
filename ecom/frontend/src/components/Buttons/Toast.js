@@ -1,28 +1,25 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { Message } from "semantic-ui-react";
+import { CSSTransition } from "react-transition-group";
 
-class Toast extends Component {
-  state = { visible: true };
-
-  handleDismiss = () => {
-    this.setState({ visible: false });
-  };
-
-  render() {
-    return (
-      <React.Fragment>
-        {this.state.visible && (
-          <Message
-            error={this.props.error}
-            onDismiss={this.handleDismiss}
-            header={this.props.header}
-            content={this.props.content}
-            positive={this.props.positive}
-          />
-        )}
-      </React.Fragment>
-    );
-  }
-}
+const Toast = ({ error, header, content, positive }) => {
+  const [visible, setVisible] = useState(true);
+  return (
+    <CSSTransition
+      in={visible}
+      classNames="fadeout"
+      unmountOnExit
+      timeout={300}
+    >
+      <Message
+        error={error}
+        onDismiss={() => setVisible(!visible)}
+        header={header}
+        content={content}
+        positive={positive}
+      />
+    </CSSTransition>
+  );
+};
 
 export default Toast;
