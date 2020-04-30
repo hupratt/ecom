@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import url("https://fonts.googleapis.com/css?family=Caveat|Pacifico&display=swap");
 .container-forms {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -142,6 +143,14 @@
   --youtube-color: #0b7b8f;
 }
 
+/* relative to the index.scss file */
+@font-face {
+  font-family: "SqueakyChalkSound";
+  src: url(../fonts/SqueakyChalkSound.ttf) format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   margin: 0;
   height: 100%;
@@ -166,7 +175,7 @@ h6 {
 }
 
 h1 {
-  font-size: 70px;
+  font-size: 6rem;
 }
 
 h2 {
@@ -174,7 +183,7 @@ h2 {
 }
 
 h3 {
-  font-size: 30px;
+  font-size: 3rem;
 }
 
 h4 {
@@ -4435,6 +4444,47 @@ label
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+
+.container-wrapper {
+  max-width: 1430px;
+  margin: auto;
+}
+
+.container-cta {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 20px;
+  border-radius: 15px;
+  background-image: url(https://bookshop-images-f1492f08-f236-4a55-afb7-70ded209cb24.s3.eu-west-2.amazonaws.com/resources/image-back-to-school.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+  display: block;
+}
+
+.container-cta h1 {
+  font-family: "Caveat", cursive;
+  color: white;
+  padding-left: 360px;
+  padding-top: 70px;
+}
+
+.container-cta h3 {
+  font-family: "Caveat", cursive;
+  color: white;
+  padding-left: 360px;
+}
+
+.container-cta h3 a {
+  text-decoration: underline;
+  padding-left: 0px;
 }
 
 .ui.divided.grid {

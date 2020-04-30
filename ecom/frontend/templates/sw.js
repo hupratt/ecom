@@ -1,7 +1,7 @@
-const staticCacheName = "site-static-v1";
-const dynamicCacheName = "site-dynamic-v1";
+const staticCacheName = "site-static-v2";
+const dynamicCacheName = "site-dynamic-v2";
 const assets = [
-  "/static/frontend/main.js",
+  // "/static/frontend/main.js",
   "/fallback/",
   "https://use.fontawesome.com/releases/v5.7.2/webfonts/fa-solid-900.woff2",
   "https://use.fontawesome.com/releases/v5.7.2/webfonts/fa-brands-400.woff2",

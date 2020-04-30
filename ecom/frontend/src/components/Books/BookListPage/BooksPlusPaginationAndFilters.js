@@ -13,7 +13,7 @@ const propTypes = {
   onSelectRadio: PropTypes.func.isRequired,
   paginatedData: PropTypes.array.isRequired,
   language: PropTypes.string.isRequired,
-  handleClickOnBook: PropTypes.func.isRequired
+  handleClickOnBook: PropTypes.func.isRequired,
 };
 
 const BooksPlusPaginationAndFilters = ({
@@ -27,12 +27,20 @@ const BooksPlusPaginationAndFilters = ({
   handleSetActiveCategory,
   authors,
   onSliderChange,
-  sliderValues
+  sliderValues,
 }) => {
   const { t } = useTranslation();
   return (
-    <Container className="booklist">
-      <React.Fragment>
+    <React.Fragment>
+      <div className="container-wrapper">
+        <div className="container container-cta">
+          <h1>European School books</h1>
+          <h3>
+            Available <a>here</a>
+          </h3>
+        </div>
+      </div>
+      <Container className="booklist">
         <div className="container container-forms">
           <LanguageFilter onSelectRadio={onSelectRadio} language={language} />
           <AuthorFilter onSelectAuthor={onSelectAuthor} authors={authors} />
@@ -44,7 +52,7 @@ const BooksPlusPaginationAndFilters = ({
           <p>
             {t("Displaying x of y", {
               fraction: paginatedData.length,
-              total: length
+              total: length,
             })}
           </p>
         </div>
@@ -54,8 +62,8 @@ const BooksPlusPaginationAndFilters = ({
           paginatedDataLength={paginatedData.length}
           length={length}
         />
-      </React.Fragment>
-    </Container>
+      </Container>
+    </React.Fragment>
   );
 };
 
