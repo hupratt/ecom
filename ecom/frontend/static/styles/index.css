@@ -4496,22 +4496,23 @@ label
 .container-cta i {
   position: absolute;
   float: right;
-  bottom: 265px;
+  bottom: 225px;
   color: white;
-  right: 40px;
+  right: 20px;
+  padding: 30px;
 }
 
 .container-cta h1 {
   font-family: "Caveat", cursive;
   color: white;
-  padding-left: 360px;
-  padding-top: 70px;
+  padding-left: 20vw;
+  padding-top: 8vh;
 }
 
 .container-cta h3 {
   font-family: "Caveat", cursive;
   color: white;
-  padding-left: 360px;
+  padding-left: 20vw;
 }
 
 .container-cta h3 a {

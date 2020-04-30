@@ -21,7 +21,7 @@ const CallToAction = () => {
           <h3>
             Available <a>here</a>
           </h3>
-          <a onClick={handleClick}>
+          <a onClick={handleClick} href="#">
             <i className="fas fa-times"></i>
           </a>
         </div>
