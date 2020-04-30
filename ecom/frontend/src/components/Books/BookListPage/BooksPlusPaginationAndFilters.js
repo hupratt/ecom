@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import LanguageFilter from "../../Filters/LanguageFilter";
 import AuthorFilter from "../../Filters/AuthorFilter";
 import CategoryFilter from "../../Filters/CategoryFilter";
@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import MySlider from "../../Buttons/Slider";
 import { Container } from "semantic-ui-react";
 import { useTranslation } from "react-i18next";
+import { CSSTransition } from "react-transition-group";
 
 const propTypes = {
   bookPerPage: PropTypes.number.isRequired,
@@ -29,17 +30,25 @@ const BooksPlusPaginationAndFilters = ({
   onSliderChange,
   sliderValues,
 }) => {
+  const [cta, setCTA] = useState(true);
+
   const { t } = useTranslation();
   return (
     <React.Fragment>
-      <div className="container-wrapper">
-        <div className="container container-cta">
-          <h1>European School books</h1>
-          <h3>
-            Available <a>here</a>
-          </h3>
+      <CSSTransition in={cta} classNames="fadeout" unmountOnExit timeout={300}>
+        <div className="container-wrapper">
+          <div className="container container-cta">
+            <h1>European School books</h1>
+            <h3>
+              Available <a>here</a>
+            </h3>
+            <a onClick={() => setCTA(!cta)}>
+              <i className="fas fa-times"></i>
+            </a>
+          </div>
         </div>
-      </div>
+      </CSSTransition>
+
       <Container className="booklist">
         <div className="container container-forms">
           <LanguageFilter onSelectRadio={onSelectRadio} language={language} />

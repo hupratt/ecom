@@ -36,6 +36,14 @@
   display: block;
 }
 
+.container-cta i {
+  position: relative;
+  float: right;
+  bottom: 210px;
+  color: white;
+  right: 20px;
+}
+
 .container-cta h1 {
   font-family: "Caveat", cursive;
   color: white;
