@@ -10,12 +10,10 @@ import { debounce } from "throttle-debounce";
 import { searchThis } from "../../actions/navigation";
 import BaseRouter from "../../routes";
 import { bookListURL } from "../../constants";
-
 import { fetchBooks, loadmoar } from "../../actions/books";
 import { fetchCart } from "../../actions/cart";
 import { userIsStaff } from "../../actions/auth";
 import queryString from "query-string";
-import { CSSTransition } from "react-transition-group";
 
 class CustomLayout extends React.Component {
   state = {
@@ -236,6 +234,7 @@ class CustomLayout extends React.Component {
             </div>
           </div>
         </header>
+
         <BaseRouter
           onSelectAuthor={this.onSelectAuthor}
           onSliderChange={this.onSliderChange}

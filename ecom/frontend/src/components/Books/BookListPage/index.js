@@ -11,6 +11,7 @@ import { Trans } from "react-i18next";
 import { fetchBooks } from "../../../actions/books";
 import queryString from "query-string";
 import { userIsStaff } from "../../../actions/auth";
+import CallToAction from "../../Buttons/CallToAction";
 
 const propTypes = {
   data: PropTypes.array.isRequired,
@@ -159,6 +160,7 @@ class BookList extends React.Component {
                     <React.Fragment />
                   )}
                 </div>
+                <CallToAction />
               </div>
             </div>
           </div>
