@@ -44,6 +44,7 @@ class BookDetailPage extends React.Component {
       history,
       user_name,
       user_staff,
+      loading,
     } = this.props;
 
     return (
@@ -102,6 +103,7 @@ class BookDetailPage extends React.Component {
               history={history}
               user_name={user_name}
               user_staff={user_staff}
+              loading={loading}
             />
           </Container>
         )}

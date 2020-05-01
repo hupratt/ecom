@@ -5,7 +5,7 @@ import { bookDetailURL, endpoint } from "../constants";
 
 export const fetchBook = (id, dataIsCached = false) => {
   return (dispatch) => {
-    dispatch({ type: actionTypes.LOADING });
+    dispatch({ type: actionTypes.LOADING_BOOK });
     console.log(`running axios to fetch book number ${id}`);
     axios
       .get(bookDetailURL(id))

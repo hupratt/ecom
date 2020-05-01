@@ -11,12 +11,12 @@ const initState = {
   language: "All",
   dataIsCached: false,
   offset: 0,
-  _length: 0
+  _length: 0,
 };
 
 const loading = (state, action) => {
   return updateObject(state, {
-    loading: true
+    loading: true,
   });
 };
 
@@ -25,7 +25,7 @@ const fetchItemsSuccess = (state, action) => {
     data: action.data,
     error: null,
     loading: false,
-    _length: action._length
+    _length: action._length,
   });
 };
 
@@ -33,18 +33,19 @@ const fetchCache = (state, action) => {
   return updateObject(state, {
     error: null,
     loading: false,
-    dataIsCached: true
+    dataIsCached: true,
   });
 };
 const fetchItemsFail = (state, action) => {
   return updateObject(state, {
     error: action.error,
-    loading: false
+    loading: false,
   });
 };
 const pageChanged = (state, action) => {
   return updateObject(state, {
-    currentPage: action.currentPage
+    currentPage: action.currentPage,
+    loading: false,
   });
 };
 const loadMoar = (state, action) => {
@@ -53,13 +54,13 @@ const loadMoar = (state, action) => {
     data: [...state.data, ...action.data],
     error: null,
     bookPerPage: action.bookPerPage,
-    loading: false
+    loading: false,
   });
 };
 
 const reducer = (state = initState, action) => {
   switch (action.type) {
-    case actionTypes.LOADING:
+    case actionTypes.LOADING_BOOKS:
       return loading(state, action);
     case actionTypes.FETCH_SUCCESS:
       return fetchItemsSuccess(state, action);

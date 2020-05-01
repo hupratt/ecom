@@ -69,6 +69,11 @@ export const authLogin = (username, password) => {
         axios.defaults.headers.common["Authorization"] = "Token " + token;
         dispatch(authSuccess(token));
         dispatch(checkAuthTimeout(36000));
+
+        /* FIX ME, changing the state 
+        is not showing the edit 
+        ²and add page buttons */
+        window.location.reload();
       })
       .catch((err) => {
         dispatch(authFail(err));

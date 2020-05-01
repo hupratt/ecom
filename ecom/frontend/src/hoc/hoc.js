@@ -28,7 +28,8 @@ export const withLoading = (WrappedComponent) => {
           </Segment>
         );
       }
-      return <WrappedComponent {...this.props} />;
+      const { loading, ...passed } = this.props;
+      return <WrappedComponent {...passed} />;
     }
   }
   return HOC;

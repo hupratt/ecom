@@ -115,6 +115,9 @@ class CustomLayout extends React.Component {
   };
 
   clearFilters = () => {
+    /* FIX ME, changing the state 
+    is not triggering page refresh */
+
     this.setState(
       {
         language: "",

@@ -61,7 +61,7 @@ const updateSuccess = (state, action) => {
 };
 const reducer = (state = initState, action) => {
   switch (action.type) {
-    case actionTypes.LOADING:
+    case actionTypes.LOADING_BOOK:
       return loading(state, action);
     case actionTypes.FETCH_FAIL:
       return fetchItemsFail(state, action);
