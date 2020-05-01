@@ -104,7 +104,7 @@ const BookGrid = ({
           ) : (
             <CoolSVGResultsIsEmpty />
           )}
-          {length - paginatedDataLength > 0 ? (
+          {length - paginatedDataLength > 0 &&
             [...Array(length - paginatedDataLength || 0)]
               .slice(0, 10)
               .map((e, i) => (
@@ -146,10 +146,7 @@ const BookGrid = ({
                     </p>
                   </div>
                 </li>
-              ))
-          ) : (
-            <CoolSVGResultsIsEmpty />
-          )}
+              ))}
         </ul>
       </Grid>
     </React.Fragment>

@@ -125,6 +125,7 @@ class BookList extends React.Component {
       isAuthenticated,
       user_name,
       user_staff,
+      loading,
     } = this.props;
     return (
       <React.Fragment>
@@ -181,6 +182,7 @@ class BookList extends React.Component {
           sliderValues={sliderValues}
           error={error}
           errorCart={errorCart}
+          loading={loading}
         />
 
         {this.props.children}

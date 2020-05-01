@@ -1,18 +1,30 @@
 import React from "react";
-import { Dimmer, Loader, Segment, Message } from "semantic-ui-react";
+import { Dimmer, Loader, Segment, Image } from "semantic-ui-react";
 import Toast from "../components/Buttons/Toast";
 
 export const Hoc = (props) => props.children;
 
 export const withLoading = (WrappedComponent) => {
   class HOC extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = { imageLoaded: false };
+    }
     render() {
       if (this.props.loading) {
         return (
-          <Segment>
+          <Segment style={{ border: "none", boxShadow: "unset" }}>
             <Dimmer active inverted>
               <Loader inverted>Loading</Loader>
             </Dimmer>
+            <Image
+              onLoad={() => this.setState({ imageLoaded: true })}
+              style={{
+                width: "100vw",
+                marginLeft: "5vw",
+              }}
+              src="https://bookshop-images-f1492f08-f236-4a55-afb7-70ded209cb24.s3.eu-west-2.amazonaws.com/resources/loader-waiting-poorquality.png"
+            />
           </Segment>
         );
       }
