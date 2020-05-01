@@ -12,11 +12,18 @@ const initState = {
   dataIsCached: false,
   offset: 0,
   _length: 0,
+  moreloading: false,
 };
 
 const loading = (state, action) => {
   return updateObject(state, {
     loading: true,
+  });
+};
+
+const moreloading = (state, action) => {
+  return updateObject(state, {
+    moreloading: true,
   });
 };
 
@@ -54,7 +61,7 @@ const loadMoar = (state, action) => {
     data: [...state.data, ...action.data],
     error: null,
     bookPerPage: action.bookPerPage,
-    loading: false,
+    moreloading: false,
   });
 };
 
@@ -62,6 +69,8 @@ const reducer = (state = initState, action) => {
   switch (action.type) {
     case actionTypes.LOADING_BOOKS:
       return loading(state, action);
+    case actionTypes.LOADING_MORE_BOOKS:
+      return moreloading(state, action);
     case actionTypes.FETCH_SUCCESS:
       return fetchItemsSuccess(state, action);
     case actionTypes.FETCH_FAIL:

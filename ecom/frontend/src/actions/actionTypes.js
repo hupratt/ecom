@@ -9,6 +9,7 @@ export const CART_FAIL = "CART_FAIL";
 export const FETCH_SUCCESS = "FETCH_SUCCESS";
 export const FETCH_FAIL = "FETCH_FAIL";
 export const LOADING_BOOKS = "LOADING_BOOKS";
+export const LOADING_MORE_BOOKS = "LOADING_MORE_BOOKS";
 export const LOADING_BOOK = "LOADING_BOOK";
 export const PAGE_CHANGED = "PAGE_CHANGED";
 export const RADIO_BUTTON_CLICK = "RADIO_BUTTON_CLICK";

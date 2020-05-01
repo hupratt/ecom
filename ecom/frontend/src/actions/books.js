@@ -39,7 +39,7 @@ export const onPageChange = (pageNumber) => {
 
 export const loadmoar = (url_endpoint, bookPerPage, offset) => {
   return (dispatch) => {
-    dispatch({ type: actionTypes.LOADING_BOOKS });
+    dispatch({ type: actionTypes.LOADING_MORE_BOOKS });
     axios
       .get(url_endpoint)
       .then((res) => {
