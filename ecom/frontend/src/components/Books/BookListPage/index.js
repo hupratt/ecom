@@ -12,6 +12,7 @@ import { fetchBooks } from "../../../actions/books";
 import queryString from "query-string";
 import { userIsStaff } from "../../../actions/auth";
 import CallToAction from "../../Buttons/CallToAction";
+import _ from "lodash";
 
 const propTypes = {
   data: PropTypes.array.isRequired,
@@ -109,7 +110,6 @@ class BookList extends React.Component {
   };
 
   render() {
-    console.log(this.props.loading);
     const {
       data,
       bookPerPage,
@@ -163,9 +163,11 @@ class BookList extends React.Component {
                     <React.Fragment />
                   )}
                 </div>
-                <button onClick={clearFilters} className="btn clear-filters">
-                  Clear filters
-                </button>
+                {_.size(queryString.parse(this.props.location.search)) > 0 && (
+                  <button onClick={clearFilters} className="btn clear-filters">
+                    <Trans i18nKey="Clear filters" />
+                  </button>
+                )}
                 <CallToAction />
               </div>
             </div>

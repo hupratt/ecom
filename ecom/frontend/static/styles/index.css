@@ -333,6 +333,7 @@ i.icon.lock::before {
   border-radius: 7px;
   color: gray;
   border-width: 2px;
+  margin-top: 20px;
 }
 
 .picture img {
@@ -4514,7 +4515,7 @@ label
   font-family: "Caveat", cursive;
   color: white;
   padding-left: 20vw;
-  padding-top: 8vh;
+  padding-top: 5vh;
 }
 
 .container-cta h3 {
@@ -4526,6 +4527,7 @@ label
 .container-cta h3 a {
   text-decoration: underline;
   padding-left: 0px;
+  color: white;
 }
 
 .ui.divided.grid {

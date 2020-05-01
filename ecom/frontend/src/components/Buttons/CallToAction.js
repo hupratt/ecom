@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { CSSTransition } from "react-transition-group";
+import { useTranslation } from "react-i18next";
 
 const CallToAction = () => {
+  const { t } = useTranslation();
   const [cta, setCTA] = useState(true);
   const cacheCTA = localStorage.getItem("cta") == undefined ? true : false;
   const handleClick = (_) => {
@@ -17,9 +19,10 @@ const CallToAction = () => {
     >
       <div className="container-wrapper">
         <div className="container container-cta">
-          <h1>European School books</h1>
+          <h1>{t("CTA heading")}</h1>
+          <h3>{t("CTA content")}</h3>
           <h3>
-            Available <a>here</a>
+            <a href="#">{t("CTA link")}</a>
           </h3>
           <a onClick={handleClick} href="#">
             <i className="fas fa-times"></i>
