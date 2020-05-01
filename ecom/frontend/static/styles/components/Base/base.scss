@@ -186,3 +186,42 @@ i.icon.lock::before {
   border-width: 2px;
   margin-top: 20px;
 }
+
+@media screen and (max-width: 1160px) {
+  .container-cta {
+    h1 {
+      font-size: 5rem;
+    }
+    h3 {
+      font-size: 2rem;
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .container-cta {
+    h1 {
+      font-size: 4rem;
+    }
+  }
+}
+@media screen and (max-width: 800px) {
+  .container-cta {
+    h1 {
+      font-size: 3rem;
+    }
+    h3 {
+      font-size: 1.5rem;
+    }
+  }
+}
+@media screen and (max-width: 650px) {
+  .container-cta {
+    h1 {
+      padding-left: 10vw !important;
+    }
+    h3 {
+      padding-left: 10vw !important;
+    }
+  }
+}
