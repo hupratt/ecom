@@ -327,6 +327,14 @@ i.icon.lock::before {
   opacity: 1;
 }
 
+/* Buttons */
+.clear-filters {
+  border-color: gray;
+  border-radius: 7px;
+  color: gray;
+  border-width: 2px;
+}
+
 .picture img {
   width: 100%;
   height: 100%;

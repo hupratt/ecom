@@ -169,3 +169,19 @@ i.icon.lock::before {
   box-shadow: 0 0 3px var(--youtube-color), 0 0 1px var(--youtube-color);
   opacity: 1;
 }
+
+/* Buttons */
+
+// .clear-filters:before {
+//   font-family: "Font Awesome 5 Free";
+//   font-weight: 900;
+//   content: "\f2ed";
+//   color: white;
+// }
+
+.clear-filters {
+  border-color: gray;
+  border-radius: 7px;
+  color: gray;
+  border-width: 2px;
+}

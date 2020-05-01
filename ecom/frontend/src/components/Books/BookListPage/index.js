@@ -127,6 +127,7 @@ class BookList extends React.Component {
       user_name,
       user_staff,
       loading,
+      clearFilters,
     } = this.props;
     return (
       <React.Fragment>
@@ -162,6 +163,9 @@ class BookList extends React.Component {
                     <React.Fragment />
                   )}
                 </div>
+                <button onClick={clearFilters} className="btn clear-filters">
+                  Clear filters
+                </button>
                 <CallToAction />
               </div>
             </div>

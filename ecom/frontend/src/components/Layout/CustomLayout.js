@@ -261,7 +261,6 @@ class CustomLayout extends React.Component {
           </div>
         </header>
 
-        <button onClick={this.clearFilters}>Clear filters</button>
         <BaseRouter
           onSelectAuthor={this.onSelectAuthor}
           onSliderChange={this.onSliderChange}
@@ -273,6 +272,7 @@ class CustomLayout extends React.Component {
           category={category}
           error={error}
           errorCart={errorCart}
+          clearFilters={this.clearFilters}
         />
         <BottomNavigation />
 
