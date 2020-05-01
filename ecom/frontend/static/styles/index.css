@@ -9,6 +9,9 @@
   display: -ms-flexbox;
   display: flex;
   width: 20vw;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
   position: absolute;
 }
 
@@ -4532,6 +4535,7 @@ label
 
 .ui.divided.grid {
   position: relative;
+  width: 80vw;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

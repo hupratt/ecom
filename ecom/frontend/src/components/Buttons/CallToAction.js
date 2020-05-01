@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { CSSTransition } from "react-transition-group";
 import { useTranslation } from "react-i18next";
 
-const CallToAction = () => {
+const CallToAction = ({ handleSetActiveCategory }) => {
   const { t } = useTranslation();
   const [cta, setCTA] = useState(true);
   const cacheCTA = localStorage.getItem("cta") == undefined ? true : false;
@@ -22,7 +22,9 @@ const CallToAction = () => {
           <h1>{t("CTA heading")}</h1>
           <h3>{t("CTA content")}</h3>
           <h3>
-            <a href="#">{t("CTA link")}</a>
+            <a onClick={handleSetActiveCategory} val="Ensino">
+              {t("CTA link")}
+            </a>
           </h3>
           <a onClick={handleClick} href="#">
             <i className="fas fa-times"></i>

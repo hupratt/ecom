@@ -66,6 +66,7 @@
 
 .ui.divided.grid {
   position: relative;
+  width: 80vw;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

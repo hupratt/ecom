@@ -168,7 +168,9 @@ class BookList extends React.Component {
                     <Trans i18nKey="Clear filters" />
                   </button>
                 )}
-                <CallToAction />
+                <CallToAction
+                  handleSetActiveCategory={handleSetActiveCategory}
+                />
               </div>
             </div>
           </div>
