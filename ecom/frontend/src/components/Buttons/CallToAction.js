@@ -22,7 +22,7 @@ const CallToAction = ({ handleSetActiveCategory }) => {
           <h1>{t("CTA heading")}</h1>
           <h3>{t("CTA content")}</h3>
           <h3>
-            <a onClick={handleSetActiveCategory} val="Ensino">
+            <a onClick={handleSetActiveCategory} href="#" val="Ensino">
               {t("CTA link")}
             </a>
           </h3>
