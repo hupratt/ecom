@@ -114,6 +114,22 @@ class CustomLayout extends React.Component {
     document.removeEventListener("scroll", this.trackScrolling);
   };
 
+  clearFilters = () => {
+    this.setState(
+      {
+        language: "",
+        authors: new Map(),
+        category: "",
+        sliderValues: [0, 100],
+        search: "",
+      },
+      () => {
+        fetchBooks(bookListURL());
+        this.props.history.push("/");
+        window.location.reload();
+      }
+    );
+  };
   onSelectAuthor = (e, data) => {
     const item = e.target.textContent;
     const isChecked = data.checked;
@@ -202,7 +218,14 @@ class CustomLayout extends React.Component {
   };
 
   render() {
-    const { authenticated, cart, error, errorCart, success } = this.props;
+    const {
+      authenticated,
+      cart,
+      error,
+      errorCart,
+      success,
+      fetchBooks,
+    } = this.props;
     const { language, sliderValues, authors, category } = this.state;
     return (
       <React.Fragment>
@@ -235,6 +258,7 @@ class CustomLayout extends React.Component {
           </div>
         </header>
 
+        <button onClick={this.clearFilters}>Clear filters</button>
         <BaseRouter
           onSelectAuthor={this.onSelectAuthor}
           onSliderChange={this.onSliderChange}
