@@ -4,14 +4,13 @@ import { send } from "emailjs-com";
 import { Trans } from "react-i18next";
 import FormExampleFieldControlId from "./SemanticForm";
 import { CSSTransition } from "react-transition-group";
-
-export default class extends React.Component {
+import { withTranslation } from "react-i18next";
+class EmailForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       message_html: "",
-      // email: "lapetiteportugaise.bxl@gmail.com",
-      email: "cortohprattdo@gmail.com",
+      email: "lapetiteportugaise.bxl@gmail.com",
       success: null,
       error: null,
       showForm: false,
@@ -49,6 +48,7 @@ export default class extends React.Component {
 
   sendFeedback = (templateId, variables) => {
     const userId = "user_mQ8MeAwQ0zwwc5ftEn2LO";
+    const { t } = this.props;
     if (
       variables.message_html.length > 0 ||
       variables.email_client.length > 0
@@ -64,28 +64,25 @@ export default class extends React.Component {
         });
     } else {
       this.setState({
-        error: "No message",
+        error: t("Missing fields"),
       });
     }
   };
   render() {
+    const { t } = this.props;
     const { success, error, showForm, message_html } = this.state;
     const { placeholder } = this.props;
+    const thanks = t("Thank you");
+    const error_message = t("There was an error");
 
     return (
       <React.Fragment>
-        {success && (
-          <Message
-            positive
-            header={success}
-            content="Thank you for your message. We will reply as soon as possible"
-          />
-        )}
+        {success && <Message positive header={success} content={thanks} />}
         {error && (
           <Message
             error
-            header="There was an error"
-            content={JSON.stringify(`${error}. Our teams are looking into it`)}
+            header={error_message}
+            content={JSON.stringify(`${error}`)}
           />
         )}
 
@@ -126,3 +123,5 @@ export default class extends React.Component {
     );
   }
 }
+
+export default withTranslation()(EmailForm);

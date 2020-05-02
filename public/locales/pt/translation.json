@@ -56,5 +56,8 @@
   "CTA link": "Veja aqui",
   "Message": "Mensagem",
   "Email": "Email",
-  "Name": "Nome"
+  "Name": "Nome",
+  "Thank you": "Obrigado pela sua mensagem. Iremos dar seguimento à sua mensagem o mais depressa possível",
+  "There was an error": "Houve um erro",
+  "Missing fields": "Os campos obrigatórios estão vazios"
 }
