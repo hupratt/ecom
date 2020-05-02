@@ -7,25 +7,37 @@ export default class extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      feedback: "",
-      email: "lapetiteportugaise.bxl@gmail.com",
-      success: undefined,
-      error: undefined,
+      message_html: "",
+      // email: "lapetiteportugaise.bxl@gmail.com",
+      email: "cortohprattdo@gmail.com",
+      success: null,
+      error: null,
       showForm: false,
+      email_client: "",
+      name_client: "",
     };
   }
 
-  handleChange = (event) => {
-    this.setState({ feedback: event.target.value });
+  handleChangeTextArea = (event) => {
+    this.setState({ message_html: event.target.value });
+  };
+  handleChangeEmail = (event) => {
+    this.setState({ email_client: event.target.value });
+  };
+  handleChangeName = (event) => {
+    this.setState({ name_client: event.target.value });
   };
 
   handleSubmit = (event) => {
     const templateId = "template_9gmUuqgs";
-
+    const { message_html, email_client, name_client, email } = this.state;
+    const { isbn } = this.props;
     this.sendFeedback(templateId, {
-      message_html: this.state.feedback,
-      email: this.state.email,
-      isbn: this.props.isbn,
+      message_html,
+      email_client,
+      name_client,
+      email,
+      isbn,
     });
   };
 
@@ -35,7 +47,10 @@ export default class extends React.Component {
 
   sendFeedback = (templateId, variables) => {
     const userId = "user_mQ8MeAwQ0zwwc5ftEn2LO";
-    if (variables.message_html.length > 0) {
+    if (
+      variables.message_html.length > 0 ||
+      variables.email_client.length > 0
+    ) {
       send("default_service", templateId, variables, userId)
         .then((res) => {
           this.setState({ success: `Email successfully sent!` });
@@ -52,7 +67,9 @@ export default class extends React.Component {
     }
   };
   render() {
-    const { success, error, showForm, feedback } = this.state;
+    const { success, error, showForm, message_html } = this.state;
+    const { placeholder } = this.props;
+
     return (
       <React.Fragment>
         {success && (
@@ -69,7 +86,7 @@ export default class extends React.Component {
             content={JSON.stringify(`${error}. Our teams are looking into it`)}
           />
         )}
-        <FormExampleFieldControlId />
+
         {showForm == false ? (
           <div className="email">
             <a
@@ -81,23 +98,14 @@ export default class extends React.Component {
             </a>
           </div>
         ) : (
-          <form className="mailing">
-            <textarea
-              id="mailing"
-              name="mailing"
-              onChange={this.handleChange}
-              placeholder={this.props.placeholder}
-              required
-              value={feedback}
-              style={{ width: "100%", height: "150px" }}
-            />
-
-            <div className="email">
-              <a className="primary-btn" href="#" onClick={this.handleSubmit}>
-                <Trans i18nKey="Submit" />
-              </a>
-            </div>
-          </form>
+          <FormExampleFieldControlId
+            handleSubmit={this.handleSubmit}
+            handleTextAreaChange={this.handleChangeTextArea}
+            handleChangeEmail={this.handleChangeEmail}
+            handleChangeName={this.handleChangeName}
+            message_html={message_html}
+            placeholder={placeholder}
+          />
         )}
       </React.Fragment>
     );

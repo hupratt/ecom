@@ -1,5 +1,6 @@
 import React from "react";
 import { Form, Input, TextArea, Button, Select } from "semantic-ui-react";
+import { useTranslation } from "react-i18next";
 
 const genderOptions = [
   { key: "m", text: "Male", value: "male" },
@@ -7,53 +8,53 @@ const genderOptions = [
   { key: "o", text: "Other", value: "other" },
 ];
 
-const FormExampleFieldControlId = () => (
-  <Form>
-    <Form.Group widths="equal">
+const FormExampleFieldControlId = ({
+  handleSubmit,
+  handleTextAreaChange,
+  message_html,
+  placeholder,
+  handleChangeEmail,
+  handleChangeName,
+}) => {
+  const { t } = useTranslation();
+  return (
+    <Form id="form-email">
+      <Form.Group widths="equal">
+        <Form.Field
+          id="form-input-control-first-name"
+          control={Input}
+          label={t("Name")}
+          placeholder={t("Name")}
+          onChange={handleChangeName}
+        />
+        <Form.Field
+          id="form-input-control-error-email"
+          control={Input}
+          label={t("Email")}
+          placeholder="your@email.com"
+          onChange={handleChangeEmail}
+          required
+        />
+      </Form.Group>
+
       <Form.Field
-        id="form-input-control-first-name"
-        control={Input}
-        label="First name"
-        placeholder="First name"
+        id="form-textarea-control-textarea"
+        control={TextArea}
+        label={t("Message")}
+        placeholder={placeholder}
+        id="mailing"
+        name="mailing"
+        onChange={handleTextAreaChange}
+        required
+        value={message_html}
       />
-      <Form.Field
-        id="form-input-control-last-name"
-        control={Input}
-        label="Last name"
-        placeholder="Last name"
-      />
-      <Form.Field
-        control={Select}
-        options={genderOptions}
-        label={{ children: "Gender", htmlFor: "form-select-control-gender" }}
-        placeholder="Gender"
-        search
-        searchInput={{ id: "form-select-control-gender" }}
-      />
-    </Form.Group>
-    <Form.Field
-      id="form-textarea-control-opinion"
-      control={TextArea}
-      label="Opinion"
-      placeholder="Opinion"
-    />
-    <Form.Field
-      id="form-input-control-error-email"
-      control={Input}
-      label="Email"
-      placeholder="joe@schmoe.com"
-      error={{
-        content: "Please enter a valid email address",
-        pointing: "below",
-      }}
-    />
-    <Form.Field
-      id="form-button-control-public"
-      control={Button}
-      content="Confirm"
-      label="Label with htmlFor"
-    />
-  </Form>
-);
+      <div className="email">
+        <a className="primary-btn" href="#" onClick={handleSubmit}>
+          {t("Submit")}
+        </a>
+      </div>
+    </Form>
+  );
+};
 
 export default FormExampleFieldControlId;
