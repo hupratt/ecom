@@ -64,7 +64,7 @@ class StripeForm extends React.Component {
     this.form.reset();
   };
   render() {
-    const { name, number, expiry, cvc, focused, issuer, formData } = this.state;
+    const { name, number, expiry, cvc, focused, issuer } = this.state;
 
     return (
       <React.Fragment>
@@ -138,7 +138,7 @@ class StripeForm extends React.Component {
                   style={{ marginTop: "10px" }}
                 >
                   Submit
-                </Button>{" "}
+                </Button>
               </div>
             </form>
           </div>
