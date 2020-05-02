@@ -90,7 +90,7 @@ const BookDetail = ({
                             <a>{el}</a>
                           )
                         )}
-                        <div className="addcart">
+                        {/* <div className="addcart">
                           <a
                             href="#"
                             className="primary-btn pd-cart"
@@ -100,7 +100,7 @@ const BookDetail = ({
                           >
                             {t("Add To Cart")}
                           </a>
-                        </div>
+                        </div> */}
                         <ShowForm isbn={book.isbn} />
 
                         <ul className="pd-tags">
