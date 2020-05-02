@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import ShowForm from "./ShowForm";
 
 const propTypes = {
   handleAddToCart: PropTypes.func.isRequired,
@@ -100,7 +101,7 @@ const BookDetail = ({
                             {t("Add To Cart")}
                           </a>
                         </div> */}
-                        <EmailForm isbn={book.isbn} />
+                        <ShowForm isbn={book.isbn} />
 
                         <ul className="pd-tags">
                           <li>

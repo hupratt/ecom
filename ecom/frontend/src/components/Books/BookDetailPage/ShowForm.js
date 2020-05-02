@@ -68,7 +68,7 @@ class ShowForm extends React.Component {
     const { t } = this.props;
     const thanks = t("Thank you");
     const error_message = t("There was an error");
-
+    console.log(showForm == true);
     return (
       <React.Fragment>
         {success && <Message positive header={success} content={thanks} />}
@@ -96,19 +96,17 @@ class ShowForm extends React.Component {
             </a>
           </div>
         </CSSTransition>
-        {showForm == true && (
-          <CSSTransition
-            in={showForm == true}
-            classNames="fadein"
-            appear
-            timeout={300}
-          >
-            <FormExampleFieldControlId
-              handleSubmit={this.handleSubmit}
-              onChangeInput={this.onChangeInput}
-            />
-          </CSSTransition>
-        )}
+        <CSSTransition
+          in={showForm == true}
+          classNames="fadein"
+          appear
+          timeout={300}
+        >
+          <FormExampleFieldControlId
+            handleSubmit={this.handleSubmit}
+            onChangeInput={this.onChangeInput}
+          />
+        </CSSTransition>
       </React.Fragment>
     );
   }

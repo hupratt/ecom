@@ -269,6 +269,18 @@ i.icon.lock::before {
   transition: opacity 1000ms, transform 1000ms, -webkit-transform 1000ms;
 }
 
+.ui.form {
+  display: none;
+}
+
+.fade-exit-done {
+  display: unset !important;
+}
+
+.fadein-enter-done {
+  display: unset !important;
+}
+
 .fadein-enter {
   opacity: 0;
 }
