@@ -240,7 +240,7 @@ const InjectedForm = withRouter(injectStripe(CheckoutFormWithRedux));
 const WrappedForm = () => (
   <Container text>
     <StripeProvider apiKey="pk_test_eRajPaamV4LUIhBv3oFmauqn">
-      <div style={{ marginTop: 200 }}>
+      <div style={{ marginTop: 100, height: "100vh" }}>
         <h2>Complete your order</h2>
         <Elements>
           <InjectedForm />
