@@ -29,6 +29,7 @@ import {
 } from "../../actions/checkout";
 import axios from "axios";
 import { resetCart } from "../../actions/cart";
+import StripeForm from "./StripeForm";
 
 const OrderPreview = ({ data }) => {
   return (
@@ -193,7 +194,7 @@ class CheckoutForm extends Component {
         ) : (
           <React.Fragment>
             <Header>Payment Details</Header>
-            <CardElement />
+
             {success && (
               <Message positive>
                 <Message.Header>Your payment was successful</Message.Header>
@@ -203,15 +204,7 @@ class CheckoutForm extends Component {
                 </p>
               </Message>
             )}
-            <Button
-              loading={loading}
-              disabled={loading}
-              primary
-              onClick={this.submit}
-              style={{ marginTop: "10px" }}
-            >
-              Submit
-            </Button>
+            <StripeForm loading={loading} submit={this.submit} />
           </React.Fragment>
         )}
       </div>
