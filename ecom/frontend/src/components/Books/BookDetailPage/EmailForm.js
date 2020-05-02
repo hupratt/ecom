@@ -2,7 +2,7 @@ import React from "react";
 import { Message } from "semantic-ui-react";
 import { send } from "emailjs-com";
 import { Trans } from "react-i18next";
-
+import FormExampleFieldControlId from "./SemanticForm";
 export default class extends React.Component {
   constructor(props) {
     super(props);
@@ -11,21 +11,21 @@ export default class extends React.Component {
       email: "lapetiteportugaise.bxl@gmail.com",
       success: undefined,
       error: undefined,
-      showForm: false
+      showForm: false,
     };
   }
 
-  handleChange = event => {
+  handleChange = (event) => {
     this.setState({ feedback: event.target.value });
   };
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     const templateId = "template_9gmUuqgs";
 
     this.sendFeedback(templateId, {
       message_html: this.state.feedback,
       email: this.state.email,
-      isbn: this.props.isbn
+      isbn: this.props.isbn,
     });
   };
 
@@ -37,17 +37,17 @@ export default class extends React.Component {
     const userId = "user_mQ8MeAwQ0zwwc5ftEn2LO";
     if (variables.message_html.length > 0) {
       send("default_service", templateId, variables, userId)
-        .then(res => {
+        .then((res) => {
           this.setState({ success: `Email successfully sent!` });
         })
-        .catch(err => {
+        .catch((err) => {
           this.setState({
-            error: `The email could not be sent: ${err.text}`
+            error: `The email could not be sent: ${err.text}`,
           });
         });
     } else {
       this.setState({
-        error: "No message"
+        error: "No message",
       });
     }
   };
@@ -69,6 +69,7 @@ export default class extends React.Component {
             content={JSON.stringify(`${error}. Our teams are looking into it`)}
           />
         )}
+        <FormExampleFieldControlId />
         {showForm == false ? (
           <div className="email">
             <a
