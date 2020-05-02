@@ -133,8 +133,8 @@ i.icon.lock::before {
 
 .fadein-enter-active {
   opacity: 1;
-  -webkit-transition: opacity 200ms ease-in-out;
-  transition: opacity 200ms ease-in-out;
+  -webkit-transition: opacity 1000ms ease-in-out;
+  transition: opacity 1000ms ease-in-out;
 }
 
 .fadein-exit {
