@@ -8,14 +8,7 @@ const genderOptions = [
   { key: "o", text: "Other", value: "other" },
 ];
 
-const FormExampleFieldControlId = ({
-  handleSubmit,
-  handleTextAreaChange,
-  message_html,
-  placeholder,
-  handleChangeEmail,
-  handleChangeName,
-}) => {
+const SemanticForm = ({ handleSubmit, onChangeInput }) => {
   const { t } = useTranslation();
   return (
     <Form id="form-email">
@@ -25,14 +18,16 @@ const FormExampleFieldControlId = ({
           control={Input}
           label={t("Name")}
           placeholder={t("Name")}
-          onChange={handleChangeName}
+          name="name_client"
+          onChange={onChangeInput}
         />
         <Form.Field
           id="form-input-control-error-email"
           control={Input}
           label={t("Email")}
           placeholder="your@email.com"
-          onChange={handleChangeEmail}
+          onChange={onChangeInput}
+          name="email_client"
           required
         />
       </Form.Group>
@@ -41,12 +36,11 @@ const FormExampleFieldControlId = ({
         id="form-textarea-control-textarea"
         control={TextArea}
         label={t("Message")}
-        placeholder={placeholder}
+        placeholder={t("Would buy")}
         id="mailing"
-        name="mailing"
-        onChange={handleTextAreaChange}
+        name="message_html"
+        onChange={onChangeInput}
         required
-        value={message_html}
       />
       <div className="email">
         <a className="primary-btn" href="#" onClick={handleSubmit}>
@@ -57,4 +51,4 @@ const FormExampleFieldControlId = ({
   );
 };
 
-export default FormExampleFieldControlId;
+export default SemanticForm;

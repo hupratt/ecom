@@ -59,5 +59,6 @@
   "Name": "Name",
   "Thank you": "Thank you for your message. We will reply as soon as possible",
   "There was an error": "There was an error",
-  "Missing fields": "Missing fields"
+  "Missing fields": "Missing fields",
+  "Email successfully sent !": "Email successfully sent !"
 }

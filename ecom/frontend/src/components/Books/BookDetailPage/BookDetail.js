@@ -1,9 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import EmailForm from "./EmailForm";
-import { shortDescr } from "../../utility";
 import { useTranslation } from "react-i18next";
-import { endpoint } from "../../../constants";
 
 const propTypes = {
   handleAddToCart: PropTypes.func.isRequired,
@@ -103,10 +100,7 @@ const BookDetail = ({
                             {t("Add To Cart")}
                           </a>
                         </div> */}
-                        <EmailForm
-                          isbn={book.isbn}
-                          placeholder={t("Would buy")}
-                        />
+                        <EmailForm isbn={book.isbn} />
 
                         <ul className="pd-tags">
                           <li>

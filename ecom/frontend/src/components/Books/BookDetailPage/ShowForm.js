@@ -5,7 +5,7 @@ import { Trans } from "react-i18next";
 import FormExampleFieldControlId from "./SemanticForm";
 import { CSSTransition } from "react-transition-group";
 import { withTranslation } from "react-i18next";
-class EmailForm extends React.Component {
+class ShowForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,14 +19,9 @@ class EmailForm extends React.Component {
     };
   }
 
-  handleChangeTextArea = (event) => {
-    this.setState({ message_html: event.target.value });
-  };
-  handleChangeEmail = (event) => {
-    this.setState({ email_client: event.target.value });
-  };
-  handleChangeName = (event) => {
-    this.setState({ name_client: event.target.value });
+  onChangeInput = (event) => {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
   };
 
   handleSubmit = (event) => {
@@ -55,7 +50,7 @@ class EmailForm extends React.Component {
     ) {
       send("default_service", templateId, variables, userId)
         .then((res) => {
-          this.setState({ success: `Email successfully sent!` });
+          this.setState({ success: t("Email successfully sent !") });
         })
         .catch((err) => {
           this.setState({
@@ -69,9 +64,8 @@ class EmailForm extends React.Component {
     }
   };
   render() {
+    const { success, error, showForm } = this.state;
     const { t } = this.props;
-    const { success, error, showForm, message_html } = this.state;
-    const { placeholder } = this.props;
     const thanks = t("Thank you");
     const error_message = t("There was an error");
 
@@ -111,11 +105,7 @@ class EmailForm extends React.Component {
           >
             <FormExampleFieldControlId
               handleSubmit={this.handleSubmit}
-              handleTextAreaChange={this.handleChangeTextArea}
-              handleChangeEmail={this.handleChangeEmail}
-              handleChangeName={this.handleChangeName}
-              message_html={message_html}
-              placeholder={placeholder}
+              onChangeInput={this.onChangeInput}
             />
           </CSSTransition>
         )}
@@ -124,4 +114,4 @@ class EmailForm extends React.Component {
   }
 }
 
-export default withTranslation()(EmailForm);
+export default withTranslation()(ShowForm);
