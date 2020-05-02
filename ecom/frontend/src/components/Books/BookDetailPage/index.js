@@ -10,6 +10,7 @@ import BookDetail from "./BookDetail";
 import { fetchBooks } from "../../../actions/books";
 import { Trans } from "react-i18next";
 import { userIsStaff } from "../../../actions/auth";
+import ReactGA from "react-ga";
 
 const propTypes = {
   book: PropTypes.object.isRequired,
@@ -46,7 +47,9 @@ class BookDetailPage extends React.Component {
       user_staff,
       loading,
     } = this.props;
-
+    if (process.env.GOOGLE_ANALYTICS) {
+      ReactGA.pageview(`/books/${book.id}`);
+    }
     return (
       <React.Fragment>
         {/* Breadcrumb Section Begin */}

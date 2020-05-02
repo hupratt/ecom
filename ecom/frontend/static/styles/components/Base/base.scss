@@ -93,6 +93,9 @@ i.icon.lock::before {
   content: "\f023" !important;
 }
 
+.flag-select {
+  z-index: 0;
+}
 .ui.error.message,
 .ui.positive.message {
   .close.icon {
@@ -123,10 +126,10 @@ i.icon.lock::before {
   transform: scale(0.8);
   transition: opacity 1000ms, transform 1000ms;
 }
-.ui.form {
+.product-details .ui.form {
   display: none;
 }
-.fade-exit-done {
+.fadeout-exit-done {
   display: unset !important;
 }
 .fadein-enter-done {
