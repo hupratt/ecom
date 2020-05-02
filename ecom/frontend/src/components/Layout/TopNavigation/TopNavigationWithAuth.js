@@ -36,12 +36,7 @@ const TopNavigationWithAuth = ({ cart, onSearchChange }) => {
                         return (
                           <tr key={order_item.id}>
                             <td className="si-pic">
-                              <img
-                                src={
-                                  s3_base_url + order_item.livre.isbn + ".jpg"
-                                }
-                                alt=""
-                              />
+                              <img src={order_item.livre.picture} alt="" />
                             </td>
                             <td className="si-text">
                               <div className="product-selected">

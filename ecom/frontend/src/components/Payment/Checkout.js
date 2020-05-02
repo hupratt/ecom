@@ -19,7 +19,7 @@ import {
   Select,
 } from "semantic-ui-react";
 import { Link, withRouter } from "react-router-dom";
-import { s3_base_url, checkoutURL } from "../../constants";
+import { checkoutURL } from "../../constants";
 import { connect } from "react-redux";
 import {
   handleFetchOrder,
@@ -40,10 +40,7 @@ const OrderPreview = ({ data }) => {
             {data.order_items.map((orderItem, i) => {
               return (
                 <Item key={i}>
-                  <Item.Image
-                    size="tiny"
-                    src={`${s3_base_url}${orderItem.livre.isbn}.jpg`}
-                  />
+                  <Item.Image size="tiny" src={`${orderItem.livre.picture}`} />
                   <Item.Content verticalAlign="middle">
                     <Item.Header as="a">
                       {orderItem.quantity} x {orderItem.livre.titre}
