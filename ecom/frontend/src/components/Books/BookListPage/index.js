@@ -91,10 +91,12 @@ class BookList extends React.Component {
       language,
       authors,
       bookPerPage,
+      moreloading,
     } = this.props;
     if (
       this.isBottom(wrappedElement) &&
       loading == false &&
+      moreloading == false &&
       offset + 12 < _length
     ) {
       loadMoar(
@@ -216,6 +218,7 @@ const mapStateToProps = (state) => {
   return {
     data: state.books.data,
     loading: state.books.loading,
+    moreloading: state.books.moreloading,
     offset: state.books.offset,
     bookPerPage: state.books.bookPerPage,
     _length: state.books._length,
