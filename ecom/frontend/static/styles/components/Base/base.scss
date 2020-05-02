@@ -123,6 +123,21 @@ i.icon.lock::before {
   transform: scale(0.8);
   transition: opacity 1000ms, transform 1000ms;
 }
+.fadein-enter {
+  opacity: 0;
+}
+.fadein-enter-active {
+  opacity: 1;
+  transition: opacity 200ms ease-in-out;
+}
+.fadein-exit {
+  opacity: 1;
+}
+.fadein-exit-active {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 1000ms, transform 1000ms;
+}
 
 .youtube-enter,
 .youtube-appear {

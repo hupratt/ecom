@@ -3,6 +3,8 @@ import { Message } from "semantic-ui-react";
 import { send } from "emailjs-com";
 import { Trans } from "react-i18next";
 import FormExampleFieldControlId from "./SemanticForm";
+import { CSSTransition } from "react-transition-group";
+
 export default class extends React.Component {
   constructor(props) {
     super(props);
@@ -87,7 +89,12 @@ export default class extends React.Component {
           />
         )}
 
-        {showForm == false ? (
+        <CSSTransition
+          in={showForm == false}
+          classNames="fadeout"
+          unmountOnExit
+          timeout={300}
+        >
           <div className="email">
             <a
               href="#"
@@ -97,15 +104,23 @@ export default class extends React.Component {
               <Trans i18nKey="Email Us" />
             </a>
           </div>
-        ) : (
-          <FormExampleFieldControlId
-            handleSubmit={this.handleSubmit}
-            handleTextAreaChange={this.handleChangeTextArea}
-            handleChangeEmail={this.handleChangeEmail}
-            handleChangeName={this.handleChangeName}
-            message_html={message_html}
-            placeholder={placeholder}
-          />
+        </CSSTransition>
+        {showForm == true && (
+          <CSSTransition
+            in={showForm == true}
+            classNames="fadein"
+            appear
+            timeout={300}
+          >
+            <FormExampleFieldControlId
+              handleSubmit={this.handleSubmit}
+              handleTextAreaChange={this.handleChangeTextArea}
+              handleChangeEmail={this.handleChangeEmail}
+              handleChangeName={this.handleChangeName}
+              message_html={message_html}
+              placeholder={placeholder}
+            />
+          </CSSTransition>
         )}
       </React.Fragment>
     );
