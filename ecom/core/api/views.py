@@ -118,11 +118,22 @@ class BookListView(ListAPIView):
                 distinct_id = str(uuid.uuid4())
             else:
                 distinct_id = request.session.session_key
-            posthog.capture(distinct_id, "page view")
+
             if request.user.is_authenticated:
-                posthog.identify(
-                    request.session.session_key,
-                    {"email": request.user.email, "name": request.user.username},
+                posthog.capture(
+                    distinct_id,
+                    "page view",
+                    {
+                        "email": str(request.user.email),
+                        "name": str(request.user.username),
+                        "location": "/",
+                    },
+                )
+            else:
+                posthog.capture(
+                    distinct_id,
+                    "page view",
+                    {"email": "anon", "name": "anon", "location": "/"},
                 )
         return self.list(request, *args, **kwargs)
 
@@ -177,16 +188,33 @@ class BookDetailView(RetrieveAPIView):
     queryset = Livre.objects.all()
 
     def get(self, request, *args, **kwargs):
+
         if len(settings.POSTHOG_KEY) > 0:
             if request.session.session_key is None:
                 distinct_id = str(uuid.uuid4())
             else:
                 distinct_id = request.session.session_key
-            posthog.capture(distinct_id, "page view")
+
             if request.user.is_authenticated:
-                posthog.identify(
-                    request.session.session_key,
-                    {"email": request.user.email, "name": request.user.username},
+                posthog.capture(
+                    distinct_id,
+                    "page view",
+                    {
+                        "email": str(request.user.email),
+                        "name": str(request.user.username),
+                        "location": f"/books/{kwargs['pk']}",
+                    },
+                )
+
+            else:
+                posthog.capture(
+                    distinct_id,
+                    "page view",
+                    {
+                        "email": "anon",
+                        "name": "anon",
+                        "location": f"/books/{kwargs['pk']}",
+                    },
                 )
         return self.retrieve(request, *args, **kwargs)
 
