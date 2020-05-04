@@ -13,7 +13,7 @@ for (x in labels) {
 				def PYTHON_P="$PROJECT/bin/python3.6"
 				
 				stage ('Checkout') {
-					// checkout scm
+					// checkout source control
 					sh """ 
 					whoami
 					sudo service apache2 stop
