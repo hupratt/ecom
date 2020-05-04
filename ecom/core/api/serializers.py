@@ -60,13 +60,13 @@ class BookItemSerializer(serializers.ModelSerializer):
 
 
 class BookSerializer(serializers.ModelSerializer):
-    titre = serializers.CharField(required=True)
-    isbn = serializers.CharField(required=True)
+    titre = serializers.CharField(required=True, max_length=100)
+    isbn = serializers.CharField(required=True, max_length=50)
     prix = serializers.IntegerField(required=False)
     note = serializers.IntegerField(required=False)
-    auteur_nom = serializers.CharField(required=False)
-    langue_nom = serializers.CharField(required=False)
-    genre_nom = serializers.CharField(required=False)
+    auteur_nom = serializers.CharField(required=False, max_length=50)
+    langue_nom = serializers.CharField(required=False, max_length=50)
+    genre_nom = serializers.CharField(required=False, max_length=50)
     get_quantity = serializers.IntegerField(required=False)
     prix_barre = serializers.IntegerField(required=False)
     description = serializers.CharField(required=False)

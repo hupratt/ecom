@@ -27,10 +27,10 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
     "debug_toolbar",
-    "core",
     "frontend",
     "home",
     "storages",
+    "core.apps.PostHogConfig",
 ]
 
 MIDDLEWARE = [
@@ -158,6 +158,9 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
+# Posthog
+POSTHOG_KEY = os.environ.get("POSTHOG_KEY", "")
+POSTHOG_DOMAIN = os.environ.get("POSTHOG_DOMAIN", "")
 
 if os.environ.get("DJANGO_DEVELOPMENT") is None:
     # Sentry

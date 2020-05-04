@@ -14,10 +14,10 @@ from rest_framework.generics import (
     DestroyAPIView,
 )
 from django.contrib.auth.models import User
-import os
+import os, uuid
 from django.contrib.postgres.search import SearchVector
 from django.db.models import Q
-import stripe
+import stripe, posthog
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -50,8 +50,6 @@ from core.models import (
     LivreItem,
 )
 from rest_framework.renderers import JSONRenderer
-
-stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 class UserIDView(APIView):
@@ -114,6 +112,20 @@ class BookListView(ListAPIView):
     serializer_class = BookSerializer
     paginate_by_param = "limit"
 
+    def get(self, request, *args, **kwargs):
+        if len(settings.POSTHOG_KEY) > 0:
+            if request.session.session_key is None:
+                distinct_id = str(uuid.uuid4())
+            else:
+                distinct_id = request.session.session_key
+            posthog.capture(distinct_id, "page view")
+            if request.user.is_authenticated:
+                posthog.identify(
+                    request.session.session_key,
+                    {"email": request.user.email, "name": request.user.username},
+                )
+        return self.list(request, *args, **kwargs)
+
     def get_queryset(self):
         """
         Optionally restricts the returned books to a given set of parameters.
@@ -163,6 +175,20 @@ class BookDetailView(RetrieveAPIView):
     permission_classes = (AllowAny,)
     serializer_class = BookSerializer
     queryset = Livre.objects.all()
+
+    def get(self, request, *args, **kwargs):
+        if len(settings.POSTHOG_KEY) > 0:
+            if request.session.session_key is None:
+                distinct_id = str(uuid.uuid4())
+            else:
+                distinct_id = request.session.session_key
+            posthog.capture(distinct_id, "page view")
+            if request.user.is_authenticated:
+                posthog.identify(
+                    request.session.session_key,
+                    {"email": request.user.email, "name": request.user.username},
+                )
+        return self.retrieve(request, *args, **kwargs)
 
 
 class OrderQuantityUpdateView(APIView):
