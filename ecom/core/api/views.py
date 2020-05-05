@@ -118,22 +118,15 @@ class BookListView(ListAPIView):
                 distinct_id = str(uuid.uuid4())
             else:
                 distinct_id = request.session.session_key
-
+            posthog.capture(
+                distinct_id,
+                "$pageview",
+                {"$current_url": f"{os.getenv('REACT_APP_BASE')}/books/{kwargs['pk']}"},
+            )
             if request.user.is_authenticated:
-                posthog.capture(
+                posthog.identify(
                     distinct_id,
-                    "page view",
-                    {
-                        "email": str(request.user.email),
-                        "name": str(request.user.username),
-                        "location": "/",
-                    },
-                )
-            else:
-                posthog.capture(
-                    distinct_id,
-                    "page view",
-                    {"email": "anon", "name": "anon", "location": "/"},
+                    {"email": request.user.email, "name": request.user.username},
                 )
         return self.list(request, *args, **kwargs)
 
@@ -194,28 +187,17 @@ class BookDetailView(RetrieveAPIView):
                 distinct_id = str(uuid.uuid4())
             else:
                 distinct_id = request.session.session_key
-
+            posthog.capture(
+                distinct_id,
+                "$pageview",
+                {"$current_url": f"{os.getenv('REACT_APP_BASE')}/books/{kwargs['pk']}"},
+            )
             if request.user.is_authenticated:
-                posthog.capture(
+                posthog.identify(
                     distinct_id,
-                    "page view",
-                    {
-                        "email": str(request.user.email),
-                        "name": str(request.user.username),
-                        "location": f"/books/{kwargs['pk']}",
-                    },
+                    {"email": request.user.email, "name": request.user.username},
                 )
 
-            else:
-                posthog.capture(
-                    distinct_id,
-                    "page view",
-                    {
-                        "email": "anon",
-                        "name": "anon",
-                        "location": f"/books/{kwargs['pk']}",
-                    },
-                )
         return self.retrieve(request, *args, **kwargs)
 
 
