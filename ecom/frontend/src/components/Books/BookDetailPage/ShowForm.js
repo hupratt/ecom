@@ -5,6 +5,8 @@ import { Trans } from "react-i18next";
 import FormExampleFieldControlId from "./SemanticForm";
 import { CSSTransition } from "react-transition-group";
 import { withTranslation } from "react-i18next";
+import posthog from "posthog-js";
+
 class ShowForm extends React.Component {
   constructor(props) {
     super(props);
@@ -38,6 +40,15 @@ class ShowForm extends React.Component {
   };
 
   showEmailForm = () => {
+    console.log(this.props.user.distinct_id);
+    posthog.capture("$send-email", {
+      distinct_id: this.props.user.distinct_id,
+    });
+    posthog.identify(this.props.user.distinct_id);
+    posthog.people.set({
+      email: this.props.user.email,
+      username: this.props.user.username,
+    });
     this.setState({ showForm: true });
   };
 

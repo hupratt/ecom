@@ -7,12 +7,19 @@ const initialState = {
   loading: false,
   user_staff: null,
   user_name: null,
+  distinct_id: null,
+  email: null,
 };
 
 const authStart = (state, action) => {
   return updateObject(state, {
     error: null,
     loading: true,
+  });
+};
+const grabTokenDistinctId = (state, action) => {
+  return updateObject(state, {
+    distinct_id: action.data,
   });
 };
 
@@ -41,6 +48,8 @@ const authIsStaff = (state, action) => {
   return updateObject(state, {
     user_staff: action.data.user_staff,
     user_name: action.data.user_name,
+    distinct_id: action.data.distinct_id,
+    email: action.data.email,
   });
 };
 
@@ -56,6 +65,8 @@ const reducer = (state = initialState, action) => {
       return authFail(state, action);
     case actionTypes.AUTH_LOGOUT:
       return authLogout(state, action);
+    case actionTypes.AUTH_GRAB_TOKEN_DISTINCT_ID:
+      return grabTokenDistinctId(state, action);
     default:
       return state;
   }

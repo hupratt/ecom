@@ -30,6 +30,28 @@ export const logout = () => {
   };
 };
 
+/* Stack overflow goodness */
+
+function readCookie(name) {
+  var nameEQ = name + "=";
+  var ca = document.cookie.split(";");
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == " ") c = c.substring(1, c.length);
+    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+  }
+  return null;
+}
+
+export const grabTokenDistinctId = () => {
+  return (dispatch) => {
+    dispatch({
+      type: actionTypes.AUTH_GRAB_TOKEN_DISTINCT_ID,
+      data: readCookie("distinct_id"),
+    });
+  };
+};
+
 export const checkAuthTimeout = (expirationTime) => {
   return (dispatch) => {
     setTimeout(() => {
@@ -43,8 +65,8 @@ export const userIsStaff = () => {
     axios
       .get(`${endpoint}/user-staff/`)
       .then((res) => {
-        const { user_name, user_staff } = res.data;
-        const data = { user_name, user_staff };
+        const { user_name, user_staff, distinct_id, email } = res.data;
+        const data = { user_name, user_staff, distinct_id, email };
         dispatch({ type: actionTypes.USER_STAFF, data });
       })
       .catch((err) => {

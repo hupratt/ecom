@@ -4,8 +4,8 @@ import App from "./App";
 import register from "./serviceWorker";
 import { Provider } from "react-redux";
 import { store } from "./reducers";
-import ReactGA from "react-ga";
 import "./i18n";
+import posthog from "posthog-js";
 
 const app = (
   <Provider store={store}>
@@ -15,10 +15,12 @@ const app = (
 
 ReactDOM.render(app, document.getElementById("root"));
 
-if (process.env.GOOGLE_ANALYTICS) {
-  ReactGA.initialize(process.env.GOOGLE_ANALYTICS);
-  ReactGA.pageview("/");
-}
+// Analytics
+posthog.init(process.env.POSTHOG_KEY, {
+  api_host: process.env.POSTHOG_DOMAIN,
+});
+
+// posthog.opt_out_capturing();
 
 /* Allows caching, push notifications and queues offline actions
 This action fires a seperate thread to install on

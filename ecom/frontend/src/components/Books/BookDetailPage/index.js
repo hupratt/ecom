@@ -10,7 +10,6 @@ import BookDetail from "./BookDetail";
 import { fetchBooks } from "../../../actions/books";
 import { Trans } from "react-i18next";
 import { userIsStaff } from "../../../actions/auth";
-import ReactGA from "react-ga";
 
 const propTypes = {
   book: PropTypes.object.isRequired,
@@ -46,10 +45,10 @@ class BookDetailPage extends React.Component {
       user_name,
       user_staff,
       loading,
+      distinct_id,
+      email,
     } = this.props;
-    if (process.env.GOOGLE_ANALYTICS) {
-      ReactGA.pageview(`/books/${book.id}`);
-    }
+    const user = { user_name, user_staff, distinct_id, email };
     return (
       <React.Fragment>
         {/* Breadcrumb Section Begin */}
@@ -104,8 +103,7 @@ class BookDetailPage extends React.Component {
               error={error}
               errorCart={errorCart}
               history={history}
-              user_name={user_name}
-              user_staff={user_staff}
+              user={user}
               loading={loading}
             />
           </Container>
@@ -134,6 +132,8 @@ const mapStateToProps = (state) => {
     isAuthenticated: state.auth.token !== null,
     user_name: state.auth.user_name,
     user_staff: state.auth.user_staff,
+    distinct_id: state.auth.distinct_id,
+    email: state.auth.email,
     loading: state.book.loading,
     error: state.book.error,
     errorCart: state.cart.error,

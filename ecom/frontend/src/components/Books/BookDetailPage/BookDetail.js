@@ -9,14 +9,9 @@ const propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
 };
 
-const BookDetail = ({
-  handleAddToCart,
-  book,
-  isAuthenticated,
-  user_name,
-  user_staff,
-}) => {
+const BookDetail = ({ handleAddToCart, book, isAuthenticated, user }) => {
   const stars_number_inverse = 5 - book.note;
+
   const { t } = useTranslation();
   return (
     <div>
@@ -101,7 +96,7 @@ const BookDetail = ({
                             {t("Add To Cart")}
                           </a>
                         </div> */}
-                        <ShowForm isbn={book.isbn} />
+                        <ShowForm isbn={book.isbn} user={user} />
 
                         <ul className="pd-tags">
                           <li>
@@ -110,7 +105,7 @@ const BookDetail = ({
                           <li>
                             <span>{t("LANGUAGES")}</span>: {book.langue_nom}
                           </li>
-                          {user_name && user_staff && (
+                          {user.user_name && user.user_staff && (
                             <li>
                               <span>{t("QUANTITY")}</span>: {book.get_quantity}
                             </li>

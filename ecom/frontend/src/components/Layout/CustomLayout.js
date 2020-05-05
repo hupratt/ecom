@@ -12,7 +12,7 @@ import BaseRouter from "../../routes";
 import { bookListURL } from "../../constants";
 import { fetchBooks, loadmoar } from "../../actions/books";
 import { fetchCart } from "../../actions/cart";
-import { userIsStaff } from "../../actions/auth";
+import { userIsStaff, grabTokenDistinctId } from "../../actions/auth";
 import queryString from "query-string";
 
 class CustomLayout extends React.Component {
@@ -57,7 +57,9 @@ class CustomLayout extends React.Component {
     }
   };
   componentDidMount() {
+    // runs once on start up of the app
     document.addEventListener("scroll", this.trackScrolling);
+    this.props.grabTokenDistinctId();
     const q = queryString.parse(this.props.location.search);
     if (Object.keys(q).length > 0 && this.props.location.pathname == "/") {
       // parameter search, handle string parameters
@@ -316,6 +318,7 @@ const mapDispatchToProps = (dispatch) => {
     refreshCart: () => dispatch(fetchCart()),
     searchThis: (e, callback) => dispatch(searchThis(e, callback)),
     userIsStaff: (e) => dispatch(userIsStaff(e)),
+    grabTokenDistinctId: () => dispatch(grabTokenDistinctId()),
   };
 };
 
