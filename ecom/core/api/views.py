@@ -121,12 +121,15 @@ class BookListView(ListAPIView):
             posthog.capture(
                 distinct_id,
                 "$pageview",
-                {"$current_url": f"{os.getenv('REACT_APP_BASE')}/books/{kwargs['pk']}"},
+                {"$current_url": f"{os.getenv('REACT_APP_BASE')}/books"},
             )
             if request.user.is_authenticated:
                 posthog.identify(
                     distinct_id,
-                    {"email": request.user.email, "name": request.user.username},
+                    {
+                        "email": str(request.user.email),
+                        "name": str(request.user.username),
+                    },
                 )
         return self.list(request, *args, **kwargs)
 
@@ -195,7 +198,10 @@ class BookDetailView(RetrieveAPIView):
             if request.user.is_authenticated:
                 posthog.identify(
                     distinct_id,
-                    {"email": request.user.email, "name": request.user.username},
+                    {
+                        "email": str(request.user.email),
+                        "name": str(request.user.username),
+                    },
                 )
 
         return self.retrieve(request, *args, **kwargs)
