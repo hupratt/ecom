@@ -115,22 +115,26 @@ class BookListView(ListAPIView):
     def get(self, request, *args, **kwargs):
         if len(settings.POSTHOG_KEY) > 0:
             if request.session.session_key is None:
-                distinct_id = str(uuid.uuid4())
+                request.session["distinct_id"] = str(uuid.uuid4())
             else:
-                distinct_id = request.session.session_key
+                request.session["distinct_id"] = request.session.session_key
             posthog.capture(
-                distinct_id,
+                request.session.get("distinct_id"),
                 "$pageview",
                 {"$current_url": f"{os.getenv('REACT_APP_BASE')}/books"},
             )
-            if request.user.is_authenticated:
+            if (
+                request.user.is_authenticated
+                and request.session.get("identified_already", False) is False
+            ):
                 posthog.identify(
-                    distinct_id,
+                    request.session.get("distinct_id"),
                     {
                         "email": str(request.user.email),
                         "name": str(request.user.username),
                     },
                 )
+                request.session["identified_already"] = True
         return self.list(request, *args, **kwargs)
 
     def get_queryset(self):
@@ -187,22 +191,26 @@ class BookDetailView(RetrieveAPIView):
 
         if len(settings.POSTHOG_KEY) > 0:
             if request.session.session_key is None:
-                distinct_id = str(uuid.uuid4())
+                request.session["distinct_id"] = str(uuid.uuid4())
             else:
-                distinct_id = request.session.session_key
+                request.session["distinct_id"] = request.session.session_key
             posthog.capture(
-                distinct_id,
+                request.session.get("distinct_id"),
                 "$pageview",
                 {"$current_url": f"{os.getenv('REACT_APP_BASE')}/books/{kwargs['pk']}"},
             )
-            if request.user.is_authenticated:
+            if (
+                request.user.is_authenticated
+                and request.session.get("identified_already", False) is False
+            ):
                 posthog.identify(
-                    distinct_id,
+                    request.session.get("distinct_id"),
                     {
                         "email": str(request.user.email),
                         "name": str(request.user.username),
                     },
                 )
+                request.session["identified_already"] = True
 
         return self.retrieve(request, *args, **kwargs)
 
