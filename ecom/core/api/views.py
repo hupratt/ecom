@@ -17,7 +17,7 @@ from django.contrib.auth.models import User
 import os, uuid
 from django.contrib.postgres.search import SearchVector
 from django.db.models import Q
-import stripe, posthog
+import stripe
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -54,15 +54,17 @@ from rest_framework.renderers import JSONRenderer
 
 class UserIDView(APIView):
     def get(self, request, *args, **kwargs):
-        return Response(
-            {
-                "userID": request.user.id,
-                "user_staff": request.user.is_staff,
-                "user_name": request.user.username,
-                "email": request.user.email,
-            },
-            status=HTTP_200_OK,
-        )
+        if request.user.is_authenticated:
+            return Response(
+                {
+                    "userID": request.user.id,
+                    "user_staff": request.user.is_staff,
+                    "user_name": request.user.username,
+                    "email": request.user.email,
+                },
+                status=HTTP_200_OK,
+            )
+        return Response({}, status=HTTP_200_OK)
 
 
 def user_test(request):

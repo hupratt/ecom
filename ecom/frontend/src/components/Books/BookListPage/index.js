@@ -4,7 +4,7 @@ import { loadmoar } from "../../../actions/books";
 import BooksPlusPaginationAndFilters from "./BooksPlusPaginationAndFilters";
 import { withLoading, withError } from "../../../hoc/hoc";
 import PropTypes from "prop-types";
-import { bookListURL, endpoint } from "../../../constants";
+import { bookListURL, base } from "../../../constants";
 import { Link, withRouter } from "react-router-dom";
 import { fetchCart } from "../../../actions/cart";
 import { Trans } from "react-i18next";
@@ -13,6 +13,7 @@ import queryString from "query-string";
 import { userIsStaff } from "../../../actions/auth";
 import CallToAction from "../../Buttons/CallToAction";
 import _ from "lodash";
+import posthog from "posthog-js";
 
 const propTypes = {
   data: PropTypes.array.isRequired,
@@ -48,6 +49,22 @@ class BookList extends React.Component {
     document.removeEventListener("scroll", this.trackScrolling);
   };
 
+  recordWithPosthogDetail = (id) => {
+    const { user_name, email, distinct_id } = this.props;
+    // console.log(posthog.has_opted_out_capturing());
+    // posthog.opt_in_captureing();
+    if (distinct_id && posthog.has_opted_out_capturing() == false) {
+      console.log("capturing");
+      posthog.capture("$pageview", {
+        distinct_id,
+        $current_url: `${base}/books/${id}`,
+      });
+      posthog.identify(distinct_id);
+      user_name && email && posthog.people.set({ email, user_name });
+      console.log(`Detail view: ${user_name} ${email} ${distinct_id}`);
+    }
+  };
+
   mapStateToUrl = () => {
     const {
       offset,
@@ -71,6 +88,7 @@ class BookList extends React.Component {
   };
   handleClickOnBook = (id) => {
     this.props.history.push(`/books/${id}`);
+    this.recordWithPosthogDetail(id);
   };
 
   isBottom = (el) => {
@@ -229,6 +247,8 @@ const mapStateToProps = (state) => {
     isAuthenticated: state.auth.token !== null,
     user_name: state.auth.user_name,
     user_staff: state.auth.user_staff,
+    distinct_id: state.auth.distinct_id,
+    email: state.auth.email,
     shoppingCart: state.cart.shoppingCart,
   };
 };

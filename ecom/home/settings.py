@@ -30,7 +30,7 @@ INSTALLED_APPS = [
     "frontend",
     "home",
     "storages",
-    "core.apps.PostHogConfig",
+    "core",
 ]
 
 MIDDLEWARE = [
