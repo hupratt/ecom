@@ -49,6 +49,7 @@ class BookDetailPage extends React.Component {
       email,
     } = this.props;
     const user = { user_name, user_staff, distinct_id, email };
+    console.log(`Detail: ${user_name} ${email} ${distinct_id}`);
     return (
       <React.Fragment>
         {/* Breadcrumb Section Begin */}

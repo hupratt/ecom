@@ -60,7 +60,6 @@ class UserIDView(APIView):
                 "user_staff": request.user.is_staff,
                 "user_name": request.user.username,
                 "email": request.user.email,
-                "distinct_id": request.COOKIES["distinct_id"],
             },
             status=HTTP_200_OK,
         )
@@ -115,24 +114,6 @@ class BookListView(ListAPIView):
     paginate_by_param = "limit"
 
     def get(self, request, *args, **kwargs):
-        if (
-            "distinct_id" in request.COOKIES.keys() is not None
-            and len(settings.POSTHOG_KEY) > 0
-        ):
-            distinct_id = request.COOKIES["distinct_id"]
-            posthog.capture(
-                distinct_id,
-                "$pageview",
-                {"$current_url": f"{os.getenv('REACT_APP_BASE')}/books"},
-            )
-            if request.user.is_authenticated:
-                posthog.identify(
-                    distinct_id,
-                    {
-                        "email": str(request.user.email),
-                        "name": str(request.user.username),
-                    },
-                )
         return self.list(request, *args, **kwargs)
 
     def get_queryset(self):
@@ -186,24 +167,6 @@ class BookDetailView(RetrieveAPIView):
     queryset = Livre.objects.all()
 
     def get(self, request, *args, **kwargs):
-        if (
-            "distinct_id" in request.COOKIES.keys() is not None
-            and len(settings.POSTHOG_KEY) > 0
-        ):
-            distinct_id = request.COOKIES["distinct_id"]
-            posthog.capture(
-                distinct_id,
-                "$pageview",
-                {"$current_url": f"{os.getenv('REACT_APP_BASE')}/books/{kwargs['pk']}"},
-            )
-            if request.user.is_authenticated:
-                posthog.identify(
-                    distinct_id,
-                    {
-                        "email": str(request.user.email),
-                        "name": str(request.user.username),
-                    },
-                )
         return self.retrieve(request, *args, **kwargs)
 
 

@@ -48,7 +48,6 @@ const authIsStaff = (state, action) => {
   return updateObject(state, {
     user_staff: action.data.user_staff,
     user_name: action.data.user_name,
-    distinct_id: action.data.distinct_id,
     email: action.data.email,
   });
 };

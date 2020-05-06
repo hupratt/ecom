@@ -39,17 +39,18 @@ class ShowForm extends React.Component {
     });
   };
 
+  recordWithPosthog = () => {
+    const { user } = this.props;
+    const { user_name, email, distinct_id } = user;
+    posthog.capture("$send-email", { distinct_id });
+    posthog.identify(distinct_id);
+    user_name && email && posthog.people.set({ email, user_name });
+    console.log(`${user_name} ${email} ${distinct_id}`);
+  };
+
   showEmailForm = () => {
-    posthog.capture("$send-email", {
-      distinct_id: this.props.user.distinct_id,
-    });
-    posthog.identify(this.props.user.distinct_id);
-    this.props.user.username &&
-      posthog.people.set({
-        email: this.props.user.email,
-        username: this.props.user.username,
-      });
     this.setState({ showForm: true });
+    this.recordWithPosthog();
   };
 
   sendFeedback = (templateId, variables) => {
