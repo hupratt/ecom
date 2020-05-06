@@ -7,6 +7,8 @@ from django.shortcuts import get_object_or_404
 from django_countries.fields import CountryField
 from datetime import datetime
 from django.db.models.signals import post_save
+import os
+from django.utils.html import format_html
 
 CATEGORY_CHOICES = (("S", "Shirt"), ("SW", "Sport wear"), ("OW", "Outwear"))
 
@@ -125,6 +127,12 @@ class Livre(models.Model):
     def show_homepage(self):
         if self.book_quantity.count() > 0:
             return True
+
+    def edit_book_url(self):
+        return format_html(
+            '<a href="%s">%s</a>'
+            % (f"{os.getenv('REACT_APP_BASE')}/books/{self.id}", "Edit this book")
+        )
 
     def __str__(self):
         return f"Book {self.isbn}"

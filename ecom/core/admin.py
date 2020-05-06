@@ -99,6 +99,7 @@ class LivreInLineAdmin(admin.ModelAdmin):
         "updated",
         "id",
         "created",
+        "edit_book_url",
     ]
     list_filter = ["auteur_nom"]
     search_fields = [

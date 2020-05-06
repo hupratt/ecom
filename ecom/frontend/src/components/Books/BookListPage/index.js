@@ -157,9 +157,9 @@ class BookList extends React.Component {
             <div className="row">
               <div className="col-lg-12">
                 <div className="breadcrumb-text">
-                  <Link to="/">
+                  <a>
                     <i className="fa fa-home" /> <Trans i18nKey="Home" />
-                  </Link>
+                  </a>
                   <span>
                     <Trans i18nKey="Detail" />
                   </span>
