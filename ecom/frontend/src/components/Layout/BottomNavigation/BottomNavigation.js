@@ -1,6 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import SubscriptionForm from "./SubscriptionForm";
+import { Link } from "react-router-dom";
 
 const BottomNavigation = () => {
   const { t } = useTranslation();
@@ -51,14 +52,10 @@ const BottomNavigation = () => {
                 <a href="https://www.lapetiteportugaise.eu">{t("Contact")}</a>
               </li>
               <li>
-                <a href="https://www.lapetiteportugaise.eu">
-                  {t("Privacy Policy")}
-                </a>
+                <Link to="/privacy-policy/">{t("Privacy Policy")}</Link>
               </li>
               <li>
-                <a href="https://www.lapetiteportugaise.eu">
-                  {t("Terms of Use")}
-                </a>
+                <Link to="/terms-of-use/">{t("Terms of Use")}</Link>
               </li>
             </ul>
           </div>

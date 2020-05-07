@@ -12,12 +12,16 @@ import BookListPage from "./components/Books/BookListPage";
 import BookUpdate from "./components/Books/BookUpdatePage/";
 import BookAdd from "./components/Books/BookAddPage/";
 import FallBack from "./components/FallBackPage";
+import PrivacyPolicy from "./components/PrivacyPolicyPage";
+import TermsOfUse from "./components/TermsOfUsePage";
 
 const BaseRouter = (props) => {
   return (
     <Hoc>
       <Route exact path="/book/add/" component={BookAdd} />
       <Route exact path="/fallback/" component={FallBack} />
+      <Route exact path="/privacy-policy/" component={PrivacyPolicy} />
+      <Route exact path="/terms-of-use/" component={TermsOfUse} />
       <Route
         exact
         path="/books/:bookID"
