@@ -45,7 +45,7 @@ class ShowForm extends React.Component {
     } = this.props;
     posthog.capture("$send-email", { distinct_id });
     posthog.identify(distinct_id);
-    user_name && email && posthog.people.set({ email, user_name });
+    posthog.people.set({ email, user_name });
     console.log(`Send email: ${user_name} ${email} ${distinct_id}`);
   };
 
