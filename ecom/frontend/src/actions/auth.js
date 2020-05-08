@@ -9,10 +9,11 @@ export const authStart = () => {
   };
 };
 
-export const authSuccess = (token) => {
+export const authSuccess = (token, username = null) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
     token: token,
+    username: username,
   };
 };
 
@@ -77,13 +78,8 @@ export const authLogin = (username, password) => {
         localStorage.setItem("token", token);
         localStorage.setItem("expirationDate", expirationDate);
         axios.defaults.headers.common["Authorization"] = "Token " + token;
-        dispatch(authSuccess(token));
+        dispatch(authSuccess(token, username));
         dispatch(checkAuthTimeout(36000));
-
-        /* FIX ME, changing the state 
-        is not showing the edit 
-        ²and add page buttons */
-        window.location.reload();
       })
       .catch((err) => {
         dispatch(authFail(err));
@@ -108,7 +104,7 @@ export const authSignup = (username, email, password1, password2) => {
         localStorage.setItem("token", token);
         localStorage.setItem("expirationDate", expirationDate);
         axios.defaults.headers.common["Authorization"] = "Token " + token;
-        dispatch(authSuccess(token));
+        dispatch(authSuccess(token, username));
         dispatch(checkAuthTimeout(3600));
       })
       .catch((err) => {

@@ -26,6 +26,7 @@ const grabTokenDistinctId = (state, action) => {
 const authSuccess = (state, action) => {
   return updateObject(state, {
     token: action.token,
+    user_name: action.user_name,
     error: null,
     loading: false,
   });
