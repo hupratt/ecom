@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from "uuid";
 /* Shorter versions of the book detail description */
 
 const getPosition = (string, subString, index) =>
@@ -49,8 +50,9 @@ const findPosthogCookieName = () => {
 };
 
 export const posthogCookieDistinctId = () => {
-  const id = JSON.parse(get_cookies_array()[findPosthogCookieName()])
-    .distinct_id;
+  const id =
+    JSON.parse(get_cookies_array()[findPosthogCookieName()]).distinct_id ||
+    uuidv4();
   console.log("distinct_id", id);
   return id;
 };
