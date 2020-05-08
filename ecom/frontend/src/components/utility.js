@@ -51,7 +51,7 @@ const findPosthogCookieName = () => {
 };
 
 export const posthogCookieDistinctId = () => {
-  const id = "";
+  let id = "";
   if (findPosthogCookieName()) {
     id = JSON.parse(get_cookies_array()[findPosthogCookieName()]).distinct_id;
     console.log("distinct_id", id);
