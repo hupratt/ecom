@@ -60,7 +60,7 @@ class BookList extends React.Component {
         $current_url: `${base}/books/${id}`,
       });
       posthog.identify(distinct_id);
-      user_name && email && posthog.people.set({ email, user_name });
+      posthog.people.set({ email, user_name });
       console.log(`Detail view: ${user_name} ${email} ${distinct_id}`);
     }
   };
