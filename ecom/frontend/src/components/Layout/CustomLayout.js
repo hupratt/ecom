@@ -12,8 +12,11 @@ import BaseRouter from "../../routes";
 import { bookListURL } from "../../constants";
 import { fetchBooks, loadmoar } from "../../actions/books";
 import { fetchCart } from "../../actions/cart";
-import { userIsStaff, grabTokenDistinctId } from "../../actions/auth";
+import { userIsStaff, grabCookies } from "../../actions/auth";
 import queryString from "query-string";
+import ModalCookies from "../Buttons/ModalCookies";
+import posthog from "posthog-js";
+import get_cookies_array from "../../components/utility";
 
 class CustomLayout extends React.Component {
   state = {
@@ -22,6 +25,7 @@ class CustomLayout extends React.Component {
     category: "",
     sliderValues: [0, 100],
     search: "",
+    modalOpen: false,
   };
   constructor(props) {
     super(props);
@@ -56,10 +60,38 @@ class CustomLayout extends React.Component {
       el.classList.remove("header-fixed");
     }
   };
+  handleOpenCookies = () => {
+    this.setState((prevState) => {
+      return { ...prevState, modalOpen: true };
+    });
+  };
+  handleCloseNoCookies = () => {
+    this.setState((prevState) => {
+      return { ...prevState, modalOpen: false };
+    });
+    posthog.opt_out_capturing();
+    document.cookie = "cookies=false";
+  };
+  handleCloseYesCookies = () => {
+    this.setState((prevState) => {
+      return { ...prevState, modalOpen: false };
+    });
+    document.cookie = "cookies=true";
+  };
+
   componentDidMount() {
     // runs once on start up of the app
     document.addEventListener("scroll", this.trackScrolling);
-    this.props.grabTokenDistinctId();
+
+    const grabThemCookies = new Promise((resolve, reject) => {
+      resolve(this.props.grabCookies());
+    });
+    grabThemCookies.then((_) => {
+      console.log(this.props.cookieConsent);
+      this.props.cookieConsent == null &&
+        setTimeout(() => this.handleOpenCookies(), 5000);
+    });
+
     const q = queryString.parse(this.props.location.search);
     if (Object.keys(q).length > 0 && this.props.location.pathname == "/") {
       // parameter search, handle string parameters
@@ -231,7 +263,7 @@ class CustomLayout extends React.Component {
       success,
       fetchBooks,
     } = this.props;
-    const { language, sliderValues, authors, category } = this.state;
+    const { language, sliderValues, authors, category, modalOpen } = this.state;
     return (
       <React.Fragment>
         {/* Header Section Begin */}
@@ -262,7 +294,19 @@ class CustomLayout extends React.Component {
             </div>
           </div>
         </header>
-
+        {modalOpen && (
+          <ModalCookies
+            handleCloseYesCookies={this.handleCloseYesCookies}
+            handleCloseNoCookies={this.handleCloseNoCookies}
+            style={{
+              height: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "100%",
+            }}
+          />
+        )}
         <BaseRouter
           onSelectAuthor={this.onSelectAuthor}
           onSliderChange={this.onSliderChange}
@@ -298,6 +342,7 @@ const TopNavigationWithAuthenticationHandlingAndErrorHandling = withError(
 const mapStateToProps = (state) => {
   return {
     authenticated: state.auth.token !== null,
+    cookieConsent: state.auth.cookieConsent,
     cart: state.cart.shoppingCart,
     searchTerm: state.navigation.searchTerm,
     offset: state.books.offset,
@@ -318,7 +363,7 @@ const mapDispatchToProps = (dispatch) => {
     refreshCart: () => dispatch(fetchCart()),
     searchThis: (e, callback) => dispatch(searchThis(e, callback)),
     userIsStaff: (e) => dispatch(userIsStaff(e)),
-    grabTokenDistinctId: () => dispatch(grabTokenDistinctId()),
+    grabCookies: () => dispatch(grabCookies()),
   };
 };
 

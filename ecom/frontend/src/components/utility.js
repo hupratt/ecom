@@ -61,3 +61,6 @@ export const posthogCookieDistinctId = () => {
   }
   return id;
 };
+export const grabCookieConsent = () => {
+  return get_cookies_array()["cookies"];
+};

@@ -51,10 +51,11 @@ class BookList extends React.Component {
 
   recordWithPosthogDetail = (id) => {
     const { user_name, email, distinct_id } = this.props;
-    // console.log(posthog.has_opted_out_capturing());
-    // posthog.opt_in_captureing();
-    if (distinct_id && posthog.has_opted_out_capturing() == false) {
-      console.log("capturing");
+    if (
+      process.env.POSTHOG_KEY &&
+      distinct_id &&
+      posthog.has_opted_out_capturing() == false
+    ) {
       posthog.capture("$pageview", {
         distinct_id,
         $current_url: `${base}/books/${id}`,

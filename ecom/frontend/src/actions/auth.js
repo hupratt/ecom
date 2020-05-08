@@ -1,7 +1,10 @@
 import axios from "axios";
 import * as actionTypes from "./actionTypes";
 import { base, endpoint } from "../constants";
-import { posthogCookieDistinctId } from "../components/utility";
+import {
+  posthogCookieDistinctId,
+  grabCookieConsent,
+} from "../components/utility";
 
 export const authStart = () => {
   return {
@@ -32,11 +35,12 @@ export const logout = () => {
   };
 };
 
-export const grabTokenDistinctId = () => {
+export const grabCookies = () => {
   return (dispatch) => {
     dispatch({
       type: actionTypes.AUTH_GRAB_TOKEN_DISTINCT_ID,
       data: posthogCookieDistinctId(),
+      cookies: grabCookieConsent(),
     });
   };
 };

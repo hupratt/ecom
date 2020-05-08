@@ -9,6 +9,7 @@ const initialState = {
   user_name: null,
   distinct_id: null,
   email: null,
+  cookieConsent: null,
 };
 
 const authStart = (state, action) => {
@@ -20,6 +21,7 @@ const authStart = (state, action) => {
 const grabTokenDistinctId = (state, action) => {
   return updateObject(state, {
     distinct_id: action.data,
+    cookieConsent: action.cookies,
   });
 };
 

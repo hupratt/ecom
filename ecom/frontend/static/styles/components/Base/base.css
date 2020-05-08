@@ -230,6 +230,33 @@ i.icon.lock::before {
   margin-top: 20px;
 }
 
+.cookies-container {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.cookies {
+  background: white;
+  max-width: 50%;
+  border-width: 1px;
+  border-style: solid;
+  padding: 50px;
+  border-radius: 15px;
+}
+
+.cookies .buttonwrapper {
+  float: right;
+  margin-top: 40px;
+}
+
 @media screen and (max-width: 1160px) {
   .container-cta h1 {
     font-size: 5rem;

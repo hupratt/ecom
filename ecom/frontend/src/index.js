@@ -16,9 +16,10 @@ const app = (
 ReactDOM.render(app, document.getElementById("root"));
 
 // Analytics
-posthog.init(process.env.POSTHOG_KEY, {
-  api_host: process.env.POSTHOG_DOMAIN,
-});
+process.env.POSTHOG_KEY &&
+  posthog.init(process.env.POSTHOG_KEY, {
+    api_host: process.env.POSTHOG_DOMAIN,
+  });
 
 // posthog.opt_out_capturing();
 

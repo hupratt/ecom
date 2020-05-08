@@ -215,6 +215,26 @@ i.icon.lock::before {
   margin-top: 20px;
 }
 
+.cookies-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cookies {
+  background: white;
+  max-width: 50%;
+  border-width: 1px;
+  border-style: solid;
+  padding: 50px;
+  border-radius: 15px;
+  .buttonwrapper {
+    float: right;
+    margin-top: 40px;
+  }
+}
+
 @media screen and (max-width: 1160px) {
   .container-cta {
     h1 {
