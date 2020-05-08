@@ -87,7 +87,6 @@ class CustomLayout extends React.Component {
       resolve(this.props.grabCookies());
     });
     grabThemCookies.then((_) => {
-      console.log(this.props.cookieConsent);
       this.props.cookieConsent == null &&
         setTimeout(() => this.handleOpenCookies(), 5000);
     });

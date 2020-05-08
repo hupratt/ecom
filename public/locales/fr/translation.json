@@ -62,5 +62,8 @@
   "Missing fields": "Il y a des champs obligatoires manquants",
   "Email successfully sent !": "Courriel envoyé avec succès",
   "Ensino": "Enseignement",
-  "Juvenil": "Pour enfants"
+  "Juvenil": "Pour enfants",
+  "This website uses cookies": "Ce site web utilise des cookies pour vous livrer la meilleur expérience utilisateur possible",
+  "No cookies": "Pas de cookies",
+  "Got it": "Ok"
 }
