@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
-/* Shorter versions of the book detail description */
 
+/* Shorter versions of the book detail description */
 const getPosition = (string, subString, index) =>
   string.split(subString, index).join(subString).length;
 
@@ -47,12 +47,17 @@ const findPosthogCookieName = () => {
       return name;
     }
   }
+  return null;
 };
 
 export const posthogCookieDistinctId = () => {
-  const id =
-    JSON.parse(get_cookies_array()[findPosthogCookieName()]).distinct_id ||
-    uuidv4();
-  console.log("distinct_id", id);
+  const id = "";
+  if (findPosthogCookieName()) {
+    id = JSON.parse(get_cookies_array()[findPosthogCookieName()]).distinct_id;
+    console.log("distinct_id", id);
+  } else {
+    id = uuidv4();
+    console.log("generated distinct_id", id);
+  }
   return id;
 };
