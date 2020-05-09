@@ -120,10 +120,7 @@ class RegistrationForm extends React.Component {
                   Google
                 </button>
 
-                <button
-                  ng-click="signinGoogle()"
-                  className="social-login google"
-                >
+                <button className="social-login google">
                   <img src="https://bookshop-images-f1492f08-f236-4a55-afb7-70ded209cb24.s3.eu-west-2.amazonaws.com/resources/FB-Icon.png" />
                   Facebook
                 </button>
