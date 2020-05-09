@@ -6,6 +6,8 @@ const mediaURL = "/media/";
 export const endpoint = `${base}${apiURL}`;
 export const mediaEndpoint = `${base}${mediaURL}`;
 export const googleLogin = `${base}/rest-auth/google/login/`;
+export const facebookLogin = `${base}/rest-auth/facebook/login/`;
+export const githubLogin = `${base}/rest-auth/github/login/`;
 export const productListURL = `${endpoint}/products/`;
 
 export const bookListURL = (

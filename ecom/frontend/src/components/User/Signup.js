@@ -10,6 +10,7 @@ import {
 import { connect } from "react-redux";
 import { NavLink, Redirect } from "react-router-dom";
 import { authSignup } from "../../actions/auth";
+import { googleLogin, facebookLogin, githubLogin } from "../../constants";
 
 class RegistrationForm extends React.Component {
   state = {
@@ -120,9 +121,19 @@ class RegistrationForm extends React.Component {
                   Google
                 </button>
 
-                <button className="social-login google">
+                <button
+                  className="social-login facebook"
+                  onClick={() => (window.location.href = facebookLogin)}
+                >
                   <img src="https://bookshop-images-f1492f08-f236-4a55-afb7-70ded209cb24.s3.eu-west-2.amazonaws.com/resources/FB-Icon.png" />
                   Facebook
+                </button>
+                <button
+                  className="social-login github"
+                  onClick={() => (window.location.href = githubLogin)}
+                >
+                  <img src="/static/icons/github.png" />
+                  Github
                 </button>
               </div>
             </Segment>
