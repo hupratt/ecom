@@ -116,7 +116,7 @@ class RegistrationForm extends React.Component {
                   className="social-login google"
                   onClick={() => (window.location.href = googleLogin)}
                 >
-                  <img src="https://cdn.freebiesupply.com/logos/large/2x/google-icon-logo-png-transparent.png" />
+                  <img src="https://bookshop-images-f1492f08-f236-4a55-afb7-70ded209cb24.s3.eu-west-2.amazonaws.com/resources/google-icon-logo-png-transparent.png" />
                   Google
                 </button>
 
@@ -124,7 +124,7 @@ class RegistrationForm extends React.Component {
                   ng-click="signinGoogle()"
                   className="social-login google"
                 >
-                  <img src="http://sundevilgymnastics.com/wp-content/uploads/2016/11/FB-Icon.png" />
+                  <img src="https://bookshop-images-f1492f08-f236-4a55-afb7-70ded209cb24.s3.eu-west-2.amazonaws.com/resources/FB-Icon.png" />
                   Facebook
                 </button>
               </div>

@@ -41,7 +41,7 @@ class BookList extends React.Component {
     if (this.props.isAuthenticated == true && this.props.shoppingCart == null) {
       this.props.refreshCart();
     }
-    if (this.props.isAuthenticated == true && this.props.user_staff == null) {
+    if (this.props.user_staff == null) {
       this.props.userIsStaff();
     }
   }
@@ -164,7 +164,7 @@ class BookList extends React.Component {
                   <span>
                     <Trans i18nKey="Detail" />
                   </span>
-                  {user_staff && user_name && (
+                  {user_name && (
                     <React.Fragment>
                       <p>
                         Olá {user_name},
@@ -176,12 +176,10 @@ class BookList extends React.Component {
                       </p>
                     </React.Fragment>
                   )}
-                  {isAuthenticated == false ? (
+                  {!user_name && (
                     <button onClick={() => this.props.history.push(`/login`)}>
                       Log in
                     </button>
-                  ) : (
-                    <React.Fragment />
                   )}
                 </div>
                 {_.size(queryString.parse(this.props.location.search)) > 0 && (

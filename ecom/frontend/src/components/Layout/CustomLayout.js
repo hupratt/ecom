@@ -261,6 +261,7 @@ class CustomLayout extends React.Component {
       errorCart,
       success,
       fetchBooks,
+      user_name,
     } = this.props;
     const { language, sliderValues, authors, category, modalOpen } = this.state;
     return (
@@ -287,6 +288,7 @@ class CustomLayout extends React.Component {
                     error={error}
                     errorCart={errorCart}
                     success={success}
+                    user_name={user_name}
                   />
                 </div>
               </div>
@@ -341,6 +343,7 @@ const TopNavigationWithAuthenticationHandlingAndErrorHandling = withError(
 const mapStateToProps = (state) => {
   return {
     authenticated: state.auth.token !== null,
+    user_name: state.auth.user_name,
     cookieConsent: state.auth.cookieConsent,
     cart: state.cart.shoppingCart,
     searchTerm: state.navigation.searchTerm,

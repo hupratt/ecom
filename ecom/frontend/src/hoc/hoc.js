@@ -81,7 +81,7 @@ export const withError = (WrappedComponent) => {
 export const withAuthentication = (WrappedComponent1, WrappedComponent2) => {
   class HOC extends React.Component {
     render() {
-      if (this.props.authenticated) {
+      if (this.props.authenticated || this.props.user_name) {
         return <WrappedComponent1 {...this.props} />;
       }
       const { authenticated, ...passed } = this.props;
