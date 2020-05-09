@@ -6,7 +6,6 @@ from django.conf import settings
 import datetime, uuid
 
 
-
 def index(request):
     if len(settings.POSTHOG_KEY) > 0:
         context = {

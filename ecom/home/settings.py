@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     "home",
     "storages",
     "core",
+    "coreaccount",
 ]
 
 MIDDLEWARE = [

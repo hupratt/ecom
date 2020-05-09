@@ -10,6 +10,7 @@ import {
 import { connect } from "react-redux";
 import { NavLink, Redirect } from "react-router-dom";
 import { authLogin } from "../../actions/auth";
+import { googleLogin } from "../../constants";
 
 class LoginForm extends React.Component {
   state = {
@@ -34,52 +35,82 @@ class LoginForm extends React.Component {
       return <Redirect to="/" />;
     }
     return (
-      <Grid textAlign="center" verticalAlign="middle">
-        <Grid.Column style={{ maxWidth: 450, marginTop: 100 }}>
-          <Header as="h2" color="black" textAlign="center">
-            Log-in to your account
-          </Header>
-          {error && <p>{this.props.error.message}</p>}
+      <Grid
+        textAlign="center"
+        verticalAlign="middle"
+        columns={2}
+        divided
+        className="loginForm"
+      >
+        <Grid.Row>
+          <Grid.Column style={{ maxWidth: 450, marginTop: 100 }}>
+            <Header as="h2" color="black" textAlign="center">
+              Log-in to your account
+            </Header>
+            {error && <p>{this.props.error.message}</p>}
 
-          <React.Fragment>
-            <Form size="large" onSubmit={this.handleSubmit}>
-              <Segment stacked>
-                <Form.Input
-                  onChange={this.handleChange}
-                  value={username}
-                  name="username"
-                  fluid
-                  icon="user"
-                  iconPosition="left"
-                  placeholder="Username"
-                />
-                <Form.Input
-                  onChange={this.handleChange}
-                  fluid
-                  value={password}
-                  name="password"
-                  icon="lock"
-                  iconPosition="left"
-                  placeholder="Password"
-                  type="password"
-                />
+            <React.Fragment>
+              <Form size="large" onSubmit={this.handleSubmit}>
+                <Segment stacked>
+                  <Form.Input
+                    onChange={this.handleChange}
+                    value={username}
+                    name="username"
+                    fluid
+                    icon="user"
+                    iconPosition="left"
+                    placeholder="Username"
+                  />
+                  <Form.Input
+                    onChange={this.handleChange}
+                    fluid
+                    value={password}
+                    name="password"
+                    icon="lock"
+                    iconPosition="left"
+                    placeholder="Password"
+                    type="password"
+                  />
 
-                <Button
-                  color="grey"
-                  fluid
-                  size="large"
-                  loading={loading}
-                  disabled={loading}
+                  <Button
+                    color="grey"
+                    fluid
+                    size="large"
+                    loading={loading}
+                    disabled={loading}
+                  >
+                    Login
+                  </Button>
+                </Segment>
+              </Form>
+              <Message>
+                New to us? <NavLink to="/signup">Sign Up</NavLink>
+              </Message>
+            </React.Fragment>
+          </Grid.Column>
+          <Grid.Column style={{ maxWidth: 450, marginTop: 100 }}>
+            {error && <p>{this.props.error.message}</p>}
+            <Segment stacked style={{ minHeight: "285" }}>
+              <div className="social-box">
+                <button
+                  className="social-login google"
+                  onClick={() => (window.location.href = googleLogin)}
                 >
-                  Login
-                </Button>
-              </Segment>
-            </Form>
-            <Message>
-              New to us? <NavLink to="/signup">Sign Up</NavLink>
-            </Message>
-          </React.Fragment>
-        </Grid.Column>
+                  <img src="https://cdn.freebiesupply.com/logos/large/2x/google-icon-logo-png-transparent.png" />
+                  Google
+                </button>
+
+                <button
+                  ng-click="signinGoogle()"
+                  className="social-login google"
+                >
+                  <img src="http://sundevilgymnastics.com/wp-content/uploads/2016/11/FB-Icon.png" />
+                  Facebook
+                </button>
+              </div>
+            </Segment>
+          </Grid.Column>
+        </Grid.Row>
       </Grid>
     );
   }

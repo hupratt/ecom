@@ -82,13 +82,13 @@ export const authLogin = (username, password) => {
         localStorage.setItem("token", token);
         localStorage.setItem("expirationDate", expirationDate);
         axios.defaults.headers.common["Authorization"] = "Token " + token;
+        dispatch(userIsStaff());
         dispatch(authSuccess(token, username));
         dispatch(checkAuthTimeout(36000));
       })
       .catch((err) => {
         dispatch(authFail(err));
       });
-    dispatch(userIsStaff());
   };
 };
 
