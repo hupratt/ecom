@@ -111,7 +111,7 @@ class LoginForm extends React.Component {
                   className="social-login github"
                   onClick={() => (window.location.href = githubLogin)}
                 >
-                  <img src="/static/icons/github.png" />
+                  <img src="https://bookshop-images-f1492f08-f236-4a55-afb7-70ded209cb24.s3.eu-west-2.amazonaws.com/resources/github.png" />
                   Github
                 </button>
               </div>
