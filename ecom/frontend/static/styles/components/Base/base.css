@@ -293,6 +293,9 @@ i.icon.lock::before {
 }
 
 @media screen and (max-width: 1160px) {
+  h4 {
+    font-size: 20px;
+  }
   .container-cta h1 {
     font-size: 5rem;
   }
@@ -308,6 +311,16 @@ i.icon.lock::before {
 }
 
 @media screen and (max-width: 800px) {
+  h4 {
+    font-size: 18px;
+  }
+  .ui.red.inverted.button {
+    margin-bottom: 10px;
+    font-size: 10px;
+  }
+  .ui.green.inverted.button {
+    font-size: 10px;
+  }
   .container-cta h1 {
     font-size: 3rem;
   }
@@ -317,6 +330,9 @@ i.icon.lock::before {
 }
 
 @media screen and (max-width: 650px) {
+  h4 {
+    font-size: 16px;
+  }
   .container-cta h1 {
     padding-left: 10vw !important;
   }
