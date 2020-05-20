@@ -295,7 +295,7 @@ class CustomLayout extends React.Component {
             </div>
           </div>
         </header>
-        {modalOpen && (
+        {/* {modalOpen && (
           <ModalCookies
             handleCloseYesCookies={this.handleCloseYesCookies}
             handleCloseNoCookies={this.handleCloseNoCookies}
@@ -307,7 +307,7 @@ class CustomLayout extends React.Component {
               width: "100%",
             }}
           />
-        )}
+        )} */}
         <BaseRouter
           onSelectAuthor={this.onSelectAuthor}
           onSliderChange={this.onSliderChange}
