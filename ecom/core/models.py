@@ -145,9 +145,11 @@ class Livre(models.Model):
 
     def picture(self):
         image = self.livre_name.get_queryset().order_by("-updated").first()
-        logger.info(f"Image exists: {image}")
-        if image is not None:
-            logger.info(f"Image name: {image.image.name}")
+        logger.info(f"Image exists: {len(str(image)) > 0}")
+        if image is not None and len(str(image)) > 0:
+            logger.info(
+                f"Image name: {settings.AWS_S3_CUSTOM_DOMAIN}/{image.image.name}"
+            )
             # Fix me: image.url is wrong for some reason, appends https twice
             image_name = image.image.name
             path = f"{settings.AWS_S3_CUSTOM_DOMAIN}/{image_name}"
