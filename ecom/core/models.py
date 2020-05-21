@@ -7,8 +7,11 @@ from django.shortcuts import get_object_or_404
 from django_countries.fields import CountryField
 from datetime import datetime
 from django.db.models.signals import post_save
-import os
+import os, logging
 from django.utils.html import format_html
+
+logger = logging.getLogger("django")
+
 
 CATEGORY_CHOICES = (("S", "Shirt"), ("SW", "Sport wear"), ("OW", "Outwear"))
 
@@ -142,11 +145,15 @@ class Livre(models.Model):
 
     def picture(self):
         image = self.livre_name.get_queryset().order_by("-updated").first()
+        logger.info(f"Image exists: {image}")
         if image is not None:
+            logger.info(f"Image name: {image.image.name}")
             # Fix me: image.url is wrong for some reason, appends https twice
             image_name = image.image.name
             path = f"{settings.AWS_S3_CUSTOM_DOMAIN}/{image_name}"
             return path
+        else:
+            logger.error(f"Image not found for book: {self.isbn}")
         return f"{settings.AWS_S3_CUSTOM_DOMAIN}/resources/no-image-icon.png"
 
     def pictureid(self):

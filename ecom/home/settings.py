@@ -199,3 +199,36 @@ if os.environ.get("DJANGO_DEVELOPMENT") is None:
 
 SESSION_COOKIE_SAMESITE = "Strict"
 LANGUAGE_COOKIE_SAMESITE = "Strict"
+
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "%(levelname)s %(asctime)s %(name)s.%(funcName)s:%(lineno)s- %(message)s"
+        },
+        "simple": {"format": "{levelname} {message}", "style": "{"},
+    },
+    "handlers": {
+        "console": {
+            "level": "INFO",
+            "class": "logging.StreamHandler",
+            "formatter": "simple",
+        },
+        "file": {
+            "level": "ERROR",
+            "class": "logging.FileHandler",
+            "filename": os.path.join(BASE_DIR, "error.log"),
+            "formatter": "verbose",
+        },
+    },
+    "loggers": {
+        "django": {
+            # output logs to the console and to the file
+            "level": "INFO",
+            "handlers": ["file", "console"],
+            "propagate": True,
+        }
+    },
+}
