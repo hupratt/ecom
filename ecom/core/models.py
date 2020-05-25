@@ -155,8 +155,7 @@ class Livre(models.Model):
             path = f"{settings.AWS_S3_CUSTOM_DOMAIN}/{image_name}"
             return path
         else:
-            logger.error(f"Image not found for book: {self.isbn}")
-        return f"{settings.AWS_S3_CUSTOM_DOMAIN}/resources/no-image-icon.png"
+            return f"{settings.AWS_S3_CUSTOM_DOMAIN}/resources/no-image-icon.png"
 
     def pictureid(self):
         image = self.livre_name.get_queryset().order_by("-updated").first()
