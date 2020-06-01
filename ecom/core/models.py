@@ -6,7 +6,6 @@ from django.shortcuts import reverse
 from django.shortcuts import get_object_or_404
 from django_countries.fields import CountryField
 from datetime import datetime
-from django.db.models.signals import post_save
 import os, logging
 from django.utils.html import format_html
 

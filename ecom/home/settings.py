@@ -7,7 +7,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY_books")
 if os.environ.get("DJANGO_DEVELOPMENT") is not None:
     DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["shop.lapetiteportugaise.eu"]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
