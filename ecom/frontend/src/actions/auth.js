@@ -75,6 +75,7 @@ export const authLogin = (username, password) => {
       .post(`${base}/rest-auth/login/`, {
         username: username,
         password: password,
+        xsrfHeaderName: "X-CSRFToken",
       })
       .then((res) => {
         const token = res.data.key;
