@@ -28,7 +28,7 @@ django-rest-auth==0.9.5
 django-rest-knox==4.1.0
 django-robots==3.1.0
 django-storages==1.9.1
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 docutils==0.15.2
 google-images-download==2.8.0
 gunicorn==19.9.0
