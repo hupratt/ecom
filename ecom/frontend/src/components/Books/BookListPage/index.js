@@ -109,8 +109,11 @@ class BookList extends React.Component {
       offset,
       language,
       authors,
+      category,
       bookPerPage,
       moreloading,
+      sliderValues,
+      searchTerm
     } = this.props;
     if (
       this.isBottom(wrappedElement) &&
@@ -122,7 +125,10 @@ class BookList extends React.Component {
         bookListURL(
           offset + 12,
           language,
-          Array.from(authors.entries()).join(",")
+          Array.from(authors.entries()).join(","),
+          category,
+          sliderValues,
+          searchTerm
         ),
         bookPerPage + 12,
         offset + 12

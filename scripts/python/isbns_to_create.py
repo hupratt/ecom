@@ -4,7 +4,7 @@ isbns = [
             "prix": 12.5,
             "titre": "Vasco de Gama, Le premier voyage",
             "auteur_nom": "Álvaro Velho",
-            "genre": "História",
+            "genre": "Gastronomia",
             "langue": "FR",
         }
     },
@@ -13,7 +13,7 @@ isbns = [
             "prix": 18.0,
             "titre": "Le Corsaire de Rio",
             "auteur_nom": "Antônio Torres",
-            "genre": "Romance",
+            "genre": "Ensino",
             "langue": "FR",
         }
     },
@@ -22,7 +22,7 @@ isbns = [
             "prix": 15.0,
             "titre": "Mon cher cannibale",
             "auteur_nom": "Antônio Torres",
-            "genre": "Romance",
+            "genre": "Ensino",
             "langue": "FR",
         }
     },
@@ -31,7 +31,7 @@ isbns = [
             "prix": 22.0,
             "titre": "Mon oncle le jaguar et autres histoires",
             "auteur_nom": "João Guimarães Rosa",
-            "genre": "Contos",
+            "genre": "Literaturas",
             "langue": "FR",
         }
     },
@@ -40,7 +40,7 @@ isbns = [
             "prix": 10.0,
             "titre": "Fantasmas de um escritor em Paris",
             "auteur_nom": "Marco Guimarães",
-            "genre": "Romance",
+            "genre": "Ensino",
             "langue": "PT",
         }
     },
@@ -49,7 +49,7 @@ isbns = [
             "prix": 7.0,
             "titre": "O portal",
             "auteur_nom": "Marco Guimarães",
-            "genre": "Romance",
+            "genre": "Ensino",
             "langue": "PT",
         }
     },
@@ -58,7 +58,7 @@ isbns = [
             "prix": 17.0,
             "titre": "La meilleure part, Voyage au Brésil",
             "auteur_nom": "Patrick Straumann",
-            "genre": "História",
+            "genre": "Gastronomia",
             "langue": "FR",
         }
     },
@@ -67,7 +67,7 @@ isbns = [
             "prix": 14.5,
             "titre": "La découverte du Japon",
             "auteur_nom": "Xavier de Castro",
-            "genre": "História",
+            "genre": "Gastronomia",
             "langue": "PT",
         }
     },
@@ -76,7 +76,7 @@ isbns = [
             "prix": 14.5,
             "titre": "Le Voyage de Magellan",
             "auteur_nom": "Xavier de Castro",
-            "genre": "História",
+            "genre": "Gastronomia",
             "langue": "FR",
         }
     },
@@ -85,12 +85,12 @@ isbns = [
             "prix": 23.0,
             "titre": "La ronde de nuit",
             "auteur_nom": "Agustina Bessa Luis",
-            "genre": "Romance",
+            "genre": "Ensino",
             "langue": "FR",
         }
     },
     {
-        "blank": {
+        "595959559": {
             "prix": 62.0,
             "titre": "Amadeo de Souza Cardoso",
             "auteur_nom": "António Cardoso e outros",
@@ -112,7 +112,7 @@ isbns = [
             "prix": 19.0,
             "titre": "Queen of the Sea",
             "auteur_nom": "Barry Hatton",
-            "genre": "História",
+            "genre": "Gastronomia",
             "langue": "EN",
         }
     },
@@ -121,7 +121,7 @@ isbns = [
             "prix": 22.0,
             "titre": "Le livre des nostalgies",
             "auteur_nom": "Bernardim Ribeiro",
-            "genre": "Romance",
+            "genre": "Ensino",
             "langue": "PT",
         }
     },
@@ -148,7 +148,7 @@ isbns = [
             "prix": 21.0,
             "titre": "Histoire de lAngola",
             "auteur_nom": "David Birmingham",
-            "genre": "História",
+            "genre": "Gastronomia",
             "langue": "FR",
         }
     },
@@ -157,7 +157,7 @@ isbns = [
             "prix": 25.0,
             "titre": "Les Maia",
             "auteur_nom": "Eça de Queirós",
-            "genre": "Romance",
+            "genre": "Ensino",
             "langue": "FR",
         }
     },
@@ -166,7 +166,7 @@ isbns = [
             "prix": 22.0,
             "titre": "Wrath of God",
             "auteur_nom": "Edward Paice",
-            "genre": "História",
+            "genre": "Gastronomia",
             "langue": "EN",
         }
     },
@@ -175,7 +175,7 @@ isbns = [
             "prix": 8.0,
             "titre": "Uma noite em Lisboa",
             "auteur_nom": "Erich Maria Remarque",
-            "genre": "Romance",
+            "genre": "Ensino",
             "langue": "FR",
         }
     },
@@ -184,7 +184,7 @@ isbns = [
             "prix": 23.0,
             "titre": "Cette nuit jai rêvé de Bruegel",
             "auteur_nom": "Fernanda Botelho",
-            "genre": "Romance",
+            "genre": "Ensino",
             "langue": "FR",
         }
     },
@@ -242,7 +242,7 @@ isbns = [
         }
     },
     {
-        "blank": {
+        "55555": {
             "prix": 20.0,
             "titre": "O olhar de compromisso",
             "auteur_nom": "Gérard Bloncourt",
@@ -278,7 +278,7 @@ isbns = [
         }
     },
     {
-        "blank": {
+        "9999666": {
             "prix": 35.0,
             "titre": "Corpus",
             "auteur_nom": "Helena Almeida",
@@ -309,7 +309,7 @@ isbns = [
             "prix": 14.0,
             "titre": "Idées reçues sur les grandes découvertes",
             "auteur_nom": "Jean-Paul Duviols",
-            "genre": "História",
+            "genre": "Gastronomia",
             "langue": "FR",
         }
     },
@@ -318,21 +318,21 @@ isbns = [
             "prix": 24.9,
             "titre": "Tremblement de terre de Lisbonne (Le)",
             "auteur_nom": "Jean-Paul Poirier",
-            "genre": "História",
+            "genre": "Gastronomia",
             "langue": "FR",
         }
     },
     {
-        "blank": {
+        "552125151": {
             "prix": 22.0,
             "titre": "De Leiria à Gabela: Memórias de um soldado",
             "auteur_nom": "João Torres Lima",
-            "genre": "História",
+            "genre": "Gastronomia",
             "langue": "PT",
         }
     },
     {
-        "blank": {
+        "0022554": {
             "prix": 15.0,
             "titre": "Terras de Monte Largo",
             "auteur_nom": "José de Andrade",
@@ -363,7 +363,7 @@ isbns = [
             "prix": 10.0,
             "titre": "Furie divine",
             "auteur_nom": "José Rodrigues Dos Santos",
-            "genre": "Romance",
+            "genre": "Ensino",
             "langue": "FR",
         }
     },
@@ -372,7 +372,7 @@ isbns = [
             "prix": 10.0,
             "titre": "La clé de Salomon",
             "auteur_nom": "José Rodrigues dos Santos",
-            "genre": "Romance",
+            "genre": "Ensino",
             "langue": "FR",
         }
     },
@@ -381,7 +381,7 @@ isbns = [
             "prix": 10.0,
             "titre": "Lultime secret du Christ",
             "auteur_nom": "José Rodrigues dos Santos",
-            "genre": "Romance",
+            "genre": "Ensino",
             "langue": "FR",
         }
     },
@@ -390,7 +390,7 @@ isbns = [
             "prix": 7.5,
             "titre": "Histoire du Siège de Lisbonne",
             "auteur_nom": "José Saramago",
-            "genre": "Romance",
+            "genre": "Ensino",
             "langue": "FR",
         }
     },
@@ -399,7 +399,7 @@ isbns = [
             "prix": 7.7,
             "titre": "La Lucarne",
             "auteur_nom": "José Saramago",
-            "genre": "Romance",
+            "genre": "Ensino",
             "langue": "FR",
         }
     },
@@ -408,7 +408,7 @@ isbns = [
             "prix": 12.0,
             "titre": "Death at intervals",
             "auteur_nom": "José Saramago",
-            "genre": "Romance",
+            "genre": "Ensino",
             "langue": "EN",
         }
     },
@@ -417,16 +417,16 @@ isbns = [
             "prix": 13.8,
             "titre": "Le cousin Bazilio",
             "auteur_nom": "Eça de Queirós",
-            "genre": "Romance",
+            "genre": "Ensino",
             "langue": "FR",
         }
     },
     {
-        "blank": {
+        "9996542": {
             "prix": 17.0,
             "titre": "Outro Santo, Outro Infante",
             "auteur_nom": "Julieta Marques",
-            "genre": "História",
+            "genre": "Gastronomia",
             "langue": "PT",
         }
     },
@@ -435,7 +435,7 @@ isbns = [
             "prix": 14.0,
             "titre": "Lexpansion portugaise dans le monde XIV- XVIIIe siècle",
             "auteur_nom": "Luis Filipe Thomaz",
-            "genre": "História",
+            "genre": "Gastronomia",
             "langue": "FR",
         }
     },
@@ -453,7 +453,7 @@ isbns = [
             "prix": 16.5,
             "titre": "En lutte contre létat Salazariste",
             "auteur_nom": "Manuel Do Nascimento",
-            "genre": "História",
+            "genre": "Gastronomia",
             "langue": "PT/FR",
         }
     },
@@ -462,7 +462,7 @@ isbns = [
             "prix": 11.0,
             "titre": "La bataille de La Lys",
             "auteur_nom": "Manuel Do Nascimento",
-            "genre": "História",
+            "genre": "Gastronomia",
             "langue": "PT/FR",
         }
     },
@@ -471,7 +471,7 @@ isbns = [
             "prix": 20.5,
             "titre": "Les oubliés de la guerre des Flandres",
             "auteur_nom": "Manuel Do Nascimento",
-            "genre": "História",
+            "genre": "Gastronomia",
             "langue": "FR",
         }
     },
@@ -480,7 +480,7 @@ isbns = [
             "prix": 24.0,
             "titre": "Première Guerre Mondiale: soldats portugais",
             "auteur_nom": "Manuel Do Nascimento",
-            "genre": "História",
+            "genre": "Gastronomia",
             "langue": "FR",
         }
     },
@@ -489,7 +489,7 @@ isbns = [
             "prix": 17.0,
             "titre": "Histoires rêvérées",
             "auteur_nom": "Mia Couto",
-            "genre": "Lit Moç",
+            "genre": "BD",
             "langue": "FR",
         }
     },
@@ -498,7 +498,7 @@ isbns = [
             "prix": 14.0,
             "titre": "La pluie ébahie",
             "auteur_nom": "Mia Couto",
-            "genre": "Conto",
+            "genre": "Literatura",
             "langue": "FR",
         }
     },
@@ -507,7 +507,7 @@ isbns = [
             "prix": 12.0,
             "titre": "Tombe, tombe au fond de leau",
             "auteur_nom": "Mia Couto",
-            "genre": "Lit Moç",
+            "genre": "BD",
             "langue": "PT",
         }
     },
@@ -516,7 +516,7 @@ isbns = [
             "prix": 18.0,
             "titre": "Sabino ou les tribulations dun soldat portugais dans la Grande Guerre",
             "auteur_nom": "Nuno Gomes Garcia",
-            "genre": "Romance",
+            "genre": "Ensino",
             "langue": "PT",
         }
     },
@@ -525,7 +525,7 @@ isbns = [
             "prix": 12.0,
             "titre": "Train de nuit pour Lisbonne",
             "auteur_nom": "Pascal Mercier",
-            "genre": "Romance",
+            "genre": "Ensino",
             "langue": "FR",
         }
     },
@@ -534,12 +534,12 @@ isbns = [
             "prix": 17.5,
             "titre": "Lisbonne ville ouverte",
             "auteur_nom": "Patrick Straumann",
-            "genre": "História",
+            "genre": "Gastronomia",
             "langue": "FR",
         }
     },
     {
-        "blank": {
+        "9526232412323345": {
             "prix": 6.0,
             "titre": "À Senoite",
             "auteur_nom": "Paulo Pego",
@@ -552,7 +552,7 @@ isbns = [
             "prix": 22.0,
             "titre": "Mort sur le Tage",
             "auteur_nom": "Pedro Garcia Rosado",
-            "genre": "Romance",
+            "genre": "Ensino",
             "langue": "FR",
         }
     },
@@ -561,7 +561,7 @@ isbns = [
             "prix": 20.0,
             "titre": "Les passants de Lisbonne",
             "auteur_nom": "Philippe Besson",
-            "genre": "Romance",
+            "genre": "Ensino",
             "langue": "FR",
         }
     },
@@ -570,16 +570,16 @@ isbns = [
             "prix": 11.0,
             "titre": "Silence",
             "auteur_nom": "Shusaku Endo",
-            "genre": "Romance",
+            "genre": "Ensino",
             "langue": "EN",
         }
     },
     {
-        "blank": {
+        "55959595959592622": {
             "prix": 18.0,
             "titre": "Napoleão",
             "auteur_nom": "Teixeira de Pascoaes",
-            "genre": "História",
+            "genre": "Gastronomia",
             "langue": "PT",
         }
     },
@@ -597,7 +597,7 @@ isbns = [
             "prix": 22.0,
             "titre": "Autisme",
             "auteur_nom": "Valério Romao",
-            "genre": "Romance",
+            "genre": "Ensino",
             "langue": "FR",
         }
     },
@@ -606,7 +606,7 @@ isbns = [
             "prix": 2.5,
             "titre": "Candide ou loptimisme",
             "auteur_nom": "Voltaire",
-            "genre": "Romance",
+            "genre": "Ensino",
             "langue": "FR",
         }
     },
@@ -631,7 +631,7 @@ def create_product(isbn, titre, auteur_nom, genre_nom, langue_nom, prix=0):
             langue_nom=langue_nom,
         )
         livre.save()
-        b = LivreItem(quantity=livre)
+        b = LivreItem(livre=livre)
         b.save()
     else:
         livre = Livre.objects.create(
@@ -643,7 +643,7 @@ def create_product(isbn, titre, auteur_nom, genre_nom, langue_nom, prix=0):
             prix=prix,
         )
         livre.save()
-        b = LivreItem(quantity=livre)
+        b = LivreItem(livre=livre)
         b.save()
 
 
