@@ -7,7 +7,12 @@ SECRET_KEY = os.environ.get("SECRET_KEY_books")
 if os.environ.get("DJANGO_DEVELOPMENT") is not None:
     DEBUG = True
 
-ALLOWED_HOSTS = ["shop.lapetiteportugaise.eu", "127.0.0.1", "localhost", "lapetiteportugaise.eu"]
+ALLOWED_HOSTS = [
+    "shop.lapetiteportugaise.eu",
+    "127.0.0.1",
+    "localhost",
+    "lapetiteportugaise.eu",
+]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -97,7 +102,7 @@ if USE_S3:
     AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
     AWS_DEFAULT_ACL = None
     AWS_S3_CUSTOM_DOMAIN = (
-        f"https://{AWS_STORAGE_BUCKET_NAME}.s3.eu-west-2.amazonaws.com"
+        f"https://{AWS_STORAGE_BUCKET_NAME}.s3.eu-west-2.amazonaws.com/lppshop"
     )
     AWS_S3_OBJECT_PARAMETERS = {"CacheControl": "max-age=86400"}
     # s3 static settings
