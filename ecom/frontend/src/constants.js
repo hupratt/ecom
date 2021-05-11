@@ -37,4 +37,4 @@ export const orderItemDeleteURL = (id) =>
   `${endpoint}/order-items/${id}/delete/`;
 export const orderItemUpdateQuantityURL = `${endpoint}/order-item/update-quantity/`;
 export const paymentListURL = `${endpoint}/payments/`;
-export const s3_base_url = `https://bookshop-images-f1492f08-f236-4a55-afb7-70ded209cb24.s3.eu-west-2.amazonaws.com/`;
+export const s3_base_url = `https://bookshop-images-f1492f08-f236-4a55-afb7-70ded209cb25.s3.eu-west-2.amazonaws.com/lppshop/`;
