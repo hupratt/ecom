@@ -67,7 +67,7 @@ const BottomNavigation = () => {
             {t("Made By")}
           </div>
           <img
-            src="https://bookshop-images-f1492f08-f236-4a55-afb7-70ded209cb24.s3.eu-west-2.amazonaws.com/resources/payment-details.png"
+            src="https://bookshop-images-f1492f08-f236-4a55-afb7-70ded209cb25.s3.eu-west-2.amazonaws.com/resources/logo-stripe.png"
             alt="payment-details-icons"
           />
         </div>

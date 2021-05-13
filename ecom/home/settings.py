@@ -150,7 +150,6 @@ CORS_ORIGIN_WHITELIST = (
     "http://127.0.0.1:3000",
     "http://127.0.0.1:8000",
     "https://shop.lapetiteportugaise.eu",
-    "https://bookshop-images-f1492f08-f236-4a55-afb7-70ded209cb24.s3.eu-west-2.amazonaws.com",
 )
 
 

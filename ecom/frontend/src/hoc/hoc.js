@@ -23,7 +23,7 @@ export const withLoading = (WrappedComponent) => {
                 width: "100vw",
                 marginLeft: "5vw",
               }}
-              src="https://bookshop-images-f1492f08-f236-4a55-afb7-70ded209cb24.s3.eu-west-2.amazonaws.com/resources/loader-waiting-poorquality.png"
+              src="https://bookshop-images-f1492f08-f236-4a55-afb7-70ded209cb25.s3.eu-west-2.amazonaws.com/resources/loader-waiting-poorquality.webp"
             />
           </Segment>
         );

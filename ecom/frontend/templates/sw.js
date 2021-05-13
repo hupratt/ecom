@@ -5,7 +5,6 @@ const assets = [
   "/fallback/",
   "https://use.fontawesome.com/releases/v5.7.2/webfonts/fa-solid-900.woff2",
   "https://use.fontawesome.com/releases/v5.7.2/webfonts/fa-brands-400.woff2",
-  "https://bookshop-images-f1492f08-f236-4a55-afb7-70ded209cb24.s3.eu-west-2.amazonaws.com/resources/noresults.png",
   "https://bootswatch.com/4/cosmo/bootstrap.min.css",
   "https://www.lapetiteportugaise.eu/static/images/icons/logo-petite-portugaise-300.png",
 ];
