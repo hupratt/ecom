@@ -102,7 +102,7 @@ if USE_S3:
     AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
     AWS_DEFAULT_ACL = None
     AWS_S3_CUSTOM_DOMAIN = (
-        f"https://{AWS_STORAGE_BUCKET_NAME}.s3.eu-west-2.amazonaws.com/lppshop"
+        f"https://{AWS_STORAGE_BUCKET_NAME}.s3.eu-west-2.amazonaws.com"
     )
     AWS_LOCATION = "lppshop"
     AWS_S3_OBJECT_PARAMETERS = {"CacheControl": "max-age=86400"}
