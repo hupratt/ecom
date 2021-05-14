@@ -151,7 +151,9 @@ class Livre(models.Model):
             # )
             # Fix me: image.url is wrong for some reason, appends https twice
             image_name = image.image.name
-            path = f"{settings.AWS_S3_CUSTOM_DOMAIN}/{image_name}"
+            path = f"{settings.AWS_S3_CUSTOM_DOMAIN}/{image_name}".replace(
+                "https://https://", "https://"
+            )
             return path
         else:
             return f"{settings.AWS_S3_CUSTOM_DOMAIN}/resources/no-image-icon.jpg"
