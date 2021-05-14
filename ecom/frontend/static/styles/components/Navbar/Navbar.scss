@@ -30,7 +30,19 @@
 .footer-section {
   background: #222222;
   padding-top: 75px;
-  margin-top: 15vh;
+  position: sticky;
+  z-index: -1;
+}
+
+.fallback {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: -2;
+  img {
+    width: 100%;
+    z-index: -2;
+  }
 }
 
 .inner-header {
