@@ -4,7 +4,8 @@ from django.core.wsgi import get_wsgi_application
 sys.path.append("/home/ubuntu/Dev/ecom")
 sys.path.append("/home/ubuntu/Dev/ecom/ecom")
 
-if os.environ.get("DJANGO_DEVELOPMENT") == "true":
+if os.environ.get("DJANGO_DEVELOPMENT") == "True":
+    print("running dev settings")
     dotenv.read_dotenv(
         os.path.join(
             os.path.dirname(os.path.dirname(os.path.dirname(__file__))),
