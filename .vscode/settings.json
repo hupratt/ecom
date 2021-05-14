@@ -19,4 +19,6 @@
   "python.linting.mypyEnabled": true,
   "python.linting.enabled": true,
   // "mypy.executable": "/home/ubuntu/Dev/ecom/bin/mypy",
+  "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"}
 }
