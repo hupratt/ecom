@@ -276,7 +276,7 @@ class CustomLayout extends React.Component {
                     <a href="https://www.lapetiteportugaise.eu/">
                       <img
                         className="logo"
-                        src="https://www.lapetiteportugaise.eu/static/images/icons/logo-petite-portugaise-300.png"
+                        src="https://shop.lapetiteportugaise.eu/static/frontend/logopetiteportugaise300.png"
                         alt="la petite portugaise's logo"
                       />
                     </a>

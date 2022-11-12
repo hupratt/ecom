@@ -24,3 +24,4 @@ creditcard
 static
 media
 *.log
+pyvenv.cfg
