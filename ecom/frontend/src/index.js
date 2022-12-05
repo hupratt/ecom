@@ -16,12 +16,12 @@ const app = (
 ReactDOM.render(app, document.getElementById("root"));
 
 // Analytics
-// process.env.POSTHOG_KEY &&
-//   posthog.init(process.env.POSTHOG_KEY, {
-//     api_host: process.env.POSTHOG_DOMAIN,
-//     secure_cookie: true,
-//     cookie_expiration: 99999999999,
-//   });
+process.env.POSTHOG_KEY &&
+  posthog.init(process.env.POSTHOG_KEY, {
+    api_host: process.env.POSTHOG_DOMAIN,
+    secure_cookie: true,
+    cookie_expiration: 99999999999,
+  });
 
 // posthog.opt_out_capturing();
 
