@@ -1,6 +1,6 @@
-<mxfile modified="2022-12-13T15:10:15.252Z" host="app.diagrams.net" agent="5.0 (X11)" etag="Aqic9lbA568wwcnvfp2A" version="20.6.2" type="github">
+<mxfile modified="2022-12-13T15:10:59.573Z" host="app.diagrams.net" agent="5.0 (X11)" etag="y28zJeA4UaDMBBqhsh_M" version="20.6.2" type="github">
   <diagram id="Ht1M8jgEwFfnCIfOTk4-" name="Page-1">
-    <mxGraphModel dx="3555" dy="2725" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="1185" dy="1460" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -161,6 +161,15 @@
         </mxCell>
         <mxCell id="xgc6DM9Copx6KXdF2zNQ-47" value="&lt;div&gt;the backend sends all the payment&lt;/div&gt;&lt;div&gt;orders to stripe for fulfillment&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=30;fontColor=#FF6E42;labelBackgroundColor=default;" parent="1" vertex="1">
           <mxGeometry x="1498" y="367" width="490" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="RrQftwysjKoqg6gLQJ93-1" value="" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://cdn1.iconfinder.com/data/icons/bootstrap-vol-3/16/filetype-jsx-128.png" vertex="1" parent="1">
+          <mxGeometry x="562" y="402" width="46" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="RrQftwysjKoqg6gLQJ93-3" value="" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://cdn1.iconfinder.com/data/icons/bootstrap-vol-3/16/filetype-jsx-128.png" vertex="1" parent="1">
+          <mxGeometry x="660" y="402" width="46" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="RrQftwysjKoqg6gLQJ93-4" value="" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://cdn1.iconfinder.com/data/icons/bootstrap-vol-3/16/filetype-scss-128.png" vertex="1" parent="1">
+          <mxGeometry x="510" y="402" width="46" height="46" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
