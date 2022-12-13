@@ -1,4 +1,4 @@
-<mxfile modified="2022-12-13T09:37:18.159Z" host="app.diagrams.net" agent="5.0 (X11)" etag="MlwrrLwS-9kxJ41sz-Xa" version="20.6.2" type="github">
+<mxfile modified="2022-12-13T09:54:56.175Z" host="app.diagrams.net" agent="5.0 (X11)" etag="nkbHMG8w8PUgNRqE8w5x" version="20.6.2" type="github">
   <diagram id="Ht1M8jgEwFfnCIfOTk4-" name="Page-1">
     <mxGraphModel dx="1422" dy="759" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
@@ -49,25 +49,25 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="xgc6DM9Copx6KXdF2zNQ-3" value="" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.android;fillColor=#205E00;gradientColor=none;" vertex="1" parent="1">
-          <mxGeometry x="625" y="452" width="38.5" height="44" as="geometry" />
+          <mxGeometry x="635" y="484" width="38.5" height="44" as="geometry" />
         </mxCell>
         <mxCell id="xgc6DM9Copx6KXdF2zNQ-4" value="" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://cdn1.iconfinder.com/data/icons/bootstrap-vol-3/16/filetype-js-128.png" vertex="1" parent="1">
-          <mxGeometry x="573" y="368" width="46" height="46" as="geometry" />
+          <mxGeometry x="583" y="400" width="46" height="46" as="geometry" />
         </mxCell>
         <mxCell id="xgc6DM9Copx6KXdF2zNQ-5" value="" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://cdn1.iconfinder.com/data/icons/bootstrap-vol-3/16/filetype-scss-128.png" vertex="1" parent="1">
-          <mxGeometry x="667.25" y="368" width="46" height="46" as="geometry" />
+          <mxGeometry x="677.25" y="400" width="46" height="46" as="geometry" />
         </mxCell>
         <mxCell id="xgc6DM9Copx6KXdF2zNQ-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=30;fontColor=#FF6E42;strokeWidth=6;" edge="1" parent="1" source="xgc6DM9Copx6KXdF2zNQ-6" target="xgc6DM9Copx6KXdF2zNQ-3">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="xgc6DM9Copx6KXdF2zNQ-6" value="" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://cdn1.iconfinder.com/data/icons/bootstrap-vol-3/16/filetype-jsx-128.png" vertex="1" parent="1">
-          <mxGeometry x="621.25" y="580" width="46" height="46" as="geometry" />
+          <mxGeometry x="631.25" y="612" width="46" height="46" as="geometry" />
         </mxCell>
         <mxCell id="xgc6DM9Copx6KXdF2zNQ-8" value="&lt;div style=&quot;font-size: 30px;&quot;&gt;&lt;font style=&quot;font-size: 30px;&quot; color=&quot;#FF6E42&quot;&gt;Babel transpiles the &lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 30px;&quot;&gt;&lt;font style=&quot;font-size: 30px;&quot; color=&quot;#FF6E42&quot;&gt;.jsx into .js and &lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 30px;&quot;&gt;&lt;font style=&quot;font-size: 30px;&quot; color=&quot;#FF6E42&quot;&gt;Webpack then &lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 30px;&quot;&gt;&lt;font style=&quot;font-size: 30px;&quot; color=&quot;#FF6E42&quot;&gt;bundles all &lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 30px;&quot;&gt;&lt;font style=&quot;font-size: 30px;&quot; color=&quot;#FF6E42&quot;&gt;of the .js files and &lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 30px;&quot;&gt;&lt;font style=&quot;font-size: 30px;&quot; color=&quot;#FF6E42&quot;&gt;the index.scss &lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 30px;&quot;&gt;&lt;font style=&quot;font-size: 30px;&quot; color=&quot;#FF6E42&quot;&gt;into two files&lt;/font&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontColor=#FF6E42;labelBackgroundColor=default;" vertex="1" parent="1">
-          <mxGeometry x="750" y="441" width="290" height="270" as="geometry" />
+          <mxGeometry x="760" y="446" width="290" height="270" as="geometry" />
         </mxCell>
         <mxCell id="xgc6DM9Copx6KXdF2zNQ-10" value="&lt;div&gt;&lt;font style=&quot;font-size: 30px;&quot;&gt;The front end is &lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 30px;&quot;&gt;integrated into django&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 30px;&quot;&gt;&amp;nbsp;as an &quot;app&quot;. It&#39;s static &lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 30px;&quot;&gt;files then get fed &lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 30px;&quot;&gt;into the main static &lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 30px;&quot;&gt;folder with the &lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 30px;&quot;&gt;collectstatic command&lt;/font&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontColor=#FF6E42;labelBackgroundColor=default;" vertex="1" parent="1">
-          <mxGeometry x="213" y="339" width="320" height="270" as="geometry" />
+          <mxGeometry x="213" y="320" width="320" height="270" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
