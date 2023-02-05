@@ -1,5 +1,11 @@
 # Ecom web application
 
+## Database UML
+<p align="center" width="100%">
+    <img width="90%" src="https://github.com/hupratt/ecom/blob/master/db.png?raw=true">
+</p>
+
+
 ## Architecture
 
 - Ecom is a django single page (SPA) web app running on apache as a web server.
