@@ -1,5 +1,8 @@
 # Ecom web application
 
+![Banner](https://github.com/hupratt/ecom/blob/master/shop.jpg?raw=true)
+
+
 ## Database UML
 <p align="center" width="100%">
     <img width="90%" src="https://github.com/hupratt/ecom/blob/master/db.png?raw=true">
@@ -67,6 +70,5 @@ unset PYTHONIOENCODING
 
 git rm -r --cached .
 
-## am i being ddosed
-
-netstat -ntu|awk '{print \$5}'|cut -d: -f1 -s|sort|uniq -c|sort -nk1 -r
+## Preview
+![ui-demo](https://github.com/hupratt/ecom/blob/master/shop-2_Lossless.gif?raw=true)
