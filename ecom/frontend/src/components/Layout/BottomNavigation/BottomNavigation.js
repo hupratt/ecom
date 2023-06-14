@@ -35,8 +35,8 @@ const BottomNavigation = () => {
 
             <ul>
               <li> {t("T-F")}12:00 - 15:00</li>
-              <li> {t("S")}15:00 - 17:00</li>
-              <li> {t("Sun")}15:00 - 17:00 </li>
+              <li> {t("S")}11:00 - 13:00 & 15:00 - 17:00</li>
+              <li> {t("Sun")}11:00 - 13:00 & 15:00 - 17:00</li>
             </ul>
           </div>
           <div className="footer-widget centermyitems">
