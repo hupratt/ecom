@@ -71,7 +71,7 @@ class BookSerializer(serializers.ModelSerializer):
     prix_barre = serializers.IntegerField(required=False)
     description = serializers.CharField(required=False)
     picture = serializers.CharField(required=False)
-    pictureid = serializers.IntegerField(required=False)
+    # pictureid = serializers.IntegerField(required=False)
     get_item_id_list = serializers.ListField(required=False)
     book_quantity = BookItemSerializer(many=True, required=False)
 

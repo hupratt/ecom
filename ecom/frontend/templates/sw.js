@@ -6,7 +6,7 @@ const assets = [
   "https://use.fontawesome.com/releases/v5.7.2/webfonts/fa-solid-900.woff2",
   "https://use.fontawesome.com/releases/v5.7.2/webfonts/fa-brands-400.woff2",
   "https://bootswatch.com/4/cosmo/bootstrap.min.css",
-  "https://www.lapetiteportugaise.eu/static/images/icons/logo-petite-portugaise-300.png",
+  "https://lapetiteportugaise.bitwcmd.duckdns.org//static/images/icons/logo-petite-portugaise-300.png",
 ];
 
 self.addEventListener("install", (e) => {

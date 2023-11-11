@@ -4,6 +4,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 
 SECRET_KEY = os.environ.get("SECRET_KEY_books")
 
+DEBUG = False
+
 if os.environ.get("DJANGO_DEVELOPMENT") is not None:
     DEBUG = True
 
@@ -11,7 +13,8 @@ ALLOWED_HOSTS = [
     "shop.lapetiteportugaise.eu",
     "127.0.0.1",
     "localhost",
-    "lapetiteportugaise.eu",
+    "lapetiteportugaise.craftstudios.shop",
+    "lapetiteportugaise.thekor.eu",
 ]
 
 INSTALLED_APPS = [
@@ -93,7 +96,7 @@ USE_L10N = True
 USE_TZ = True
 
 SITE_ID = 2
-USE_S3 = os.getenv("USE_S3") == "TRUE"
+USE_S3 = True
 
 if USE_S3:
     # aws settings
@@ -102,9 +105,9 @@ if USE_S3:
     AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
     AWS_DEFAULT_ACL = None
     AWS_S3_CUSTOM_DOMAIN = (
-        f"https://{AWS_STORAGE_BUCKET_NAME}.s3.eu-west-2.amazonaws.com"
+        f"https://{AWS_STORAGE_BUCKET_NAME}.s3.eu-north-1.amazonaws.com"
     )
-    AWS_LOCATION = "lppshop"
+    AWS_LOCATION = ""
     AWS_S3_OBJECT_PARAMETERS = {"CacheControl": "max-age=86400"}
     # s3 static settings
     STATIC_LOCATION = "static"
@@ -145,13 +148,11 @@ LOGIN_REDIRECT_URL = "/"
 
 WSGI_APPLICATION = "home.wsgi.application"
 
+CORS_ORIGIN_ALLOW_ALL = False
+
+
 CORS_ORIGIN_WHITELIST = (
-    "http://localhost:8000",
-    "http://localhost:8070",
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-    "http://127.0.0.1:8000",
-    "https://shop.lapetiteportugaise.eu",
+    "https://posthog.thekor.eu",
 )
 
 

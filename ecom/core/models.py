@@ -151,7 +151,7 @@ class Livre(models.Model):
             # )
             # Fix me: image.url is wrong for some reason, appends https twice
             image_name = image.image.name
-            path = f"{settings.AWS_S3_CUSTOM_DOMAIN}/lppshop/{image_name}".replace(
+            path = f"{settings.AWS_S3_CUSTOM_DOMAIN}/{image_name}".replace(
                 "https://https://", "https://"
             )
             return path
@@ -162,7 +162,7 @@ class Livre(models.Model):
         image = self.livre_name.get_queryset().order_by("-updated").first()
         if image is not None:
             return image.id
-        return ""
+        return 0
 
 
 class Auteur(models.Model):

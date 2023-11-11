@@ -1,4 +1,4 @@
-export const base = process.env.REACT_APP_BASE;
+export const base = 'https://lapetiteportugaise.thekor.eu';
 
 const apiURL = "/api";
 const mediaURL = "/media/";
