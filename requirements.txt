@@ -99,12 +99,7 @@ packaging==23.0
 pandas==2.0.3
 paramiko==2.9.3
 pep8==1.7.1
-pexpect==4.8.0
-Pillow==9.0.1
-platformdirs==2.5.1
-pluggy==1.0.0
-protobuf==3.12.4
-psutil==5.9.0
+Pillow==6.2.1
 psycopg2-binary==2.8.4
 ptyprocess==0.7.0
 pycairo==1.20.1
