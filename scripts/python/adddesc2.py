@@ -1109,10 +1109,10 @@ def uploadThis(placeholderpath, bucket):
 
 def create_connection():
     return psycopg2.connect(
-        host="127.0.0.1",
-        database="ecom",
-        user="ubuntu",
-        password="JPmorgan01loliloll??!",
+        host="",
+        database="",
+        user="",
+        password="",
     )
 
 

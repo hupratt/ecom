@@ -25,3 +25,4 @@ static
 media
 *.log
 pyvenv.cfg
+yarn.lock

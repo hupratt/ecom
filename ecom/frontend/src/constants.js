@@ -1,4 +1,4 @@
-export const base = 'https://lapetiteportugaise.thekor.eu';
+export const base = "http://localhost:2569";
 
 const apiURL = "/api";
 const mediaURL = "/media/";
