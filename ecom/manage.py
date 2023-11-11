@@ -8,10 +8,8 @@ import dotenv
 def main():
     if os.environ.get("DJANGO_DEVELOPMENT") == "True":
         dotenv.read_dotenv(
-            os.path.join(
-                os.path.dirname(os.path.dirname(os.path.dirname(__file__))),
-                ".env.development",
-            )
+            os.path.join(os.path.dirname(os.path.dirname(__file__))),
+            ".env.development",
         )
     else:
         dotenv.read_dotenv(
