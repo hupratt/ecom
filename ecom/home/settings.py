@@ -99,15 +99,15 @@ SITE_ID = 2
 USE_S3 = True
 
 if USE_S3:
-    # aws settings
-    AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
-    AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
-    AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
-    AWS_DEFAULT_ACL = None
+    DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+    AWS_ACCESS_KEY_ID = os.getenv("MINIO_ACCESS_KEY_ID")
+    AWS_SECRET_ACCESS_KEY = os.getenv("MINIO_SECRET_ACCESS_KEY")
+    AWS_STORAGE_BUCKET_NAME = os.getenv("MINIO_STORAGE_BUCKET_NAME")
+    AWS_S3_ENDPOINT_URL = os.getenv("AWS_S3_URL")
     AWS_S3_CUSTOM_DOMAIN = (
-        f"https://{AWS_STORAGE_BUCKET_NAME}.s3.eu-north-1.amazonaws.com"
+        f"https://minio-api.thekor.eu/{AWS_STORAGE_BUCKET_NAME}"
     )
-    AWS_LOCATION = ""
+    MINIO_ACCESS_URL = os.getenv("MINIO_ACCESS_URL")
     AWS_S3_OBJECT_PARAMETERS = {"CacheControl": "max-age=86400"}
     # s3 static settings
     STATIC_LOCATION = "static"
@@ -120,9 +120,6 @@ if USE_S3:
     PUBLIC_MEDIA_LOCATION = "media"
     # MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/"
     MEDIA_URL = "/media/"
-    # DEFAULT_FILE_STORAGE = "home.storage_backends.PublicMediaStorage"
-    DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
-    AWS_S3_REGION_NAME = os.getenv("AWS_S3_REGION_NAME")
 else:
     STATIC_URL = "/static/"
     MEDIA_URL = "/media/"
@@ -152,6 +149,7 @@ CORS_ORIGIN_ALLOW_ALL = False
 
 
 CORS_ORIGIN_WHITELIST = (
+    "https://minio-api.thekor.eu",
     "https://posthog.thekor.eu",
 )
 
